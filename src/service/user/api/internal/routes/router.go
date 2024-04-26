@@ -2,8 +2,8 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/common/middleware"
-	"lookingforpartner/pkg/logger"
 	"lookingforpartner/service/user/api/internal/config"
 	"lookingforpartner/service/user/api/internal/handler"
 	"lookingforpartner/service/user/api/internal/svc"

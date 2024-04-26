@@ -7,8 +7,8 @@ import (
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
 	"lookingforpartner/common"
+	httpUtil2 "lookingforpartner/common/httputils"
 	"lookingforpartner/idl/pb/user"
-	httpUtil "lookingforpartner/pkg/httputils"
 	"lookingforpartner/service/user/api/internal/svc"
 	"net/http"
 )
@@ -19,10 +19,10 @@ func SingUpHandler(c *gin.Context) {
 		zap.L().Error("Sign up with invalid param", zap.Error(err))
 		errors, ok := err.(validator.ValidationErrors)
 		if !ok {
-			httpUtil.ResponseError(c, common.CodeInvalidParam, http.StatusBadRequest)
+			httpUtil2.ResponseError(c, common.CodeInvalidParam, http.StatusBadRequest)
 		} else {
-			errMsg := httpUtil.RemoveTopStruct(errors.Translate(httpUtil.Trans))
-			httpUtil.ResponseErrorWithMsg(c, common.CodeInvalidParam, http.StatusBadRequest, errMsg)
+			errMsg := httpUtil2.RemoveTopStruct(errors.Translate(httpUtil2.Trans))
+			httpUtil2.ResponseErrorWithMsg(c, common.CodeInvalidParam, http.StatusBadRequest, errMsg)
 		}
 		return
 	}
@@ -36,12 +36,12 @@ func SingUpHandler(c *gin.Context) {
 	if err != nil {
 		zap.L().Error("Invoke signup RPC failed", zap.Error(err))
 		if errors.Is(err, common.ErrorUserExist) {
-			httpUtil.ResponseError(c, common.CodeUserExists, http.StatusBadRequest)
+			httpUtil2.ResponseError(c, common.CodeUserExists, http.StatusBadRequest)
 		} else {
-			httpUtil.ResponseError(c, common.CodeServerBusy, http.StatusInternalServerError)
+			httpUtil2.ResponseError(c, common.CodeServerBusy, http.StatusInternalServerError)
 		}
 		return
 	}
 
-	httpUtil.ResponseSuccess(c, nil)
+	httpUtil2.ResponseSuccess(c, nil)
 }

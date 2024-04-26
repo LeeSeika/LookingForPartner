@@ -2,7 +2,7 @@ package svc
 
 import (
 	"log"
-	"lookingforpartner/pkg/snowflake"
+	"lookingforpartner/common/snowflake"
 	"lookingforpartner/service/user/rpc/internal/config"
 )
 

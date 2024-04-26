@@ -130,7 +130,7 @@ func (r *Register) register() error {
 }
 
 func (r *Register) keepAlive() {
-	ticker := time.NewTicker(time.Duration(r.srvTTL) * time.Second)
+	//ticker := time.NewTicker(time.Duration(r.srvTTL) * time.Second)
 
 	for {
 		select {
@@ -142,18 +142,21 @@ func (r *Register) keepAlive() {
 			if _, err := r.cli.Revoke(r.ctx, r.leasesID); err != nil {
 				zap.L().Error("revoke failed", zap.Error(err))
 			}
-		case res := <-r.keepaliveCh:
-			if res == nil {
+			return
+		case res, ok := <-r.keepaliveCh:
+			if !ok {
 				if err := r.register(); err != nil {
 					zap.L().Error("register failed", zap.Error(err))
 				}
+			} else {
+				zap.L().Info("keep alive info", zap.Any("lease resp", res))
 			}
-		case <-ticker.C:
-			if r.keepaliveCh == nil {
-				if err := r.register(); err != nil {
-					zap.L().Error("register failed", zap.Error(err))
-				}
-			}
+			//case <-ticker.C:
+			//	if r.keepaliveCh == nil {
+			//		if err := r.register(); err != nil {
+			//			zap.L().Error("register failed", zap.Error(err))
+			//		}
+			//	}
 		}
 	}
 }

@@ -7,26 +7,29 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	discovery2 "lookingforpartner/common/discovery"
 	"lookingforpartner/idl/pb/user"
-	"lookingforpartner/pkg/discovery"
 	"lookingforpartner/service/user/rpc/internal/handler"
 	"lookingforpartner/service/user/rpc/internal/svc"
 	"net"
 )
 
 type UserServer struct {
-	svcCtx *svc.ServiceContext
-	server *grpc.Server
-	ctx    context.Context
+	svcCtx     *svc.ServiceContext
+	server     *grpc.Server
+	ctx        context.Context
+	cancelFunc context.CancelFunc
 
 	user.UnimplementedUserServiceServer
 }
 
 func NewUserServer(svcCtx *svc.ServiceContext) *UserServer {
+	ctx, cancelFunc := context.WithCancel(context.Background())
 	return &UserServer{
-		svcCtx: svcCtx,
-		server: grpc.NewServer(),
-		ctx:    context.Background(),
+		svcCtx:     svcCtx,
+		server:     grpc.NewServer(),
+		ctx:        ctx,
+		cancelFunc: cancelFunc,
 	}
 }
 
@@ -42,8 +45,6 @@ func (s *UserServer) GetUserInfo(ctx context.Context, req *user.GetUserInfoReque
 }
 
 func (s *UserServer) MustStart() {
-	ctx, cancel := context.WithCancel(s.ctx)
-	defer cancel()
 
 	name := s.svcCtx.Config.Server.Name
 	etcdAddress := s.svcCtx.Config.Etcd.Host
@@ -55,8 +56,8 @@ func (s *UserServer) MustStart() {
 	server := s.server
 
 	// 服务注册
-	etcdRegister := discovery.NewRegister(etcdAddress, dialTimeout)
-	srvInfo := discovery.Server{
+	etcdRegister := discovery2.NewRegister(etcdAddress, dialTimeout)
+	srvInfo := discovery2.Server{
 		Name: name,
 		Addr: grpcAddress,
 	}
@@ -66,7 +67,7 @@ func (s *UserServer) MustStart() {
 	if err != nil {
 		panic(fmt.Sprintf("listen failed, err: %v", err))
 	}
-	if err := etcdRegister.Register(ctx, srvInfo, srvTTL); err != nil {
+	if err := etcdRegister.Register(s.ctx, srvInfo, srvTTL); err != nil {
 		panic(fmt.Sprintf("register failed, err: %v", err))
 	}
 	zap.L().Info("server started listening", zap.Any("grpc addrs", grpcAddress))
@@ -76,5 +77,6 @@ func (s *UserServer) MustStart() {
 }
 
 func (s *UserServer) Stop() {
+	s.cancelFunc()
 	s.server.Stop()
 }
