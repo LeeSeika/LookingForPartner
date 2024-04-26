@@ -1,0 +1,37 @@
+Server:
+  Name: user.rpc
+  Host: 0.0.0.0
+  Port: 11001
+
+Log:
+  Level: "debug"
+  Filename: "lfp_user_rpc.log"
+  MaxSize: 300
+  MaxAge: 30
+  MaxBackups: 7
+  Mode: "dev"
+
+Etcd:
+  DialTimeout: 10
+  TTL: 10
+  Host:
+    - etcd:2379
+  Key: user.rpc
+
+Mysql:
+  Host: mysql
+  Port: 3306
+  User: "root"
+  Password: "root"
+  Database: "lookingforpartner"
+  MaxOpenConn: 500
+  MaxIdleConn: 5
+
+CacheRedis:
+  Host:
+    - redis:6379
+  PoolSize: 50
+  DB: 0
+
+SnowFlake:
+  MachineID: 1  # 取值范围 [1, 1024]

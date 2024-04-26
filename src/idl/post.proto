@@ -1,0 +1,87 @@
+syntax = "proto3";
+option go_package = "post/";
+
+message CreatePostRequest{
+  //  @inject_tag: json:"author_id,string"`
+  int64 AuthorID = 1;
+  //  @inject_tag: json:"community_id" binding:"required"`
+  int64 CommunityID = 2;
+  //  @inject_tag: json:"title" binding:"required"`
+  string Title = 3;
+  //  @inject_tag: json:"content" binding:"required"`
+  string Content = 4;
+}
+
+message CreatePostResponse{
+  //  @inject_tag: json:"post_id"`
+  int64 PostID = 1;
+  //  @inject_tag: json:"create_time"`
+  string CreateTime = 2;
+}
+
+message GetPostDetailRequest{
+  int64 PostID = 1;
+}
+
+message CommunityDetail{
+  //  @inject_tag: json:"community_id"`
+  int64 CommunityID = 1;
+  //  @inject_tag: json:"community_name"`
+  string CommunityName = 2;
+  //  @inject_tag: json:"introduction"`
+  string Introduction = 3;
+  //  @inject_tag: json:"create_time"`
+  string CreateTime = 4;
+}
+
+message GetPostDetailResponse{
+  //  @inject_tag: json:"author_id,string"`
+  int64 AuthorID = 1;
+  //  @inject_tag: json:"community_id`
+  int64 CommunityID = 2;
+  //  @inject_tag: json:"title"`
+  string Title = 3;
+  //  @inject_tag: json:"content"`
+  string Content = 4;
+  //  @inject_tag: json:"post_id,string"`
+  int64 PostID = 5;
+  //  @inject_tag: json:"status"`
+  int32 Status = 6;
+  //  @inject_tag: json:"comment_count"`
+  int32 CommentCount = 7;
+  //  @inject_tag: json:"author_name"`
+  string AuthorName = 8;
+  //  @inject_tag: json:"vote_numbers"`
+  int64 VoteNumbers = 9;
+  //  @inject_tag: json:"create_time"`
+  string CreateTime = 10;
+  //  @inject_tag: json:"update_time"`
+  string UpdateTime = 11;
+  //  @inject_tag: json:"community_detail"`
+  CommunityDetail CommunityDetail = 12;
+}
+
+message PostListParam{
+  //  @inject_tag: json:"page"`
+  int64 Page = 1;
+  //  @inject_tag: json:"size"`
+  int64 Size = 2;
+  //  @inject_tag: json:"order"`
+  string Order = 3;
+}
+
+message GetPostListByCommunityInOrderRequest{
+  //  @inject_tag: json:"community_id"`
+  int64 CommunityID = 1;
+  PostListParam PostListParam = 2;
+}
+
+message GetPostListByCommunityInOrderResponse{
+  repeated GetPostDetailResponse PostDetailList = 1;
+}
+
+service PostService{
+  rpc CreatePost(CreatePostRequest) returns(CreatePostResponse);
+  rpc GetPostDetail(GetPostDetailRequest) returns(GetPostDetailResponse);
+  rpc GetPostListByCommunityInOrder(GetPostListByCommunityInOrderRequest) returns(GetPostListByCommunityInOrderResponse);
+}

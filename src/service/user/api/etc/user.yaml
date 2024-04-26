@@ -1,0 +1,24 @@
+Server:
+  Name: User
+  Host: 0.0.0.0
+  Port: 10001
+
+Auth:
+  AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
+  AccessExpire: 86400
+  RefreshExpire: 604800
+
+Log:
+  Level: "debug"
+  Filename: "lfp_user_api.log"
+  MaxSize: 300
+  MaxAge: 30
+  MaxBackups: 7
+  Mode: "dev"
+
+Etcd:
+  Address:
+    - etcd:2379
+
+UserRpc:
+  Key: user.rpc

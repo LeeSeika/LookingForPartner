@@ -1,0 +1,72 @@
+syntax = "proto3";
+option go_package = "comment/";
+
+message AddCommentRequest{
+  //  @inject_tag: json:"post_id,string"`
+  int64 PostID = 1;
+  //  @inject_tag: json:"content"`
+  string Content = 2;
+  //  @inject_tag: json:"user_id"`
+  int64 UserID = 3;
+  //  @inject_tag: json:"root_command_id,string"`
+  int64 RootCommandID = 4;
+  //  @inject_tag: json:"to_command_id,string"`
+  int64 ToCommentID = 5;
+}
+
+message AddCommentResponse{
+  //  @inject_tag: json:"post_id,string"`
+  int64 PostID = 1;
+  //  @inject_tag: json:"content"`
+  string Content = 2;
+  //  @inject_tag: json:"user_id"`
+  int64 UserID = 3;
+  //  @inject_tag: json:"root_command_id,string"`
+  int64 RootCommandID = 4;
+  //  @inject_tag: json:"to_command_id,string"`
+  int64 ToCommentID = 5;
+  //  @inject_tag: json:"comment_id,string"`
+  int64 CommentID = 6;
+  //  @inject_tag: json:"create_time"`
+  string CreateTime = 7;
+  //  @inject_tag: json:"update_time"`
+  string UpdateTime = 8;
+  //  @inject_tag: json:"comment_like_count"`
+  int32 CommentLikeCount = 9;
+  //  @inject_tag: json:"author_name"`
+  string AuthorName = 10;
+}
+
+message DeleteCommentRequest{
+  //  @inject_tag: json:"comment_id"`
+  int64 CommentID = 1;
+}
+
+message DeleteCommentResponse{
+
+}
+
+message CommentListParam{
+  //  @inject_tag: json:"page"`
+  int64 Page = 1;
+  //  @inject_tag: json:"size"`
+  int64 Size = 2;
+  //  @inject_tag: json:"order"`
+  string Order = 3;
+}
+
+message GetCommentRequest{
+  //  @inject_tag: json:"post_id,string"`
+  int64 PostID = 1;
+  CommentListParam CommentListParam = 2;
+}
+
+message GetCommentResponse{
+  repeated AddCommentResponse CommentList = 1;
+}
+
+service CommentService{
+  rpc AddComment(AddCommentRequest) returns(AddCommentResponse);
+  rpc DeleteComment(DeleteCommentRequest) returns(DeleteCommentResponse);
+  rpc GetComments(GetCommentRequest) returns(GetCommentResponse);
+}

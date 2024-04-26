@@ -1,0 +1,57 @@
+syntax = "proto3";
+option go_package = "user/";
+
+message UserInfo{
+  int64 UserID = 1;
+  string Username = 2;
+}
+
+message GetUserInfoRequest{
+  repeated int64 UserID = 1;
+}
+
+message GetUserInfoResponse{
+  repeated UserInfo UserInfoList = 1;
+}
+
+message UserLoginRequest{
+  //  @inject_tag: json:"username" binding:"required"`
+  string Username = 1;
+  //  @inject_tag: json:"password" binding:"required"`
+  string Password = 2;
+}
+
+message UserLoginResponse{
+  //  @inject_tag: json:"user_info"
+  UserInfo UserInfo = 1;
+  //  @inject_tag: json:"token"
+  string Token = 2;
+  //  @inject_tag: json:"refresh"
+  string Refresh = 3;
+  //  @inject_tag: json:"code"
+  //int64 Code=4;
+  //  @inject_tag: json:"msg"
+  //string Msg=5;
+}
+
+message UserSignupRequest{
+  // @inject_tag: json:"username" binding:"required"`
+  string Username = 1;
+  //  @inject_tag: json:"password" binding:"required"`
+  string Password = 2;
+  //  @inject_tag: json:"confirm_password" binding:"required,eqfield=Password"
+  string RePassword = 3;
+}
+
+message UserSignupResponse{
+  //  @inject_tag: json:"code"
+  //int64 Code=1;
+  //  @inject_tag: json:"msg"
+  //string Msg=2;
+}
+
+service UserService{
+  rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
+  rpc UserSignup(UserSignupRequest) returns(UserSignupResponse);
+  rpc GetUserInfo(GetUserInfoRequest) returns(GetUserInfoResponse);
+}

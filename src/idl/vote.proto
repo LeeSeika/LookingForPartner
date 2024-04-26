@@ -1,0 +1,28 @@
+syntax = "proto3";
+option go_package = "vote/";
+
+message GetVoteDataRequest{
+  repeated int64 PostIDList=1;
+}
+
+message GetVoteDataResponse{
+  repeated int64 VoteDataList=1;
+}
+
+message VoteRequest{
+  //  @inject_tag: json:"post_id" binding:"required"`
+  string PostID = 1;
+  //  @inject_tag: json:"direction" binding:"oneof=-1 0 1"`
+  int32 Direction = 2;
+
+  int64 UserID = 3;
+}
+
+message VoteResponse{
+
+}
+
+service VoteService{
+  rpc GetVoteData(GetVoteDataRequest) returns(GetVoteDataResponse);
+  rpc Vote(VoteRequest) returns(VoteResponse);
+}
