@@ -9,19 +9,25 @@ import (
 )
 
 type Register struct {
+	// etcd服务端地址
 	EtcdAddrs []string
+	// etcd客户端
+	cli *clientv3.Client
 
+	// etcd客户端连接服务端的超时时间
 	dialTimeout int
-	// close notify ctx
+	// 当Server关闭时，通过ctx通知etcd客户端停止租约和keepalive
 	ctx context.Context
 
-	leasesID    clientv3.LeaseID
+	// 租约的唯一ID
+	leasesID clientv3.LeaseID
+	// 接收etcd服务端返回的keepalive响应
 	keepaliveCh <-chan *clientv3.LeaseKeepAliveResponse
 
+	// 服务的具体信息，将作为etcd键值对的value
 	srvInfo Server
-	srvTTL  int64
-
-	cli *clientv3.Client
+	// 一次租约的期限
+	srvTTL int64
 }
 
 func NewRegister(etcdAddrs []string, dialTimeout int) *Register {
@@ -47,6 +53,7 @@ func (r *Register) Register(ctx context.Context, srvInfo Server, ttl int64) erro
 		return err
 	}
 
+	// 新开一个goroutine去处理keepalive的响应
 	go r.keepAlive()
 
 	return nil
