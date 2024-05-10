@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	discovery2 "lookingforpartner/common/discovery"
+	"lookingforpartner/common/discovery"
 	"lookingforpartner/idl/pb/user"
 	"lookingforpartner/service/user/rpc/internal/handler"
 	"lookingforpartner/service/user/rpc/internal/svc"
@@ -56,8 +56,8 @@ func (s *UserServer) MustStart() {
 	server := s.server
 
 	// 服务注册
-	etcdRegister := discovery2.NewRegister(etcdAddress, dialTimeout)
-	srvInfo := discovery2.Server{
+	etcdRegister := discovery.NewRegister(etcdAddress, dialTimeout)
+	srvInfo := discovery.Server{
 		Name: name,
 		Addr: grpcAddress,
 	}

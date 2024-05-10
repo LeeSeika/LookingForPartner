@@ -22,7 +22,7 @@ import (
 func main() {
 	var configFilePath string
 	workDir, _ := os.Getwd()
-	defaultConfigPath := "/etc/user.yaml"
+	defaultConfigPath := "/service/user/api/etc/user.yaml"
 	if strings.HasSuffix(workDir, "/") {
 		defaultConfigPath = "etc/user.yaml"
 	}
