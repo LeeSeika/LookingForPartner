@@ -1,0 +1,738 @@
+{"level":"INFO","time":"2024-05-06T12:06:47.265+0800","caller":"rpcclient/init.go:27","msg":"Begin initializing Service RPC Connection","service":"user.rpc"}
+{"level":"ERROR","time":"2024-05-06T12:07:02.268+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"INFO","time":"2024-05-06T12:10:33.927+0800","caller":"rpcclient/init.go:27","msg":"Begin initializing Service RPC Connection","service":"user.rpc"}
+{"level":"ERROR","time":"2024-05-06T12:10:48.931+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"INFO","time":"2024-05-06T12:11:29.657+0800","caller":"rpcclient/init.go:27","msg":"Begin initializing Service RPC Connection","service":"user.rpc"}
+{"level":"INFO","time":"2024-05-06T12:11:29.659+0800","caller":"rpcclient/init.go:27","msg":"Begin initializing Service RPC Connection","service":"test"}
+{"level":"ERROR","time":"2024-05-06T12:11:44.661+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"INFO","time":"2024-05-06T12:12:26.519+0800","caller":"rpcclient/init.go:27","msg":"Begin initializing Service RPC Connection","service":"user.rpc"}
+{"level":"INFO","time":"2024-05-06T12:12:26.521+0800","caller":"rpcclient/init.go:27","msg":"Begin initializing Service RPC Connection","service":"test"}
+{"level":"ERROR","time":"2024-05-06T12:12:41.522+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"INFO","time":"2024-05-06T12:13:41.523+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:13:56.525+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:13:56.525+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:13:56.525+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:14:41.523+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:14:56.526+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:14:56.526+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:14:56.526+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:15:41.526+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:15:56.531+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:15:56.532+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:15:56.532+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:16:41.532+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:16:56.534+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:16:56.534+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:16:56.534+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:17:41.533+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:17:56.534+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:17:56.535+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:17:56.535+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:18:41.533+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:18:56.534+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:18:56.534+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:18:56.535+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:19:41.532+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:19:56.534+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:19:56.535+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:19:56.535+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:20:41.533+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:20:56.535+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:20:56.535+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:20:56.535+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:21:41.533+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:21:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:21:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:21:56.536+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:22:41.534+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:22:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:22:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:22:56.536+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:23:41.534+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:23:56.535+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:23:56.535+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:23:56.535+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:24:41.534+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:24:56.535+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:24:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:24:56.536+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:25:41.534+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:25:56.535+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:25:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:25:56.536+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:26:41.534+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:26:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:26:56.537+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:26:56.537+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:27:41.535+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:27:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:27:56.537+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:27:56.537+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:28:41.535+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:28:56.537+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:28:56.537+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:28:56.537+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:29:41.535+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:29:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:29:56.536+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:29:56.536+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:30:41.535+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:30:56.537+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:30:56.537+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:30:56.537+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:31:41.535+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:31:56.537+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:31:56.537+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:31:56.537+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:32:41.536+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:32:56.537+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:32:56.538+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:32:56.538+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:33:41.536+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:33:56.538+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:33:56.538+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:33:56.538+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:34:41.536+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:34:56.538+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:34:56.538+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:34:56.538+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:35:41.536+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:35:56.539+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:35:56.539+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:35:56.539+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:36:41.537+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:36:56.538+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:36:56.539+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:36:56.539+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:37:41.537+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:37:56.538+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:37:56.539+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:37:56.539+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:38:41.537+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:38:56.538+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:38:56.538+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:38:56.539+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:39:41.538+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:39:56.543+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:39:56.543+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:39:56.543+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:40:41.538+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:40:56.542+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:40:56.542+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:40:56.542+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:41:41.486+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:41:56.489+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:41:56.490+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:41:56.490+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:42:41.485+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:42:56.489+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:42:56.489+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:42:56.489+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:43:41.484+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:43:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:43:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:43:56.487+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:44:41.483+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:44:56.486+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:44:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:44:56.487+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:45:41.484+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:45:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:45:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:45:56.487+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:46:41.482+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:46:56.484+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:46:56.485+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:46:56.485+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:47:41.482+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:47:56.484+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:47:56.484+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:47:56.484+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:48:41.481+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:48:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:48:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:48:56.483+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:49:41.480+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:49:56.482+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:49:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:49:56.483+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:50:41.480+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:50:56.481+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:50:56.482+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:50:56.482+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:51:41.479+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:51:56.482+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:51:56.482+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:51:56.482+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:52:41.478+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:52:56.480+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:52:56.480+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:52:56.480+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:53:41.478+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:53:56.479+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:53:56.479+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:53:56.479+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:54:41.477+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:54:56.480+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:54:56.481+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:54:56.481+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:55:41.476+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:55:56.477+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:55:56.479+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:55:56.479+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:56:41.476+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:56:56.477+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:56:56.478+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:56:56.478+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:57:41.475+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:57:56.477+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:57:56.478+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:57:56.479+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:58:41.475+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:58:56.478+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:58:56.478+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:58:56.478+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T12:59:41.474+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T12:59:56.476+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T12:59:56.478+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T12:59:56.478+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:00:41.474+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:00:56.478+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:00:56.479+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:00:56.479+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:01:41.474+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:01:56.474+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:01:56.475+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:01:56.475+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:02:41.473+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:02:56.475+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:02:56.476+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:02:56.476+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:03:41.472+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:03:56.473+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:03:56.473+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:03:56.473+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:04:41.471+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:04:56.476+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:04:56.476+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:04:56.476+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:05:41.471+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:05:56.473+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:05:56.473+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:05:56.474+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:06:41.470+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:06:56.473+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:06:56.473+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:06:56.473+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:07:41.470+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:07:56.477+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:07:56.478+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:07:56.478+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:08:41.484+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:08:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:08:56.489+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:08:56.489+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:09:41.485+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:09:56.490+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:09:56.490+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:09:56.490+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:10:41.486+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:10:56.489+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:10:56.489+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:10:56.489+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:11:41.484+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:11:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:11:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:11:56.488+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:12:41.484+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:12:56.486+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:12:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:12:56.487+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:13:41.485+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:13:56.488+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:13:56.488+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:13:56.488+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:14:41.484+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:14:56.488+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:14:56.489+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:14:56.489+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:15:41.484+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:15:56.488+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:15:56.488+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:15:56.488+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:16:41.484+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:16:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:16:56.487+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:16:56.487+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:17:41.483+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:17:56.486+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:17:56.486+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:17:56.487+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:18:41.483+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:18:56.486+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:18:56.486+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:18:56.486+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:19:41.481+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:19:56.485+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:19:56.486+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:19:56.486+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:20:41.482+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:20:56.485+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:20:56.485+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:20:56.485+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:21:41.482+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:21:56.485+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:21:56.485+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:21:56.485+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:22:41.482+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:22:56.485+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:22:56.485+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:22:56.485+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:23:41.480+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:23:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:23:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:23:56.483+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:24:41.481+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:24:56.484+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:24:56.484+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:24:56.485+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:25:41.479+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:25:56.481+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:25:56.482+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:25:56.482+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:26:41.480+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:26:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:26:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:26:56.483+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:27:41.479+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:27:56.482+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:27:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:27:56.483+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:28:41.479+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:28:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:28:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:28:56.483+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:29:41.479+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:29:56.480+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:29:56.481+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:29:56.481+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:30:41.479+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:30:56.482+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:30:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:30:56.483+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:31:41.477+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:31:56.479+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:31:56.481+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:31:56.481+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:32:41.478+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:32:56.483+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:32:56.484+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:32:56.484+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:33:41.478+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:33:56.480+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:33:56.482+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:33:56.482+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:34:41.477+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:34:56.480+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:34:56.482+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:34:56.482+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:35:41.503+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:35:56.507+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:35:56.508+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:35:56.508+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:36:41.506+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:36:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:36:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:36:56.510+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:37:41.505+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:37:56.509+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:37:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:37:56.510+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:38:41.506+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:38:56.508+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:38:56.509+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:38:56.509+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:39:41.507+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:39:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:39:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:39:56.510+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:40:41.507+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:40:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:40:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:40:56.510+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:41:41.505+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:41:56.509+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:41:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:41:56.510+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:42:41.507+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:42:56.508+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:42:56.508+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:42:56.508+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:43:41.507+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:43:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:43:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:43:56.511+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:44:41.507+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:44:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:44:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:44:56.511+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:45:41.507+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:45:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:45:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:45:56.510+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:46:41.508+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:46:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:46:56.512+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:46:56.512+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:47:41.508+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:47:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:47:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:47:56.511+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:48:41.508+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:48:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:48:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:48:56.511+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:49:41.508+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:49:56.510+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:49:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:49:56.511+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:50:41.507+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:50:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:50:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:50:56.511+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:51:41.508+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:51:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:51:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:51:56.511+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:52:41.509+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:52:56.512+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:52:56.513+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:52:56.513+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:53:41.509+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T13:53:56.511+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T13:53:56.512+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T13:53:56.512+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T13:54:41.508+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T14:10:44.058+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T14:10:44.059+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T14:10:44.059+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T14:11:29.066+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T14:11:44.070+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T14:11:44.072+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T14:11:44.072+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T14:12:29.067+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T14:12:44.071+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T14:12:44.071+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T14:12:44.072+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T14:28:29.419+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T14:28:44.421+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T14:28:44.421+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T14:28:44.422+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T14:29:29.419+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T14:29:44.421+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T14:29:44.422+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T14:29:44.422+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T14:46:12.527+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T14:46:27.525+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T14:46:27.526+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T14:46:27.526+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T14:47:12.519+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T14:47:27.522+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T14:47:27.522+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T14:47:27.523+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T14:48:12.519+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T14:48:27.522+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T14:48:27.523+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T14:48:27.523+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T14:49:12.518+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T14:56:03.317+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T14:56:03.319+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T14:56:03.319+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T15:00:42.579+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T15:00:57.583+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T15:00:57.584+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T15:00:57.584+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T15:18:40.055+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T15:18:55.058+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T15:18:55.059+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T15:18:55.059+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T15:19:40.054+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T15:19:55.058+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T15:19:55.059+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T15:19:55.059+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T15:23:22.768+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T15:23:37.770+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T15:23:37.771+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T15:23:37.771+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T15:24:22.767+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T15:24:37.770+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T15:24:37.771+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T15:24:37.771+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T15:42:53.525+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T15:43:08.544+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T15:43:08.545+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T15:43:08.545+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T15:43:53.554+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T15:44:08.558+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T15:44:08.558+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T15:44:08.558+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T15:44:53.554+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T15:45:08.557+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T15:45:08.558+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T15:45:08.558+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T16:01:08.632+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T16:01:23.637+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T16:01:23.637+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T16:01:23.637+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T16:02:08.635+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T16:02:23.638+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T16:02:23.639+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T16:02:23.639+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T16:18:14.035+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T16:18:29.031+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T16:18:29.031+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T16:18:29.031+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T16:19:14.023+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T16:19:29.026+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T16:19:29.028+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T16:19:29.028+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T16:20:14.023+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T16:20:29.025+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T16:20:29.025+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T16:20:29.025+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T16:37:06.546+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T16:37:21.550+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T16:37:21.550+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T16:37:21.550+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T16:38:06.546+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T16:38:21.550+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T16:38:21.550+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T16:38:21.550+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T16:54:20.403+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T16:54:35.405+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T16:54:35.406+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T16:54:35.406+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T16:55:20.404+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T16:55:35.408+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T16:55:35.409+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T16:55:35.409+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:02:08.442+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T17:02:23.445+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T17:02:23.446+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T17:02:23.446+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:03:08.441+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T17:03:23.444+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T17:03:23.444+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T17:03:23.444+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:04:08.443+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T17:04:23.446+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T17:04:23.447+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T17:04:23.447+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:21:51.740+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T17:22:06.743+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T17:22:06.746+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T17:22:06.746+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:22:51.740+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T17:23:06.742+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T17:23:06.742+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T17:23:06.742+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:39:56.175+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T17:40:11.176+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T17:40:11.176+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T17:40:11.176+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:40:56.174+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T17:41:11.176+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T17:41:11.177+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T17:41:11.177+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:57:09.552+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T17:57:24.542+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T17:57:24.543+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T17:57:24.543+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:58:09.530+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T17:58:24.533+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T17:58:24.533+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T17:58:24.533+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T17:59:09.528+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:03:07.394+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:03:07.394+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:03:07.395+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T18:19:05.870+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:19:20.877+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:19:20.877+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:19:20.878+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T18:20:05.876+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:20:20.880+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:20:20.880+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:20:20.880+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T18:21:05.876+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:36:33.703+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:36:33.705+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:36:33.705+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T18:37:18.684+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:37:33.687+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:37:33.688+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:37:33.688+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T18:38:18.682+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:38:33.685+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:38:33.685+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:38:33.685+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T18:55:00.254+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:55:15.257+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:55:15.257+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:55:15.258+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T18:56:00.251+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:56:15.254+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:56:15.255+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:56:15.255+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T18:57:25.199+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:57:40.202+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:57:40.202+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:57:40.203+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T18:58:25.198+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T18:58:40.202+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T18:58:40.202+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T18:58:40.202+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T19:04:24.842+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T19:04:39.846+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T19:04:39.846+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T19:04:39.846+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T19:05:24.842+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T19:05:39.844+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T19:05:39.845+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T19:05:39.845+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T19:06:24.841+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T19:06:39.843+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T19:06:39.845+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T19:06:39.845+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T19:23:45.164+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T19:24:00.170+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T19:24:00.171+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T19:24:00.171+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T19:24:45.166+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T19:25:00.169+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T19:25:00.170+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T19:25:00.170+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T19:40:53.801+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T19:41:08.806+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T19:41:08.808+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T19:41:08.808+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T19:41:53.803+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T19:42:08.805+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T19:42:08.806+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T19:42:08.806+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:00:23.320+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:00:38.324+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:00:38.324+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:00:38.324+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:01:23.322+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:01:38.323+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:01:38.323+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:01:38.323+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:05:17.654+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:05:32.656+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:05:32.657+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:05:32.657+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:06:17.655+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:06:32.659+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:06:32.660+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:06:32.660+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:23:08.663+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:23:23.660+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:23:23.661+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:23:23.661+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:24:08.651+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:24:23.654+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:24:23.654+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:24:23.655+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:25:08.651+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:25:23.653+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:25:23.653+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:25:23.653+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:26:08.650+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:26:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:26:23.651+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:26:23.651+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:27:08.650+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:27:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:27:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:27:23.652+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:28:08.650+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:28:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:28:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:28:23.652+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:29:08.650+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:29:23.651+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:29:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:29:23.652+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:30:08.649+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:30:23.653+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:30:23.654+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:30:23.654+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:31:08.649+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:31:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:31:23.651+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:31:23.651+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:32:08.650+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:32:23.653+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:32:23.655+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:32:23.655+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:33:08.649+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:33:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:33:23.653+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:33:23.653+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:34:08.649+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:34:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:34:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:34:23.652+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:35:08.649+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:35:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:35:23.653+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:35:23.653+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:36:08.649+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:36:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:36:23.651+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:36:23.651+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:37:08.647+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:37:23.651+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:37:23.651+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:37:23.651+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:38:08.647+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:38:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:38:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:38:23.650+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:39:08.647+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:39:23.649+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:39:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:39:23.650+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:40:08.647+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:40:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:40:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:40:23.650+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:41:08.648+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:41:23.651+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:41:23.653+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:41:23.653+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:42:08.648+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:42:23.651+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:42:23.652+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:42:23.652+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:43:08.647+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:43:23.649+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:43:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:43:23.650+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:44:08.647+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:44:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:44:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:44:23.650+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:45:08.647+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:45:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:45:23.650+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:45:23.650+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:46:08.647+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:46:23.649+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:46:23.649+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:46:23.649+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}
+{"level":"INFO","time":"2024-05-06T20:47:08.646+0800","caller":"discovery/resolver.go:177","msg":"Begin a full sync"}
+{"level":"ERROR","time":"2024-05-06T20:47:23.649+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/user.rpc/"}
+{"level":"ERROR","time":"2024-05-06T20:47:23.649+0800","caller":"discovery/resolver.go:197","msg":"Get info from etcd server while sync failed","prefix":"/test/"}
+{"level":"INFO","time":"2024-05-06T20:47:23.649+0800","caller":"discovery/resolver.go:179","msg":"Full sync end","addrs":{}}

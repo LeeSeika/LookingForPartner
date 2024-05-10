@@ -726,3 +726,4 @@
 2024/04/25 14:40:55 [error] 22#22: *5 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: localhost, request: "POST /api/v1/signup HTTP/1.1", upstream: "http://172.20.0.12:10001/api/v1/signup", host: "localhost:8080"
 2024/04/25 14:40:58 [error] 22#22: *5 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.65.1, server: localhost, request: "POST /api/v1/signup HTTP/1.1", upstream: "http://172.20.0.12:10001/api/v1/signup", host: "localhost:8080"
 2024/04/25 14:40:58 [error] 22#22: *5 open() "/etc/nginx/html/50x.html" failed (2: No such file or directory), client: 192.168.65.1, server: localhost, request: "POST /api/v1/signup HTTP/1.1", upstream: "http://172.20.0.12:10001/api/v1/signup", host: "localhost:8080"
+2024/05/07 16:24:33 [emerg] 1#1: host not found in upstream "golang" in /etc/nginx/nginx.conf:48
