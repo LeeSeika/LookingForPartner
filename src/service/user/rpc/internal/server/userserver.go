@@ -27,22 +27,12 @@ func (s *UserServer) WxLogin(ctx context.Context, in *user.WxLoginRequest) (*use
 	return l.WxLogin(in)
 }
 
-func (s *UserServer) SetUserBaseInfo(ctx context.Context, in *user.SetUserBaseInfoRequest) (*user.SetUserBaseInfoResponse, error) {
-	l := logic.NewSetUserBaseInfoLogic(ctx, s.svcCtx)
-	return l.SetUserBaseInfo(in)
+func (s *UserServer) SetUserInfo(ctx context.Context, in *user.SetUserInfoRequest) (*user.SetUserInfoResponse, error) {
+	l := logic.NewSetUserInfoLogic(ctx, s.svcCtx)
+	return l.SetUserInfo(in)
 }
 
-func (s *UserServer) GetUserBaseInfo(ctx context.Context, in *user.GetUserBaseInfoRequest) (*user.GetUserBaseInfoResponse, error) {
-	l := logic.NewGetUserBaseInfoLogic(ctx, s.svcCtx)
-	return l.GetUserBaseInfo(in)
-}
-
-func (s *UserServer) SetUserExtraInfo(ctx context.Context, in *user.SetUserExtraInfoRequest) (*user.SetUserExtraInfoRequest, error) {
-	l := logic.NewSetUserExtraInfoLogic(ctx, s.svcCtx)
-	return l.SetUserExtraInfo(in)
-}
-
-func (s *UserServer) GetUserExtraInfo(ctx context.Context, in *user.GetUserExtraInfoRequest) (*user.GetUserExtraInfoRequest, error) {
-	l := logic.NewGetUserExtraInfoLogic(ctx, s.svcCtx)
-	return l.GetUserExtraInfo(in)
+func (s *UserServer) GetUserInfo(ctx context.Context, in *user.GetUserInfoRequest) (*user.GetUserInfoResponse, error) {
+	l := logic.NewGetUserInfoLogic(ctx, s.svcCtx)
+	return l.GetUserInfo(in)
 }

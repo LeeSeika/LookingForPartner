@@ -8,7 +8,7 @@ type User struct {
 	Username     string
 	Avatar       string
 	School       string
-	Grade        int
+	Grade        int64
 	Introduction string
-	PostCount    int
+	PostCount    int64
 }

@@ -19,11 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	User_WxLogin_FullMethodName          = "/userclient.User/WxLogin"
-	User_SetUserBaseInfo_FullMethodName  = "/userclient.User/SetUserBaseInfo"
-	User_GetUserBaseInfo_FullMethodName  = "/userclient.User/GetUserBaseInfo"
-	User_SetUserExtraInfo_FullMethodName = "/userclient.User/SetUserExtraInfo"
-	User_GetUserExtraInfo_FullMethodName = "/userclient.User/GetUserExtraInfo"
+	User_WxLogin_FullMethodName     = "/userclient.User/WxLogin"
+	User_SetUserInfo_FullMethodName = "/userclient.User/SetUserInfo"
+	User_GetUserInfo_FullMethodName = "/userclient.User/GetUserInfo"
 )
 
 // UserClient is the client API for User service.
@@ -31,10 +29,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserClient interface {
 	WxLogin(ctx context.Context, in *WxLoginRequest, opts ...grpc.CallOption) (*WxLoginResponse, error)
-	SetUserBaseInfo(ctx context.Context, in *SetUserBaseInfoRequest, opts ...grpc.CallOption) (*SetUserBaseInfoResponse, error)
-	GetUserBaseInfo(ctx context.Context, in *GetUserBaseInfoRequest, opts ...grpc.CallOption) (*GetUserBaseInfoResponse, error)
-	SetUserExtraInfo(ctx context.Context, in *SetUserExtraInfoRequest, opts ...grpc.CallOption) (*SetUserExtraInfoRequest, error)
-	GetUserExtraInfo(ctx context.Context, in *GetUserExtraInfoRequest, opts ...grpc.CallOption) (*GetUserExtraInfoRequest, error)
+	SetUserInfo(ctx context.Context, in *SetUserInfoRequest, opts ...grpc.CallOption) (*SetUserInfoResponse, error)
+	GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
 }
 
 type userClient struct {
@@ -54,36 +50,18 @@ func (c *userClient) WxLogin(ctx context.Context, in *WxLoginRequest, opts ...gr
 	return out, nil
 }
 
-func (c *userClient) SetUserBaseInfo(ctx context.Context, in *SetUserBaseInfoRequest, opts ...grpc.CallOption) (*SetUserBaseInfoResponse, error) {
-	out := new(SetUserBaseInfoResponse)
-	err := c.cc.Invoke(ctx, User_SetUserBaseInfo_FullMethodName, in, out, opts...)
+func (c *userClient) SetUserInfo(ctx context.Context, in *SetUserInfoRequest, opts ...grpc.CallOption) (*SetUserInfoResponse, error) {
+	out := new(SetUserInfoResponse)
+	err := c.cc.Invoke(ctx, User_SetUserInfo_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) GetUserBaseInfo(ctx context.Context, in *GetUserBaseInfoRequest, opts ...grpc.CallOption) (*GetUserBaseInfoResponse, error) {
-	out := new(GetUserBaseInfoResponse)
-	err := c.cc.Invoke(ctx, User_GetUserBaseInfo_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userClient) SetUserExtraInfo(ctx context.Context, in *SetUserExtraInfoRequest, opts ...grpc.CallOption) (*SetUserExtraInfoRequest, error) {
-	out := new(SetUserExtraInfoRequest)
-	err := c.cc.Invoke(ctx, User_SetUserExtraInfo_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userClient) GetUserExtraInfo(ctx context.Context, in *GetUserExtraInfoRequest, opts ...grpc.CallOption) (*GetUserExtraInfoRequest, error) {
-	out := new(GetUserExtraInfoRequest)
-	err := c.cc.Invoke(ctx, User_GetUserExtraInfo_FullMethodName, in, out, opts...)
+func (c *userClient) GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error) {
+	out := new(GetUserInfoResponse)
+	err := c.cc.Invoke(ctx, User_GetUserInfo_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -95,10 +73,8 @@ func (c *userClient) GetUserExtraInfo(ctx context.Context, in *GetUserExtraInfoR
 // for forward compatibility
 type UserServer interface {
 	WxLogin(context.Context, *WxLoginRequest) (*WxLoginResponse, error)
-	SetUserBaseInfo(context.Context, *SetUserBaseInfoRequest) (*SetUserBaseInfoResponse, error)
-	GetUserBaseInfo(context.Context, *GetUserBaseInfoRequest) (*GetUserBaseInfoResponse, error)
-	SetUserExtraInfo(context.Context, *SetUserExtraInfoRequest) (*SetUserExtraInfoRequest, error)
-	GetUserExtraInfo(context.Context, *GetUserExtraInfoRequest) (*GetUserExtraInfoRequest, error)
+	SetUserInfo(context.Context, *SetUserInfoRequest) (*SetUserInfoResponse, error)
+	GetUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -109,17 +85,11 @@ type UnimplementedUserServer struct {
 func (UnimplementedUserServer) WxLogin(context.Context, *WxLoginRequest) (*WxLoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WxLogin not implemented")
 }
-func (UnimplementedUserServer) SetUserBaseInfo(context.Context, *SetUserBaseInfoRequest) (*SetUserBaseInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetUserBaseInfo not implemented")
+func (UnimplementedUserServer) SetUserInfo(context.Context, *SetUserInfoRequest) (*SetUserInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetUserInfo not implemented")
 }
-func (UnimplementedUserServer) GetUserBaseInfo(context.Context, *GetUserBaseInfoRequest) (*GetUserBaseInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserBaseInfo not implemented")
-}
-func (UnimplementedUserServer) SetUserExtraInfo(context.Context, *SetUserExtraInfoRequest) (*SetUserExtraInfoRequest, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetUserExtraInfo not implemented")
-}
-func (UnimplementedUserServer) GetUserExtraInfo(context.Context, *GetUserExtraInfoRequest) (*GetUserExtraInfoRequest, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserExtraInfo not implemented")
+func (UnimplementedUserServer) GetUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 
@@ -152,74 +122,38 @@ func _User_WxLogin_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_SetUserBaseInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetUserBaseInfoRequest)
+func _User_SetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).SetUserBaseInfo(ctx, in)
+		return srv.(UserServer).SetUserInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_SetUserBaseInfo_FullMethodName,
+		FullMethod: User_SetUserInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).SetUserBaseInfo(ctx, req.(*SetUserBaseInfoRequest))
+		return srv.(UserServer).SetUserInfo(ctx, req.(*SetUserInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_GetUserBaseInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserBaseInfoRequest)
+func _User_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).GetUserBaseInfo(ctx, in)
+		return srv.(UserServer).GetUserInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_GetUserBaseInfo_FullMethodName,
+		FullMethod: User_GetUserInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetUserBaseInfo(ctx, req.(*GetUserBaseInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _User_SetUserExtraInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetUserExtraInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServer).SetUserExtraInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: User_SetUserExtraInfo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).SetUserExtraInfo(ctx, req.(*SetUserExtraInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _User_GetUserExtraInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserExtraInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServer).GetUserExtraInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: User_GetUserExtraInfo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetUserExtraInfo(ctx, req.(*GetUserExtraInfoRequest))
+		return srv.(UserServer).GetUserInfo(ctx, req.(*GetUserInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -236,20 +170,12 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_WxLogin_Handler,
 		},
 		{
-			MethodName: "SetUserBaseInfo",
-			Handler:    _User_SetUserBaseInfo_Handler,
+			MethodName: "SetUserInfo",
+			Handler:    _User_SetUserInfo_Handler,
 		},
 		{
-			MethodName: "GetUserBaseInfo",
-			Handler:    _User_GetUserBaseInfo_Handler,
-		},
-		{
-			MethodName: "SetUserExtraInfo",
-			Handler:    _User_SetUserExtraInfo_Handler,
-		},
-		{
-			MethodName: "GetUserExtraInfo",
-			Handler:    _User_GetUserExtraInfo_Handler,
+			MethodName: "GetUserInfo",
+			Handler:    _User_GetUserInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

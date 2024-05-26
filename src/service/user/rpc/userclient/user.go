@@ -13,24 +13,18 @@ import (
 )
 
 type (
-	GetUserBaseInfoRequest   = user.GetUserBaseInfoRequest
-	GetUserBaseInfoResponse  = user.GetUserBaseInfoResponse
-	GetUserExtraInfoRequest  = user.GetUserExtraInfoRequest
-	GetUserExtraInfoResponse = user.GetUserExtraInfoResponse
-	SetUserBaseInfoRequest   = user.SetUserBaseInfoRequest
-	SetUserBaseInfoResponse  = user.SetUserBaseInfoResponse
-	SetUserExtraInfoRequest  = user.SetUserExtraInfoRequest
-	SetUserExtraInfoResponse = user.SetUserExtraInfoResponse
-	UserInfo                 = user.UserInfo
-	WxLoginRequest           = user.WxLoginRequest
-	WxLoginResponse          = user.WxLoginResponse
+	GetUserInfoRequest  = user.GetUserInfoRequest
+	GetUserInfoResponse = user.GetUserInfoResponse
+	SetUserInfoRequest  = user.SetUserInfoRequest
+	SetUserInfoResponse = user.SetUserInfoResponse
+	UserInfo            = user.UserInfo
+	WxLoginRequest      = user.WxLoginRequest
+	WxLoginResponse     = user.WxLoginResponse
 
 	User interface {
 		WxLogin(ctx context.Context, in *WxLoginRequest, opts ...grpc.CallOption) (*WxLoginResponse, error)
-		SetUserBaseInfo(ctx context.Context, in *SetUserBaseInfoRequest, opts ...grpc.CallOption) (*SetUserBaseInfoResponse, error)
-		GetUserBaseInfo(ctx context.Context, in *GetUserBaseInfoRequest, opts ...grpc.CallOption) (*GetUserBaseInfoResponse, error)
-		SetUserExtraInfo(ctx context.Context, in *SetUserExtraInfoRequest, opts ...grpc.CallOption) (*SetUserExtraInfoRequest, error)
-		GetUserExtraInfo(ctx context.Context, in *GetUserExtraInfoRequest, opts ...grpc.CallOption) (*GetUserExtraInfoRequest, error)
+		SetUserInfo(ctx context.Context, in *SetUserInfoRequest, opts ...grpc.CallOption) (*SetUserInfoResponse, error)
+		GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
 	}
 
 	defaultUser struct {
@@ -49,22 +43,12 @@ func (m *defaultUser) WxLogin(ctx context.Context, in *WxLoginRequest, opts ...g
 	return client.WxLogin(ctx, in, opts...)
 }
 
-func (m *defaultUser) SetUserBaseInfo(ctx context.Context, in *SetUserBaseInfoRequest, opts ...grpc.CallOption) (*SetUserBaseInfoResponse, error) {
+func (m *defaultUser) SetUserInfo(ctx context.Context, in *SetUserInfoRequest, opts ...grpc.CallOption) (*SetUserInfoResponse, error) {
 	client := user.NewUserClient(m.cli.Conn())
-	return client.SetUserBaseInfo(ctx, in, opts...)
+	return client.SetUserInfo(ctx, in, opts...)
 }
 
-func (m *defaultUser) GetUserBaseInfo(ctx context.Context, in *GetUserBaseInfoRequest, opts ...grpc.CallOption) (*GetUserBaseInfoResponse, error) {
+func (m *defaultUser) GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error) {
 	client := user.NewUserClient(m.cli.Conn())
-	return client.GetUserBaseInfo(ctx, in, opts...)
-}
-
-func (m *defaultUser) SetUserExtraInfo(ctx context.Context, in *SetUserExtraInfoRequest, opts ...grpc.CallOption) (*SetUserExtraInfoRequest, error) {
-	client := user.NewUserClient(m.cli.Conn())
-	return client.SetUserExtraInfo(ctx, in, opts...)
-}
-
-func (m *defaultUser) GetUserExtraInfo(ctx context.Context, in *GetUserExtraInfoRequest, opts ...grpc.CallOption) (*GetUserExtraInfoRequest, error) {
-	client := user.NewUserClient(m.cli.Conn())
-	return client.GetUserExtraInfo(ctx, in, opts...)
+	return client.GetUserInfo(ctx, in, opts...)
 }

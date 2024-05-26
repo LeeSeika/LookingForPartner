@@ -13,14 +13,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodPost,
-				Path:    "/baseinfo",
-				Handler: GetUserBaseInfoHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/extrainfo",
-				Handler: GetUserExtraInfoHandler(serverCtx),
+				Method:  http.MethodGet,
+				Path:    "/info/:id",
+				Handler: GetUserInfoHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
@@ -28,20 +23,15 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: WxLoginHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/api/user"),
+		rest.WithPrefix("/api/users"),
 	)
 
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/baseinfo",
-				Handler: SetUserBaseInfoHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/extrainfo",
-				Handler: SetUserExtraInfoHandler(serverCtx),
+				Method:  http.MethodPost,
+				Path:    "/info/:id",
+				Handler: SetUserInfoHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
@@ -50,6 +40,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/user"),
+		rest.WithPrefix("/api/users"),
 	)
 }

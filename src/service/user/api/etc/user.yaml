@@ -1,3 +1,11 @@
 Name: User
 Host: 0.0.0.0
-Port: 8888
+Port: 10001
+
+Auth:
+  AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
+  AccessExpire: 3600
+  RefreshExpire: 604800
+
+AppID: wx
+AppSecret: 3b

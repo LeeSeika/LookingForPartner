@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"lookingforpartner/common/error/rpc"
+	"lookingforpartner/common/errs"
 	"lookingforpartner/service/user/model"
 
 	"lookingforpartner/service/user/rpc/internal/svc"
@@ -29,7 +29,7 @@ func (l *WxLoginLogic) WxLogin(in *user.WxLoginRequest) (*user.WxLoginResponse, 
 	u := model.User{WxUid: in.WxUid, Username: in.Username}
 	err := l.svcCtx.UserInterface.FirstOrCreateUser(&u)
 	if err != nil {
-		return nil, rpc.ErrUnknown
+		return nil, errs.RpcUnknown
 	}
 
 	return &user.WxLoginResponse{}, nil

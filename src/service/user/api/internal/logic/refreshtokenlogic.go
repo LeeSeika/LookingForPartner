@@ -2,10 +2,13 @@ package logic
 
 import (
 	"context"
+	"errors"
+	"github.com/zeromicro/go-zero/core/logx"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/service/user/api/internal/common"
 	"lookingforpartner/service/user/api/internal/svc"
 	"lookingforpartner/service/user/api/internal/types"
-
-	"github.com/zeromicro/go-zero/core/logx"
+	"lookingforpartner/service/user/rpc/pb/user"
 )
 
 type RefreshTokenLogic struct {
@@ -23,7 +26,35 @@ func NewRefreshTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Refr
 }
 
 func (l *RefreshTokenLogic) RefreshToken(req *types.RefreshTokenReqeust) (resp *types.RefreshTokenResponse, err error) {
-	// todo: add your logic here and delete this line
+	// validate
+	uid, ok := l.ctx.Value("uid").(string)
+	if !ok {
+		return nil, errs.FormattedUnAuthorized()
+	}
 
-	return
+	// rpc call
+	getUserInfoReq := user.GetUserInfoRequest{WxUid: uid}
+	_, err = l.svcCtx.UserRpc.GetUserInfo(l.ctx, &getUserInfoReq)
+	if err != nil {
+		l.Logger.Errorf("[User][Api] GetUserInfo error, err: %v", err)
+		if errors.Is(err, errs.RpcNotFound) {
+			return nil, errs.FormattedNotFound()
+		}
+		return nil, errs.FormattedUnknown()
+	}
+
+	// generate token
+	accessExpire := l.svcCtx.Config.Auth.AccessExpire
+	refreshExpire := l.svcCtx.Config.Auth.RefreshExpire
+	accessSecret := l.svcCtx.Config.Auth.AccessSecret
+	accessToken, refreshToken, err := common.CreateTokenAndRefreshToken(uid, accessExpire, refreshExpire, accessSecret)
+	if err != nil {
+		l.Logger.Errorf("[User][Api] CreateTokenAndRefreshToken error, err: %+v", err)
+		return nil, errs.FormattedGenTokenFailed()
+	}
+
+	return &types.RefreshTokenResponse{
+		Token:        accessToken,
+		RefreshToken: refreshToken,
+	}, nil
 }

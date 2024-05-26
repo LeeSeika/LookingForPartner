@@ -14,57 +14,39 @@ message WxLoginResponse {
   UserInfo UserInfo = 1;
 }
 
+// UserInfo
 message UserInfo {
-  int32 PostCount = 1;
+  int64 PostCount = 1;
   string School = 2;
-  int32 Grade = 3;
+  int64 Grade = 3;
   string Avatar = 4;
   string Introduction = 5;
   string Username = 6;
 }
 
-// SetUserBaseInfo
-message SetUserBaseInfoRequest {
+// SetUserInfo
+message SetUserInfoRequest {
   string WxUid = 1;
   string School = 2;
-  int32 Grade = 3;
+  int64 Grade = 3;
+  string Introduction = 4;
 }
 
-message SetUserBaseInfoResponse {
+message SetUserInfoResponse {
+  UserInfo user = 1;
 }
 
-// GetUserBaseInfo
-message GetUserBaseInfoRequest {
-}
-
-message GetUserBaseInfoResponse {
-  string School = 1;
-  int32 Grade = 2;
-  string Username = 3;
-}
-
-// SetUserExtraInfo
-message SetUserExtraInfoRequest {
+// GetUserInfo
+message GetUserInfoRequest {
   string WxUid = 1;
-  string Introduction = 2;
 }
 
-message SetUserExtraInfoResponse {
-}
-
-// GetUserExtraInfo
-message GetUserExtraInfoRequest {
-}
-
-message GetUserExtraInfoResponse {
-  string Introduction = 1;
-  int32 PostCount = 2;
+message GetUserInfoResponse {
+  UserInfo user = 1;
 }
 
 service User {
   rpc WxLogin(WxLoginRequest) returns(WxLoginResponse);
-  rpc SetUserBaseInfo(SetUserBaseInfoRequest) returns(SetUserBaseInfoResponse);
-  rpc GetUserBaseInfo(GetUserBaseInfoRequest) returns(GetUserBaseInfoResponse);
-  rpc SetUserExtraInfo(SetUserExtraInfoRequest) returns(SetUserExtraInfoRequest);
-  rpc GetUserExtraInfo(GetUserExtraInfoRequest) returns(GetUserExtraInfoRequest);
+  rpc SetUserInfo(SetUserInfoRequest) returns(SetUserInfoResponse);
+  rpc GetUserInfo(GetUserInfoRequest) returns(GetUserInfoResponse);
 }

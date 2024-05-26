@@ -10,8 +10,8 @@ info (
 
 // WxLogin
 type WxLoginRequest {
-	Code string `json:"code"`
-// NickName string `json:"nickname"`
+	Code     string `json:"code"`
+	NickName string `json:"nickname"`
 }
 
 type WxLoginResponse {
@@ -24,9 +24,9 @@ type UserInfo {
 	WxUid        string `json:"wx_uid"`
 	Avatar       string `json:"avatar"`
 	School       string `json:"school"`
-	Grade        int    `json:"grade"`
+	Grade        int64  `json:"grade"`
 	Introduction string `json:"introduction"`
-	PostCount    int    `json:"post_count"`
+	PostCount    int64  `json:"post_count"`
 	Username     string `json:"username"`
 }
 
@@ -38,65 +38,55 @@ type RefreshTokenResponse {
 	RefreshToken string `json:"refresh_token"`
 }
 
-// SetUserBaseInfo
-type SetUserBaseInfoRequest {
-	// Username     string `json:"username"`
-	School string `json:"school"`
-	Grade  int    `json:"grade"`
-}
-
-type SetUserBaseInfoResponse {}
-
-// GetUserBaseInfo
-type GetUserBaseInfoRequest {}
-
-type GetUserBaseInfoResponse {
-	Avatar string `json:"avatar"`
-	School string `json:"school"`
-	Grade  int    `json:"grade"`
-}
-
-// SetUserExtraInfo
-type SetUserExtraInfoRequest {
+// SetUserInfo
+type SetUserInfoRequest {
+	ID           string `path:"id"`
+	School       string `json:"school"`
+	Grade        int64  `json:"grade"`
 	Introduction string `json:"introduction"`
 }
 
-type SetUserExtraInfoResponse {}
-
-// GetUserExtraInfo
-type GetUserExtraInfoRequest {}
-
-type GetUserExtraInfoResponse {
+type SetUserInfoResponse {
+	Avatar       string `json:"avatar"`
+	School       string `json:"school"`
+	Grade        int64  `json:"grade"`
 	Introduction string `json:"introduction"`
-	PostCount    int    `json:"post_count"`
+	PostCount    int64  `json:"post_count"`
+}
+
+// GetUserInfo
+type GetUserInfoRequest {
+	ID string `path:"id"`
+}
+
+type GetUserInfoResponse {
+	Avatar       string `json:"avatar"`
+	School       string `json:"school"`
+	Grade        int64  `json:"grade"`
+	Introduction string `json:"introduction"`
+	PostCount    int64  `json:"post_count"`
 }
 
 @server (
-	prefix: /api/user
+	prefix: /api/users
 )
 service User {
 	@handler WxLogin
 	post /wxlogin (WxLoginRequest) returns (WxLoginResponse)
 
-	@handler GetUserBaseInfo
-	post /baseinfo (GetUserBaseInfoRequest) returns (GetUserBaseInfoResponse)
-
-	@handler GetUserExtraInfo
-	post /extrainfo (GetUserExtraInfoRequest) returns (GetUserExtraInfoResponse)
+	@handler GetUserInfo
+	get /info/:id (GetUserInfoRequest) returns (GetUserInfoResponse)
 }
 
 @server (
 	jwt:    Auth
-	prefix: /api/user
+	prefix: /api/users
 )
 service User {
 	@handler RefreshToken
 	post /refreshtoken (RefreshTokenReqeust) returns (RefreshTokenResponse)
 
-	@handler SetUserBaseInfo
-	get /baseinfo (SetUserBaseInfoRequest) returns (SetUserBaseInfoResponse)
-
-	@handler SetUserExtraInfo
-	get /extrainfo (SetUserExtraInfoRequest) returns (SetUserExtraInfoResponse)
+	@handler SetUserInfo
+	post /info/:id (SetUserInfoRequest) returns (SetUserInfoResponse)
 }
 
