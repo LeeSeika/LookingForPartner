@@ -1,0 +1,102 @@
+syntax = "v1"
+
+info (
+	title:   "user"
+	desc:    ""
+	author:  "LeeSeika"
+	email:   "DBang1999@163.com"
+	version: "1.0"
+)
+
+// WxLogin
+type WxLoginRequest {
+	Code string `json:"code"`
+// NickName string `json:"nickname"`
+}
+
+type WxLoginResponse {
+	Token        string   `json:"token"`
+	RefreshToken string   `json:"refresh_token"`
+	UserInfo     UserInfo `json:"user_info"`
+}
+
+type UserInfo {
+	WxUid        string `json:"wx_uid"`
+	Avatar       string `json:"avatar"`
+	School       string `json:"school"`
+	Grade        int    `json:"grade"`
+	Introduction string `json:"introduction"`
+	PostCount    int    `json:"post_count"`
+	Username     string `json:"username"`
+}
+
+// RefreshToken
+type RefreshTokenReqeust {}
+
+type RefreshTokenResponse {
+	Token        string `json:"token"`
+	RefreshToken string `json:"refresh_token"`
+}
+
+// SetUserBaseInfo
+type SetUserBaseInfoRequest {
+	// Username     string `json:"username"`
+	School string `json:"school"`
+	Grade  int    `json:"grade"`
+}
+
+type SetUserBaseInfoResponse {}
+
+// GetUserBaseInfo
+type GetUserBaseInfoRequest {}
+
+type GetUserBaseInfoResponse {
+	Avatar string `json:"avatar"`
+	School string `json:"school"`
+	Grade  int    `json:"grade"`
+}
+
+// SetUserExtraInfo
+type SetUserExtraInfoRequest {
+	Introduction string `json:"introduction"`
+}
+
+type SetUserExtraInfoResponse {}
+
+// GetUserExtraInfo
+type GetUserExtraInfoRequest {}
+
+type GetUserExtraInfoResponse {
+	Introduction string `json:"introduction"`
+	PostCount    int    `json:"post_count"`
+}
+
+@server (
+	prefix: /api/user
+)
+service User {
+	@handler WxLogin
+	post /wxlogin (WxLoginRequest) returns (WxLoginResponse)
+
+	@handler GetUserBaseInfo
+	post /baseinfo (GetUserBaseInfoRequest) returns (GetUserBaseInfoResponse)
+
+	@handler GetUserExtraInfo
+	post /extrainfo (GetUserExtraInfoRequest) returns (GetUserExtraInfoResponse)
+}
+
+@server (
+	jwt:    Auth
+	prefix: /api/user
+)
+service User {
+	@handler RefreshToken
+	post /refreshtoken (RefreshTokenReqeust) returns (RefreshTokenResponse)
+
+	@handler SetUserBaseInfo
+	get /baseinfo (SetUserBaseInfoRequest) returns (SetUserBaseInfoResponse)
+
+	@handler SetUserExtraInfo
+	get /extrainfo (SetUserExtraInfoRequest) returns (SetUserExtraInfoResponse)
+}
+
