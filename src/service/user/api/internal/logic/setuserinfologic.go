@@ -28,10 +28,10 @@ func (l *SetUserInfoLogic) SetUserInfo(req *types.SetUserInfoRequest) (resp *typ
 	// validate
 	uid, ok := l.ctx.Value("uid").(string)
 	if !ok {
-		return nil, errs.FormattedUnAuthorized()
+		return nil, errs.FormattedApiUnAuthorized()
 	}
 	if uid != req.ID {
-		return nil, errs.FormattedUnAuthorized()
+		return nil, errs.FormattedApiUnAuthorized()
 	}
 
 	// rpc call
@@ -45,9 +45,9 @@ func (l *SetUserInfoLogic) SetUserInfo(req *types.SetUserInfoRequest) (resp *typ
 	if err != nil {
 		l.Logger.Errorf("[User][Api] SetUserInfo error, err: %v", err)
 		if errors.Is(err, errs.RpcNotFound) {
-			return nil, errs.FormattedNotFound()
+			return nil, errs.FormattedApiNotFound()
 		}
-		return nil, errs.FormattedUnknown()
+		return nil, errs.FormattedApiInternal()
 	}
 
 	getUserInfoReq := user.GetUserInfoRequest{WxUid: req.ID}
@@ -55,9 +55,9 @@ func (l *SetUserInfoLogic) SetUserInfo(req *types.SetUserInfoRequest) (resp *typ
 	if err != nil {
 		l.Logger.Errorf("[User][Api] GetUserInfo error, err: %v", err)
 		if errors.Is(err, errs.RpcNotFound) {
-			return nil, errs.FormattedNotFound()
+			return nil, errs.FormattedApiNotFound()
 		}
-		return nil, errs.FormattedUnknown()
+		return nil, errs.FormattedApiInternal()
 	}
 
 	resp = &types.SetUserInfoResponse{

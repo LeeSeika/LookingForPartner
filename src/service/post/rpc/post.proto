@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package postclient;
+
+option go_package = "./post";
+
+message Project {
+  int64 ProjectID = 1;
+  string MaintainerID = 2;
+  string Name = 3;
+  string Introduction = 4 ;
+  string Maintainer = 5;
+  string Role = 6;
+  string HeadCountInfo = 7;
+  string Progress = 8;
+}
+
+message PostInfo {
+  int64 PostID = 1;
+  string CreatedAt = 2;
+  string Title = 3;
+  Project   Project = 4;
+  string Content = 5;
+  string AuthorID = 6;
+}
+
+// CreatePost
+message CreatePostRequest {
+  string Title = 1;
+  Project Project = 2;
+  string Content = 3;
+  string WxUid = 4;
+}
+
+message CreatePostResponse {
+  PostInfo PostInfo = 1;
+}
+
+// DeletePost
+message DeletePostRequest {
+  int64 PostID = 1;
+  string WxUid = 2;
+}
+
+message DeletePostResponse {
+}
+
+// GetPost
+message GetPostRequest {
+  int64 PostID = 1;
+}
+
+message GetPostResponse {
+  PostInfo Post = 1;
+}
+
+// GetPosts
+message GetPostsRequest {
+  int64 PostID = 1;
+  int64 Page = 2;
+  int64 Size = 3;
+  string OrderBy = 4;
+}
+
+message GetPostsResponse {
+  repeated PostInfo Posts = 1;
+}
+
+// GetPostsByAuthorID
+message GetPostsByAuthorIDRequest {
+  int64 PostID = 1;
+  int64 Page = 2;
+  int64 Size = 3;
+  string AuthorID = 4;
+  string OrderBy = 5;
+}
+
+message GetPostsByAuthorIDResponse {
+  repeated PostInfo Posts = 1;
+}
+
+// UpdateProject
+message UpdateProjectRequest {
+  int64 ProjectID = 1;
+  string Name = 2;
+  string Role = 3;
+  string introduction = 4;
+  string Progress = 5;
+  string HeadCountInfo = 6;
+}
+
+message UpdateProjectResponse {
+  Project Project = 1;
+}
+
+service Post {
+  rpc CreatePost(CreatePostRequest) returns(CreatePostResponse);
+  rpc DeletePost(DeletePostRequest) returns(DeletePostResponse);
+  rpc GetPost(GetPostRequest) returns(GetPostResponse);
+  rpc GetPosts(GetPostsRequest) returns(GetPostsResponse);
+  rpc GetPostsByAuthorID(GetPostsByAuthorIDRequest) returns(GetPostsByAuthorIDResponse);
+  rpc UpdateProject(UpdateProjectRequest) returns(UpdateProjectResponse);
+}

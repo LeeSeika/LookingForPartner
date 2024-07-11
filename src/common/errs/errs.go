@@ -8,12 +8,14 @@ import (
 )
 
 var (
-	RpcUnknown  = status.Error(codes.Unknown, "unknown")
-	RpcNotFound = status.Error(codes.NotFound, "not found")
+	RpcUnknown          = status.Error(codes.Unknown, "unknown")
+	RpcNotFound         = status.Error(codes.NotFound, "not found")
+	RpcAlreadyExists    = status.Error(codes.AlreadyExists, "already exists")
+	RpcPermissionDenied = status.Error(codes.PermissionDenied, "permission denied")
 )
 
 var (
-	ApiUnknown              = "unknown"
+	ApiInternal             = "internal"
 	ApiProcessWxLoginFailed = "failed to process wx login"
 	ApiNotFound             = "not found"
 	ApiUnauthorized         = "unauthorized"
@@ -26,18 +28,18 @@ func FormatApiError(statusCode int, errMsg string) error {
 
 // formatted errs
 
-func FormattedUnknown() error {
-	return errors.New(http.StatusInternalServerError, ApiUnknown)
+func FormattedApiInternal() error {
+	return errors.New(http.StatusInternalServerError, ApiInternal)
 }
 
-func FormattedNotFound() error {
+func FormattedApiNotFound() error {
 	return errors.New(http.StatusBadRequest, ApiNotFound)
 }
 
-func FormattedUnAuthorized() error {
+func FormattedApiUnAuthorized() error {
 	return errors.New(http.StatusUnauthorized, ApiUnauthorized)
 }
 
-func FormattedGenTokenFailed() error {
+func FormattedApiGenTokenFailed() error {
 	return errors.New(http.StatusInternalServerError, ApiGenTokenFailed)
 }

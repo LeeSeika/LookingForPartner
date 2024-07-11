@@ -38,7 +38,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	authReq, err := http.NewRequest(http.MethodGet, authUrl, nil)
 	if err != nil {
 		l.Logger.Errorf("[User][Api] http.NewRequest error, err: %+v", err)
-		return nil, errs.FormattedUnknown()
+		return nil, errs.FormattedApiInternal()
 	}
 
 	client := &http.Client{}
@@ -51,7 +51,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	respBodyData, err := ioutil.ReadAll(authResp.Body)
 	if err != nil {
 		l.Logger.Errorf("[User][Api] ioutil.ReadAll error, err: %+v", err)
-		return nil, errs.FormattedUnknown()
+		return nil, errs.FormattedApiInternal()
 	}
 
 	type respBody struct {
@@ -65,7 +65,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	err = json.Unmarshal(respBodyData, &rb)
 	if err != nil {
 		l.Logger.Errorf("[User][Api] json.Unmarshal error, err: %+v", err)
-		return nil, errs.FormattedUnknown()
+		return nil, errs.FormattedApiInternal()
 	}
 
 	// rpc call
@@ -76,7 +76,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	wxLoginResp, err := l.svcCtx.UserRpc.WxLogin(l.ctx, &wxLoginReq)
 	if err != nil {
 		l.Logger.Errorf("[User][Api] WxLogin error, err: %+v", err)
-		return nil, errs.FormattedUnknown()
+		return nil, errs.FormattedApiInternal()
 	}
 
 	// generate token
@@ -86,7 +86,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	accessToken, refreshToken, err := common.CreateTokenAndRefreshToken(rb.Openid, accessExpire, refreshExpire, accessSecret)
 	if err != nil {
 		l.Logger.Errorf("[User][Api] CreateTokenAndRefreshToken error, err: %+v", err)
-		return nil, errs.FormattedGenTokenFailed()
+		return nil, errs.FormattedApiGenTokenFailed()
 	}
 
 	userInfo := types.UserInfo{

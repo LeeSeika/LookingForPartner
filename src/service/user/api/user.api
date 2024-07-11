@@ -4,7 +4,7 @@ info (
 	title:   "user"
 	desc:    ""
 	author:  "LeeSeika"
-	email:   "DBang1999@163.com"
+	email:   "LeeSeika@outlook.com"
 	version: "1.0"
 )
 
@@ -68,25 +68,25 @@ type GetUserInfoResponse {
 }
 
 @server (
-	prefix: /api/users
+	prefix: /api/v1
 )
 service User {
 	@handler WxLogin
-	post /wxlogin (WxLoginRequest) returns (WxLoginResponse)
+	post /users/wxlogin (WxLoginRequest) returns (WxLoginResponse)
 
 	@handler GetUserInfo
-	get /info/:id (GetUserInfoRequest) returns (GetUserInfoResponse)
+	get /users/userID/:id (GetUserInfoRequest) returns (GetUserInfoResponse)
 }
 
 @server (
 	jwt:    Auth
-	prefix: /api/users
+	prefix: /api/v1
 )
 service User {
 	@handler RefreshToken
-	post /refreshtoken (RefreshTokenReqeust) returns (RefreshTokenResponse)
+	get /users/token (RefreshTokenReqeust) returns (RefreshTokenResponse)
 
 	@handler SetUserInfo
-	post /info/:id (SetUserInfoRequest) returns (SetUserInfoResponse)
+	put /users/userID/:id (SetUserInfoRequest) returns (SetUserInfoResponse)
 }
 

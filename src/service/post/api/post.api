@@ -1,0 +1,127 @@
+syntax = "v1"
+
+info (
+	title:   "post"
+	desc:    ""
+	author:  "LeeSeika"
+	email:   "LeeSeika@outlook.com"
+	version: "1.0"
+)
+
+type Project {
+	ProjectID     int64  `json:"project_id, string"`
+	MaintainerID  string `json:"maintainer_id"`
+	Name          string `json:"name"`
+	Introduction  string `json:"introduction"`
+	Maintainer    string `json:"maintainer"`
+	Role          string `json:"role"`
+	HeadCountInfo string `json:"head_count_info"`
+	Progress      string `json:"progress"`
+}
+
+type Post {
+	PostID    int64   `json:"post_id, string"`
+	CreatedAt string  `json:"created_at"`
+	Title     string  `json:"title"`
+	Project   Project `json:"project"`
+	Content   string  `json:"content"`
+	AuthorID  string  `json:"author_id"`
+}
+
+// CreatePost
+type CreatePostRequest {
+	Title   string  `json:"title"`
+	Project Project `json:"project"`
+	Content string  `json:"content"`
+}
+
+type CreatePostResponse {
+	PostID    int64   `json:"post_id, string"`
+	CreatedAt string  `json:"created_at"`
+	Title     string  `json:"title"`
+	Project   Project `json:"project"`
+	Content   string  `json:"content"`
+}
+
+// DeletePost
+type DeletePostRequest {
+	PostID int64 `path:"postID, string"`
+}
+
+type DeletePostResponse {}
+
+// GetPost
+type GetPostRequest {
+	PostID int64 `path:"postID, string"`
+}
+
+type GetPostResponse {
+	Post Post `json:"post"`
+}
+
+// GetPosts
+type GetPostsRequest {
+	Page  int64  `json:"page"`
+	Size  int64  `json:"size"`
+	Order string `json:"order"`
+}
+
+type GetPostsResponse {
+	Posts []Post `json:"posts"`
+}
+
+// GetPostsByUid
+type GetPostByAuthorIDRequest {
+	AuthorID string `path:"authorID"`
+	Page     int64  `json:"page"`
+	Size     int64  `json:"size"`
+	Order    string `json:"order"`
+}
+
+type GetPostsByAuthorIDResponse {
+	Posts []GetPostResponse `json:"posts"`
+}
+
+// UpdateProject
+type UpdateProjectRequest {
+	ProjectID     int64  `path:"projectID, string"`
+	Name          string `json:"name"`
+	Introduction  string `json:"introduction"`
+	Role          string `json:"role"`
+	HeadCountInfo string `json:"head_count_info"`
+	Progress      string `json:"progress"`
+}
+
+type UpdateProjectResponse {
+	Project Project `json:"project"`
+}
+
+@server (
+	prefix: /api/v1
+)
+service Post {
+	@handler GetPost
+	get /posts/:postID (GetPostRequest) returns (GetPostResponse)
+
+	@handler GetPosts
+	get /posts (GetPostsRequest) returns (GetPostsResponse)
+
+	@handler GetPostsByAuthorID
+	get /posts/author/:authorID (GetPostByAuthorIDRequest) returns (GetPostsByAuthorIDResponse)
+}
+
+@server (
+	prefix: /api/v1
+	jwt:    Auth
+)
+service Post {
+	@handler CreatePost
+	post /posts (CreatePostRequest) returns (CreatePostResponse)
+
+	@handler DeletePost
+	delete /posts/:postID (DeletePostRequest) returns (DeletePostResponse)
+
+	@handler UpdateProject
+	put /posts/project/:projectID (UpdateProjectRequest) returns (UpdateProjectResponse)
+}
+

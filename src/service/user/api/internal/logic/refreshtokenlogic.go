@@ -29,7 +29,7 @@ func (l *RefreshTokenLogic) RefreshToken(req *types.RefreshTokenReqeust) (resp *
 	// validate
 	uid, ok := l.ctx.Value("uid").(string)
 	if !ok {
-		return nil, errs.FormattedUnAuthorized()
+		return nil, errs.FormattedApiUnAuthorized()
 	}
 
 	// rpc call
@@ -38,9 +38,9 @@ func (l *RefreshTokenLogic) RefreshToken(req *types.RefreshTokenReqeust) (resp *
 	if err != nil {
 		l.Logger.Errorf("[User][Api] GetUserInfo error, err: %v", err)
 		if errors.Is(err, errs.RpcNotFound) {
-			return nil, errs.FormattedNotFound()
+			return nil, errs.FormattedApiNotFound()
 		}
-		return nil, errs.FormattedUnknown()
+		return nil, errs.FormattedApiInternal()
 	}
 
 	// generate token
@@ -50,7 +50,7 @@ func (l *RefreshTokenLogic) RefreshToken(req *types.RefreshTokenReqeust) (resp *
 	accessToken, refreshToken, err := common.CreateTokenAndRefreshToken(uid, accessExpire, refreshExpire, accessSecret)
 	if err != nil {
 		l.Logger.Errorf("[User][Api] CreateTokenAndRefreshToken error, err: %+v", err)
-		return nil, errs.FormattedGenTokenFailed()
+		return nil, errs.FormattedApiGenTokenFailed()
 	}
 
 	return &types.RefreshTokenResponse{

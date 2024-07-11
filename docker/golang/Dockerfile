@@ -1,6 +1,6 @@
 FROM --platform=linux/amd64 golang:1.20
 
-LABEL maintainer="DBang1999@163.com"
+LABEL maintainer="LeeSeika@outlook.com"
 
 ENV GOPROXY https://goproxy.cn,direct
 

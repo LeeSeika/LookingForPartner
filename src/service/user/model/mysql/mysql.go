@@ -17,10 +17,10 @@ func (m *MysqlInterface) SetUser(user *model.User) error {
 	return rs.Error
 }
 
-func (m *MysqlInterface) GetUser(wxUid string) (model.User, error) {
+func (m *MysqlInterface) GetUser(wxUid string) (*model.User, error) {
 	var user model.User
 	rs := m.db.Model(&model.User{}).Where("wx_uid = ?", wxUid).First(&user)
-	return user, rs.Error
+	return &user, rs.Error
 }
 
 func (m *MysqlInterface) FirstOrCreateUser(user *model.User) error {

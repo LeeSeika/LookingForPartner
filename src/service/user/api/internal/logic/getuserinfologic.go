@@ -31,9 +31,9 @@ func (l *GetUserInfoLogic) GetUserInfo(req *types.GetUserInfoRequest) (resp *typ
 	if err != nil {
 		l.Logger.Errorf("[User][Api] GetUserInfo error, err: %v", err)
 		if errors.Is(err, errs.RpcNotFound) {
-			return nil, errs.FormattedNotFound()
+			return nil, errs.FormattedApiNotFound()
 		}
-		return nil, errs.FormattedUnknown()
+		return nil, errs.FormattedApiInternal()
 	}
 
 	resp = &types.GetUserInfoResponse{
