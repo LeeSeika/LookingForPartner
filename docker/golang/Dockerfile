@@ -21,7 +21,7 @@ RUN touch /etc/apt/sources.list && \
 
 # 安装 goctl
 USER root
-RUN go install github.com/zeromicro/go-zero/tools/goctl@v1.6.2 && \
+RUN go install github.com/zeromicro/go-zero/tools/goctl@v1.6.3 && \
     goctl env check --install --verbose --force
 
 # # 安装 protoc
