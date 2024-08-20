@@ -1,3 +1,8 @@
 Name: Post
 Host: 0.0.0.0
-Port: 8888
+Port: 10002
+
+Auth:
+  AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
+  AccessExpire: 3600
+  RefreshExpire: 604800
