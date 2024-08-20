@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 golang:1.20
+FROM --platform=linux/amd64 golang:1.22
 
 LABEL maintainer="LeeSeika@outlook.com"
 
@@ -21,7 +21,7 @@ RUN touch /etc/apt/sources.list && \
 
 # 安装 goctl
 USER root
-RUN go install github.com/zeromicro/go-zero/tools/goctl@latest && \
+RUN go install github.com/zeromicro/go-zero/tools/goctl@v1.6.2 && \
     goctl env check --install --verbose --force
 
 # # 安装 protoc
