@@ -36,11 +36,7 @@ type CreatePostRequest {
 }
 
 type CreatePostResponse {
-	PostID    int64   `json:"post_id, string"`
-	CreatedAt string  `json:"created_at"`
-	Title     string  `json:"title"`
-	Project   Project `json:"project"`
-	Content   string  `json:"content"`
+	Post Post `json:"post"`
 }
 
 // DeletePost
@@ -79,7 +75,7 @@ type GetPostByAuthorIDRequest {
 }
 
 type GetPostsByAuthorIDResponse {
-	Posts []GetPostResponse `json:"posts"`
+	Posts []Post `json:"posts"`
 }
 
 // UpdateProject

@@ -37,6 +37,7 @@ func (l *UpdateProjectLogic) UpdateProject(in *post.UpdateProjectRequest) (*post
 	}
 	updatedProj, err := l.svcCtx.PostInterface.SetProject(&proj)
 	if err != nil {
+		l.Logger.Errorf("[Post][Rpc] SetProject error, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 

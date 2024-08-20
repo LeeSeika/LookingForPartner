@@ -30,3 +30,19 @@ func ProjectApi2Rpc(proj *types.Project) post.Project {
 		Progress:      proj.Progress,
 	}
 }
+
+func PostRpc2Api(po *post.PostInfo) types.Post {
+	proj := types.Project{}
+	if po.GetProject() != nil {
+		proj = ProjectRpc2Api(po.GetProject())
+	}
+
+	return types.Post{
+		PostID:    po.PostID,
+		CreatedAt: po.CreatedAt,
+		Title:     po.Title,
+		Project:   proj,
+		Content:   po.Content,
+		AuthorID:  po.AuthorID,
+	}
+}

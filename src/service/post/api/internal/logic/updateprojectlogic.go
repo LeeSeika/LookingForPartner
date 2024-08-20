@@ -2,6 +2,9 @@ package logic
 
 import (
 	"context"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/service/post/api/internal/converter"
+	"lookingforpartner/service/post/rpc/pb/post"
 
 	"lookingforpartner/service/post/api/internal/svc"
 	"lookingforpartner/service/post/api/internal/types"
@@ -24,7 +27,23 @@ func NewUpdateProjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 }
 
 func (l *UpdateProjectLogic) UpdateProject(req *types.UpdateProjectRequest) (resp *types.UpdateProjectResponse, err error) {
-	// todo: add your logic here and delete this line
+	updateProjectReq := post.UpdateProjectRequest{
+		ProjectID:     req.ProjectID,
+		Name:          req.Name,
+		Role:          req.Role,
+		Introduction:  req.Introduction,
+		Progress:      req.Progress,
+		HeadCountInfo: req.HeadCountInfo,
+	}
 
-	return
+	updateProjectResp, err := l.svcCtx.PostRpc.UpdateProject(l.ctx, &updateProjectReq)
+	if err != nil {
+		return nil, errs.FormattedApiInternal()
+	}
+
+	resp = &types.UpdateProjectResponse{
+		Project: converter.ProjectRpc2Api(updateProjectResp.GetProject()),
+	}
+
+	return resp, nil
 }

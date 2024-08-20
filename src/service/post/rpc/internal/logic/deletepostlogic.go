@@ -32,6 +32,7 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 		if po == nil || errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errs.RpcNotFound
 		}
+		l.Logger.Errorf("[Post][Rpc] CreatePost error, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 	if po.AuthorID != in.WxUid {
@@ -39,6 +40,7 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 	}
 	_, _, err = l.svcCtx.PostInterface.DeletePostTx(in.PostID)
 	if err != nil {
+		l.Logger.Errorf("[Post][Rpc] CreatePostWithProjectTx error, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 

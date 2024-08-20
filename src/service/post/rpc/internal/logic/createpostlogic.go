@@ -60,6 +60,7 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 		if errors.As(err, &mysqlErr) && mysqlErr.Number == 1062 {
 			return nil, errs.RpcAlreadyExists
 		}
+		l.Logger.Errorf("[Post][Rpc] CreatePostWithProjectTx error, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 

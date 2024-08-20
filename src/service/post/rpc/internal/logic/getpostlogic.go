@@ -32,6 +32,7 @@ func (l *GetPostLogic) GetPost(in *post.GetPostRequest) (*post.GetPostResponse, 
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errs.RpcNotFound
 		}
+		l.Logger.Errorf("[Post][Rpc] GetPost error, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 

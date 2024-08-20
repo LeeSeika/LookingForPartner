@@ -46,11 +46,7 @@ func (l *CreatePostLogic) CreatePost(req *types.CreatePostRequest) (resp *types.
 	}
 
 	resp = &types.CreatePostResponse{
-		PostID:    createPostResp.PostInfo.PostID,
-		CreatedAt: createPostResp.PostInfo.CreatedAt,
-		Title:     createPostResp.PostInfo.Title,
-		Project:   converter.ProjectRpc2Api(createPostResp.PostInfo.Project),
-		Content:   createPostResp.PostInfo.Content,
+		Post: converter.PostRpc2Api(createPostResp.GetPostInfo()),
 	}
 
 	return resp, nil

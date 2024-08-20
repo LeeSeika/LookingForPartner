@@ -8,29 +8,25 @@ type CreatePostRequest struct {
 }
 
 type CreatePostResponse struct {
-	PostID    int64   `json:"post_id, string"`
-	CreatedAt string  `json:"created_at"`
-	Title     string  `json:"title"`
-	Project   Project `json:"project"`
-	Content   string  `json:"content"`
+	Post Post `json:"post"`
 }
 
 type DeletePostRequest struct {
-	PostID int64 `json:"post_id, string"`
+	PostID int64 `path:"postID, string"`
 }
 
 type DeletePostResponse struct {
 }
 
 type GetPostByAuthorIDRequest struct {
-	AuthorID string `json:"author_id"`
+	AuthorID string `path:"authorID"`
 	Page     int64  `json:"page"`
 	Size     int64  `json:"size"`
 	Order    string `json:"order"`
 }
 
 type GetPostRequest struct {
-	PostID int64 `json:"post_id, string"`
+	PostID int64 `path:"postID, string"`
 }
 
 type GetPostResponse struct {
@@ -38,7 +34,7 @@ type GetPostResponse struct {
 }
 
 type GetPostsByAuthorIDResponse struct {
-	Posts []GetPostResponse `json:"posts"`
+	Posts []Post `json:"posts"`
 }
 
 type GetPostsRequest struct {
@@ -72,6 +68,7 @@ type Project struct {
 }
 
 type UpdateProjectRequest struct {
+	ProjectID     int64  `path:"projectID, string"`
 	Name          string `json:"name"`
 	Introduction  string `json:"introduction"`
 	Role          string `json:"role"`

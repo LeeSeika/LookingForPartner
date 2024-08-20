@@ -29,10 +29,8 @@ func NewGetPostsByAuthorIDLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 func (l *GetPostsByAuthorIDLogic) GetPostsByAuthorID(in *post.GetPostsByAuthorIDRequest) (*post.GetPostsByAuthorIDResponse, error) {
 	posts, err := l.svcCtx.PostInterface.GetPostsByAuthorID(in.Page, in.Size, in.AuthorID, dao.OrderByString2Opt(in.OrderBy))
 	if err != nil {
+		l.Logger.Errorf("[Post][Rpc] GetPostsByAuthorID error, err: %+v", err)
 		return nil, errs.RpcUnknown
-	}
-	if len(posts) == 0 {
-		return nil, errs.RpcNotFound
 	}
 
 	poInfos := make([]*post.PostInfo, 0, len(posts))

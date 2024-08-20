@@ -19,13 +19,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/posts/author/:id",
-				Handler: GetPostsByAuthorIDHandler(serverCtx),
+				Path:    "/posts/:postID",
+				Handler: GetPostHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/posts/post/:id",
-				Handler: GetPostHandler(serverCtx),
+				Path:    "/posts/author/:authorID",
+				Handler: GetPostsByAuthorIDHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api/v1"),
@@ -35,17 +35,17 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/posts/post",
+				Path:    "/posts",
 				Handler: CreatePostHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodDelete,
-				Path:    "/posts/post/:id",
+				Path:    "/posts/:postID",
 				Handler: DeletePostHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/posts/project/:id",
+				Method:  http.MethodPut,
+				Path:    "/posts/project/:projectID",
 				Handler: UpdateProjectHandler(serverCtx),
 			},
 		},

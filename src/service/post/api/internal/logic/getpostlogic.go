@@ -2,6 +2,9 @@ package logic
 
 import (
 	"context"
+	"errors"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/service/post/api/internal/converter"
 	"lookingforpartner/service/post/rpc/pb/post"
 
 	"lookingforpartner/service/post/api/internal/svc"
@@ -25,7 +28,21 @@ func NewGetPostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPostLo
 }
 
 func (l *GetPostLogic) GetPost(req *types.GetPostRequest) (resp *types.GetPostResponse, err error) {
+	getPostReq := post.GetPostRequest{
+		PostID: req.PostID,
+	}
 
-	getPostReq := post.GetPostRequest{PostID: req.PostID}
-	return
+	getPostResp, err := l.svcCtx.PostRpc.GetPost(l.ctx, &getPostReq)
+	if err != nil {
+		if errors.Is(err, errs.RpcNotFound) {
+			return nil, errs.FormattedApiNotFound()
+		}
+		return nil, errs.FormattedApiInternal()
+	}
+
+	resp = &types.GetPostResponse{
+		Post: converter.PostRpc2Api(getPostResp.GetPost()),
+	}
+
+	return resp, nil
 }
