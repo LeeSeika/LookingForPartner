@@ -2,7 +2,7 @@
 package types
 
 type GetUserInfoRequest struct {
-	ID string `path:"id"`
+	ID string `path:"wxUid"`
 }
 
 type GetUserInfoResponse struct {
@@ -22,7 +22,7 @@ type RefreshTokenResponse struct {
 }
 
 type SetUserInfoRequest struct {
-	ID           string `path:"id"`
+	ID           string `path:"wxUid"`
 	School       string `json:"school"`
 	Grade        int64  `json:"grade"`
 	Introduction string `json:"introduction"`
@@ -52,15 +52,7 @@ type WxLoginRequest struct {
 }
 
 type WxLoginResponse struct {
-	Token        string `json:"token"`
-	RefreshToken string `json:"refresh_token"`
-	UserInfo     struct {
-		WxUid        string `json:"wx_uid"`
-		Avatar       string `json:"avatar"`
-		School       string `json:"school"`
-		Grade        int64  `json:"grade"`
-		Introduction string `json:"introduction"`
-		PostCount    int64  `json:"post_count"`
-		Username     string `json:"username"`
-	} `json:"user_info"`
+	Token        string   `json:"token"`
+	RefreshToken string   `json:"refresh_token"`
+	UserInfo     UserInfo `json:"user_info"`
 }

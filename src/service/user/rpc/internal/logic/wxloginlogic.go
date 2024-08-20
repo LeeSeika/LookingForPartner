@@ -29,6 +29,7 @@ func (l *WxLoginLogic) WxLogin(in *user.WxLoginRequest) (*user.WxLoginResponse, 
 	u := model.User{WxUid: in.WxUid, Username: in.Username}
 	err := l.svcCtx.UserInterface.FirstOrCreateUser(&u)
 	if err != nil {
+		l.Logger.Errorf("[User][Rpc] FirstOrCreateUser error, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 
