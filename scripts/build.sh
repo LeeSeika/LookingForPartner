@@ -1,19 +1,26 @@
 set -ex
 
-VERSION=1.0.0
-
-echo $VERSION
-
-LDFLAGS="-X main.Version=${VERSION}"
-
+# get OS
 UNAME_S=$(uname -s)
 GOOS=linux
 if [ $UNAME_S = "Darwin" ]; then
 	GOOS=darwin
 fi
 
-GOOS=${GOOS} GOARCH=amd64 go build -ldflags "${LDFLAGS}" -o ../target/user-api ./service/user/api/user.go
-GOOS=${GOOS} GOARCH=amd64 go build -ldflags "${LDFLAGS}" -o ../target/user-rpc ./service/user/rpc/user.go
+# get arch
+UNAME_M=$(uname -m)
+GOARCH=arm64
+if [ $UNAME_M == "x86_64" ]; then
+   GOARCH=amd64
+fi
 
-GOOS=${GOOS} GOARCH=amd64 go build -ldflags "${LDFLAGS}" -o ../target/post-api ./service/post/api/post.go
-GOOS=${GOOS} GOARCH=amd64 go build -ldflags "${LDFLAGS}" -o ../target/post-rpc ./service/post/rpc/post.go
+# build services
+services=(user post)
+
+for item in "${services[@]}"; do
+  goctl api go -api ./service/"$item"/api/"$item".api -dir ./service/"$item"/api/
+  goctl rpc protoc ./service/"$item"/rpc/"$item".proto --go_out=./service/"$item"/rpc/pb --go-grpc_out=./service/"$item"/rpc/pb --zrpc_out=./service/"$item"/rpc/
+
+  GOOS=${GOOS} GOARCH=${GOARCH} go build  -o ../target/"$item"-rpc ./service/"$item"/rpc/"$item".go
+  GOOS=${GOOS} GOARCH=${GOARCH} go build  -o ../target/"$item"-api ./service/"$item"/api/"$item".go
+done
