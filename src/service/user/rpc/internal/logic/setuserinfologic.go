@@ -5,7 +5,7 @@ import (
 	"errors"
 	"gorm.io/gorm"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/service/user/model"
+	"lookingforpartner/model"
 	"lookingforpartner/service/user/rpc/internal/converter"
 
 	"lookingforpartner/service/user/rpc/internal/svc"

@@ -27,7 +27,7 @@ func NewGetPostsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPosts
 }
 
 func (l *GetPostsLogic) GetPosts(in *post.GetPostsRequest) (*post.GetPostsResponse, error) {
-	posts, err := l.svcCtx.PostInterface.GetPosts(in.Page, in.Size, dao.OrderByString2Opt(in.OrderBy))
+	posts, err := l.svcCtx.PostInterface.GetPosts(in.Page, in.Size, dao.ToOrderByOpt(in.OrderBy))
 	if err != nil {
 		l.Logger.Errorf("[Post][Rpc] GetPosts error, err: %+v", err)
 		return nil, errs.RpcUnknown

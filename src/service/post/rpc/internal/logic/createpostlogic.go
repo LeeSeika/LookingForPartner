@@ -6,7 +6,7 @@ import (
 	"github.com/go-sql-driver/mysql"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/service/post/model"
+	model2 "lookingforpartner/model"
 	"lookingforpartner/service/post/rpc/internal/converter"
 	"lookingforpartner/service/post/rpc/internal/svc"
 	"lookingforpartner/service/post/rpc/pb/post"
@@ -27,11 +27,11 @@ func NewCreatePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 }
 
 func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePostResponse, error) {
-	var po *model.Post
-	var proj *model.Project
+	var po *model2.Post
+	var proj *model2.Project
 	var err error
 
-	po = &model.Post{
+	po = &model2.Post{
 		PostID:   1, //todo
 		AuthorID: in.WxUid,
 		Title:    in.Title,
@@ -41,7 +41,7 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 	if in.Project == nil {
 		po, err = l.svcCtx.PostInterface.CreatePost(po)
 	} else {
-		proj = &model.Project{
+		proj = &model2.Project{
 			ProjectID:     1, //todo
 			MaintainerID:  in.Project.MaintainerID,
 			Maintainer:    in.Project.Maintainer,

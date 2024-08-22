@@ -1,6 +1,7 @@
 package converter
 
 import (
+	model2 "lookingforpartner/model"
 	"lookingforpartner/service/post/model"
 	"lookingforpartner/service/post/rpc/pb/post"
 	"time"
@@ -32,7 +33,7 @@ func PostWithProject2PostInfo(poWithProj *model.PostWithProject) *post.PostInfo 
 	return &poInfo
 }
 
-func PostAndProject2PostInfo(po *model.Post, proj *model.Project) *post.PostInfo {
+func PostAndProject2PostInfo(po *model2.Post, proj *model2.Project) *post.PostInfo {
 	var projResp *post.Project
 	if proj != nil {
 		projResp = &post.Project{
@@ -59,7 +60,7 @@ func PostAndProject2PostInfo(po *model.Post, proj *model.Project) *post.PostInfo
 	return &poInfo
 }
 
-func Project2ProjResp(proj *model.Project) *post.Project {
+func Project2ProjResp(proj *model2.Project) *post.Project {
 	porjResp := post.Project{
 		ProjectID:     proj.ProjectID,
 		MaintainerID:  proj.MaintainerID,

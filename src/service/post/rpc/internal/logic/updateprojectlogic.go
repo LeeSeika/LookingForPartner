@@ -3,7 +3,7 @@ package logic
 import (
 	"context"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/service/post/model"
+	"lookingforpartner/model"
 	"lookingforpartner/service/post/rpc/internal/converter"
 
 	"lookingforpartner/service/post/rpc/internal/svc"

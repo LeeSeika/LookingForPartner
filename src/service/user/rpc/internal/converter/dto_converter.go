@@ -1,7 +1,7 @@
 package converter
 
 import (
-	"lookingforpartner/service/user/model"
+	"lookingforpartner/model"
 	"lookingforpartner/service/user/rpc/pb/user"
 )
 

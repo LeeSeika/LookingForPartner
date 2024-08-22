@@ -1,7 +1,9 @@
 package model
 
+import "lookingforpartner/model"
+
 type UserInterface interface {
-	FirstOrCreateUser(user *User) error
-	SetUser(user *User) error
-	GetUser(wxUid string) (*User, error)
+	FirstOrCreateUser(user *model.User) error
+	SetUser(user *model.User) error
+	GetUser(wxUid string) (*model.User, error)
 }

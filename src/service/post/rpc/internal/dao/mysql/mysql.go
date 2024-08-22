@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"lookingforpartner/common/dao"
-	"lookingforpartner/service/post/model"
+	"lookingforpartner/model"
+	"lookingforpartner/service/post/rpc/internal/dao"
 	"time"
 )
 
@@ -13,35 +13,31 @@ type MysqlInterface struct {
 	db *gorm.DB
 }
 
-func (m *MysqlInterface) DeletePostTx(postID int64) (*model.Post, *model.Project, error) {
+func (m *MysqlInterface) DeletePost(postID string) (*model.Post, error) {
 	tx := m.db.Begin()
 	defer tx.Rollback()
 
 	var post model.Post
-	rs := tx.Where("post_id = ?", postID).Delete(&post)
-	if rs.Error != nil {
-		return nil, nil, rs.Error
-	}
+	post.PostID = postID
 
-	var project model.Project
-	rs = tx.Where("post_id = ?", postID).Delete(&project)
+	rs := tx.Select("Project").Delete(&post)
 	if rs.Error != nil {
-		return nil, nil, rs.Error
+		return nil, rs.Error
 	}
 
 	if err := tx.Where("wx_uid = ?", post.AuthorID).
 		UpdateColumn("post_count", gorm.Expr("post_count - ?", 1)).Error; err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	if err := tx.Commit().Error; err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
-	return &post, &project, nil
+	return &post, nil
 }
 
-func (m *MysqlInterface) CreatePostWithProjectTx(post *model.Post, project *model.Project) (*model.Post, *model.Project, error) {
+func (m *MysqlInterface) CreatePostWithProjectTx(post *model.Post) (*model.Post, error) {
 	tx := m.db.Begin()
 	defer tx.Rollback()
 
@@ -77,7 +73,7 @@ func (m *MysqlInterface) CreatePost(post *model.Post) (*model.Post, error) {
 
 }
 
-func (m *MysqlInterface) GetPost(postID int64) (*model.PostWithProject, error) {
+func (m *MysqlInterface) GetPost(postID int64) (*model.Post, error) {
 	var postWithProject model.PostWithProject
 	rs := m.db.Model(&model.Post{}).
 		Joins("left join projects on posts.post_id = projects.post_id").
@@ -121,7 +117,7 @@ func (m *MysqlInterface) SetProject(project *model.Project) (*model.Project, err
 	return project, nil
 }
 
-func NewMysqlInterface(database, username, password, host, port string, maxIdleConns, maxOpenConns, connMaxLifeTime int) (model.PostInterface, error) {
+func NewMysqlInterface(database, username, password, host, port string, maxIdleConns, maxOpenConns, connMaxLifeTime int) (dao.PostInterface, error) {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		username,
 		password,

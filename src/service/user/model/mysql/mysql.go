@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	model2 "lookingforpartner/model"
 	"lookingforpartner/service/user/model"
 	"time"
 )
@@ -12,18 +13,18 @@ type MysqlInterface struct {
 	db *gorm.DB
 }
 
-func (m *MysqlInterface) SetUser(user *model.User) error {
+func (m *MysqlInterface) SetUser(user *model2.User) error {
 	rs := m.db.Where("wx_uid = ?", user.WxUid).Updates(user)
 	return rs.Error
 }
 
-func (m *MysqlInterface) GetUser(wxUid string) (*model.User, error) {
-	var user model.User
-	rs := m.db.Model(&model.User{}).Where("wx_uid = ?", wxUid).First(&user)
+func (m *MysqlInterface) GetUser(wxUid string) (*model2.User, error) {
+	var user model2.User
+	rs := m.db.Model(&model2.User{}).Where("wx_uid = ?", wxUid).First(&user)
 	return &user, rs.Error
 }
 
-func (m *MysqlInterface) FirstOrCreateUser(user *model.User) error {
+func (m *MysqlInterface) FirstOrCreateUser(user *model2.User) error {
 	rs := m.db.Where("wx_uid = ?", user.WxUid).FirstOrCreate(user)
 	return rs.Error
 }
@@ -59,5 +60,5 @@ func NewMysqlInterface(database, username, password, host, port string, maxIdleC
 }
 
 func (m *MysqlInterface) autoMigrate() {
-	m.db.AutoMigrate(&model.User{})
+	m.db.AutoMigrate(&model2.User{})
 }

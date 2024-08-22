@@ -2,14 +2,14 @@ package svc
 
 import (
 	"log"
-	"lookingforpartner/service/post/model"
-	"lookingforpartner/service/post/model/mysql"
 	"lookingforpartner/service/post/rpc/internal/config"
+	"lookingforpartner/service/post/rpc/internal/dao"
+	"lookingforpartner/service/post/rpc/internal/dao/mysql"
 )
 
 type ServiceContext struct {
 	Config        config.Config
-	PostInterface model.PostInterface
+	PostInterface dao.PostInterface
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
