@@ -14,10 +14,14 @@ RUN touch /etc/apt/sources.list && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
     curl \
+    wget \
     zip \
     unzip \
     git \
-    vim 
+    vim \
+    lsof \
+    net-tools \
+    iputils-ping
 
 # 安装 goctl
 USER root
@@ -48,4 +52,4 @@ RUN apt-get clean && \
     rm /var/log/lastlog /var/log/faillog
 
 # 设置工作目录
-WORKDIR /usr/src/code
+WORKDIR /home/src

@@ -3,3 +3,7 @@ data/*
 data/nginx/*
 !data/nginx/conf
 .idea
+./log
+.env
+target/*
+log/*
