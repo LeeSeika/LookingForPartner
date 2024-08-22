@@ -6,3 +6,9 @@ Auth:
   AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
   AccessExpire: 3600
   RefreshExpire: 604800
+
+PostRpc:
+  Etcd:
+    Hosts:
+      - etcd:2379
+    Key: post.rpc

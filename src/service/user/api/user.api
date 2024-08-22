@@ -10,8 +10,8 @@ info (
 
 // WxLogin
 type WxLoginRequest {
-	Code     string `json:"code"`
-	NickName string `json:"nickname"`
+	Code     string `json:"code,required"`
+	NickName string `json:"nickname,required"`
 }
 
 type WxLoginResponse {

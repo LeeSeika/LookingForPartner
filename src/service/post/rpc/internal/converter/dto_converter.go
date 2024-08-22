@@ -22,11 +22,11 @@ func PostWithProject2PostInfo(poWithProj *model.PostWithProject) *post.PostInfo 
 
 	poInfo := post.PostInfo{
 		PostID:    poWithProj.Post.PostID,
-		CreatedAt: poWithProj.CreatedAt.Format(time.DateTime),
-		Title:     poWithProj.Title,
+		CreatedAt: poWithProj.Post.CreatedAt.Format(time.DateTime),
+		Title:     poWithProj.Post.Title,
 		Project:   projResp,
-		Content:   poWithProj.Content,
-		AuthorID:  poWithProj.AuthorID,
+		Content:   poWithProj.Post.Content,
+		AuthorID:  poWithProj.Post.AuthorID,
 	}
 
 	return &poInfo

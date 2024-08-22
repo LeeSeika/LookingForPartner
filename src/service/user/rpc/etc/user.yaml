@@ -2,5 +2,15 @@ Name: user.rpc
 ListenOn: 0.0.0.0:20001
 Etcd:
   Hosts:
-  - etcd:2379
+    - etcd:2379
   Key: user.rpc
+
+Mysql:
+  Database: looking_for_partner
+  Username: root
+  Password: "123456"
+  Host: mysql
+  Port: "3306"
+  MaxIdleConns: 10
+  maxOpenConns: 100
+  connMaxLifeTime: 3600

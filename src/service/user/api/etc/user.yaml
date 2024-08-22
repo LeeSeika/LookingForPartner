@@ -9,3 +9,9 @@ Auth:
 
 AppID: wx
 AppSecret: 3b
+
+UserRpc:
+  Etcd:
+    Hosts:
+      - etcd:2379
+    Key: user.rpc

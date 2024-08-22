@@ -4,6 +4,7 @@ import (
 	"context"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/service/user/model"
+	"lookingforpartner/service/user/rpc/internal/converter"
 
 	"lookingforpartner/service/user/rpc/internal/svc"
 	"lookingforpartner/service/user/rpc/pb/user"
@@ -33,5 +34,5 @@ func (l *WxLoginLogic) WxLogin(in *user.WxLoginRequest) (*user.WxLoginResponse, 
 		return nil, errs.RpcUnknown
 	}
 
-	return &user.WxLoginResponse{}, nil
+	return &user.WxLoginResponse{UserInfo: converter.UserDB2Rpc(&u)}, nil
 }

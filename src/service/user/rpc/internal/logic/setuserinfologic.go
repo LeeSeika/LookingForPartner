@@ -6,6 +6,7 @@ import (
 	"gorm.io/gorm"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/service/user/model"
+	"lookingforpartner/service/user/rpc/internal/converter"
 
 	"lookingforpartner/service/user/rpc/internal/svc"
 	"lookingforpartner/service/user/rpc/pb/user"
@@ -43,5 +44,5 @@ func (l *SetUserInfoLogic) SetUserInfo(in *user.SetUserInfoRequest) (*user.SetUs
 		return nil, errs.RpcUnknown
 	}
 
-	return &user.SetUserInfoResponse{}, nil
+	return &user.SetUserInfoResponse{User: converter.UserDB2Rpc(&u)}, nil
 }
