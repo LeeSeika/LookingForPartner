@@ -33,7 +33,7 @@ message SetUserInfoRequest {
 }
 
 message SetUserInfoResponse {
-  UserInfo user = 1;
+  UserInfo UserInfo = 1;
 }
 
 // GetUserInfo
@@ -42,7 +42,7 @@ message GetUserInfoRequest {
 }
 
 message GetUserInfoResponse {
-  UserInfo user = 1;
+  UserInfo UserInfo = 1;
 }
 
 service User {

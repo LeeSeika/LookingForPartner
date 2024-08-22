@@ -44,5 +44,5 @@ func (l *SetUserInfoLogic) SetUserInfo(in *user.SetUserInfoRequest) (*user.SetUs
 		return nil, errs.RpcUnknown
 	}
 
-	return &user.SetUserInfoResponse{User: converter.UserDB2Rpc(&u)}, nil
+	return &user.SetUserInfoResponse{UserInfo: converter.UserDB2Rpc(&u)}, nil
 }

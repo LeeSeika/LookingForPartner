@@ -45,5 +45,5 @@ func (l *GetUserInfoLogic) GetUserInfo(in *user.GetUserInfoRequest) (*user.GetUs
 		Username:     u.Username,
 	}
 
-	return &user.GetUserInfoResponse{User: &userInfo}, nil
+	return &user.GetUserInfoResponse{UserInfo: &userInfo}, nil
 }

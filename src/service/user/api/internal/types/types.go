@@ -47,8 +47,8 @@ type UserInfo struct {
 }
 
 type WxLoginRequest struct {
-	Code     string `json:"code,required"`
-	NickName string `json:"nickname,required"`
+	Code     string `json:"code"`
+	NickName string `json:"nickname"`
 }
 
 type WxLoginResponse struct {

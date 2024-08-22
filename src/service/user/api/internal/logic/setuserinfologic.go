@@ -61,11 +61,11 @@ func (l *SetUserInfoLogic) SetUserInfo(req *types.SetUserInfoRequest) (resp *typ
 	}
 
 	resp = &types.SetUserInfoResponse{
-		Avatar:       getUserInfoResp.User.Avatar,
-		School:       getUserInfoResp.User.School,
-		Grade:        getUserInfoResp.User.Grade,
-		Introduction: getUserInfoResp.User.Introduction,
-		PostCount:    getUserInfoResp.User.PostCount,
+		Avatar:       getUserInfoResp.UserInfo.Avatar,
+		School:       getUserInfoResp.UserInfo.School,
+		Grade:        getUserInfoResp.UserInfo.Grade,
+		Introduction: getUserInfoResp.UserInfo.Introduction,
+		PostCount:    getUserInfoResp.UserInfo.PostCount,
 	}
 
 	return resp, nil

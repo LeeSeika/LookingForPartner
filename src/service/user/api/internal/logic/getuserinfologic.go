@@ -37,11 +37,11 @@ func (l *GetUserInfoLogic) GetUserInfo(req *types.GetUserInfoRequest) (resp *typ
 	}
 
 	resp = &types.GetUserInfoResponse{
-		Avatar:       getUserInfoResp.User.Avatar,
-		School:       getUserInfoResp.User.School,
-		Grade:        getUserInfoResp.User.Grade,
-		Introduction: getUserInfoResp.User.Introduction,
-		PostCount:    getUserInfoResp.User.PostCount,
+		Avatar:       getUserInfoResp.UserInfo.Avatar,
+		School:       getUserInfoResp.UserInfo.School,
+		Grade:        getUserInfoResp.UserInfo.Grade,
+		Introduction: getUserInfoResp.UserInfo.Introduction,
+		PostCount:    getUserInfoResp.UserInfo.PostCount,
 	}
 
 	return resp, nil
