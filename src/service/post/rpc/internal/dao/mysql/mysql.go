@@ -1,30 +1,42 @@
 package mysql
 
 import (
+	"context"
 	"fmt"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	"time"
+
+	basedao "lookingforpartner/common/dao"
 	"lookingforpartner/model"
 	"lookingforpartner/service/post/rpc/internal/dao"
-	"time"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 type MysqlInterface struct {
 	db *gorm.DB
 }
 
-func (m *MysqlInterface) DeletePost(postID string) (*model.Post, error) {
+func (m *MysqlInterface) DeletePost(ctx context.Context, postID string) (*model.Post, error) {
 	tx := m.db.Begin()
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+
 	defer tx.Rollback()
+
+	tx = tx.WithContext(ctx)
 
 	var post model.Post
 	post.PostID = postID
 
+	// delete post with cascade project
 	rs := tx.Select("Project").Delete(&post)
 	if rs.Error != nil {
 		return nil, rs.Error
 	}
 
+	// decrease post_count by 1
 	if err := tx.Where("wx_uid = ?", post.AuthorID).
 		UpdateColumn("post_count", gorm.Expr("post_count - ?", 1)).Error; err != nil {
 		return nil, err
@@ -37,83 +49,113 @@ func (m *MysqlInterface) DeletePost(postID string) (*model.Post, error) {
 	return &post, nil
 }
 
-func (m *MysqlInterface) CreatePostWithProjectTx(post *model.Post) (*model.Post, error) {
+func (m *MysqlInterface) CreatePost(ctx context.Context, post *model.Post) (*model.Post, error) {
 	tx := m.db.Begin()
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+
 	defer tx.Rollback()
 
+	tx = tx.WithContext(ctx)
+
+	// create post with cascade project
 	if err := tx.Create(post).Error; err != nil {
-		return nil, nil, err
-	}
-	if err := tx.Create(project).Error; err != nil {
-		return nil, nil, err
-	}
-	if err := tx.Where("id = ?", post.ID).First(post).Error; err != nil {
-		return nil, nil, err
-	}
-	if err := tx.Where("id = ?", project.ID).First(project).Error; err != nil {
-		return nil, nil, err
-	}
-	if err := tx.Where("wx_uid = ?", post.AuthorID).
-		UpdateColumn("post_count", gorm.Expr("post_count + ?", 1)).Error; err != nil {
-		return nil, nil, err
-	}
-	if err := tx.Commit().Error; err != nil {
-		return nil, nil, err
-	}
-	return post, project, nil
-}
-
-func (m *MysqlInterface) CreatePost(post *model.Post) (*model.Post, error) {
-	rs := m.db.Create(post)
-	if rs.Error != nil {
-		return nil, rs.Error
-	}
-	_ = m.db.Model(&model.Post{}).Where("id = ?", post.ID).First(post)
-	return post, nil
-
-}
-
-func (m *MysqlInterface) GetPost(postID int64) (*model.Post, error) {
-	var postWithProject model.PostWithProject
-	rs := m.db.Model(&model.Post{}).
-		Joins("left join projects on posts.post_id = projects.post_id").
-		Where("posts.post_id = ?", postID).
-		First(&postWithProject)
-	return &postWithProject, rs.Error
-}
-
-func (m *MysqlInterface) GetPosts(page, size int64, order dao.OrderOpt) ([]*model.PostWithProject, error) {
-	offset := (page - 1) * size
-	limit := size
-	postWithProjects := make([]*model.PostWithProject, 0)
-	rs := m.db.Model(&model.Post{}).
-		Joins("left join projects on posts.post_id = projects.post_id").
-		Offset(int(offset)).
-		Limit(int(limit)).
-		Order(order.String()).
-		Find(&postWithProjects)
-	return postWithProjects, rs.Error
-}
-
-func (m *MysqlInterface) GetPostsByAuthorID(page, size int64, authorID string, order dao.OrderOpt) ([]*model.PostWithProject, error) {
-	offset := (page - 1) * size
-	limit := size
-	postWithProjects := make([]*model.PostWithProject, 0)
-	rs := m.db.Model(&model.Post{}).
-		Joins("left join projects on posts.post_id = projects.post_id").
-		Where("posts.author_id = ?", authorID).
-		Offset(int(offset)).
-		Limit(int(limit)).
-		Order(order.String()).
-		Find(&postWithProjects)
-	return postWithProjects, rs.Error
-}
-
-func (m *MysqlInterface) SetProject(project *model.Project) (*model.Project, error) {
-	if err := m.db.Model(&model.Project{}).Where("project_id = ?", project.ProjectID).Updates(project).Error; err != nil {
 		return nil, err
 	}
-	m.db.Model(&model.Project{}).Where("project_id = ?", project.ProjectID).First(project)
+	if err := tx.Where("id = ?", post.PostID).First(post).Error; err != nil {
+		return nil, err
+	}
+
+	// increase post_count by 1
+	if err := tx.Where("wx_uid = ?", post.AuthorID).
+		UpdateColumn("post_count", gorm.Expr("post_count + ?", 1)).Error; err != nil {
+		return nil, err
+	}
+
+	if err := tx.Commit().Error; err != nil {
+		return nil, err
+	}
+	return post, nil
+}
+
+func (m *MysqlInterface) GetPost(ctx context.Context, postID string) (*model.Post, error) {
+	db := m.db.WithContext(ctx)
+
+	var post model.Post
+
+	rs := db.Model(&model.Post{}).
+		Preload("Projects").
+		Where("post_id = ?", postID).
+		First(&post)
+
+	return &post, rs.Error
+}
+
+func (m *MysqlInterface) GetPosts(ctx context.Context, page, size int64, order basedao.OrderOpt) ([]*model.Post, *basedao.Paginator, error) {
+	db := m.db.WithContext(ctx)
+
+	posts := make([]*model.Post, 0, int(size))
+
+	query := db.Preload("Projects")
+
+	param := basedao.PaginationParam{
+		Query:   query,
+		Page:    int(page),
+		Limit:   int(size),
+		OrderBy: []string{order.String()},
+		ShowSQL: false,
+	}
+	paginator, err := basedao.GetListWithPagination(db, &param, posts)
+
+	return posts, paginator, err
+}
+
+func (m *MysqlInterface) GetPostsByAuthorID(ctx context.Context, page, size int64, authorID string, order basedao.OrderOpt) ([]*model.Post, *basedao.Paginator, error) {
+	db := m.db.WithContext(ctx)
+
+	posts := make([]*model.Post, 0, int(size))
+
+	query := db.Where("author_id = ?", authorID).
+		Preload("Projects")
+
+	param := basedao.PaginationParam{
+		Query:   query,
+		Page:    int(page),
+		Limit:   int(size),
+		OrderBy: []string{order.String()},
+		ShowSQL: false,
+	}
+
+	paginator, err := basedao.GetListWithPagination(db, &param, posts)
+
+	return posts, paginator, err
+}
+
+func (m *MysqlInterface) UpdateProject(ctx context.Context, project *model.Project) (*model.Project, error) {
+	db := m.db.WithContext(ctx)
+
+	query := db.Where("project_id = ?", project.ProjectID)
+
+	updateOpt := basedao.UpdateOpt{
+		Query: query,
+		Data:  project,
+	}
+
+	if err := basedao.Update(db, updateOpt); err != nil {
+		return nil, err
+	}
+
+	// get updated project
+	getOpt := basedao.GetOpt{
+		Query:   query,
+		Preload: nil,
+		OrderBy: nil,
+	}
+
+	// update progress has succeeded, don't return error
+	_ = basedao.GetOne(db, getOpt, project)
+
 	return project, nil
 }
 

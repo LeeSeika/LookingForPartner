@@ -18,8 +18,8 @@ fi
 services=(user post)
 
 for item in "${services[@]}"; do
-  goctl api go -api ./service/"$item"/api/"$item".api -dir ./service/"$item"/api/
-  goctl rpc protoc ./service/"$item"/rpc/"$item".proto --go_out=./service/"$item"/rpc/pb --go-grpc_out=./service/"$item"/rpc/pb --zrpc_out=./service/"$item"/rpc/
+  goctl api go -api ./api/"$item".api -dir ./service/"$item"/api/
+  goctl rpc protoc ./protobuf/"$item"/"$item".proto --proto_path=./protobuf/ --go_out=plugins=grpc,paths=source_relative:. --go-grpc_out=. --zrpc_out=./service/"$item"/rpc/
 
   GOOS=${GOOS} GOARCH=${GOARCH} go build  -o ../target/"$item"-rpc ./service/"$item"/rpc/"$item".go
   GOOS=${GOOS} GOARCH=${GOARCH} go build  -o ../target/"$item"-api ./service/"$item"/api/"$item".go

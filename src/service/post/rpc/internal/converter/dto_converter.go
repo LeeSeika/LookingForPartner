@@ -1,58 +1,30 @@
 package converter
 
 import (
-	model2 "lookingforpartner/model"
-	"lookingforpartner/service/post/model"
-	"lookingforpartner/service/post/rpc/pb/post"
 	"time"
+
+	"lookingforpartner/model"
+	"lookingforpartner/service/post/rpc/pb/post"
 )
 
-func PostWithProject2PostInfo(poWithProj *model.PostWithProject) *post.PostInfo {
-	proj := poWithProj.Project
+func PostDBToRPC(po *model.Post) *post.PostInfo {
+	proj := po.Project
 
-	projResp := &post.Project{
+	projRPC := &post.Project{
 		ProjectID:     proj.ProjectID,
 		MaintainerID:  proj.MaintainerID,
 		Name:          proj.Name,
 		Introduction:  proj.Introduction,
-		Maintainer:    proj.Maintainer,
 		Role:          proj.Role,
 		HeadCountInfo: proj.HeadCountInfo,
 		Progress:      proj.Progress,
 	}
 
 	poInfo := post.PostInfo{
-		PostID:    poWithProj.Post.PostID,
-		CreatedAt: poWithProj.Post.CreatedAt.Format(time.DateTime),
-		Title:     poWithProj.Post.Title,
-		Project:   projResp,
-		Content:   poWithProj.Post.Content,
-		AuthorID:  poWithProj.Post.AuthorID,
-	}
-
-	return &poInfo
-}
-
-func PostAndProject2PostInfo(po *model2.Post, proj *model2.Project) *post.PostInfo {
-	var projResp *post.Project
-	if proj != nil {
-		projResp = &post.Project{
-			ProjectID:     proj.ProjectID,
-			MaintainerID:  proj.MaintainerID,
-			Name:          proj.Name,
-			Introduction:  proj.Introduction,
-			Maintainer:    proj.Maintainer,
-			Role:          proj.Role,
-			HeadCountInfo: proj.HeadCountInfo,
-			Progress:      proj.Progress,
-		}
-	}
-
-	poInfo := post.PostInfo{
 		PostID:    po.PostID,
 		CreatedAt: po.CreatedAt.Format(time.DateTime),
 		Title:     po.Title,
-		Project:   projResp,
+		Project:   projRPC,
 		Content:   po.Content,
 		AuthorID:  po.AuthorID,
 	}
@@ -60,17 +32,16 @@ func PostAndProject2PostInfo(po *model2.Post, proj *model2.Project) *post.PostIn
 	return &poInfo
 }
 
-func Project2ProjResp(proj *model2.Project) *post.Project {
-	porjResp := post.Project{
+func ProjectDBToRPC(proj *model.Project) *post.Project {
+	projRPC := post.Project{
 		ProjectID:     proj.ProjectID,
 		MaintainerID:  proj.MaintainerID,
 		Name:          proj.Name,
 		Introduction:  proj.Introduction,
-		Maintainer:    proj.Maintainer,
 		Role:          proj.Role,
 		HeadCountInfo: proj.HeadCountInfo,
 		Progress:      proj.Progress,
 	}
 
-	return &porjResp
+	return &projRPC
 }

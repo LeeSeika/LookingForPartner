@@ -1,8 +1,6 @@
 package dao
 
 import (
-	"context"
-	"fmt"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 	"reflect"
@@ -50,29 +48,9 @@ type OrderOpt struct {
 	OrderBy    OrderBy
 }
 
-type OrderBy string
-
-const (
-	OrderByDESC OrderBy = "desc"
-	OrderByASC  OrderBy = "asc"
-)
-
-const (
-	CreatedAt = "created_at"
-	UpdatedAt = "updated_at"
-)
-
-// String to string.
-func (opt *OrderOpt) String() string {
-	if opt.OrderBy == "" {
-		opt.OrderBy = OrderByASC
-	}
-	return fmt.Sprintf("%s %s", opt.ColumnName, opt.OrderBy)
-}
-
 // Insert data to table.
-func (dao *DAO) Insert(ctx context.Context, opt InsertOpt) error {
-	if err := dao.db.Model(opt.Data).Create(opt.Data).Error; err != nil {
+func Insert(db *gorm.DB, opt InsertOpt) error {
+	if err := db.Model(opt.Data).Create(opt.Data).Error; err != nil {
 		return errors.Wrap(err, "insert")
 	}
 
@@ -80,8 +58,8 @@ func (dao *DAO) Insert(ctx context.Context, opt InsertOpt) error {
 }
 
 // GetOne data by option.
-func (dao *DAO) GetOne(ctx context.Context, opt GetOpt, dest interface{}) error {
-	query := dao.db.Where(opt.Query)
+func GetOne(db *gorm.DB, opt GetOpt, dest interface{}) error {
+	query := db.Where(opt.Query)
 
 	if query.Error != nil {
 		return errors.Wrapf(query.Error, "db where:%+v", opt.Query)
@@ -109,8 +87,8 @@ func (dao *DAO) GetOne(ctx context.Context, opt GetOpt, dest interface{}) error 
 }
 
 // GetList gets list by option.
-func (dao *DAO) GetList(ctx context.Context, opt GetOpt, dest interface{}) error {
-	query := dao.db.Where(opt.Query)
+func GetList(db *gorm.DB, opt GetOpt, dest interface{}) error {
+	query := db.Where(opt.Query)
 
 	if query.Error != nil {
 		return errors.Wrapf(query.Error, "db where:%+v", opt.Query)
@@ -149,8 +127,8 @@ func (dao *DAO) GetList(ctx context.Context, opt GetOpt, dest interface{}) error
 }
 
 // Update by option.
-func (dao *DAO) Update(ctx context.Context, opt UpdateOpt) error {
-	query := dao.db.Where(opt.Query)
+func Update(db *gorm.DB, opt UpdateOpt) error {
+	query := db.Where(opt.Query)
 
 	if query.Error != nil {
 		return errors.Wrapf(query.Error, "db where:%+v", opt.Query)
@@ -165,8 +143,8 @@ func (dao *DAO) Update(ctx context.Context, opt UpdateOpt) error {
 }
 
 // Delete by option.
-func (dao *DAO) Delete(ctx context.Context, opt DeleteOpt) error {
-	query := dao.db.Where(opt.Query)
+func Delete(db *gorm.DB, opt DeleteOpt) error {
+	query := db.Where(opt.Query)
 
 	if query.Error != nil {
 		return errors.Wrapf(query.Error, "db where:%+v", opt.Query)
@@ -181,10 +159,10 @@ func (dao *DAO) Delete(ctx context.Context, opt DeleteOpt) error {
 }
 
 // Count by option.
-func (dao *DAO) Count(ctx context.Context, opt CountOpt) (int64, error) {
+func Count(db *gorm.DB, opt CountOpt) (int64, error) {
 	var count int64
 
-	query := dao.db.Where(opt.Query)
+	query := db.Where(opt.Query)
 
 	if query.Error != nil {
 		return count, errors.Wrapf(query.Error, "db where:%+v", opt.Query)

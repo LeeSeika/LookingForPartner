@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
+	"lookingforpartner/lookingforpartner/service/user/rpc/pb/user"
 	"lookingforpartner/service/user/rpc/internal/logic"
 	"lookingforpartner/service/user/rpc/internal/svc"
-	"lookingforpartner/service/user/rpc/pb/user"
 )
 
 type UserServer struct {

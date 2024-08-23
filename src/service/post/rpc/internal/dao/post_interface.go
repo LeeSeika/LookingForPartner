@@ -1,16 +1,17 @@
 package dao
 
 import (
-	"lookingforpartner/common/dao"
+	"context"
+
+	basedao "lookingforpartner/common/dao"
 	"lookingforpartner/model"
 )
 
 type PostInterface interface {
-	CreatePost(post *model.Post) (*model.Post, error)
-	DeletePost(postID string) (*model.Post, error)
-	GetPost(postID string) (*model.Post, error)
-	// todo: cursor
-	GetPosts(page, size int64, order dao.OrderOpt) ([]*model.Post, error)
-	GetPostsByAuthorID(page, size int64, authorID string, order dao.OrderOpt) ([]*model.Post, error)
-	UpdateProject(project *model.Project) (*model.Project, error)
+	CreatePost(ctx context.Context, post *model.Post) (*model.Post, error)
+	DeletePost(ctx context.Context, postID string) (*model.Post, error)
+	GetPost(ctx context.Context, postID string) (*model.Post, error)
+	GetPosts(ctx context.Context, page, size int64, order basedao.OrderOpt) ([]*model.Post, *basedao.Paginator, error)
+	GetPostsByAuthorID(ctx context.Context, page, size int64, authorID string, order basedao.OrderOpt) ([]*model.Post, *basedao.Paginator, error)
+	UpdateProject(ctx context.Context, project *model.Project) (*model.Project, error)
 }

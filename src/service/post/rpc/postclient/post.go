@@ -23,6 +23,7 @@ type (
 	GetPostsByAuthorIDResponse = post.GetPostsByAuthorIDResponse
 	GetPostsRequest            = post.GetPostsRequest
 	GetPostsResponse           = post.GetPostsResponse
+	Maintainer                 = post.Maintainer
 	PostInfo                   = post.PostInfo
 	Project                    = post.Project
 	UpdateProjectRequest       = post.UpdateProjectRequest
