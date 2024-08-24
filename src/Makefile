@@ -13,3 +13,6 @@ build:  ## build all services
 
 run:  ## run all services
 	bash ../scripts/run.sh
+
+kill:  ## kill all running services
+	bash ../scripts/kill.sh
