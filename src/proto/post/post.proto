@@ -2,33 +2,23 @@ syntax = "proto3";
 
 package postclient;
 
-option go_package = "lookingforpartner/service/post/rpc/pb/post";
+option go_package = "lookingforpartner/pb/post";
 
+import "paginator/paginator.proto";
 import "user/user.proto";
 
-message Maintainer {
-  string WxUid = 1;
-  string School = 2;
-  int64 Grade = 3;
-  string Avatar = 4;
-  string Introduction = 5;
-  string Username = 6;
-  int64 PostCount = 7;
-}
-
 message Project {
-  int64 ProjectID = 1;
-  string MaintainerID = 2;
+  string ProjectID = 1;
+  userclient.UserInfo Maintainer = 2;
   string Name = 3;
-  string Introduction = 4 ;
-  string Maintainer = 5;
-  string Role = 6;
-  string HeadCountInfo = 7;
-  string Progress = 8;
+  string Introduction = 4;
+  string Role = 5;
+  string HeadCountInfo = 6;
+  string Progress = 7;
 }
 
 message PostInfo {
-  int64 PostID = 1;
+  string PostID = 1;
   string CreatedAt = 2;
   string Title = 3;
   Project   Project = 4;
@@ -50,7 +40,7 @@ message CreatePostResponse {
 
 // DeletePost
 message DeletePostRequest {
-  int64 PostID = 1;
+  string PostID = 1;
   string WxUid = 2;
 }
 
@@ -59,7 +49,7 @@ message DeletePostResponse {
 
 // GetPost
 message GetPostRequest {
-  int64 PostID = 1;
+  string PostID = 1;
 }
 
 message GetPostResponse {
@@ -68,7 +58,7 @@ message GetPostResponse {
 
 // GetPosts
 message GetPostsRequest {
-  int64 PostID = 1;
+  string PostID = 1;
   int64 Page = 2;
   int64 Size = 3;
   string OrderBy = 4;
@@ -76,6 +66,7 @@ message GetPostsRequest {
 
 message GetPostsResponse {
   repeated PostInfo Posts = 1;
+  Paginator paginator = 2;
 }
 
 // GetPostsByAuthorID
@@ -88,11 +79,12 @@ message GetPostsByAuthorIDRequest {
 
 message GetPostsByAuthorIDResponse {
   repeated PostInfo Posts = 1;
+  Paginator paginator = 2;
 }
 
 // UpdateProject
 message UpdateProjectRequest {
-  int64 ProjectID = 1;
+  string ProjectID = 1;
   string Name = 2;
   string Role = 3;
   string introduction = 4;

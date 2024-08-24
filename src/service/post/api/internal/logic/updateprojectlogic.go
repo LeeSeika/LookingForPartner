@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"lookingforpartner/common/errs"
-	"lookingforpartner/service/post/api/internal/converter"
-	"lookingforpartner/service/post/rpc/pb/post"
 
+	"lookingforpartner/common/errs"
+	"lookingforpartner/pb/post"
+	"lookingforpartner/service/post/api/internal/converter"
 	"lookingforpartner/service/post/api/internal/svc"
 	"lookingforpartner/service/post/api/internal/types"
 
@@ -42,7 +42,7 @@ func (l *UpdateProjectLogic) UpdateProject(req *types.UpdateProjectRequest) (res
 	}
 
 	resp = &types.UpdateProjectResponse{
-		Project: converter.ProjectRpc2Api(updateProjectResp.GetProject()),
+		Project: converter.ProjectRpcToApi(updateProjectResp.GetProject()),
 	}
 
 	return resp, nil

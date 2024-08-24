@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"lookingforpartner/pb/paginator"
 	"math"
 
 	"github.com/pkg/errors"
@@ -53,7 +54,7 @@ func GetListWithPagination(db *gorm.DB, p *PaginationParam, result interface{}) 
 	}
 
 	done := make(chan error, 1)
-	var paginator Paginator
+	var pagi Paginator
 	var count int64
 	var offset int
 
@@ -76,26 +77,26 @@ func GetListWithPagination(db *gorm.DB, p *PaginationParam, result interface{}) 
 		return nil, errors.Wrapf(err, "db failed to count")
 	}
 
-	paginator.TotalRecord = count
-	paginator.CurrPage = p.Page
+	pagi.TotalRecord = count
+	pagi.CurrPage = p.Page
 
-	paginator.Offset = offset
-	paginator.Limit = p.Limit
-	paginator.TotalPage = int(math.Ceil(float64(count) / float64(p.Limit)))
+	pagi.Offset = offset
+	pagi.Limit = p.Limit
+	pagi.TotalPage = int(math.Ceil(float64(count) / float64(p.Limit)))
 
 	if p.Page > 1 {
-		paginator.PrevPage = p.Page - 1
+		pagi.PrevPage = p.Page - 1
 	} else {
-		paginator.PrevPage = p.Page
+		pagi.PrevPage = p.Page
 	}
 
-	if p.Page == paginator.TotalPage {
-		paginator.NextPage = p.Page
+	if p.Page == pagi.TotalPage {
+		pagi.NextPage = p.Page
 	} else {
-		paginator.NextPage = p.Page + 1
+		pagi.NextPage = p.Page + 1
 	}
 
-	return &paginator, nil
+	return &pagi, nil
 }
 
 func countRecords(db *gorm.DB, anyType interface{}, done chan error, count *int64) {
@@ -106,4 +107,16 @@ func countRecords(db *gorm.DB, anyType interface{}, done chan error, count *int6
 	}
 
 	close(done)
+}
+
+func (p *Paginator) ToRPC() *paginator.Paginator {
+	return &paginator.Paginator{
+		TotalRecord: p.TotalRecord,
+		TotalPage:   int64(p.TotalPage),
+		Offset:      int64(p.Offset),
+		Limit:       int64(p.Limit),
+		CurrPage:    int64(p.CurrPage),
+		PrevPage:    int64(p.PrevPage),
+		NextPage:    int64(p.NextPage),
+	}
 }

@@ -8,8 +8,8 @@ import (
 	"lookingforpartner/model"
 	"lookingforpartner/service/user/rpc/internal/converter"
 
+	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/rpc/internal/svc"
-	"lookingforpartner/service/user/rpc/pb/user"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

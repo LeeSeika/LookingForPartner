@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/rpc/internal/logic"
 	"lookingforpartner/service/post/rpc/internal/svc"
-	"lookingforpartner/service/post/rpc/pb/post"
 )
 
 type PostServer struct {

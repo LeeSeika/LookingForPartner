@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/service/post/rpc/pb/post"
+	"lookingforpartner/pb/post"
 	"net/http"
 
 	"lookingforpartner/service/post/api/internal/svc"

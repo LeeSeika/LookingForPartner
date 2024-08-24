@@ -1,18 +1,29 @@
 package converter
 
 import (
+	"lookingforpartner/pb/user"
 	"time"
 
 	"lookingforpartner/model"
-	"lookingforpartner/service/post/rpc/pb/post"
+	"lookingforpartner/pb/post"
 )
 
 func PostDBToRPC(po *model.Post) *post.PostInfo {
 	proj := po.Project
 
+	maintainer := &user.UserInfo{
+		WxUid:        proj.Maintainer.WxUid,
+		Username:     proj.Maintainer.Username,
+		Avatar:       proj.Maintainer.Avatar,
+		School:       proj.Maintainer.School,
+		Grade:        proj.Maintainer.Grade,
+		Introduction: proj.Maintainer.Introduction,
+		PostCount:    proj.Maintainer.PostCount,
+	}
+
 	projRPC := &post.Project{
 		ProjectID:     proj.ProjectID,
-		MaintainerID:  proj.MaintainerID,
+		Maintainer:    maintainer,
 		Name:          proj.Name,
 		Introduction:  proj.Introduction,
 		Role:          proj.Role,
@@ -33,9 +44,19 @@ func PostDBToRPC(po *model.Post) *post.PostInfo {
 }
 
 func ProjectDBToRPC(proj *model.Project) *post.Project {
+	maintainer := &user.UserInfo{
+		WxUid:        proj.Maintainer.WxUid,
+		Username:     proj.Maintainer.Username,
+		Avatar:       proj.Maintainer.Avatar,
+		School:       proj.Maintainer.School,
+		Grade:        proj.Maintainer.Grade,
+		Introduction: proj.Maintainer.Introduction,
+		PostCount:    proj.Maintainer.PostCount,
+	}
+
 	projRPC := post.Project{
 		ProjectID:     proj.ProjectID,
-		MaintainerID:  proj.MaintainerID,
+		Maintainer:    maintainer,
 		Name:          proj.Name,
 		Introduction:  proj.Introduction,
 		Role:          proj.Role,

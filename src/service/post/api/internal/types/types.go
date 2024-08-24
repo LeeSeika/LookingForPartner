@@ -12,7 +12,7 @@ type CreatePostResponse struct {
 }
 
 type DeletePostRequest struct {
-	PostID int64 `path:"postID, string"`
+	PostID string `path:"postID"`
 }
 
 type DeletePostResponse struct {
@@ -26,7 +26,7 @@ type GetPostByAuthorIDRequest struct {
 }
 
 type GetPostRequest struct {
-	PostID int64 `path:"postID, string"`
+	PostID string `path:"postID"`
 }
 
 type GetPostResponse struct {
@@ -48,7 +48,7 @@ type GetPostsResponse struct {
 }
 
 type Post struct {
-	PostID    int64   `json:"post_id, string"`
+	PostID    string  `json:"post_id"`
 	CreatedAt string  `json:"created_at"`
 	Title     string  `json:"title"`
 	Project   Project `json:"project"`
@@ -57,18 +57,17 @@ type Post struct {
 }
 
 type Project struct {
-	ProjectID     int64  `json:"project_id, string"`
-	MaintainerID  string `json:"maintainer_id"`
-	Name          string `json:"name"`
-	Introduction  string `json:"introduction"`
-	Maintainer    string `json:"maintainer"`
-	Role          string `json:"role"`
-	HeadCountInfo string `json:"head_count_info"`
-	Progress      string `json:"progress"`
+	ProjectID     string   `json:"project_id"`
+	Name          string   `json:"name"`
+	Introduction  string   `json:"introduction"`
+	Maintainer    UserInfo `json:"maintainer"`
+	Role          string   `json:"role"`
+	HeadCountInfo string   `json:"head_count_info"`
+	Progress      string   `json:"progress"`
 }
 
 type UpdateProjectRequest struct {
-	ProjectID     int64  `path:"projectID, string"`
+	ProjectID     string `path:"projectID"`
 	Name          string `json:"name"`
 	Introduction  string `json:"introduction"`
 	Role          string `json:"role"`
@@ -78,4 +77,14 @@ type UpdateProjectRequest struct {
 
 type UpdateProjectResponse struct {
 	Project Project `json:"project"`
+}
+
+type UserInfo struct {
+	WxUid        string `json:"wx_uid"`
+	Avatar       string `json:"avatar"`
+	School       string `json:"school"`
+	Grade        int64  `json:"grade"`
+	Introduction string `json:"introduction"`
+	PostCount    int64  `json:"post_count"`
+	Username     string `json:"username"`
 }

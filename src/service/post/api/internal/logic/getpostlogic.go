@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/api/internal/converter"
-	"lookingforpartner/service/post/rpc/pb/post"
 
 	"lookingforpartner/service/post/api/internal/svc"
 	"lookingforpartner/service/post/api/internal/types"
@@ -41,7 +41,7 @@ func (l *GetPostLogic) GetPost(req *types.GetPostRequest) (resp *types.GetPostRe
 	}
 
 	resp = &types.GetPostResponse{
-		Post: converter.PostRpc2Api(getPostResp.GetPost()),
+		Post: converter.PostRpcToApi(getPostResp.GetPost()),
 	}
 
 	return resp, nil

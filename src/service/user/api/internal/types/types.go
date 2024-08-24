@@ -13,6 +13,25 @@ type GetUserInfoResponse struct {
 	PostCount    int64  `json:"post_count"`
 }
 
+type Post struct {
+	PostID    string  `json:"post_id"`
+	CreatedAt string  `json:"created_at"`
+	Title     string  `json:"title"`
+	Project   Project `json:"project"`
+	Content   string  `json:"content"`
+	AuthorID  string  `json:"author_id"`
+}
+
+type Project struct {
+	ProjectID     string   `json:"project_id"`
+	Name          string   `json:"name"`
+	Introduction  string   `json:"introduction"`
+	Maintainer    UserInfo `json:"maintainer"`
+	Role          string   `json:"role"`
+	HeadCountInfo string   `json:"head_count_info"`
+	Progress      string   `json:"progress"`
+}
+
 type RefreshTokenReqeust struct {
 }
 

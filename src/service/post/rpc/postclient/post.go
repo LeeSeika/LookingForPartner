@@ -6,7 +6,7 @@ package postclient
 import (
 	"context"
 
-	"lookingforpartner/service/post/rpc/pb/post"
+	"lookingforpartner/pb/post"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
@@ -23,7 +23,6 @@ type (
 	GetPostsByAuthorIDResponse = post.GetPostsByAuthorIDResponse
 	GetPostsRequest            = post.GetPostsRequest
 	GetPostsResponse           = post.GetPostsResponse
-	Maintainer                 = post.Maintainer
 	PostInfo                   = post.PostInfo
 	Project                    = post.Project
 	UpdateProjectRequest       = post.UpdateProjectRequest

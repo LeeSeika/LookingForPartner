@@ -4,10 +4,10 @@ import (
 	"context"
 	"errors"
 	"gorm.io/gorm"
-	"lookingforpartner/common/errs"
 
+	"lookingforpartner/common/errs"
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/rpc/internal/svc"
-	"lookingforpartner/service/post/rpc/pb/post"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,7 +27,7 @@ func NewDeletePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delete
 }
 
 func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePostResponse, error) {
-	po, err := l.svcCtx.PostInterface.GetPost(in.PostID)
+	po, err := l.svcCtx.PostInterface.GetPost(l.ctx, in.PostID)
 	if err != nil {
 		if po == nil || errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errs.RpcNotFound
@@ -38,7 +38,7 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 	if po.AuthorID != in.WxUid {
 		return nil, errs.RpcPermissionDenied
 	}
-	_, _, err = l.svcCtx.PostInterface.DeletePostTx(in.PostID)
+	_, err = l.svcCtx.PostInterface.DeletePost(l.ctx, in.PostID)
 	if err != nil {
 		l.Logger.Errorf("[Post][Rpc] CreatePostWithProjectTx error, err: %+v", err)
 		return nil, errs.RpcUnknown

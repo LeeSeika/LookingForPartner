@@ -4,8 +4,8 @@ import (
 	"context"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/api/internal/converter"
-	"lookingforpartner/service/post/rpc/pb/post"
 	"net/http"
 
 	"lookingforpartner/service/post/api/internal/svc"
@@ -55,7 +55,7 @@ func (l *GetPostsByAuthorIDLogic) GetPostsByAuthorID(req *types.GetPostByAuthorI
 	posts := getPostsByAuthorIDResp.GetPosts()
 	postInfos := make([]types.Post, 0, len(posts))
 	for _, poRpc := range posts {
-		poApi := converter.PostRpc2Api(poRpc)
+		poApi := converter.PostRpcToApi(poRpc)
 		postInfos = append(postInfos, poApi)
 	}
 

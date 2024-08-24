@@ -8,25 +8,7 @@ info (
 	version: "1.0"
 )
 
-type Project {
-	ProjectID     int64  `json:"project_id, string"`
-	MaintainerID  string `json:"maintainer_id"`
-	Name          string `json:"name"`
-	Introduction  string `json:"introduction"`
-	Maintainer    string `json:"maintainer"`
-	Role          string `json:"role"`
-	HeadCountInfo string `json:"head_count_info"`
-	Progress      string `json:"progress"`
-}
-
-type Post {
-	PostID    int64   `json:"post_id, string"`
-	CreatedAt string  `json:"created_at"`
-	Title     string  `json:"title"`
-	Project   Project `json:"project"`
-	Content   string  `json:"content"`
-	AuthorID  string  `json:"author_id"`
-}
+import "object.api"
 
 // CreatePost
 type CreatePostRequest {
@@ -41,14 +23,14 @@ type CreatePostResponse {
 
 // DeletePost
 type DeletePostRequest {
-	PostID int64 `path:"postID, string"`
+	PostID string `path:"postID"`
 }
 
 type DeletePostResponse {}
 
 // GetPost
 type GetPostRequest {
-	PostID int64 `path:"postID, string"`
+	PostID string `path:"postID"`
 }
 
 type GetPostResponse {
@@ -80,7 +62,7 @@ type GetPostsByAuthorIDResponse {
 
 // UpdateProject
 type UpdateProjectRequest {
-	ProjectID     int64  `path:"projectID, string"`
+	ProjectID     string `path:"projectID"`
 	Name          string `json:"name"`
 	Introduction  string `json:"introduction"`
 	Role          string `json:"role"`

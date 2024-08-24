@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/api/internal/converter"
-	"lookingforpartner/service/post/rpc/pb/post"
 
 	"lookingforpartner/service/post/api/internal/svc"
 	"lookingforpartner/service/post/api/internal/types"
@@ -33,7 +33,7 @@ func (l *CreatePostLogic) CreatePost(req *types.CreatePostRequest) (resp *types.
 		return nil, errs.FormattedApiUnAuthorized()
 	}
 
-	proj := converter.ProjectApi2Rpc(&req.Project)
+	proj := converter.ProjectApiToRpc(&req.Project)
 	createPostReq := post.CreatePostRequest{
 		Title:   req.Title,
 		Project: &proj,
@@ -46,7 +46,7 @@ func (l *CreatePostLogic) CreatePost(req *types.CreatePostRequest) (resp *types.
 	}
 
 	resp = &types.CreatePostResponse{
-		Post: converter.PostRpc2Api(createPostResp.GetPostInfo()),
+		Post: converter.PostRpcToApi(createPostResp.GetPostInfo()),
 	}
 
 	return resp, nil

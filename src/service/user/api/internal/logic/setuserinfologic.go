@@ -5,9 +5,9 @@ import (
 	"errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/api/internal/svc"
 	"lookingforpartner/service/user/api/internal/types"
-	"lookingforpartner/service/user/rpc/pb/user"
 )
 
 type SetUserInfoLogic struct {

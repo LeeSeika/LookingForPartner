@@ -5,7 +5,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	model2 "lookingforpartner/model"
-	"lookingforpartner/service/user/model"
+	"lookingforpartner/service/user/rpc/internal/dao"
 	"time"
 )
 
@@ -29,7 +29,7 @@ func (m *MysqlInterface) FirstOrCreateUser(user *model2.User) error {
 	return rs.Error
 }
 
-func NewMysqlInterface(database, username, password, host, port string, maxIdleConns, maxOpenConns, connMaxLifeTime int) (model.UserInterface, error) {
+func NewMysqlInterface(database, username, password, host, port string, maxIdleConns, maxOpenConns, connMaxLifeTime int) (dao.UserInterface, error) {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		username,
 		password,

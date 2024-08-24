@@ -2,12 +2,12 @@ package logic
 
 import (
 	"context"
-	"lookingforpartner/common/dao"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/params"
 	"lookingforpartner/service/post/rpc/internal/converter"
 
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/rpc/internal/svc"
-	"lookingforpartner/service/post/rpc/pb/post"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,7 +27,7 @@ func NewGetPostsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPosts
 }
 
 func (l *GetPostsLogic) GetPosts(in *post.GetPostsRequest) (*post.GetPostsResponse, error) {
-	posts, err := l.svcCtx.PostInterface.GetPosts(in.Page, in.Size, dao.ToOrderByOpt(in.OrderBy))
+	posts, paginator, err := l.svcCtx.PostInterface.GetPosts(l.ctx, in.Page, in.Size, params.ToOrderByOpt(in.OrderBy))
 	if err != nil {
 		l.Logger.Errorf("[Post][Rpc] GetPosts error, err: %+v", err)
 		return nil, errs.RpcUnknown
@@ -35,9 +35,9 @@ func (l *GetPostsLogic) GetPosts(in *post.GetPostsRequest) (*post.GetPostsRespon
 
 	poInfos := make([]*post.PostInfo, 0, len(posts))
 	for _, po := range posts {
-		poInfo := converter.PostWithProject2PostInfo(po)
+		poInfo := converter.PostDBToRPC(po)
 		poInfos = append(poInfos, poInfo)
 	}
 
-	return &post.GetPostsResponse{Posts: poInfos}, nil
+	return &post.GetPostsResponse{Posts: poInfos, Paginator: paginator.ToRPC()}, nil
 }

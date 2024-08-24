@@ -6,7 +6,7 @@ package server
 import (
 	"context"
 
-	"lookingforpartner/lookingforpartner/service/user/rpc/pb/user"
+	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/rpc/internal/logic"
 	"lookingforpartner/service/user/rpc/internal/svc"
 )

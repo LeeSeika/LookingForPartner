@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/rpc/internal/config"
 	"lookingforpartner/service/post/rpc/internal/server"
 	"lookingforpartner/service/post/rpc/internal/svc"
-	"lookingforpartner/service/post/rpc/pb/post"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

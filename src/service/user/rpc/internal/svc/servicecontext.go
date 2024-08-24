@@ -2,14 +2,14 @@ package svc
 
 import (
 	"log"
-	"lookingforpartner/service/user/model"
-	"lookingforpartner/service/user/model/mysql"
 	"lookingforpartner/service/user/rpc/internal/config"
+	"lookingforpartner/service/user/rpc/internal/dao"
+	"lookingforpartner/service/user/rpc/internal/dao/mysql"
 )
 
 type ServiceContext struct {
 	Config        config.Config
-	UserInterface model.UserInterface
+	UserInterface dao.UserInterface
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {

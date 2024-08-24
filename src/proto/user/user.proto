@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package userclient;
 
-option go_package = "lookingforpartner/service/user/rpc/pb/user";
+option go_package = "lookingforpartner/pb/user";
 
 // WxLogin
 message WxLoginRequest {

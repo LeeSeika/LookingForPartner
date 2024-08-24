@@ -1,40 +1,59 @@
 package converter
 
 import (
+	"lookingforpartner/pb/post"
+	"lookingforpartner/pb/user"
 	"lookingforpartner/service/post/api/internal/types"
-	"lookingforpartner/service/post/rpc/pb/post"
 )
 
-func ProjectRpc2Api(proj *post.Project) types.Project {
+func ProjectRpcToApi(proj *post.Project) types.Project {
+	maintainer := types.UserInfo{
+		WxUid:        proj.Maintainer.WxUid,
+		Avatar:       proj.Maintainer.Avatar,
+		School:       proj.Maintainer.School,
+		Grade:        proj.Maintainer.Grade,
+		Introduction: proj.Maintainer.Introduction,
+		PostCount:    proj.Maintainer.PostCount,
+		Username:     proj.Maintainer.Username,
+	}
+
 	return types.Project{
 		ProjectID:     proj.ProjectID,
-		MaintainerID:  proj.MaintainerID,
 		Name:          proj.Name,
 		Introduction:  proj.Introduction,
-		Maintainer:    proj.Maintainer,
+		Maintainer:    maintainer,
 		Role:          proj.Role,
 		HeadCountInfo: proj.HeadCountInfo,
 		Progress:      proj.Progress,
 	}
 }
 
-func ProjectApi2Rpc(proj *types.Project) post.Project {
+func ProjectApiToRpc(proj *types.Project) post.Project {
+	maintainer := &user.UserInfo{
+		WxUid:        proj.Maintainer.WxUid,
+		Avatar:       proj.Maintainer.Avatar,
+		School:       proj.Maintainer.School,
+		Grade:        proj.Maintainer.Grade,
+		Introduction: proj.Maintainer.Introduction,
+		PostCount:    proj.Maintainer.PostCount,
+		Username:     proj.Maintainer.Username,
+	}
+
 	return post.Project{
 		ProjectID:     proj.ProjectID,
-		MaintainerID:  proj.MaintainerID,
 		Name:          proj.Name,
 		Introduction:  proj.Introduction,
-		Maintainer:    proj.Maintainer,
+		Maintainer:    maintainer,
 		Role:          proj.Role,
 		HeadCountInfo: proj.HeadCountInfo,
 		Progress:      proj.Progress,
 	}
 }
 
-func PostRpc2Api(po *post.PostInfo) types.Post {
+func PostRpcToApi(po *post.PostInfo) types.Post {
 	proj := types.Project{}
 	if po.GetProject() != nil {
-		proj = ProjectRpc2Api(po.GetProject())
+		proj = ProjectRpcToApi(po.GetProject())
 	}
 
 	return types.Post{

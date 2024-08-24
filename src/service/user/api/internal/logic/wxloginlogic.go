@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/api/internal/common"
 	"lookingforpartner/service/user/api/internal/svc"
 	"lookingforpartner/service/user/api/internal/types"
-	"lookingforpartner/service/user/rpc/pb/user"
 	"net/http"
 
 	"github.com/zeromicro/go-zero/core/logx"

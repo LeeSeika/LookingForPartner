@@ -2,11 +2,12 @@ package logic
 
 import (
 	"context"
+
 	"lookingforpartner/common/errs"
 	"lookingforpartner/model"
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/rpc/internal/converter"
 	"lookingforpartner/service/post/rpc/internal/svc"
-	"lookingforpartner/service/post/rpc/pb/post"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -40,7 +41,7 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 	if in.Project != nil {
 		proj = model.Project{
 			ProjectID:     "1", //todo
-			MaintainerID:  in.Project.MaintainerID,
+			MaintainerID:  in.Project.Maintainer.WxUid,
 			Name:          in.Project.Name,
 			Introduction:  in.Project.Introduction,
 			Role:          in.Project.Role,
@@ -56,7 +57,7 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 		return nil, errs.RpcUnknown
 	}
 
-	poInfo := converter.PostAndProject2PostInfo(po, proj)
+	poInfo := converter.PostDBToRPC(po)
 
 	return &post.CreatePostResponse{PostInfo: poInfo}, nil
 }

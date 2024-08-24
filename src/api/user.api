@@ -8,6 +8,8 @@ info (
 	version: "1.0"
 )
 
+import "object.api"
+
 // WxLogin
 type WxLoginRequest {
 	Code     string `json:"code"`
@@ -18,16 +20,6 @@ type WxLoginResponse {
 	Token        string   `json:"token"`
 	RefreshToken string   `json:"refresh_token"`
 	UserInfo     UserInfo `json:"user_info"`
-}
-
-type UserInfo {
-	WxUid        string `json:"wx_uid"`
-	Avatar       string `json:"avatar"`
-	School       string `json:"school"`
-	Grade        int64  `json:"grade"`
-	Introduction string `json:"introduction"`
-	PostCount    int64  `json:"post_count"`
-	Username     string `json:"username"`
 }
 
 // RefreshToken
