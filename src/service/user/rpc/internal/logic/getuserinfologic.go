@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"gorm.io/gorm"
-	"lookingforpartner/common/errs"
 
+	"lookingforpartner/common/errs"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/rpc/internal/svc"
 

@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 	"errors"
-	"lookingforpartner/common/errs"
-	"lookingforpartner/pb/post"
 	"net/http"
 
+	"lookingforpartner/common/errs"
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/api/internal/svc"
 	"lookingforpartner/service/post/api/internal/types"
 
