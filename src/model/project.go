@@ -11,7 +11,7 @@ type Project struct {
 	Introduction  string
 	Role          string `gorm:"size:40"`
 	HeadCountInfo string
-	Progress      string `gorm:"128"`
+	Progress      string `gorm:"size:128"`
 
 	// belongs to
 	MaintainerID string `gorm:"size:128"`

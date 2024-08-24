@@ -7,9 +7,9 @@ import (
 
 type User struct {
 	WxUid        string `gorm:"size:128;primarykey"`
-	Username     string `gorm:"128"`
-	Avatar       string `gorm:"256"`
-	School       string `gorm:"128"`
+	Username     string `gorm:"size:128"`
+	Avatar       string `gorm:"size:256"`
+	School       string `gorm:"size:128"`
 	Grade        int64
 	Introduction string
 	PostCount    int64
