@@ -30,7 +30,7 @@ func (m *MysqlInterface) DeletePost(ctx context.Context, postID string) (*model.
 	var post model.Post
 	post.PostID = postID
 
-	// delete post with cascade project
+	// delete post with project
 	rs := tx.Select("Project").Delete(&post)
 	if rs.Error != nil {
 		return nil, rs.Error

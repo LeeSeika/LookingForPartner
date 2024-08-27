@@ -5,14 +5,12 @@ go 1.21
 toolchain go1.22.5
 
 require (
-	github.com/bwmarrin/snowflake v0.3.0
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
-	github.com/go-sql-driver/mysql v1.8.1
 	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/jaevor/go-nanoid v1.4.0
 	github.com/pkg/errors v0.9.1
 	github.com/zeromicro/go-zero v1.6.4
 	github.com/zeromicro/x v0.0.0-20240408115609-8224c482b07e
-	golang.org/x/crypto v0.22.0
 	google.golang.org/grpc v1.64.0
 	google.golang.org/protobuf v1.33.0
 	gorm.io/driver/mysql v1.5.6
@@ -35,6 +33,7 @@ require (
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
 	github.com/go-openapi/swag v0.22.4 // indirect
+	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang/mock v1.6.0 // indirect

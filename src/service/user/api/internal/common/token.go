@@ -2,7 +2,7 @@ package common
 
 import (
 	"errors"
-	"lookingforpartner/common/jwtx"
+	"lookingforpartner/pkg/jwtx"
 	"time"
 )
 

@@ -5,7 +5,7 @@ import (
 	"lookingforpartner/pb/user"
 )
 
-func UserDB2Rpc(u *model.User) *user.UserInfo {
+func UserDBToRpc(u *model.User) *user.UserInfo {
 
 	userInfo := user.UserInfo{
 		PostCount:    u.PostCount,

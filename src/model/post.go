@@ -2,11 +2,10 @@ package model
 
 import (
 	"gorm.io/gorm"
-	"time"
 )
 
 type Post struct {
-	PostID  string `gorm:"size:128;primarykey"`
+	PostID  string `gorm:"size:128;index"`
 	Title   string `gorm:"size:256"`
 	Content string
 
@@ -17,7 +16,5 @@ type Post struct {
 	Author   User   `gorm:"foreignKey:AuthorID"`
 
 	// base fields
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
+	gorm.Model
 }

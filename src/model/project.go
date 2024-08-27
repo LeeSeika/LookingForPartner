@@ -2,11 +2,10 @@ package model
 
 import (
 	"gorm.io/gorm"
-	"time"
 )
 
 type Project struct {
-	ProjectID     string `gorm:"primarykey"`
+	ProjectID     string `gorm:"size:128;index"`
 	Name          string `gorm:"size:128"`
 	Introduction  string
 	Role          string `gorm:"size:40"`
@@ -18,7 +17,5 @@ type Project struct {
 	Maintainer   User   `gorm:"foreignKey:MaintainerID"`
 
 	// base fields
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
+	gorm.Model
 }

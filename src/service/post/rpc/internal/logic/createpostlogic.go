@@ -3,9 +3,11 @@ package logic
 import (
 	"context"
 
+	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/model"
 	"lookingforpartner/pb/post"
+	"lookingforpartner/pkg/nanoid"
 	"lookingforpartner/service/post/rpc/internal/converter"
 	"lookingforpartner/service/post/rpc/internal/svc"
 
@@ -32,7 +34,7 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 	var err error
 
 	po = &model.Post{
-		PostID:   "1", //todo
+		PostID:   constant.NanoidPrefixPost + nanoid.Gen(),
 		AuthorID: in.WxUid,
 		Title:    in.Title,
 		Content:  in.Content,
@@ -40,7 +42,7 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 
 	if in.Project != nil {
 		proj = model.Project{
-			ProjectID:     "1", //todo
+			ProjectID:     constant.NanoidPrefixProject + nanoid.Gen(),
 			MaintainerID:  in.Project.Maintainer.WxUid,
 			Name:          in.Project.Name,
 			Introduction:  in.Project.Introduction,
