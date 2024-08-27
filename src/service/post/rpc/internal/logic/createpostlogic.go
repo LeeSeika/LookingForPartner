@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"github.com/rs/zerolog/log"
 
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
@@ -10,21 +11,17 @@ import (
 	"lookingforpartner/pkg/nanoid"
 	"lookingforpartner/service/post/rpc/internal/converter"
 	"lookingforpartner/service/post/rpc/internal/svc"
-
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type CreatePostLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
-	logx.Logger
 }
 
 func NewCreatePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreatePostLogic {
 	return &CreatePostLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logx.WithContext(ctx),
 	}
 }
 
@@ -55,7 +52,7 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 
 	po, err = l.svcCtx.PostInterface.CreatePost(l.ctx, po)
 	if err != nil {
-		l.Logger.Errorf("[Post][Rpc] CreatePostWithProjectTx error, err: %+v", err)
+		log.Error().Msgf("cannot create post, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 

@@ -3,22 +3,22 @@ package logic
 import (
 	"context"
 	"errors"
-	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/api/internal/svc"
 	"lookingforpartner/service/user/api/internal/types"
+
+	"github.com/rs/zerolog/log"
 )
 
 type GetUserInfoLogic struct {
-	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
 func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserInfoLogic {
 	return &GetUserInfoLogic{
-		Logger: logx.WithContext(ctx),
+
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
@@ -29,7 +29,7 @@ func (l *GetUserInfoLogic) GetUserInfo(req *types.GetUserInfoRequest) (resp *typ
 	getUserInfoReq := user.GetUserInfoRequest{WxUid: req.ID}
 	getUserInfoResp, err := l.svcCtx.UserRpc.GetUserInfo(l.ctx, &getUserInfoReq)
 	if err != nil {
-		l.Logger.Errorf("[User][Api] GetUserInfo error, err: %v", err)
+		log.Error().Msgf("[User][Api] GetUserInfo error, err: %v", err)
 		if errors.Is(err, errs.RpcNotFound) {
 			return nil, errs.FormattedApiNotFound()
 		}

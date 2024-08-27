@@ -8,19 +8,16 @@ import (
 	"lookingforpartner/service/post/api/internal/converter"
 	"lookingforpartner/service/post/api/internal/svc"
 	"lookingforpartner/service/post/api/internal/types"
-
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type UpdateProjectLogic struct {
-	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
 func NewUpdateProjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateProjectLogic {
 	return &UpdateProjectLogic{
-		Logger: logx.WithContext(ctx),
+
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}

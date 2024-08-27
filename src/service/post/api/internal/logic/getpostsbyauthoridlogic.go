@@ -11,18 +11,16 @@ import (
 	"lookingforpartner/service/post/api/internal/types"
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type GetPostsByAuthorIDLogic struct {
-	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
 func NewGetPostsByAuthorIDLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPostsByAuthorIDLogic {
 	return &GetPostsByAuthorIDLogic{
-		Logger: logx.WithContext(ctx),
+
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
