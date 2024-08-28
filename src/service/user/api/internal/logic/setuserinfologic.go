@@ -3,24 +3,25 @@ package logic
 import (
 	"context"
 	"errors"
+	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/api/internal/svc"
 	"lookingforpartner/service/user/api/internal/types"
-
-	"github.com/rs/zerolog/log"
 )
 
 type SetUserInfoLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
+	logx.Logger
 }
 
 func NewSetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SetUserInfoLogic {
 	return &SetUserInfoLogic{
-
 		ctx:    ctx,
 		svcCtx: svcCtx,
+		Logger: logger.NewLogger(ctx, "user"),
 	}
 }
 
@@ -43,7 +44,7 @@ func (l *SetUserInfoLogic) SetUserInfo(req *types.SetUserInfoRequest) (resp *typ
 	}
 	_, err = l.svcCtx.UserRpc.SetUserInfo(l.ctx, &setUserInfoReq)
 	if err != nil {
-		log.Error().Msgf("[User][Api] SetUserInfo error, err: %v", err)
+		l.Logger.Errorf("[User][Api] SetUserInfo error, err: %v", err)
 		if errors.Is(err, errs.RpcNotFound) {
 			return nil, errs.FormattedApiNotFound()
 		}
@@ -53,7 +54,7 @@ func (l *SetUserInfoLogic) SetUserInfo(req *types.SetUserInfoRequest) (resp *typ
 	getUserInfoReq := user.GetUserInfoRequest{WxUid: req.ID}
 	getUserInfoResp, err := l.svcCtx.UserRpc.GetUserInfo(l.ctx, &getUserInfoReq)
 	if err != nil {
-		log.Error().Msgf("[User][Api] GetUserInfo error, err: %v", err)
+		l.Logger.Errorf("[User][Api] GetUserInfo error, err: %v", err)
 		if errors.Is(err, errs.RpcNotFound) {
 			return nil, errs.FormattedApiNotFound()
 		}

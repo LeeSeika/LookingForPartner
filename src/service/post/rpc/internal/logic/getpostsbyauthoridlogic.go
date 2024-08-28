@@ -2,8 +2,9 @@ package logic
 
 import (
 	"context"
-	"github.com/rs/zerolog/log"
+	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/common/params"
 	"lookingforpartner/service/post/rpc/internal/converter"
 
@@ -14,19 +15,21 @@ import (
 type GetPostsByAuthorIDLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
+	logx.Logger
 }
 
 func NewGetPostsByAuthorIDLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPostsByAuthorIDLogic {
 	return &GetPostsByAuthorIDLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
+		Logger: logger.NewLogger(ctx, "post"),
 	}
 }
 
 func (l *GetPostsByAuthorIDLogic) GetPostsByAuthorID(in *post.GetPostsByAuthorIDRequest) (*post.GetPostsByAuthorIDResponse, error) {
 	posts, paginator, err := l.svcCtx.PostInterface.GetPostsByAuthorID(l.ctx, in.Page, in.Size, in.AuthorID, params.ToOrderByOpt(in.OrderBy))
 	if err != nil {
-		log.Error().Msgf("cannot get posts by author_id, err: %+v", err)
+		l.Logger.Errorf("cannot get posts by author_id, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 

@@ -2,8 +2,9 @@ package logic
 
 import (
 	"context"
-	"github.com/rs/zerolog/log"
+	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/model"
 	"lookingforpartner/service/post/rpc/internal/converter"
 
@@ -14,12 +15,14 @@ import (
 type UpdateProjectLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
+	logx.Logger
 }
 
 func NewUpdateProjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateProjectLogic {
 	return &UpdateProjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
+		Logger: logger.NewLogger(ctx, "post"),
 	}
 }
 
@@ -34,7 +37,7 @@ func (l *UpdateProjectLogic) UpdateProject(in *post.UpdateProjectRequest) (*post
 	}
 	updatedProj, err := l.svcCtx.PostInterface.UpdateProject(l.ctx, &proj)
 	if err != nil {
-		log.Error().Msgf("cannot update project, err: %+v", err)
+		l.Logger.Errorf("cannot update project, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 

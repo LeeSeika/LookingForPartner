@@ -3,8 +3,9 @@ package logic
 import (
 	"context"
 	"errors"
-	"github.com/rs/zerolog/log"
+	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
+	"lookingforpartner/common/logger"
 
 	"lookingforpartner/common/errs"
 	"lookingforpartner/pb/post"
@@ -14,12 +15,14 @@ import (
 type DeletePostLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
+	logx.Logger
 }
 
 func NewDeletePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeletePostLogic {
 	return &DeletePostLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
+		Logger: logger.NewLogger(ctx, "post"),
 	}
 }
 
@@ -29,7 +32,7 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 		if po == nil || errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errs.RpcNotFound
 		}
-		log.Error().Msgf("cannot get post, err: %+v", err)
+		l.Logger.Errorf("cannot get post, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 	if po.AuthorID != in.WxUid {
@@ -37,7 +40,7 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 	}
 	_, err = l.svcCtx.PostInterface.DeletePost(l.ctx, in.PostID)
 	if err != nil {
-		log.Error().Msgf("cannot delete post, err: %+v", err)
+		l.Logger.Errorf("cannot delete post, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 
