@@ -3,8 +3,9 @@ package logic
 import (
 	"context"
 	"errors"
-	"github.com/rs/zerolog/log"
+	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
+	"lookingforpartner/common/logger"
 
 	"lookingforpartner/common/errs"
 	"lookingforpartner/pb/user"
@@ -14,19 +15,21 @@ import (
 type GetUserInfoLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
+	logx.Logger
 }
 
 func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserInfoLogic {
 	return &GetUserInfoLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
+		Logger: logger.NewLogger(ctx, "user"),
 	}
 }
 
 func (l *GetUserInfoLogic) GetUserInfo(in *user.GetUserInfoRequest) (*user.GetUserInfoResponse, error) {
 	u, err := l.svcCtx.UserInterface.GetUser(in.WxUid)
 	if err != nil {
-		log.Error().Msgf("cannot get user, err: %+v", err)
+		l.Logger.Errorf("cannot get user, err: %+v", err)
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errs.RpcNotFound
 		}

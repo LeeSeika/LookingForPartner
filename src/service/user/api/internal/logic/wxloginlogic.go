@@ -4,27 +4,28 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
 	"io/ioutil"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/api/internal/common"
 	"lookingforpartner/service/user/api/internal/svc"
 	"lookingforpartner/service/user/api/internal/types"
 	"net/http"
-
-	"github.com/rs/zerolog/log"
 )
 
 type WxLoginLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
+	logx.Logger
 }
 
 func NewWxLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxLoginLogic {
 	return &WxLoginLogic{
-
 		ctx:    ctx,
 		svcCtx: svcCtx,
+		Logger: logger.NewLogger(ctx, "user"),
 	}
 }
 
@@ -36,20 +37,20 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	authUrl := fmt.Sprintf("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", appID, appSecret, req.Code)
 	authReq, err := http.NewRequest(http.MethodGet, authUrl, nil)
 	if err != nil {
-		log.Error().Msgf("cannot new wechat login request, err: %+v", err)
+		l.Logger.Errorf("cannot new wechat login request, err: %+v", err)
 		return nil, errs.FormattedApiInternal()
 	}
 
 	client := &http.Client{}
 	authResp, err := client.Do(authReq)
 	if err != nil {
-		log.Error().Msgf("cannot send wechat login request, err: %+v", err)
+		l.Logger.Errorf("cannot send wechat login request, err: %+v", err)
 		return nil, errs.FormatApiError(authResp.StatusCode, errs.ApiProcessWxLoginFailed)
 	}
 
 	respBodyData, err := ioutil.ReadAll(authResp.Body)
 	if err != nil {
-		log.Error().Msgf("cannot read reponse body, err: %+v", err)
+		l.Logger.Errorf("cannot read reponse body, err: %+v", err)
 		return nil, errs.FormattedApiInternal()
 	}
 
@@ -63,7 +64,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	var rb respBody
 	err = json.Unmarshal(respBodyData, &rb)
 	if err != nil {
-		log.Error().Msgf("cannot unmarshal json, err: %+v", err)
+		l.Logger.Errorf("cannot unmarshal json, err: %+v", err)
 		return nil, errs.FormattedApiInternal()
 	}
 
@@ -74,7 +75,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	}
 	wxLoginResp, err := l.svcCtx.UserRpc.WxLogin(l.ctx, &wxLoginReq)
 	if err != nil {
-		log.Error().Msgf("cannot call WxLogin rpc, err: %+v", err)
+		l.Logger.Errorf("cannot call WxLogin rpc, err: %+v", err)
 		return nil, errs.FormattedApiInternal()
 	}
 
@@ -84,7 +85,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	accessSecret := l.svcCtx.Config.Auth.AccessSecret
 	accessToken, refreshToken, err := common.CreateTokenAndRefreshToken(rb.Openid, accessExpire, refreshExpire, accessSecret)
 	if err != nil {
-		log.Error().Msgf("cannot generate token, err: %+v", err)
+		l.Logger.Errorf("cannot generate token, err: %+v", err)
 		return nil, errs.FormattedApiGenTokenFailed()
 	}
 
