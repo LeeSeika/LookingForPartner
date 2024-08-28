@@ -21,7 +21,8 @@ RUN touch /etc/apt/sources.list && \
     vim \
     lsof \
     net-tools \
-    iputils-ping
+    iputils-ping \
+    sudo
 
 # 安装 goctl
 USER root
@@ -47,9 +48,7 @@ ENV PATH $GOPATH/bin:$PATH
 
 # 清理垃圾
 USER root
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    rm /var/log/lastlog /var/log/faillog
+RUN chmod -R 700 /home/. /go/.
 
 # 设置工作目录
 WORKDIR /home/src
