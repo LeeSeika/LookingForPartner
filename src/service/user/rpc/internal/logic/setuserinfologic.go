@@ -5,9 +5,9 @@ import (
 	"errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/logger"
+	"lookingforpartner/service/user/model"
 
 	"lookingforpartner/common/errs"
-	"lookingforpartner/model"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/rpc/internal/converter"
 	"lookingforpartner/service/user/rpc/internal/svc"
@@ -30,13 +30,13 @@ func NewSetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SetUs
 }
 
 func (l *SetUserInfoLogic) SetUserInfo(in *user.SetUserInfoRequest) (*user.SetUserInfoResponse, error) {
-	u := model.User{
+	u := &model.User{
 		WxUid:        in.WxUid,
 		School:       in.School,
 		Grade:        in.Grade,
 		Introduction: in.Introduction,
 	}
-	err := l.svcCtx.UserInterface.SetUser(&u)
+	u, err := l.svcCtx.UserInterface.UpdateUser(l.ctx, u)
 	if err != nil {
 		l.Logger.Errorf("cannot update user, err: %+v", err)
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -45,5 +45,5 @@ func (l *SetUserInfoLogic) SetUserInfo(in *user.SetUserInfoRequest) (*user.SetUs
 		return nil, errs.RpcUnknown
 	}
 
-	return &user.SetUserInfoResponse{UserInfo: converter.UserDBToRpc(&u)}, nil
+	return &user.SetUserInfoResponse{UserInfo: converter.UserDBToRpc(u)}, nil
 }

@@ -6,7 +6,7 @@ if [ -r "../services.pid" ]; then
       if [ $? -eq 0 ]; then
         echo "Process with PID $pid has been killed."
       else
-        echo "Failed to kill process with PID $pid."
+        echo "failed to kill process with PID $pid."
       fi
     fi
   done < "../services.pid"

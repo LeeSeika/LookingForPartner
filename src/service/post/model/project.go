@@ -11,10 +11,8 @@ type Project struct {
 	Role          string `gorm:"size:40"`
 	HeadCountInfo string
 	Progress      string `gorm:"size:128"`
-
-	// belongs to
-	MaintainerID string `gorm:"size:128"`
-	Maintainer   User   `gorm:"foreignKey:MaintainerID"`
+	MaintainerID  string `gorm:"size:128;index"`
+	PostID        string `gorm:"size:128;index"`
 
 	// base fields
 	gorm.Model

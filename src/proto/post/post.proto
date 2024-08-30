@@ -32,6 +32,7 @@ message CreatePostRequest {
   Project Project = 2;
   string Content = 3;
   string WxUid = 4;
+  int64 idempotencyKey = 5;
 }
 
 message CreatePostResponse {
@@ -42,6 +43,7 @@ message CreatePostResponse {
 message DeletePostRequest {
   string PostID = 1;
   string WxUid = 2;
+  int64 idempotencyKey = 3;
 }
 
 message DeletePostResponse {

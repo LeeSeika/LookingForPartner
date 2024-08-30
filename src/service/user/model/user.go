@@ -13,10 +13,6 @@ type User struct {
 	Introduction string
 	PostCount    int64
 
-	// has many
-	Posts    []Post    `gorm:"foreignKey:AuthorID"`
-	Projects []Project `gorm:"foreignKey:MaintainerID"`
-
 	// base fields
 	gorm.Model
 }
