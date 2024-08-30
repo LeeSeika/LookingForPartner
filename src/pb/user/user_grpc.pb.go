@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_WxLogin_FullMethodName     = "/userclient.User/WxLogin"
-	User_SetUserInfo_FullMethodName = "/userclient.User/SetUserInfo"
-	User_GetUserInfo_FullMethodName = "/userclient.User/GetUserInfo"
+	User_WxLogin_FullMethodName             = "/userclient.User/WxLogin"
+	User_SetUserInfo_FullMethodName         = "/userclient.User/SetUserInfo"
+	User_GetUserInfo_FullMethodName         = "/userclient.User/GetUserInfo"
+	User_UpdateUserPostCount_FullMethodName = "/userclient.User/UpdateUserPostCount"
 )
 
 // UserClient is the client API for User service.
@@ -31,6 +32,7 @@ type UserClient interface {
 	WxLogin(ctx context.Context, in *WxLoginRequest, opts ...grpc.CallOption) (*WxLoginResponse, error)
 	SetUserInfo(ctx context.Context, in *SetUserInfoRequest, opts ...grpc.CallOption) (*SetUserInfoResponse, error)
 	GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
+	UpdateUserPostCount(ctx context.Context, in *UpdateUserPostCountRequest, opts ...grpc.CallOption) (*UpdateUserPostCountResponse, error)
 }
 
 type userClient struct {
@@ -71,6 +73,16 @@ func (c *userClient) GetUserInfo(ctx context.Context, in *GetUserInfoRequest, op
 	return out, nil
 }
 
+func (c *userClient) UpdateUserPostCount(ctx context.Context, in *UpdateUserPostCountRequest, opts ...grpc.CallOption) (*UpdateUserPostCountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserPostCountResponse)
+	err := c.cc.Invoke(ctx, User_UpdateUserPostCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type UserServer interface {
 	WxLogin(context.Context, *WxLoginRequest) (*WxLoginResponse, error)
 	SetUserInfo(context.Context, *SetUserInfoRequest) (*SetUserInfoResponse, error)
 	GetUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoResponse, error)
+	UpdateUserPostCount(context.Context, *UpdateUserPostCountRequest) (*UpdateUserPostCountResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedUserServer) SetUserInfo(context.Context, *SetUserInfoRequest)
 }
 func (UnimplementedUserServer) GetUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
+}
+func (UnimplementedUserServer) UpdateUserPostCount(context.Context, *UpdateUserPostCountRequest) (*UpdateUserPostCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserPostCount not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -172,6 +188,24 @@ func _User_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_UpdateUserPostCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserPostCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateUserPostCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateUserPostCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateUserPostCount(ctx, req.(*UpdateUserPostCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +224,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserInfo",
 			Handler:    _User_GetUserInfo_Handler,
+		},
+		{
+			MethodName: "UpdateUserPostCount",
+			Handler:    _User_UpdateUserPostCount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

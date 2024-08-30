@@ -5,7 +5,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/logger"
-	"lookingforpartner/model"
+	"lookingforpartner/service/post/model"
 	"lookingforpartner/service/post/rpc/internal/converter"
 
 	"lookingforpartner/pb/post"

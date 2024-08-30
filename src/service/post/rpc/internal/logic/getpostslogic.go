@@ -27,15 +27,19 @@ func NewGetPostsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPosts
 }
 
 func (l *GetPostsLogic) GetPosts(in *post.GetPostsRequest) (*post.GetPostsResponse, error) {
-	posts, paginator, err := l.svcCtx.PostInterface.GetPosts(l.ctx, in.Page, in.Size, params.ToOrderByOpt(in.OrderBy))
+	poProjs, paginator, err := l.svcCtx.PostInterface.GetPosts(l.ctx, in.Page, in.Size, params.ToOrderByOpt(in.OrderBy))
 	if err != nil {
 		l.Logger.Errorf("cannot get posts, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
 
-	poInfos := make([]*post.PostInfo, 0, len(posts))
-	for _, po := range posts {
-		poInfo := converter.PostDBToRPC(po)
+	poInfos := make([]*post.PostInfo, 0, len(poProjs))
+	for _, poProj := range poProjs {
+		poInfo := converter.PostDBToRPC(poProj.Post)
+		if poProj.Project != nil {
+			projInfo := converter.ProjectDBToRPC(poProj.Project)
+			poInfo.Project = projInfo
+		}
 		poInfos = append(poInfos, poInfo)
 	}
 

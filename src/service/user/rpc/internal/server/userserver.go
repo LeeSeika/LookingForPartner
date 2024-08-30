@@ -36,3 +36,8 @@ func (s *UserServer) GetUserInfo(ctx context.Context, in *user.GetUserInfoReques
 	l := logic.NewGetUserInfoLogic(ctx, s.svcCtx)
 	return l.GetUserInfo(in)
 }
+
+func (s *UserServer) UpdateUserPostCount(ctx context.Context, in *user.UpdateUserPostCountRequest) (*user.UpdateUserPostCountResponse, error) {
+	l := logic.NewUpdateUserPostCountLogic(ctx, s.svcCtx)
+	return l.UpdateUserPostCount(in)
+}

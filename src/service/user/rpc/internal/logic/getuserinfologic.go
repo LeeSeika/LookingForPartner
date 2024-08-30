@@ -27,7 +27,7 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 }
 
 func (l *GetUserInfoLogic) GetUserInfo(in *user.GetUserInfoRequest) (*user.GetUserInfoResponse, error) {
-	u, err := l.svcCtx.UserInterface.GetUser(in.WxUid)
+	u, err := l.svcCtx.UserInterface.GetUser(l.ctx, in.WxUid)
 	if err != nil {
 		l.Logger.Errorf("cannot get user, err: %+v", err)
 		if errors.Is(err, gorm.ErrRecordNotFound) {

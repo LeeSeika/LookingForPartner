@@ -27,7 +27,7 @@ func NewGetPostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPostLo
 }
 
 func (l *GetPostLogic) GetPost(in *post.GetPostRequest) (*post.GetPostResponse, error) {
-	po, err := l.svcCtx.PostInterface.GetPost(l.ctx, in.PostID)
+	poProj, err := l.svcCtx.PostInterface.GetPost(l.ctx, in.PostID)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errs.RpcNotFound
@@ -36,7 +36,11 @@ func (l *GetPostLogic) GetPost(in *post.GetPostRequest) (*post.GetPostResponse, 
 		return nil, errs.RpcUnknown
 	}
 
-	poInfo := converter.PostDBToRPC(po)
+	poInfo := converter.PostDBToRPC(poProj.Post)
+	if poProj.Project != nil {
+		projInfo := converter.ProjectDBToRPC(poProj.Project)
+		poInfo.Project = projInfo
+	}
 
 	return &post.GetPostResponse{Post: poInfo}, nil
 }

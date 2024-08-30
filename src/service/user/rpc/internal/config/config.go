@@ -1,6 +1,9 @@
 package config
 
-import "github.com/zeromicro/go-zero/zrpc"
+import (
+	"github.com/zeromicro/go-queue/kq"
+	"github.com/zeromicro/go-zero/zrpc"
+)
 
 type Config struct {
 	zrpc.RpcServerConf
@@ -14,4 +17,5 @@ type Config struct {
 		MaxOpenConns    int
 		ConnMaxLifeTime int
 	}
+	KqUpdateUserPostCountConsumerConf kq.KqConf
 }

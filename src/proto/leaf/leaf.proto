@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package leafclient;
+
+option go_package = "lookingforpartner/pb/leaf";
+
+// NextSegment
+message NextSegmentRequest {
+  string BizTag = 1;
+  int64 Step = 2;
+}
+
+message NextSegmentResponse {
+  int64 FirstID = 1;
+  int64 LastID = 2;
+}
+
+service Leaf {
+  rpc NextSegment(NextSegmentRequest) returns(NextSegmentResponse);
+}

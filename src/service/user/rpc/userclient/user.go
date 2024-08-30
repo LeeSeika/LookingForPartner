@@ -13,18 +13,21 @@ import (
 )
 
 type (
-	GetUserInfoRequest  = user.GetUserInfoRequest
-	GetUserInfoResponse = user.GetUserInfoResponse
-	SetUserInfoRequest  = user.SetUserInfoRequest
-	SetUserInfoResponse = user.SetUserInfoResponse
-	UserInfo            = user.UserInfo
-	WxLoginRequest      = user.WxLoginRequest
-	WxLoginResponse     = user.WxLoginResponse
+	GetUserInfoRequest          = user.GetUserInfoRequest
+	GetUserInfoResponse         = user.GetUserInfoResponse
+	SetUserInfoRequest          = user.SetUserInfoRequest
+	SetUserInfoResponse         = user.SetUserInfoResponse
+	UpdateUserPostCountRequest  = user.UpdateUserPostCountRequest
+	UpdateUserPostCountResponse = user.UpdateUserPostCountResponse
+	UserInfo                    = user.UserInfo
+	WxLoginRequest              = user.WxLoginRequest
+	WxLoginResponse             = user.WxLoginResponse
 
 	User interface {
 		WxLogin(ctx context.Context, in *WxLoginRequest, opts ...grpc.CallOption) (*WxLoginResponse, error)
 		SetUserInfo(ctx context.Context, in *SetUserInfoRequest, opts ...grpc.CallOption) (*SetUserInfoResponse, error)
 		GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
+		UpdateUserPostCount(ctx context.Context, in *UpdateUserPostCountRequest, opts ...grpc.CallOption) (*UpdateUserPostCountResponse, error)
 	}
 
 	defaultUser struct {
@@ -51,4 +54,9 @@ func (m *defaultUser) SetUserInfo(ctx context.Context, in *SetUserInfoRequest, o
 func (m *defaultUser) GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error) {
 	client := user.NewUserClient(m.cli.Conn())
 	return client.GetUserInfo(ctx, in, opts...)
+}
+
+func (m *defaultUser) UpdateUserPostCount(ctx context.Context, in *UpdateUserPostCountRequest, opts ...grpc.CallOption) (*UpdateUserPostCountResponse, error) {
+	client := user.NewUserClient(m.cli.Conn())
+	return client.UpdateUserPostCount(ctx, in, opts...)
 }

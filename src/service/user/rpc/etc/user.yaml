@@ -14,3 +14,13 @@ Mysql:
   MaxIdleConns: 10
   maxOpenConns: 100
   connMaxLifeTime: 3600
+  
+KqUpdateUserPostCountConsumerConf:
+  Name: kqUpdateUserPostCountConsumer1
+  Brokers:
+    - kafka:9092
+  Group: kqUpdateUserPostCountConsumerGroup
+  Topic: update-user-post-count
+  Offset: first
+  Consumers: 8
+  Processors: 8

@@ -1,8 +1,8 @@
 package converter
 
 import (
-	"lookingforpartner/model"
 	"lookingforpartner/pb/user"
+	"lookingforpartner/service/user/model"
 )
 
 func UserDBToRpc(u *model.User) *user.UserInfo {

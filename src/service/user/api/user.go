@@ -25,6 +25,6 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
 
-	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
+	fmt.Printf("Starting user api server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }

@@ -46,8 +46,18 @@ message GetUserInfoResponse {
   UserInfo UserInfo = 1;
 }
 
+// UpdateUserPostCount
+message UpdateUserPostCountRequest {
+  int64 IdempotencyKey = 1;
+  string WxUid = 2;
+  int64 delta = 3;
+}
+
+message UpdateUserPostCountResponse {}
+
 service User {
   rpc WxLogin(WxLoginRequest) returns(WxLoginResponse);
   rpc SetUserInfo(SetUserInfoRequest) returns(SetUserInfoResponse);
   rpc GetUserInfo(GetUserInfoRequest) returns(GetUserInfoResponse);
+  rpc UpdateUserPostCount(UpdateUserPostCountRequest) returns(UpdateUserPostCountResponse);
 }
