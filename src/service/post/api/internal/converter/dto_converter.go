@@ -56,12 +56,22 @@ func PostRpcToApi(po *post.PostInfo) types.Post {
 		proj = ProjectRpcToApi(po.GetProject())
 	}
 
+	author := types.UserInfo{
+		WxUid:        po.Author.WxUid,
+		Avatar:       po.Author.Avatar,
+		School:       po.Author.School,
+		Grade:        po.Author.Grade,
+		Introduction: po.Author.Introduction,
+		PostCount:    po.Author.PostCount,
+		Username:     po.Author.Username,
+	}
+
 	return types.Post{
 		PostID:    po.PostID,
 		CreatedAt: po.CreatedAt,
 		Title:     po.Title,
 		Project:   proj,
 		Content:   po.Content,
-		AuthorID:  po.AuthorID,
+		Author:    author,
 	}
 }

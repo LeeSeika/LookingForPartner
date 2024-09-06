@@ -27,7 +27,7 @@ func NewGetPostsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPosts
 }
 
 func (l *GetPostsLogic) GetPosts(in *post.GetPostsRequest) (*post.GetPostsResponse, error) {
-	poProjs, paginator, err := l.svcCtx.PostInterface.GetPosts(l.ctx, in.Page, in.Size, params.ToOrderByOpt(in.OrderBy))
+	poProjs, paginator, err := l.svcCtx.PostInterface.GetPosts(l.ctx, in.PaginationParams.Page, in.PaginationParams.Size, params.ToOrderByOpt(in.PaginationParams.OrderBy))
 	if err != nil {
 		l.Logger.Errorf("cannot get posts, err: %+v", err)
 		return nil, errs.RpcUnknown
@@ -42,6 +42,8 @@ func (l *GetPostsLogic) GetPosts(in *post.GetPostsRequest) (*post.GetPostsRespon
 		}
 		poInfos = append(poInfos, poInfo)
 	}
+
+	// todo: get author & maintainer info from user rpc
 
 	return &post.GetPostsResponse{Posts: poInfos, Paginator: paginator.ToRPC()}, nil
 }

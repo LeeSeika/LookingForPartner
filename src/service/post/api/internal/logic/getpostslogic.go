@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"lookingforpartner/pb/paginator"
 	"net/http"
 
 	"lookingforpartner/common/errs"
@@ -39,9 +40,11 @@ func (l *GetPostsLogic) GetPosts(req *types.GetPostsRequest) (resp *types.GetPos
 	}
 
 	getPostsReq := post.GetPostsRequest{
-		Page:    req.Page,
-		Size:    req.Size,
-		OrderBy: req.Order,
+		PaginationParams: &paginator.PaginationParams{
+			Page:    req.Page,
+			Size:    req.Size,
+			OrderBy: req.Order,
+		},
 	}
 
 	getPostsResp, err := l.svcCtx.PostRpc.GetPosts(l.ctx, &getPostsReq)
