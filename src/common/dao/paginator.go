@@ -19,13 +19,13 @@ type PaginationParam struct {
 
 // Paginator indicates the result of paging
 type Paginator struct {
-	TotalRecord int64 `json:"total_record"`
-	TotalPage   int   `json:"total_page"`
-	Offset      int   `json:"offset"`
-	Limit       int   `json:"limit"`
-	CurrPage    int   `json:"curr_page"`
-	PrevPage    int   `json:"prev_page"`
-	NextPage    int   `json:"next_page"`
+	TotalRecord int64
+	TotalPage   int
+	Offset      int
+	Limit       int
+	CurrPage    int
+	PrevPage    int
+	NextPage    int
 }
 
 func GetListWithPagination(db *gorm.DB, p *PaginationParam, result interface{}) (*Paginator, error) {

@@ -26,7 +26,7 @@ func NewRefreshTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Refr
 	}
 }
 
-func (l *RefreshTokenLogic) RefreshToken(req *types.RefreshTokenReqeust) (resp *types.RefreshTokenResponse, err error) {
+func (l *RefreshTokenLogic) RefreshToken(req *types.RefreshTokenRequest) (resp *types.RefreshTokenResponse, err error) {
 	// validate
 	uid, ok := l.ctx.Value("uid").(string)
 	if !ok {

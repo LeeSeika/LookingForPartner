@@ -20,9 +20,7 @@ type DeletePostResponse struct {
 
 type GetPostByAuthorIDRequest struct {
 	AuthorID string `path:"authorID"`
-	Page     int64  `json:"page"`
-	Size     int64  `json:"size"`
-	Order    string `json:"order"`
+	PaginationParams
 }
 
 type GetPostRequest struct {
@@ -34,17 +32,33 @@ type GetPostResponse struct {
 }
 
 type GetPostsByAuthorIDResponse struct {
-	Posts []Post `json:"posts"`
+	Posts     []Post    `json:"posts"`
+	Paginator Paginator `json:"paginator"`
 }
 
 type GetPostsRequest struct {
-	Page  int64  `json:"page"`
-	Size  int64  `json:"size"`
-	Order string `json:"order"`
+	PaginationParams
 }
 
 type GetPostsResponse struct {
-	Posts []Post `json:"posts"`
+	Posts     []Post    `json:"posts"`
+	Paginator Paginator `json:"paginator"`
+}
+
+type PaginationParams struct {
+	Page  int64  `path:"page"`
+	Size  int64  `path:"size"`
+	Order string `path:"order"`
+}
+
+type Paginator struct {
+	TotalRecord int64 `json:"total_record"`
+	TotalPage   int   `json:"total_page"`
+	Offset      int   `json:"offset"`
+	Limit       int   `json:"limit"`
+	CurrPage    int   `json:"curr_page"`
+	PrevPage    int   `json:"prev_page"`
+	NextPage    int   `json:"next_page"`
 }
 
 type Post struct {
@@ -67,16 +81,20 @@ type Project struct {
 }
 
 type UpdateProjectRequest struct {
-	ProjectID     string `path:"projectID"`
+	ProjectID      string         `path:"projectID"`
+	UpdatedProject UpdatedProject `json:"updated_project"`
+}
+
+type UpdateProjectResponse struct {
+	Project Project `json:"project"`
+}
+
+type UpdatedProject struct {
 	Name          string `json:"name"`
 	Introduction  string `json:"introduction"`
 	Role          string `json:"role"`
 	HeadCountInfo string `json:"head_count_info"`
 	Progress      string `json:"progress"`
-}
-
-type UpdateProjectResponse struct {
-	Project Project `json:"project"`
 }
 
 type UserInfo struct {

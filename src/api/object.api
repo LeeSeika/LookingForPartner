@@ -8,6 +8,22 @@ info (
 	version: "1.0"
 )
 
+type PaginationParams {
+    Page  int64  `path:"page"`
+    Size  int64  `path:"size"`
+    Order string `path:"order"`
+}
+
+type Paginator {
+    TotalRecord int64 `json:"total_record"`
+    TotalPage   int   `json:"total_page"`
+    Offset      int   `json:"offset"`
+    Limit       int   `json:"limit"`
+    CurrPage    int   `json:"curr_page"`
+    PrevPage    int   `json:"prev_page"`
+    NextPage    int   `json:"next_page"`
+}
+
 type UserInfo {
 	WxUid        string `json:"wx_uid"`
 	Avatar       string `json:"avatar"`

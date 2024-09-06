@@ -18,11 +18,14 @@ if ! test -d "pb"; then
   mkdir pb
 fi
 
+# format api
+goctl api format --dir ./api/*.api
+
 # gen paginator
 protoc ./proto/paginator/paginator.proto --proto_path=./proto/ --go_out=paths=source_relative:./pb
 
 # gen biz service code
-biz_services=(user post)
+biz_services=(user post comment)
 
 for item in "${biz_services[@]}"; do
   goctl api go -api ./api/"$item".api -dir ./service/"$item"/api/

@@ -31,13 +31,13 @@ func (l *SetUserInfoLogic) SetUserInfo(req *types.SetUserInfoRequest) (resp *typ
 	if !ok {
 		return nil, errs.FormattedApiUnAuthorized()
 	}
-	if uid != req.ID {
+	if uid != req.WxUid {
 		return nil, errs.FormattedApiUnAuthorized()
 	}
 
 	// rpc call
 	setUserInfoReq := user.SetUserInfoRequest{
-		WxUid:        req.ID,
+		WxUid:        req.WxUid,
 		School:       req.School,
 		Grade:        req.Grade,
 		Introduction: req.Introduction,
@@ -51,7 +51,7 @@ func (l *SetUserInfoLogic) SetUserInfo(req *types.SetUserInfoRequest) (resp *typ
 		return nil, errs.FormattedApiInternal()
 	}
 
-	getUserInfoReq := user.GetUserInfoRequest{WxUid: req.ID}
+	getUserInfoReq := user.GetUserInfoRequest{WxUid: req.WxUid}
 	getUserInfoResp, err := l.svcCtx.UserRpc.GetUserInfo(l.ctx, &getUserInfoReq)
 	if err != nil {
 		l.Logger.Errorf("[User][Api] GetUserInfo error, err: %v", err)

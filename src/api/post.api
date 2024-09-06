@@ -39,35 +39,37 @@ type GetPostResponse {
 
 // GetPosts
 type GetPostsRequest {
-	Page  int64  `json:"page"`
-	Size  int64  `json:"size"`
-	Order string `json:"order"`
+	PaginationParams
 }
 
 type GetPostsResponse {
-	Posts []Post `json:"posts"`
+	Posts     []Post    `json:"posts"`
+	Paginator Paginator `json:"paginator"`
 }
 
-// GetPostsByUid
+// GetPostsByAuthorID
 type GetPostByAuthorIDRequest {
 	AuthorID string `path:"authorID"`
-	Page     int64  `json:"page"`
-	Size     int64  `json:"size"`
-	Order    string `json:"order"`
+	PaginationParams
 }
 
 type GetPostsByAuthorIDResponse {
-	Posts []Post `json:"posts"`
+	Posts     []Post    `json:"posts"`
+	Paginator Paginator `json:"paginator"`
 }
 
 // UpdateProject
-type UpdateProjectRequest {
-	ProjectID     string `path:"projectID"`
+type UpdatedProject {
 	Name          string `json:"name"`
 	Introduction  string `json:"introduction"`
 	Role          string `json:"role"`
 	HeadCountInfo string `json:"head_count_info"`
 	Progress      string `json:"progress"`
+}
+
+type UpdateProjectRequest {
+	ProjectID      string         `path:"projectID"`
+	UpdatedProject UpdatedProject `json:"updated_project"`
 }
 
 type UpdateProjectResponse {
@@ -82,10 +84,10 @@ service Post {
 	get /posts/:postID (GetPostRequest) returns (GetPostResponse)
 
 	@handler GetPosts
-	get /posts (GetPostsRequest) returns (GetPostsResponse)
+	get /posts/page/:page/size/:size/order/:order (GetPostsRequest) returns (GetPostsResponse)
 
 	@handler GetPostsByAuthorID
-	get /posts/author/:authorID (GetPostByAuthorIDRequest) returns (GetPostsByAuthorIDResponse)
+	get /posts/author/:authorID/page/:page/size/:size/order/:order (GetPostByAuthorIDRequest) returns (GetPostsByAuthorIDResponse)
 }
 
 @server (
