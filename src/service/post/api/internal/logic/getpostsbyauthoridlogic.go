@@ -20,7 +20,6 @@ type GetPostsByAuthorIDLogic struct {
 
 func NewGetPostsByAuthorIDLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPostsByAuthorIDLogic {
 	return &GetPostsByAuthorIDLogic{
-
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}

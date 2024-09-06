@@ -27,7 +27,7 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 
 func (l *GetUserInfoLogic) GetUserInfo(req *types.GetUserInfoRequest) (resp *types.GetUserInfoResponse, err error) {
 	// rpc call
-	getUserInfoReq := user.GetUserInfoRequest{WxUid: req.ID}
+	getUserInfoReq := user.GetUserInfoRequest{WxUid: req.WxUid}
 	getUserInfoResp, err := l.svcCtx.UserRpc.GetUserInfo(l.ctx, &getUserInfoReq)
 	if err != nil {
 		l.Logger.Errorf("[User][Api] GetUserInfo error, err: %v", err)

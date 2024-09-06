@@ -23,7 +23,7 @@ type WxLoginResponse {
 }
 
 // RefreshToken
-type RefreshTokenReqeust {}
+type RefreshTokenRequest {}
 
 type RefreshTokenResponse {
 	Token        string `json:"token"`
@@ -32,7 +32,7 @@ type RefreshTokenResponse {
 
 // SetUserInfo
 type SetUserInfoRequest {
-	ID           string `path:"wxUid"`
+	WxUid        string `path:"wxUid"`
 	School       string `json:"school"`
 	Grade        int64  `json:"grade"`
 	Introduction string `json:"introduction"`
@@ -48,7 +48,7 @@ type SetUserInfoResponse {
 
 // GetUserInfo
 type GetUserInfoRequest {
-	ID string `path:"wxUid"`
+	WxUid string `path:"wxUid"`
 }
 
 type GetUserInfoResponse {
@@ -76,7 +76,7 @@ service User {
 )
 service User {
 	@handler RefreshToken
-	get /users/token (RefreshTokenReqeust) returns (RefreshTokenResponse)
+	get /users/token (RefreshTokenRequest) returns (RefreshTokenResponse)
 
 	@handler SetUserInfo
 	put /users/wxUid (SetUserInfoRequest) returns (SetUserInfoResponse)

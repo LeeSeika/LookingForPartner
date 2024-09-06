@@ -1,0 +1,126 @@
+syntax = "v1"
+
+info (
+	title:   "comment"
+	desc:    ""
+	author:  "LeeSeika"
+	email:   "LeeSeika@outlook.com"
+	version: "1.0"
+)
+
+import "object.api"
+
+// Subject
+type Subject {
+	SubjectID        string `json:"subject_id"`
+	PostID           string `json:"post_id"`
+	AllCommentCount  int    `json:"all_comment_count"`
+	RootCommentCount int    `json:"root_comment_count"`
+	Status           int8   `json:"status"`
+}
+
+// Comment
+type Comment {
+	CommentID       string     `json:"comment_id"`
+	SubjectID       string     `json:"subject_id"`
+	RootID          string     `json:"root_id"`
+	ParentID        string     `json:"parent_id"`
+	DialogID        string     `json:"dialog_id"`
+	AuthorID        string     `json:"author_id"`
+	LikeCount       int        `json:"like_count"`
+	Floor           int        `json:"floor"`
+	CreatedAt       string     `json:"created_at"`
+	SubCommentCount int        `json:"sub_comment_count"`
+	Content         string     `json:"content"`
+	SubComments     []*Comment `json:"sub_comments"`
+}
+
+/*
+// GetSubject
+type GetSubjectRequest {
+	PostID string `path:"post_id"`
+}
+
+type GetSubjectResponse {
+	Subject Subject `json:"subject"`
+}
+
+// UpdateSubject
+type UpdatedSubject {
+	AllCommentCount  int  `json:"all_comment_count"`
+	RootCommentCount int  `json:"root_comment_count"`
+	Status           int8 `json:"status"`
+}
+
+type UpdateSubjectRequest {
+	SubjectID      string         `path:"subjectID"`
+	UpdatedSubject UpdatedSubject `json:"updated_subject"`
+}
+
+type UpdateSubjectResponse {
+	Subject Subject `json:"subject"`
+}
+*/
+// GetComment
+type GetCommentRequest {
+	CommentID string `path:"commentID"`
+}
+
+type GetCommentResponse {
+	Comment Comment `json:"comment"`
+}
+
+// GetCommentsByPostID
+type GetCommentsByPostIDRequest {
+	PostID string `path:"postID"`
+	PaginationParams
+}
+
+type GetCommentsByPostIDResponse {
+	Comments  []Comment `json:"comments"`
+	Paginator Paginator `json:"paginator"`
+}
+
+// CreateComment
+type CreateCommentRequest {
+	SubjectID string `json:"subject_id"`
+	RootID    string `json:"root_id"`
+	ParentID  string `json:"parent_id"`
+	DialogID  string `json:"dialog_id"`
+	Content   string `json:"content"`
+}
+
+type CreateCommentResponse {
+	Comment Comment `json:"comment"`
+}
+
+// DeleteComment
+type DeleteCommentRequest {
+	CommentID string `path:"comment_id"`
+}
+
+type DeleteCommentResponse {}
+
+@server (
+	prefix: /api/v1
+)
+service Comment {
+	@handler GetComment
+	get /comments/:commentID (GetCommentRequest) returns (GetCommentResponse)
+
+	@handler GetCommentsByPostID
+	get /comments/post/:postID (GetCommentsByPostIDRequest) returns (GetCommentsByPostIDResponse)
+}
+
+@server (
+	jwt:    Auth
+	prefix: /api/v1
+)
+service Comment {
+	@handler CreateComment
+	post /comments/ (CreateCommentRequest) returns (CreateCommentResponse)
+
+	@handler DeleteComment
+	delete /comments/:commentID (DeleteCommentRequest) returns (DeleteCommentResponse)
+}
+

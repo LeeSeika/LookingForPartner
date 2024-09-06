@@ -2,7 +2,7 @@
 package types
 
 type GetUserInfoRequest struct {
-	ID string `path:"wxUid"`
+	WxUid string `path:"wxUid"`
 }
 
 type GetUserInfoResponse struct {
@@ -11,6 +11,22 @@ type GetUserInfoResponse struct {
 	Grade        int64  `json:"grade"`
 	Introduction string `json:"introduction"`
 	PostCount    int64  `json:"post_count"`
+}
+
+type PaginationParams struct {
+	Page  int64  `path:"page"`
+	Size  int64  `path:"size"`
+	Order string `path:"order"`
+}
+
+type Paginator struct {
+	TotalRecord int64 `json:"total_record"`
+	TotalPage   int   `json:"total_page"`
+	Offset      int   `json:"offset"`
+	Limit       int   `json:"limit"`
+	CurrPage    int   `json:"curr_page"`
+	PrevPage    int   `json:"prev_page"`
+	NextPage    int   `json:"next_page"`
 }
 
 type Post struct {
@@ -32,7 +48,7 @@ type Project struct {
 	Progress      string   `json:"progress"`
 }
 
-type RefreshTokenReqeust struct {
+type RefreshTokenRequest struct {
 }
 
 type RefreshTokenResponse struct {
@@ -41,7 +57,7 @@ type RefreshTokenResponse struct {
 }
 
 type SetUserInfoRequest struct {
-	ID           string `path:"wxUid"`
+	WxUid        string `path:"wxUid"`
 	School       string `json:"school"`
 	Grade        int64  `json:"grade"`
 	Introduction string `json:"introduction"`

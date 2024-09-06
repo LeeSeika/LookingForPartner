@@ -26,11 +26,11 @@ func NewUpdateProjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 func (l *UpdateProjectLogic) UpdateProject(req *types.UpdateProjectRequest) (resp *types.UpdateProjectResponse, err error) {
 	updateProjectReq := post.UpdateProjectRequest{
 		ProjectID:     req.ProjectID,
-		Name:          req.Name,
-		Role:          req.Role,
-		Introduction:  req.Introduction,
-		Progress:      req.Progress,
-		HeadCountInfo: req.HeadCountInfo,
+		Name:          req.UpdatedProject.Name,
+		Role:          req.UpdatedProject.Role,
+		Introduction:  req.UpdatedProject.Introduction,
+		Progress:      req.UpdatedProject.Progress,
+		HeadCountInfo: req.UpdatedProject.HeadCountInfo,
 	}
 
 	updateProjectResp, err := l.svcCtx.PostRpc.UpdateProject(l.ctx, &updateProjectReq)
