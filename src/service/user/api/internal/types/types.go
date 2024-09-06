@@ -30,12 +30,12 @@ type Paginator struct {
 }
 
 type Post struct {
-	PostID    string  `json:"post_id"`
-	CreatedAt string  `json:"created_at"`
-	Title     string  `json:"title"`
-	Project   Project `json:"project"`
-	Content   string  `json:"content"`
-	AuthorID  string  `json:"author_id"`
+	PostID    string   `json:"post_id"`
+	CreatedAt string   `json:"created_at"`
+	Title     string   `json:"title"`
+	Project   Project  `json:"project"`
+	Content   string   `json:"content"`
+	Author    UserInfo `json:"author"`
 }
 
 type Project struct {

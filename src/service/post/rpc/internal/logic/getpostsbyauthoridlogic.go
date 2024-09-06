@@ -27,7 +27,7 @@ func NewGetPostsByAuthorIDLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *GetPostsByAuthorIDLogic) GetPostsByAuthorID(in *post.GetPostsByAuthorIDRequest) (*post.GetPostsByAuthorIDResponse, error) {
-	poProjs, paginator, err := l.svcCtx.PostInterface.GetPostsByAuthorID(l.ctx, in.Page, in.Size, in.AuthorID, params.ToOrderByOpt(in.OrderBy))
+	poProjs, paginator, err := l.svcCtx.PostInterface.GetPostsByAuthorID(l.ctx, in.PaginationParams.Page, in.PaginationParams.Size, in.AuthorID, params.ToOrderByOpt(in.PaginationParams.OrderBy))
 	if err != nil {
 		l.Logger.Errorf("cannot get posts by author_id, err: %+v", err)
 		return nil, errs.RpcUnknown
@@ -42,6 +42,8 @@ func (l *GetPostsByAuthorIDLogic) GetPostsByAuthorID(in *post.GetPostsByAuthorID
 		}
 		poInfos = append(poInfos, poInfo)
 	}
+
+	// todo: get author & maintainer info from user rpc
 
 	return &post.GetPostsByAuthorIDResponse{Posts: poInfos, Paginator: paginator.ToRPC()}, nil
 }

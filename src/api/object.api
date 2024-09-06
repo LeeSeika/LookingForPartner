@@ -50,5 +50,5 @@ type Post {
 	Title     string  `json:"title"`
 	Project   Project `json:"project"`
 	Content   string  `json:"content"`
-	AuthorID  string  `json:"author_id"`
+	Author  UserInfo  `json:"author"`
 }

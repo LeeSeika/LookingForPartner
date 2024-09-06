@@ -6,6 +6,7 @@ option go_package = "lookingforpartner/pb/post";
 
 import "paginator/paginator.proto";
 import "user/user.proto";
+import "comment/comment.proto";
 
 message Project {
   string ProjectID = 1;
@@ -23,7 +24,8 @@ message PostInfo {
   string Title = 3;
   Project   Project = 4;
   string Content = 5;
-  string AuthorID = 6;
+  userclient.UserInfo Author = 6;
+  commentclient.SubjectInfo Subject = 7;
 }
 
 // CreatePost
@@ -60,28 +62,23 @@ message GetPostResponse {
 
 // GetPosts
 message GetPostsRequest {
-  string PostID = 1;
-  int64 Page = 2;
-  int64 Size = 3;
-  string OrderBy = 4;
+  paginator.PaginationParams PaginationParams = 1;
 }
 
 message GetPostsResponse {
   repeated PostInfo Posts = 1;
-  Paginator paginator = 2;
+  paginator.Paginator paginator = 2;
 }
 
 // GetPostsByAuthorID
 message GetPostsByAuthorIDRequest {
-  int64 Page = 1;
-  int64 Size = 2;
-  string AuthorID = 3;
-  string OrderBy = 4;
+  string AuthorID = 1;
+  paginator.PaginationParams PaginationParams = 2;
 }
 
 message GetPostsByAuthorIDResponse {
   repeated PostInfo Posts = 1;
-  Paginator paginator = 2;
+  paginator.Paginator paginator = 2;
 }
 
 // UpdateProject

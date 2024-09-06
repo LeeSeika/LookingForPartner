@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"lookingforpartner/pb/paginator"
 	"net/http"
 
 	"lookingforpartner/common/errs"
@@ -38,10 +39,12 @@ func (l *GetPostsByAuthorIDLogic) GetPostsByAuthorID(req *types.GetPostByAuthorI
 	}
 
 	getPostsByAuthorIDReq := post.GetPostsByAuthorIDRequest{
-		Page:     req.Page,
-		Size:     req.Size,
+		PaginationParams: &paginator.PaginationParams{
+			Page:    req.Page,
+			Size:    req.Size,
+			OrderBy: req.Order,
+		},
 		AuthorID: req.AuthorID,
-		OrderBy:  req.Order,
 	}
 
 	getPostsByAuthorIDResp, err := l.svcCtx.PostRpc.GetPostsByAuthorID(l.ctx, &getPostsByAuthorIDReq)

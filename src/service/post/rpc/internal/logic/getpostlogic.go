@@ -42,5 +42,7 @@ func (l *GetPostLogic) GetPost(in *post.GetPostRequest) (*post.GetPostResponse, 
 		poInfo.Project = projInfo
 	}
 
+	// todo: get author & maintainer info from user rpc
+
 	return &post.GetPostResponse{Post: poInfo}, nil
 }
