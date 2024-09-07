@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/pb/comment"
 
 	"lookingforpartner/service/comment/api/internal/svc"
 	"lookingforpartner/service/comment/api/internal/types"
@@ -24,7 +26,13 @@ func NewCreateCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cre
 }
 
 func (l *CreateCommentLogic) CreateComment(req *types.CreateCommentRequest) (resp *types.CreateCommentResponse, err error) {
-	// todo: add your logic here and delete this line
+	// validate
+	uid, ok := l.ctx.Value("uid").(string)
+	if !ok {
+		return nil, errs.FormattedApiUnAuthorized()
+	}
+
+	createCommentReq := comment.CreateCommentRequest{}
 
 	return
 }

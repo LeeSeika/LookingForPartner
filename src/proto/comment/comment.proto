@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package commentclient;
+
+option go_package = "lookingforpartner/pb/comment";
+
+import "paginator/paginator.proto";
+
+// Comment
+message CommentInfo {
+  string CommentID = 1;
+  string SubjectID = 2;
+  string RootID = 3;
+  string ParentID = 4;
+  string DialogID = 5;
+  string AuthorID = 6;
+  string Content = 7;
+  int32 Floor = 8;
+  string CreatedAt = 9;
+  int32 SubCommentsCount = 10;
+  repeated CommentInfo SubComments = 11;
+}
+
+// Subject
+message SubjectInfo {
+  string SubjectID = 1;
+  string PostID = 2;
+  int32 AllCommentCount = 3;
+  int32 RootCommentCount = 4;
+  int32 status = 5;
+}
+
+// CreateComment
+message CreateCommentRequest {
+  string WechatID = 1;
+  string SubjectID = 2;
+  string RootID = 3;
+  string ParentID = 4;
+  string DialogID = 5;
+  string Content = 6;
+}
+
+message CreateCommentResponse {
+  CommentInfo Comment = 1;
+}
+
+// DeleteComment
+message DeleteCommentRequest {
+  string CommentID = 1;
+  string OperatorID = 2;
+}
+
+message DeleteCommentResponse {
+}
+
+// GetComment
+message GetCommentRequest {
+  string CommentID = 1;
+}
+
+message GetCommentResponse {
+  CommentInfo Comment = 1;
+}
+
+// GetCommentsByPostID
+message GetCommentsByPostIDRequest {
+  string PostID = 1;
+  paginator.PaginationParams PaginationParams = 2;
+}
+
+message GetCommentsByPostIDResponse {
+  repeated CommentInfo Comment = 1;
+  paginator.Paginator Paginator = 2;
+}
+
+// CreateSubject
+message CreateSubjectRequest {
+  string PostID = 1;
+}
+
+message CreateSubjectResponse {
+  SubjectInfo Subject = 1;
+}
+
+// GetSubject
+message GetSubjectRequest {
+  string SubjectID = 1;
+}
+
+message GetSubjectResponse {
+  SubjectInfo Subject = 1;
+}
+
+service Comment {
+
+}
