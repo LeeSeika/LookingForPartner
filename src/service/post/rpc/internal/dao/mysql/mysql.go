@@ -20,7 +20,7 @@ type MysqlInterface struct {
 	db *gorm.DB
 }
 
-func (m *MysqlInterface) DeletePost(ctx context.Context, postID string, idempotencyKey int64) (*model.PostProject, error) {
+func (m *MysqlInterface) DeletePost(ctx context.Context, postID string) (*model.PostProject, error) {
 	tx := m.db.Begin()
 	if tx.Error != nil {
 		return nil, tx.Error
@@ -30,22 +30,10 @@ func (m *MysqlInterface) DeletePost(ctx context.Context, postID string, idempote
 
 	tx = tx.WithContext(ctx)
 
-	// check idempotency
-	idempotency := model.IdempotencyPost{
-		ID: idempotencyKey,
-	}
-	rs := tx.Create(idempotency)
-	if rs.Error != nil {
-		if errors.Is(rs.Error, gorm.ErrDuplicatedKey) {
-			return nil, errs.DBDuplicatedIdempotencyKey
-		}
-		return nil, rs.Error
-	}
-
 	// delete post
 	var post model.Post
 	post.PostID = postID
-	rs = tx.Clauses(clause.Returning{}).Delete(&post)
+	rs := tx.Clauses(clause.Returning{}).Delete(&post)
 	if rs.Error != nil {
 		return nil, rs.Error
 	}
@@ -95,6 +83,13 @@ func (m *MysqlInterface) CreatePost(ctx context.Context, post *model.Post, proj 
 	}
 	if err := tx.Create(proj).Error; err != nil {
 		return nil, err
+	}
+
+	post = &model.Post{
+		PostID: post.PostID,
+	}
+	proj = &model.Project{
+		ProjectID: proj.ProjectID,
 	}
 
 	if err := tx.First(post).Error; err != nil {

@@ -91,6 +91,21 @@ message GetSubjectResponse {
   SubjectInfo Subject = 1;
 }
 
-service Comment {
+// DeleteSubject
+message DeleteSubjectRequest {
+  string SubjectID = 1;
+}
 
+message DeleteSubjectResponse {
+}
+
+service Comment {
+  rpc CreateComment(CreateCommentRequest) returns(CreateCommentResponse);
+  rpc GetComment(GetCommentRequest) returns(GetCommentRequest);
+  rpc GetCommentsByPostID(GetCommentsByPostIDRequest) returns(GetCommentsByPostIDResponse);
+  rpc DeleteComment(DeleteCommentRequest) returns(DeleteCommentResponse);
+
+  rpc CreateSubject(CreateSubjectRequest) returns(CreateSubjectResponse);
+  rpc GetSubject(GetSubjectRequest) returns(GetSubjectResponse);
+  rpc DeleteSubject(DeleteSubjectRequest) returns(DeleteSubjectResponse);
 }

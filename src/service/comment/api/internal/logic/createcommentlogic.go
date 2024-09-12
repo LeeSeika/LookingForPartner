@@ -32,7 +32,16 @@ func (l *CreateCommentLogic) CreateComment(req *types.CreateCommentRequest) (res
 		return nil, errs.FormattedApiUnAuthorized()
 	}
 
-	createCommentReq := comment.CreateCommentRequest{}
+	createCommentReq := comment.CreateCommentRequest{
+		WechatID:  uid,
+		SubjectID: req.SubjectID,
+		RootID:    req.RootID,
+		ParentID:  req.ParentID,
+		DialogID:  req.DialogID,
+		Content:   req.Content,
+	}
+
+	createCommentResp, err := l.svcCtx.CommentRpc.CreateComment(l.ctx, &createCommentReq)
 
 	return
 }

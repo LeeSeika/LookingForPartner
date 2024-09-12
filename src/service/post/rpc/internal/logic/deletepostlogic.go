@@ -40,7 +40,7 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 	if po.AuthorID != in.WxUid {
 		return nil, errs.RpcPermissionDenied
 	}
-	_, err = l.svcCtx.PostInterface.DeletePost(l.ctx, in.PostID, in.IdempotencyKey)
+	_, err = l.svcCtx.PostInterface.DeletePost(l.ctx, in.PostID)
 	if err != nil {
 		if errors.Is(err, gorm.ErrDuplicatedKey) {
 			//

@@ -20,6 +20,8 @@ type (
 	CreateSubjectResponse       = comment.CreateSubjectResponse
 	DeleteCommentRequest        = comment.DeleteCommentRequest
 	DeleteCommentResponse       = comment.DeleteCommentResponse
+	DeleteSubjectRequest        = comment.DeleteSubjectRequest
+	DeleteSubjectResponse       = comment.DeleteSubjectResponse
 	GetCommentRequest           = comment.GetCommentRequest
 	GetCommentResponse          = comment.GetCommentResponse
 	GetCommentsByPostIDRequest  = comment.GetCommentsByPostIDRequest
@@ -29,6 +31,13 @@ type (
 	SubjectInfo                 = comment.SubjectInfo
 
 	Comment interface {
+		CreateComment(ctx context.Context, in *CreateCommentRequest, opts ...grpc.CallOption) (*CreateCommentResponse, error)
+		GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentRequest, error)
+		GetCommentsByPostID(ctx context.Context, in *GetCommentsByPostIDRequest, opts ...grpc.CallOption) (*GetCommentsByPostIDResponse, error)
+		DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error)
+		CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error)
+		GetSubject(ctx context.Context, in *GetSubjectRequest, opts ...grpc.CallOption) (*GetSubjectResponse, error)
+		DeleteSubject(ctx context.Context, in *DeleteSubjectRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error)
 	}
 
 	defaultComment struct {
@@ -40,4 +49,39 @@ func NewComment(cli zrpc.Client) Comment {
 	return &defaultComment{
 		cli: cli,
 	}
+}
+
+func (m *defaultComment) CreateComment(ctx context.Context, in *CreateCommentRequest, opts ...grpc.CallOption) (*CreateCommentResponse, error) {
+	client := comment.NewCommentClient(m.cli.Conn())
+	return client.CreateComment(ctx, in, opts...)
+}
+
+func (m *defaultComment) GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentRequest, error) {
+	client := comment.NewCommentClient(m.cli.Conn())
+	return client.GetComment(ctx, in, opts...)
+}
+
+func (m *defaultComment) GetCommentsByPostID(ctx context.Context, in *GetCommentsByPostIDRequest, opts ...grpc.CallOption) (*GetCommentsByPostIDResponse, error) {
+	client := comment.NewCommentClient(m.cli.Conn())
+	return client.GetCommentsByPostID(ctx, in, opts...)
+}
+
+func (m *defaultComment) DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error) {
+	client := comment.NewCommentClient(m.cli.Conn())
+	return client.DeleteComment(ctx, in, opts...)
+}
+
+func (m *defaultComment) CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error) {
+	client := comment.NewCommentClient(m.cli.Conn())
+	return client.CreateSubject(ctx, in, opts...)
+}
+
+func (m *defaultComment) GetSubject(ctx context.Context, in *GetSubjectRequest, opts ...grpc.CallOption) (*GetSubjectResponse, error) {
+	client := comment.NewCommentClient(m.cli.Conn())
+	return client.GetSubject(ctx, in, opts...)
+}
+
+func (m *defaultComment) DeleteSubject(ctx context.Context, in *DeleteSubjectRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error) {
+	client := comment.NewCommentClient(m.cli.Conn())
+	return client.DeleteSubject(ctx, in, opts...)
 }

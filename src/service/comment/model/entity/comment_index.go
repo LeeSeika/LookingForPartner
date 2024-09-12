@@ -1,6 +1,8 @@
-package model
+package entity
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type CommentIndex struct {
 	gorm.Model
@@ -13,6 +15,6 @@ type CommentIndex struct {
 	SubCount        int     `gorm:"default:0"`
 	LikeCount       int     `gorm:"default:0"`
 	Floor           int
-	InnerFloorCount int `gorm:"default:0"`
+	SubCommentCount int `gorm:"default:0"`
 	Status          int8
 }
