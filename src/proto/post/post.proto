@@ -45,7 +45,6 @@ message CreatePostResponse {
 message DeletePostRequest {
   string PostID = 1;
   string WxUid = 2;
-  int64 idempotencyKey = 3;
 }
 
 message DeletePostResponse {
