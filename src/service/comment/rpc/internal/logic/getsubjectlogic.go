@@ -2,6 +2,11 @@ package logic
 
 import (
 	"context"
+	"errors"
+	"gorm.io/gorm"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
+	"lookingforpartner/service/comment/rpc/internal/converter"
 
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/svc"
@@ -19,12 +24,20 @@ func NewGetSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetSub
 	return &GetSubjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-rpc"),
 	}
 }
 
 func (l *GetSubjectLogic) GetSubject(in *comment.GetSubjectRequest) (*comment.GetSubjectResponse, error) {
-	// todo: add your logic here and delete this line
 
-	return &comment.GetSubjectResponse{}, nil
+	subject, err := l.svcCtx.CommentInterface.GetSubject(l.ctx, in.SubjectID)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errs.RpcNotFound
+		}
+		l.Logger.Errorf("cannot get subject, err: %+v", err)
+		return nil, errs.RpcUnknown
+	}
+
+	return &comment.GetSubjectResponse{Subject: converter.SubjectDBToRPC(subject)}, nil
 }

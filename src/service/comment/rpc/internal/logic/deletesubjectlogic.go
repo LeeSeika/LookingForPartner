@@ -2,6 +2,9 @@ package logic
 
 import (
 	"context"
+	"fmt"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/svc"
@@ -19,12 +22,19 @@ func NewDeleteSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Del
 	return &DeleteSubjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-rpc"),
 	}
 }
 
 func (l *DeleteSubjectLogic) DeleteSubject(in *comment.DeleteSubjectRequest) (*comment.DeleteSubjectResponse, error) {
-	// todo: add your logic here and delete this line
+	deletedSubject, err := l.svcCtx.CommentInterface.DeleteSubject(l.ctx, in.SubjectID)
+	if err != nil {
+		l.Logger.Errorf("cannot delete subject, err: %+v", err)
+		return nil, errs.RpcUnknown
+	}
+
+	// todo: asynchronously delete all comments of this subject
+	fmt.Print(deletedSubject)
 
 	return &comment.DeleteSubjectResponse{}, nil
 }

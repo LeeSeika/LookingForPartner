@@ -2,6 +2,11 @@ package logic
 
 import (
 	"context"
+	"errors"
+	"gorm.io/gorm"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
+	"lookingforpartner/service/comment/rpc/internal/converter"
 
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/svc"
@@ -19,12 +24,20 @@ func NewGetCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetCom
 	return &GetCommentLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-rpc"),
 	}
 }
 
-func (l *GetCommentLogic) GetComment(in *comment.GetCommentRequest) (*comment.GetCommentRequest, error) {
-	// todo: add your logic here and delete this line
+func (l *GetCommentLogic) GetComment(in *comment.GetCommentRequest) (*comment.GetCommentResponse, error) {
 
-	return &comment.GetCommentRequest{}, nil
+	_commentIndexContent, err := l.svcCtx.CommentInterface.GetComment(l.ctx, in.CommentID)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errs.RpcUnknown
+		}
+		l.Logger.Errorf("cannot get comment, err: %+v", err)
+		return nil, errs.RpcUnknown
+	}
+
+	return &comment.GetCommentResponse{Comment: converter.SingleCommentDBToRPC(_commentIndexContent.CommentIndex, _commentIndexContent.CommentContent)}, nil
 }

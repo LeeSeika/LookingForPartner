@@ -32,7 +32,7 @@ type (
 
 	Comment interface {
 		CreateComment(ctx context.Context, in *CreateCommentRequest, opts ...grpc.CallOption) (*CreateCommentResponse, error)
-		GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentRequest, error)
+		GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error)
 		GetCommentsByPostID(ctx context.Context, in *GetCommentsByPostIDRequest, opts ...grpc.CallOption) (*GetCommentsByPostIDResponse, error)
 		DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error)
 		CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error)
@@ -56,7 +56,7 @@ func (m *defaultComment) CreateComment(ctx context.Context, in *CreateCommentReq
 	return client.CreateComment(ctx, in, opts...)
 }
 
-func (m *defaultComment) GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentRequest, error) {
+func (m *defaultComment) GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error) {
 	client := comment.NewCommentClient(m.cli.Conn())
 	return client.GetComment(ctx, in, opts...)
 }

@@ -2,6 +2,12 @@ package logic
 
 import (
 	"context"
+	"lookingforpartner/common/constant"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
+	"lookingforpartner/pkg/nanoid"
+	"lookingforpartner/service/comment/model/entity"
+	"lookingforpartner/service/comment/rpc/internal/converter"
 
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/svc"
@@ -19,12 +25,23 @@ func NewCreateSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cre
 	return &CreateSubjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-rpc"),
 	}
 }
 
 func (l *CreateSubjectLogic) CreateSubject(in *comment.CreateSubjectRequest) (*comment.CreateSubjectResponse, error) {
-	// todo: add your logic here and delete this line
+	subject := &entity.Subject{
+		SubjectID:        constant.NanoidPrefixSubject + nanoid.Gen(),
+		PostID:           in.PostID,
+		AllCommentCount:  0,
+		RootCommentCount: 0,
+	}
 
-	return &comment.CreateSubjectResponse{}, nil
+	subject, err := l.svcCtx.CommentInterface.CreateSubject(l.ctx, subject, in.IdempotencyKey)
+	if err != nil {
+		l.Logger.Errorf("cannot create subject, err: %+v", err)
+		return nil, errs.RpcUnknown
+	}
+
+	return &comment.CreateSubjectResponse{Subject: converter.SubjectDBToRPC(subject)}, nil
 }
