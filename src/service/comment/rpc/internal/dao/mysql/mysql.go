@@ -19,6 +19,18 @@ type MysqlInterface struct {
 	db *gorm.DB
 }
 
+func (m *MysqlInterface) GetSubject(ctx context.Context, subjectID string) (*entity.Subject, error) {
+	db := m.db.WithContext(ctx)
+
+	subject := entity.Subject{SubjectID: subjectID}
+
+	if err := db.Model(&entity.Subject{}).First(&subject).Error; err != nil {
+		return nil, err
+	}
+
+	return &subject, nil
+}
+
 func (m *MysqlInterface) GetTopSubCommentsByRootIDs(ctx context.Context, rootIDs []string, topCount int, order basedao.OrderOpt) ([]*vo.CommentIndexContent, error) {
 	db := m.db.WithContext(ctx)
 
@@ -64,7 +76,7 @@ func (m *MysqlInterface) GetTopSubCommentsByRootIDs(ctx context.Context, rootIDs
 	return subComments, nil
 }
 
-func (m *MysqlInterface) CreateComment(ctx context.Context, commentIndex *entity.CommentIndex, commentContent *entity.CommentContent, idempotencyKey int64) (*vo.CommentIndexContent, error) {
+func (m *MysqlInterface) CreateComment(ctx context.Context, commentIndex *entity.CommentIndex, commentContent *entity.CommentContent) (*vo.CommentIndexContent, error) {
 	tx := m.db.Begin()
 	if tx.Error != nil {
 		return nil, tx.Error
@@ -73,18 +85,6 @@ func (m *MysqlInterface) CreateComment(ctx context.Context, commentIndex *entity
 	defer tx.Rollback()
 
 	tx = tx.WithContext(ctx)
-
-	// check idempotency
-	idempotency := entity.IdempotencyComment{
-		ID: idempotencyKey,
-	}
-	rs := tx.Create(idempotency)
-	if rs.Error != nil {
-		if errors.Is(rs.Error, gorm.ErrDuplicatedKey) {
-			return nil, errs.DBDuplicatedIdempotencyKey
-		}
-		return nil, rs.Error
-	}
 
 	// assign a floor number for comment
 	if commentIndex.RootID != nil {
@@ -245,27 +245,7 @@ func (m *MysqlInterface) DeleteComment(ctx context.Context, commentID string) (*
 		return nil, rs.Error
 	}
 
-	if err := tx.Commit().Error; err != nil {
-		return nil, err
-	}
-
-	// update subject
-	// update all comment count of subject
-	query := tx.Where("subject_id = ?", commentIndex.SubjectID).
-		UpdateColumn("all_comment_count", gorm.Expr("all_comment_count - ?", 1))
-	if commentIndex.RootID == nil {
-		// if this is a root comment, also update root comment count of subject
-		query = query.UpdateColumn("root_comment_count", gorm.Expr("root_comment_count - ?", 1))
-	}
-	updateOpt := basedao.UpdateOpt{
-		Query: query,
-		Data:  entity.Subject{},
-	}
-	if err := basedao.Update(tx, updateOpt); err != nil {
-		return nil, err
-	}
-
-	// if this is a sub comment, update sub comments count of root comment
+	// if this is a sub comment, update sub comments count of its root comment
 	if commentIndex.RootID != nil {
 		query := tx.Where("comment_id = ?", commentIndex.RootID).
 			UpdateColumn("sub_comment_count", gorm.Expr("sub_comment_count - ?", 1))
@@ -278,18 +258,65 @@ func (m *MysqlInterface) DeleteComment(ctx context.Context, commentID string) (*
 		}
 	}
 
+	// update subject
+	query := tx.Where("subject_id = ?", commentIndex.SubjectID)
+	var allCommentCountGoingToBeDeleted int64 = 1
+	if commentIndex.RootID == nil {
+		// if this is a root comment, update root comment count of subject and all comment count
+		query = query.UpdateColumn("root_comment_count", gorm.Expr("root_comment_count - ?", 1))
+		// query sub comment count
+		tx.Model(&entity.CommentIndex{}).
+			Where("root_id = ?", commentIndex.CommentID).
+			Count(&allCommentCountGoingToBeDeleted)
+	}
+	// update all comment count of subject
+	query = query.
+		UpdateColumn("all_comment_count", gorm.Expr("all_comment_count - ?", allCommentCountGoingToBeDeleted))
+	updateOpt := basedao.UpdateOpt{
+		Query: query,
+		Data:  entity.Subject{},
+	}
+	if err := basedao.Update(tx, updateOpt); err != nil {
+		return nil, err
+	}
+
+	// commit
+	if err := tx.Commit().Error; err != nil {
+		return nil, err
+	}
+
 	commentIndexContent := vo.CommentIndexContent{CommentIndex: &commentIndex, CommentContent: &commentContent}
 	return &commentIndexContent, nil
 }
 
 func (m *MysqlInterface) CreateSubject(ctx context.Context, subject *entity.Subject, idempotencyKey int64) (*entity.Subject, error) {
-	db := m.db.WithContext(ctx)
+	tx := m.db.Begin()
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
 
-	if err := db.Model(&entity.Subject{}).Create(subject).Error; err != nil {
+	defer tx.Rollback()
+
+	tx = tx.WithContext(ctx)
+
+	// check idempotency
+	idempotency := entity.IdempotencyComment{
+		ID: idempotencyKey,
+	}
+	rs := tx.Create(idempotency)
+	if rs.Error != nil {
+		if errors.Is(rs.Error, gorm.ErrDuplicatedKey) {
+			return nil, errs.DBDuplicatedIdempotencyKey
+		}
+		return nil, rs.Error
+	}
+
+	// create subject
+	if err := tx.Model(&entity.Subject{}).Create(subject).Error; err != nil {
 		return nil, err
 	}
 
-	if err := db.Model(&entity.Subject{}).
+	if err := tx.Model(&entity.Subject{}).
 		Where("subject_id = ?", subject.SubjectID).
 		First(subject).Error; err != nil {
 		// return original subject, without error

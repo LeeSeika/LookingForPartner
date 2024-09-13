@@ -33,7 +33,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CommentClient interface {
 	CreateComment(ctx context.Context, in *CreateCommentRequest, opts ...grpc.CallOption) (*CreateCommentResponse, error)
-	GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentRequest, error)
+	GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error)
 	GetCommentsByPostID(ctx context.Context, in *GetCommentsByPostIDRequest, opts ...grpc.CallOption) (*GetCommentsByPostIDResponse, error)
 	DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error)
 	CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error)
@@ -59,9 +59,9 @@ func (c *commentClient) CreateComment(ctx context.Context, in *CreateCommentRequ
 	return out, nil
 }
 
-func (c *commentClient) GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentRequest, error) {
+func (c *commentClient) GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCommentRequest)
+	out := new(GetCommentResponse)
 	err := c.cc.Invoke(ctx, Comment_GetComment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *commentClient) DeleteSubject(ctx context.Context, in *DeleteSubjectRequ
 // for forward compatibility.
 type CommentServer interface {
 	CreateComment(context.Context, *CreateCommentRequest) (*CreateCommentResponse, error)
-	GetComment(context.Context, *GetCommentRequest) (*GetCommentRequest, error)
+	GetComment(context.Context, *GetCommentRequest) (*GetCommentResponse, error)
 	GetCommentsByPostID(context.Context, *GetCommentsByPostIDRequest) (*GetCommentsByPostIDResponse, error)
 	DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error)
 	CreateSubject(context.Context, *CreateSubjectRequest) (*CreateSubjectResponse, error)
@@ -143,7 +143,7 @@ type UnimplementedCommentServer struct{}
 func (UnimplementedCommentServer) CreateComment(context.Context, *CreateCommentRequest) (*CreateCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateComment not implemented")
 }
-func (UnimplementedCommentServer) GetComment(context.Context, *GetCommentRequest) (*GetCommentRequest, error) {
+func (UnimplementedCommentServer) GetComment(context.Context, *GetCommentRequest) (*GetCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetComment not implemented")
 }
 func (UnimplementedCommentServer) GetCommentsByPostID(context.Context, *GetCommentsByPostIDRequest) (*GetCommentsByPostIDResponse, error) {

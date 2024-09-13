@@ -76,6 +76,7 @@ message GetCommentsByPostIDResponse {
 // CreateSubject
 message CreateSubjectRequest {
   string PostID = 1;
+  int64 idempotencyKey = 2;
 }
 
 message CreateSubjectResponse {
@@ -101,7 +102,7 @@ message DeleteSubjectResponse {
 
 service Comment {
   rpc CreateComment(CreateCommentRequest) returns(CreateCommentResponse);
-  rpc GetComment(GetCommentRequest) returns(GetCommentRequest);
+  rpc GetComment(GetCommentRequest) returns(GetCommentResponse);
   rpc GetCommentsByPostID(GetCommentsByPostIDRequest) returns(GetCommentsByPostIDResponse);
   rpc DeleteComment(DeleteCommentRequest) returns(DeleteCommentResponse);
 

@@ -2,6 +2,10 @@ package logic
 
 import (
 	"context"
+	"errors"
+	"gorm.io/gorm"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/svc"
@@ -19,12 +23,37 @@ func NewDeleteCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Del
 	return &DeleteCommentLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-rpc"),
 	}
 }
 
 func (l *DeleteCommentLogic) DeleteComment(in *comment.DeleteCommentRequest) (*comment.DeleteCommentResponse, error) {
-	// todo: add your logic here and delete this line
+
+	_comment, err := l.svcCtx.CommentInterface.GetComment(l.ctx, in.CommentID)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errs.RpcNotFound
+		}
+		l.Logger.Errorf("cannot get comment when deleting comment, err: %+v", err)
+		return nil, errs.RpcUnknown
+	}
+	// todo: get post and check post authorid
+	// check permission
+	if _comment.AuthorID != in.OperatorID {
+		return nil, errs.RpcPermissionDenied
+	}
+
+	// delete comment
+	deletedComment, err := l.svcCtx.CommentInterface.DeleteComment(l.ctx, in.CommentID)
+	if err != nil {
+		l.Logger.Errorf("cannot delete comment, err: %+v", err)
+		return nil, errs.RpcUnknown
+	}
+
+	// todo: if this is a root comment, asynchronously delete all of its sub comments
+	if deletedComment.RootID == nil {
+
+	}
 
 	return &comment.DeleteCommentResponse{}, nil
 }

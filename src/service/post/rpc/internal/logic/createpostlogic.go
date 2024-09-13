@@ -26,7 +26,7 @@ func NewCreatePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 	return &CreatePostLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post"),
+		Logger: logger.NewLogger(ctx, "post-rpc"),
 	}
 }
 

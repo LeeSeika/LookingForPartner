@@ -12,4 +12,10 @@ const (
 
 	// NanoidPrefixProject is a nanoid prefix for each project
 	NanoidPrefixProject = "proj_"
+
+	// NanoidPrefixComment is a nanoid prefix for each comment
+	NanoidPrefixComment = "cmt_"
+
+	// NanoidPrefixSubject is a nanoid prefix for each subject
+	NanoidPrefixSubject = "subj_"
 )

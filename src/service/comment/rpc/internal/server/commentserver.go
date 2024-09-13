@@ -27,7 +27,7 @@ func (s *CommentServer) CreateComment(ctx context.Context, in *comment.CreateCom
 	return l.CreateComment(in)
 }
 
-func (s *CommentServer) GetComment(ctx context.Context, in *comment.GetCommentRequest) (*comment.GetCommentRequest, error) {
+func (s *CommentServer) GetComment(ctx context.Context, in *comment.GetCommentRequest) (*comment.GetCommentResponse, error) {
 	l := logic.NewGetCommentLogic(ctx, s.svcCtx)
 	return l.GetComment(in)
 }
