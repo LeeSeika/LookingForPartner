@@ -26,6 +26,7 @@ var (
 	ApiNotFound             = "not found"
 	ApiUnauthorized         = "unauthorized"
 	ApiGenTokenFailed       = "failed to generate token"
+	ApiPermissionDenied     = "permission denied"
 )
 
 func FormatApiError(statusCode int, errMsg string) error {

@@ -4,6 +4,7 @@ import (
 	"context"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/pb/comment"
+	"lookingforpartner/service/comment/api/internal/converter"
 
 	"lookingforpartner/service/comment/api/internal/svc"
 	"lookingforpartner/service/comment/api/internal/types"
@@ -42,6 +43,11 @@ func (l *CreateCommentLogic) CreateComment(req *types.CreateCommentRequest) (res
 	}
 
 	createCommentResp, err := l.svcCtx.CommentRpc.CreateComment(l.ctx, &createCommentReq)
+	if err != nil {
+		return nil, errs.FormattedApiInternal()
+	}
 
-	return
+	resp = &types.CreateCommentResponse{Comment: converter.CommentRpcToApi(createCommentResp.Comment)}
+
+	return resp, nil
 }

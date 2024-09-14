@@ -69,7 +69,7 @@ message GetCommentsByPostIDRequest {
 }
 
 message GetCommentsByPostIDResponse {
-  repeated CommentInfo Comment = 1;
+  repeated CommentInfo Comments = 1;
   paginator.Paginator Paginator = 2;
 }
 

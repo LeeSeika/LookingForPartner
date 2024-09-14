@@ -33,7 +33,7 @@ func (l *GetCommentLogic) GetComment(in *comment.GetCommentRequest) (*comment.Ge
 	_commentIndexContent, err := l.svcCtx.CommentInterface.GetComment(l.ctx, in.CommentID)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, errs.RpcUnknown
+			return nil, errs.RpcNotFound
 		}
 		l.Logger.Errorf("cannot get comment, err: %+v", err)
 		return nil, errs.RpcUnknown
