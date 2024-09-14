@@ -19,13 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Comment_CreateComment_FullMethodName       = "/commentclient.Comment/CreateComment"
-	Comment_GetComment_FullMethodName          = "/commentclient.Comment/GetComment"
-	Comment_GetCommentsByPostID_FullMethodName = "/commentclient.Comment/GetCommentsByPostID"
-	Comment_DeleteComment_FullMethodName       = "/commentclient.Comment/DeleteComment"
-	Comment_CreateSubject_FullMethodName       = "/commentclient.Comment/CreateSubject"
-	Comment_GetSubject_FullMethodName          = "/commentclient.Comment/GetSubject"
-	Comment_DeleteSubject_FullMethodName       = "/commentclient.Comment/DeleteSubject"
+	Comment_CreateComment_FullMethodName                = "/commentclient.Comment/CreateComment"
+	Comment_GetComment_FullMethodName                   = "/commentclient.Comment/GetComment"
+	Comment_GetCommentsByPostID_FullMethodName          = "/commentclient.Comment/GetCommentsByPostID"
+	Comment_DeleteComment_FullMethodName                = "/commentclient.Comment/DeleteComment"
+	Comment_DeleteSubCommentsByRooID_FullMethodName     = "/commentclient.Comment/DeleteSubCommentsByRooID"
+	Comment_DeleteAllCommentsBySubjectID_FullMethodName = "/commentclient.Comment/DeleteAllCommentsBySubjectID"
+	Comment_CreateSubject_FullMethodName                = "/commentclient.Comment/CreateSubject"
+	Comment_GetSubject_FullMethodName                   = "/commentclient.Comment/GetSubject"
+	Comment_DeleteSubject_FullMethodName                = "/commentclient.Comment/DeleteSubject"
 )
 
 // CommentClient is the client API for Comment service.
@@ -36,6 +38,8 @@ type CommentClient interface {
 	GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error)
 	GetCommentsByPostID(ctx context.Context, in *GetCommentsByPostIDRequest, opts ...grpc.CallOption) (*GetCommentsByPostIDResponse, error)
 	DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error)
+	DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error)
+	DeleteAllCommentsBySubjectID(ctx context.Context, in *DeleteAllCommentsBySubjectIDRequest, opts ...grpc.CallOption) (*DeleteAllCommentsBySubjectIDResponse, error)
 	CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error)
 	GetSubject(ctx context.Context, in *GetSubjectRequest, opts ...grpc.CallOption) (*GetSubjectResponse, error)
 	DeleteSubject(ctx context.Context, in *DeleteSubjectRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error)
@@ -89,6 +93,26 @@ func (c *commentClient) DeleteComment(ctx context.Context, in *DeleteCommentRequ
 	return out, nil
 }
 
+func (c *commentClient) DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteSubjectResponse)
+	err := c.cc.Invoke(ctx, Comment_DeleteSubCommentsByRooID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentClient) DeleteAllCommentsBySubjectID(ctx context.Context, in *DeleteAllCommentsBySubjectIDRequest, opts ...grpc.CallOption) (*DeleteAllCommentsBySubjectIDResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAllCommentsBySubjectIDResponse)
+	err := c.cc.Invoke(ctx, Comment_DeleteAllCommentsBySubjectID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *commentClient) CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateSubjectResponse)
@@ -127,6 +151,8 @@ type CommentServer interface {
 	GetComment(context.Context, *GetCommentRequest) (*GetCommentResponse, error)
 	GetCommentsByPostID(context.Context, *GetCommentsByPostIDRequest) (*GetCommentsByPostIDResponse, error)
 	DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error)
+	DeleteSubCommentsByRooID(context.Context, *DeleteSubCommentsByRootIDRequest) (*DeleteSubjectResponse, error)
+	DeleteAllCommentsBySubjectID(context.Context, *DeleteAllCommentsBySubjectIDRequest) (*DeleteAllCommentsBySubjectIDResponse, error)
 	CreateSubject(context.Context, *CreateSubjectRequest) (*CreateSubjectResponse, error)
 	GetSubject(context.Context, *GetSubjectRequest) (*GetSubjectResponse, error)
 	DeleteSubject(context.Context, *DeleteSubjectRequest) (*DeleteSubjectResponse, error)
@@ -151,6 +177,12 @@ func (UnimplementedCommentServer) GetCommentsByPostID(context.Context, *GetComme
 }
 func (UnimplementedCommentServer) DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteComment not implemented")
+}
+func (UnimplementedCommentServer) DeleteSubCommentsByRooID(context.Context, *DeleteSubCommentsByRootIDRequest) (*DeleteSubjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSubCommentsByRooID not implemented")
+}
+func (UnimplementedCommentServer) DeleteAllCommentsBySubjectID(context.Context, *DeleteAllCommentsBySubjectIDRequest) (*DeleteAllCommentsBySubjectIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAllCommentsBySubjectID not implemented")
 }
 func (UnimplementedCommentServer) CreateSubject(context.Context, *CreateSubjectRequest) (*CreateSubjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSubject not implemented")
@@ -254,6 +286,42 @@ func _Comment_DeleteComment_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Comment_DeleteSubCommentsByRooID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSubCommentsByRootIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentServer).DeleteSubCommentsByRooID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Comment_DeleteSubCommentsByRooID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentServer).DeleteSubCommentsByRooID(ctx, req.(*DeleteSubCommentsByRootIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Comment_DeleteAllCommentsBySubjectID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAllCommentsBySubjectIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentServer).DeleteAllCommentsBySubjectID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Comment_DeleteAllCommentsBySubjectID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentServer).DeleteAllCommentsBySubjectID(ctx, req.(*DeleteAllCommentsBySubjectIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Comment_CreateSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateSubjectRequest)
 	if err := dec(in); err != nil {
@@ -330,6 +398,14 @@ var Comment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteComment",
 			Handler:    _Comment_DeleteComment_Handler,
+		},
+		{
+			MethodName: "DeleteSubCommentsByRooID",
+			Handler:    _Comment_DeleteSubCommentsByRooID_Handler,
+		},
+		{
+			MethodName: "DeleteAllCommentsBySubjectID",
+			Handler:    _Comment_DeleteAllCommentsBySubjectID_Handler,
 		},
 		{
 			MethodName: "CreateSubject",

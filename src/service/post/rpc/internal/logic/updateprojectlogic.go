@@ -5,7 +5,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/logger"
-	"lookingforpartner/service/post/model"
+	"lookingforpartner/service/post/model/entity"
 	"lookingforpartner/service/post/rpc/internal/converter"
 
 	"lookingforpartner/pb/post"
@@ -27,7 +27,7 @@ func NewUpdateProjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 }
 
 func (l *UpdateProjectLogic) UpdateProject(in *post.UpdateProjectRequest) (*post.UpdateProjectResponse, error) {
-	proj := model.Project{
+	proj := entity.Project{
 		ProjectID:     in.ProjectID,
 		Name:          in.Name,
 		Introduction:  in.Introduction,

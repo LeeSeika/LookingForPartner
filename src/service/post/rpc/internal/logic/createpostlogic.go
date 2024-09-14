@@ -6,7 +6,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
-	"lookingforpartner/service/post/model"
+	"lookingforpartner/service/post/model/entity"
 
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
@@ -31,11 +31,11 @@ func NewCreatePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 }
 
 func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePostResponse, error) {
-	var po *model.Post
-	var proj *model.Project
+	var po *entity.Post
+	var proj *entity.Project
 	var err error
 
-	po = &model.Post{
+	po = &entity.Post{
 		PostID:   constant.NanoidPrefixPost + nanoid.Gen(),
 		AuthorID: in.WxUid,
 		Title:    in.Title,
@@ -43,7 +43,7 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 	}
 
 	if in.Project != nil {
-		proj = &model.Project{
+		proj = &entity.Project{
 			ProjectID:     constant.NanoidPrefixProject + nanoid.Gen(),
 			MaintainerID:  in.Project.Maintainer.WxUid,
 			Name:          in.Project.Name,

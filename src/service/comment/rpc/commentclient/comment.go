@@ -13,28 +13,34 @@ import (
 )
 
 type (
-	CommentInfo                 = comment.CommentInfo
-	CreateCommentRequest        = comment.CreateCommentRequest
-	CreateCommentResponse       = comment.CreateCommentResponse
-	CreateSubjectRequest        = comment.CreateSubjectRequest
-	CreateSubjectResponse       = comment.CreateSubjectResponse
-	DeleteCommentRequest        = comment.DeleteCommentRequest
-	DeleteCommentResponse       = comment.DeleteCommentResponse
-	DeleteSubjectRequest        = comment.DeleteSubjectRequest
-	DeleteSubjectResponse       = comment.DeleteSubjectResponse
-	GetCommentRequest           = comment.GetCommentRequest
-	GetCommentResponse          = comment.GetCommentResponse
-	GetCommentsByPostIDRequest  = comment.GetCommentsByPostIDRequest
-	GetCommentsByPostIDResponse = comment.GetCommentsByPostIDResponse
-	GetSubjectRequest           = comment.GetSubjectRequest
-	GetSubjectResponse          = comment.GetSubjectResponse
-	SubjectInfo                 = comment.SubjectInfo
+	CommentInfo                          = comment.CommentInfo
+	CreateCommentRequest                 = comment.CreateCommentRequest
+	CreateCommentResponse                = comment.CreateCommentResponse
+	CreateSubjectRequest                 = comment.CreateSubjectRequest
+	CreateSubjectResponse                = comment.CreateSubjectResponse
+	DeleteAllCommentsBySubjectIDRequest  = comment.DeleteAllCommentsBySubjectIDRequest
+	DeleteAllCommentsBySubjectIDResponse = comment.DeleteAllCommentsBySubjectIDResponse
+	DeleteCommentRequest                 = comment.DeleteCommentRequest
+	DeleteCommentResponse                = comment.DeleteCommentResponse
+	DeleteSubCommentsByRootIDRequest     = comment.DeleteSubCommentsByRootIDRequest
+	DeleteSubCommentsByRootIDResponse    = comment.DeleteSubCommentsByRootIDResponse
+	DeleteSubjectRequest                 = comment.DeleteSubjectRequest
+	DeleteSubjectResponse                = comment.DeleteSubjectResponse
+	GetCommentRequest                    = comment.GetCommentRequest
+	GetCommentResponse                   = comment.GetCommentResponse
+	GetCommentsByPostIDRequest           = comment.GetCommentsByPostIDRequest
+	GetCommentsByPostIDResponse          = comment.GetCommentsByPostIDResponse
+	GetSubjectRequest                    = comment.GetSubjectRequest
+	GetSubjectResponse                   = comment.GetSubjectResponse
+	SubjectInfo                          = comment.SubjectInfo
 
 	Comment interface {
 		CreateComment(ctx context.Context, in *CreateCommentRequest, opts ...grpc.CallOption) (*CreateCommentResponse, error)
 		GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error)
 		GetCommentsByPostID(ctx context.Context, in *GetCommentsByPostIDRequest, opts ...grpc.CallOption) (*GetCommentsByPostIDResponse, error)
 		DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error)
+		DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error)
+		DeleteAllCommentsBySubjectID(ctx context.Context, in *DeleteAllCommentsBySubjectIDRequest, opts ...grpc.CallOption) (*DeleteAllCommentsBySubjectIDResponse, error)
 		CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error)
 		GetSubject(ctx context.Context, in *GetSubjectRequest, opts ...grpc.CallOption) (*GetSubjectResponse, error)
 		DeleteSubject(ctx context.Context, in *DeleteSubjectRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error)
@@ -69,6 +75,16 @@ func (m *defaultComment) GetCommentsByPostID(ctx context.Context, in *GetComment
 func (m *defaultComment) DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error) {
 	client := comment.NewCommentClient(m.cli.Conn())
 	return client.DeleteComment(ctx, in, opts...)
+}
+
+func (m *defaultComment) DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error) {
+	client := comment.NewCommentClient(m.cli.Conn())
+	return client.DeleteSubCommentsByRooID(ctx, in, opts...)
+}
+
+func (m *defaultComment) DeleteAllCommentsBySubjectID(ctx context.Context, in *DeleteAllCommentsBySubjectIDRequest, opts ...grpc.CallOption) (*DeleteAllCommentsBySubjectIDResponse, error) {
+	client := comment.NewCommentClient(m.cli.Conn())
+	return client.DeleteAllCommentsBySubjectID(ctx, in, opts...)
 }
 
 func (m *defaultComment) CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error) {

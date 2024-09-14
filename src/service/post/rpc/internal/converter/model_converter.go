@@ -2,13 +2,13 @@ package converter
 
 import (
 	"lookingforpartner/pb/user"
-	"lookingforpartner/service/post/model"
+	"lookingforpartner/service/post/model/entity"
 	"time"
 
 	"lookingforpartner/pb/post"
 )
 
-func PostDBToRPC(po *model.Post) *post.PostInfo {
+func PostDBToRPC(po *entity.Post) *post.PostInfo {
 	author := user.UserInfo{WxUid: po.AuthorID}
 	poInfo := post.PostInfo{
 		PostID:    po.PostID,
@@ -21,7 +21,7 @@ func PostDBToRPC(po *model.Post) *post.PostInfo {
 	return &poInfo
 }
 
-func ProjectDBToRPC(proj *model.Project) *post.Project {
+func ProjectDBToRPC(proj *entity.Project) *post.Project {
 	maintainer := user.UserInfo{WxUid: proj.MaintainerID}
 	projRPC := post.Project{
 		ProjectID:     proj.ProjectID,

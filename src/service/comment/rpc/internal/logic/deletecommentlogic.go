@@ -4,8 +4,10 @@ import (
 	"context"
 	"errors"
 	"gorm.io/gorm"
+	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/logger"
+	"lookingforpartner/pb/post"
 
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/svc"
@@ -37,10 +39,30 @@ func (l *DeleteCommentLogic) DeleteComment(in *comment.DeleteCommentRequest) (*c
 		l.Logger.Errorf("cannot get comment when deleting comment, err: %+v", err)
 		return nil, errs.RpcUnknown
 	}
-	// todo: get post and check post authorid
+	subject, err := l.svcCtx.CommentInterface.GetSubject(l.ctx, _comment.SubjectID)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errs.RpcNotFound
+		}
+		l.Logger.Errorf("cannot get subject when deleting comment, err: %+v", err)
+		return nil, errs.RpcUnknown
+	}
+
 	// check permission
 	if _comment.AuthorID != in.OperatorID {
-		return nil, errs.RpcPermissionDenied
+		// get post and check post author id
+		getPostReq := post.GetPostRequest{PostID: subject.PostID}
+		getPostResp, err := l.svcCtx.PostRpc.GetPost(l.ctx, &getPostReq)
+		if err != nil {
+			l.Logger.Errorf("cannot get post when deleting comment, err: %+v", err)
+			return nil, err
+		}
+
+		postAuthorID := getPostResp.Post.Author.WxUid
+
+		if postAuthorID != in.OperatorID {
+			return nil, errs.RpcPermissionDenied
+		}
 	}
 
 	// delete comment
@@ -50,9 +72,12 @@ func (l *DeleteCommentLogic) DeleteComment(in *comment.DeleteCommentRequest) (*c
 		return nil, errs.RpcUnknown
 	}
 
-	// todo: if this is a root comment, asynchronously delete all of its sub comments
+	// if this is a root comment, asynchronously delete all of its sub comments
 	if deletedComment.RootID == nil {
-
+		err := l.svcCtx.KqDeleteCommentsByIDPusher.KPush(l.ctx, constant.MqMessageKeyDeleteSubCommentsByRootID, in.CommentID)
+		if err != nil {
+			// todo: add local queue
+		}
 	}
 
 	return &comment.DeleteCommentResponse{}, nil

@@ -1,4 +1,4 @@
-package model
+package entity
 
 import (
 	"gorm.io/gorm"
@@ -13,9 +13,4 @@ type Post struct {
 
 	// base fields
 	gorm.Model
-}
-
-type PostProject struct {
-	*Post
-	*Project
 }

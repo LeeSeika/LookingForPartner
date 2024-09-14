@@ -1,4 +1,4 @@
-Name: user.rpc
+Name: post.rpc
 ListenOn: 0.0.0.0:20002
 Etcd:
   Hosts:

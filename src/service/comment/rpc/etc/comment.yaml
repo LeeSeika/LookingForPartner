@@ -1,6 +1,37 @@
 Name: comment.rpc
-ListenOn: 0.0.0.0:8080
+ListenOn: 0.0.0.0:20003
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+  - etcd:2379
   Key: comment.rpc
+
+Mysql:
+  Database: looking_for_partner
+  Username: root
+  Password: "123456"
+  Host: mysql
+  Port: "3306"
+  MaxIdleConns: 10
+  maxOpenConns: 100
+  connMaxLifeTime: 3600
+
+PostRpc:
+  Etcd:
+    Hosts:
+      - etcd:2379
+    Key: post.rpc
+
+KqDeleteCommentsByIDConsumerConf:
+  Name: kqDeleteCommentsByIDConsumer1
+  Brokers:
+    - kafka:9092
+  Group: kqDeleteCommentsByIDConsumerGroup
+  Topic: delete-comments-by-id
+  Offset: first
+  Consumers: 8
+  Processors: 8
+
+KqDeleteCommentsByIDPusherConf:
+  Brokers:
+    - kafka:9092
+  Topic: delete--comments-by-id
