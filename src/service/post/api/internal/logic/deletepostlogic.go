@@ -40,7 +40,7 @@ func (l *DeletePostLogic) DeletePost(req *types.DeletePostRequest) (resp *types.
 		if errors.Is(err, errs.RpcNotFound) {
 			return nil, errs.FormattedApiNotFound()
 		} else if errors.Is(err, errs.RpcPermissionDenied) {
-			return nil, errs.FormatApiError(http.StatusForbidden, "no permission to delete")
+			return nil, errs.FormatApiError(http.StatusForbidden, errs.ApiPermissionDenied)
 		}
 		return nil, errs.FormattedApiInternal()
 	}
