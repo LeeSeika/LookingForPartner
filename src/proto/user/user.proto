@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package userclient;
+
+option go_package = "lookingforpartner/pb/user";
+
+// WxLogin
+message WxLoginRequest {
+  string Username = 1;
+  string WxUid = 2;
+}
+
+message WxLoginResponse {
+  UserInfo UserInfo = 1;
+}
+
+// UserInfo
+message UserInfo {
+  string WxUid = 1;
+  string School = 2;
+  int64 Grade = 3;
+  string Avatar = 4;
+  string Introduction = 5;
+  string Username = 6;
+  int64 PostCount = 7;
+}
+
+// SetUserInfo
+message SetUserInfoRequest {
+  string WxUid = 1;
+  string School = 2;
+  int64 Grade = 3;
+  string Introduction = 4;
+}
+
+message SetUserInfoResponse {
+  UserInfo UserInfo = 1;
+}
+
+// GetUserInfo
+message GetUserInfoRequest {
+  string WxUid = 1;
+}
+
+message GetUserInfoResponse {
+  UserInfo UserInfo = 1;
+}
+
+// UpdateUserPostCount
+message UpdateUserPostCountRequest {
+  int64 IdempotencyKey = 1;
+  string WxUid = 2;
+  int64 delta = 3;
+}
+
+message UpdateUserPostCountResponse {}
+
+service User {
+  rpc WxLogin(WxLoginRequest) returns(WxLoginResponse);
+  rpc SetUserInfo(SetUserInfoRequest) returns(SetUserInfoResponse);
+  rpc GetUserInfo(GetUserInfoRequest) returns(GetUserInfoResponse);
+  rpc UpdateUserPostCount(UpdateUserPostCountRequest) returns(UpdateUserPostCountResponse);
+}

@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package postclient;
+
+option go_package = "lookingforpartner/pb/post";
+
+import "paginator/paginator.proto";
+import "user/user.proto";
+import "comment/comment.proto";
+
+message Project {
+  string ProjectID = 1;
+  userclient.UserInfo Maintainer = 2;
+  string Name = 3;
+  string Introduction = 4;
+  string Role = 5;
+  string HeadCountInfo = 6;
+  string Progress = 7;
+}
+
+message PostInfo {
+  string PostID = 1;
+  string CreatedAt = 2;
+  string Title = 3;
+  Project   Project = 4;
+  string Content = 5;
+  userclient.UserInfo Author = 6;
+  commentclient.SubjectInfo Subject = 7;
+}
+
+// CreatePost
+message CreatePostRequest {
+  string Title = 1;
+  Project Project = 2;
+  string Content = 3;
+  string WxUid = 4;
+  int64 idempotencyKey = 5;
+}
+
+message CreatePostResponse {
+  PostInfo PostInfo = 1;
+}
+
+// DeletePost
+message DeletePostRequest {
+  string PostID = 1;
+  string WxUid = 2;
+}
+
+message DeletePostResponse {
+}
+
+// GetPost
+message GetPostRequest {
+  string PostID = 1;
+}
+
+message GetPostResponse {
+  PostInfo Post = 1;
+}
+
+// GetPosts
+message GetPostsRequest {
+  paginator.PaginationParams PaginationParams = 1;
+}
+
+message GetPostsResponse {
+  repeated PostInfo Posts = 1;
+  paginator.Paginator paginator = 2;
+}
+
+// GetPostsByAuthorID
+message GetPostsByAuthorIDRequest {
+  string AuthorID = 1;
+  paginator.PaginationParams PaginationParams = 2;
+}
+
+message GetPostsByAuthorIDResponse {
+  repeated PostInfo Posts = 1;
+  paginator.Paginator paginator = 2;
+}
+
+// UpdateProject
+message UpdateProjectRequest {
+  string ProjectID = 1;
+  string Name = 2;
+  string Role = 3;
+  string introduction = 4;
+  string Progress = 5;
+  string HeadCountInfo = 6;
+}
+
+message UpdateProjectResponse {
+  Project Project = 1;
+}
+
+service Post {
+  rpc CreatePost(CreatePostRequest) returns(CreatePostResponse);
+  rpc DeletePost(DeletePostRequest) returns(DeletePostResponse);
+  rpc GetPost(GetPostRequest) returns(GetPostResponse);
+  rpc GetPosts(GetPostsRequest) returns(GetPostsResponse);
+  rpc GetPostsByAuthorID(GetPostsByAuthorIDRequest) returns(GetPostsByAuthorIDResponse);
+  rpc UpdateProject(UpdateProjectRequest) returns(UpdateProjectResponse);
+}

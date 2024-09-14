@@ -1,0 +1,84 @@
+syntax = "v1"
+
+info (
+	title:   "user"
+	desc:    ""
+	author:  "LeeSeika"
+	email:   "LeeSeika@outlook.com"
+	version: "1.0"
+)
+
+import "object.api"
+
+// WxLogin
+type WxLoginRequest {
+	Code     string `json:"code"`
+	NickName string `json:"nickname"`
+}
+
+type WxLoginResponse {
+	Token        string   `json:"token"`
+	RefreshToken string   `json:"refresh_token"`
+	UserInfo     UserInfo `json:"user_info"`
+}
+
+// RefreshToken
+type RefreshTokenRequest {}
+
+type RefreshTokenResponse {
+	Token        string `json:"token"`
+	RefreshToken string `json:"refresh_token"`
+}
+
+// SetUserInfo
+type SetUserInfoRequest {
+	WxUid        string `path:"wxUid"`
+	School       string `json:"school"`
+	Grade        int64  `json:"grade"`
+	Introduction string `json:"introduction"`
+}
+
+type SetUserInfoResponse {
+	Avatar       string `json:"avatar"`
+	School       string `json:"school"`
+	Grade        int64  `json:"grade"`
+	Introduction string `json:"introduction"`
+	PostCount    int64  `json:"post_count"`
+}
+
+// GetUserInfo
+type GetUserInfoRequest {
+	WxUid string `path:"wxUid"`
+}
+
+type GetUserInfoResponse {
+	Avatar       string `json:"avatar"`
+	School       string `json:"school"`
+	Grade        int64  `json:"grade"`
+	Introduction string `json:"introduction"`
+	PostCount    int64  `json:"post_count"`
+}
+
+@server (
+	prefix: /api/v1
+)
+service User {
+	@handler WxLogin
+	post /users/wxlogin (WxLoginRequest) returns (WxLoginResponse)
+
+	@handler GetUserInfo
+	get /users/:wxUid (GetUserInfoRequest) returns (GetUserInfoResponse)
+}
+
+@server (
+	jwt:    Auth
+	prefix: /api/v1
+)
+service User {
+	@handler RefreshToken
+	get /users/token (RefreshTokenRequest) returns (RefreshTokenResponse)
+
+	@handler SetUserInfo
+	put /users/wxUid (SetUserInfoRequest) returns (SetUserInfoResponse)
+}
+

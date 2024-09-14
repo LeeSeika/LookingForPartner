@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package paginator;
+
+option go_package = "lookingforpartner/pb/paginator";
+
+message Paginator {
+  int64 total_record = 1;
+  int64 total_page = 2;
+  int64 offset = 3;
+  int64 limit = 4;
+  int64 curr_page = 5;
+  int64 prev_page = 6;
+  int64 next_page = 7;
+}
+
+message PaginationParams {
+  int64 Page = 1;
+  int64 Size = 2;
+  string OrderBy = 3;
+}

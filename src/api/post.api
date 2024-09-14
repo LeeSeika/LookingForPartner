@@ -1,0 +1,107 @@
+syntax = "v1"
+
+info (
+	title:   "post"
+	desc:    ""
+	author:  "LeeSeika"
+	email:   "LeeSeika@outlook.com"
+	version: "1.0"
+)
+
+import "object.api"
+
+// CreatePost
+type CreatePostRequest {
+	Title   string  `json:"title"`
+	Project Project `json:"project"`
+	Content string  `json:"content"`
+}
+
+type CreatePostResponse {
+	Post Post `json:"post"`
+}
+
+// DeletePost
+type DeletePostRequest {
+	PostID string `path:"postID"`
+}
+
+type DeletePostResponse {}
+
+// GetPost
+type GetPostRequest {
+	PostID string `path:"postID"`
+}
+
+type GetPostResponse {
+	Post Post `json:"post"`
+}
+
+// GetPosts
+type GetPostsRequest {
+	PaginationParams
+}
+
+type GetPostsResponse {
+	Posts     []Post    `json:"posts"`
+	Paginator Paginator `json:"paginator"`
+}
+
+// GetPostsByAuthorID
+type GetPostByAuthorIDRequest {
+	AuthorID string `path:"authorID"`
+	PaginationParams
+}
+
+type GetPostsByAuthorIDResponse {
+	Posts     []Post    `json:"posts"`
+	Paginator Paginator `json:"paginator"`
+}
+
+// UpdateProject
+type UpdatedProject {
+	Name          string `json:"name"`
+	Introduction  string `json:"introduction"`
+	Role          string `json:"role"`
+	HeadCountInfo string `json:"head_count_info"`
+	Progress      string `json:"progress"`
+}
+
+type UpdateProjectRequest {
+	ProjectID      string         `path:"projectID"`
+	UpdatedProject UpdatedProject `json:"updated_project"`
+}
+
+type UpdateProjectResponse {
+	Project Project `json:"project"`
+}
+
+@server (
+	prefix: /api/v1
+)
+service Post {
+	@handler GetPost
+	get /posts/:postID (GetPostRequest) returns (GetPostResponse)
+
+	@handler GetPosts
+	get /posts/page/:page/size/:size/order/:order (GetPostsRequest) returns (GetPostsResponse)
+
+	@handler GetPostsByAuthorID
+	get /posts/author/:authorID/page/:page/size/:size/order/:order (GetPostByAuthorIDRequest) returns (GetPostsByAuthorIDResponse)
+}
+
+@server (
+	prefix: /api/v1
+	jwt:    Auth
+)
+service Post {
+	@handler CreatePost
+	post /posts (CreatePostRequest) returns (CreatePostResponse)
+
+	@handler DeletePost
+	delete /posts/:postID (DeletePostRequest) returns (DeletePostResponse)
+
+	@handler UpdateProject
+	put /posts/project/:projectID (UpdateProjectRequest) returns (UpdateProjectResponse)
+}
+
