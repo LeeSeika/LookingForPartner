@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/logger"
 
@@ -33,8 +33,11 @@ func (l *DeleteSubjectLogic) DeleteSubject(in *comment.DeleteSubjectRequest) (*c
 		return nil, errs.RpcUnknown
 	}
 
-	// todo: asynchronously delete all comments of this subject
-	fmt.Print(deletedSubject)
+	// asynchronously delete all comments of this subject
+	err = l.svcCtx.KqDeleteCommentsByIDPusher.KPush(l.ctx, constant.MqMessageKeyDeleteAllCommentsBySubjectID, deletedSubject.SubjectID)
+	if err != nil {
+		// todo: add local queue
+	}
 
 	return &comment.DeleteSubjectResponse{}, nil
 }

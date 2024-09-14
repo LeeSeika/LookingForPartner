@@ -73,6 +73,22 @@ message GetCommentsByPostIDResponse {
   paginator.Paginator Paginator = 2;
 }
 
+// DeleteSubCommentsByRootID
+message DeleteSubCommentsByRootIDRequest {
+  string RootID = 1;
+}
+
+message DeleteSubCommentsByRootIDResponse {
+}
+
+// DeleteAllCommentsBySubjectID
+message DeleteAllCommentsBySubjectIDRequest {
+  string SubjectID = 1;
+}
+
+message DeleteAllCommentsBySubjectIDResponse {
+}
+
 // CreateSubject
 message CreateSubjectRequest {
   string PostID = 1;
@@ -105,6 +121,8 @@ service Comment {
   rpc GetComment(GetCommentRequest) returns(GetCommentResponse);
   rpc GetCommentsByPostID(GetCommentsByPostIDRequest) returns(GetCommentsByPostIDResponse);
   rpc DeleteComment(DeleteCommentRequest) returns(DeleteCommentResponse);
+  rpc DeleteSubCommentsByRooID(DeleteSubCommentsByRootIDRequest) returns(DeleteSubjectResponse);
+  rpc DeleteAllCommentsBySubjectID(DeleteAllCommentsBySubjectIDRequest) returns(DeleteAllCommentsBySubjectIDResponse);
 
   rpc CreateSubject(CreateSubjectRequest) returns(CreateSubjectResponse);
   rpc GetSubject(GetSubjectRequest) returns(GetSubjectResponse);

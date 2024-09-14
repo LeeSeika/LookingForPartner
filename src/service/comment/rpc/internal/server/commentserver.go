@@ -42,6 +42,16 @@ func (s *CommentServer) DeleteComment(ctx context.Context, in *comment.DeleteCom
 	return l.DeleteComment(in)
 }
 
+func (s *CommentServer) DeleteSubCommentsByRooID(ctx context.Context, in *comment.DeleteSubCommentsByRootIDRequest) (*comment.DeleteSubjectResponse, error) {
+	l := logic.NewDeleteSubCommentsByRooIDLogic(ctx, s.svcCtx)
+	return l.DeleteSubCommentsByRooID(in)
+}
+
+func (s *CommentServer) DeleteAllCommentsBySubjectID(ctx context.Context, in *comment.DeleteAllCommentsBySubjectIDRequest) (*comment.DeleteAllCommentsBySubjectIDResponse, error) {
+	l := logic.NewDeleteAllCommentsBySubjectIDLogic(ctx, s.svcCtx)
+	return l.DeleteAllCommentsBySubjectID(in)
+}
+
 func (s *CommentServer) CreateSubject(ctx context.Context, in *comment.CreateSubjectRequest) (*comment.CreateSubjectResponse, error) {
 	l := logic.NewCreateSubjectLogic(ctx, s.svcCtx)
 	return l.CreateSubject(in)
