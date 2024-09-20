@@ -5,7 +5,7 @@ import (
 	"errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/logger"
-	"lookingforpartner/service/user/model"
+	"lookingforpartner/service/user/model/entity"
 
 	"lookingforpartner/common/errs"
 	"lookingforpartner/pb/user"
@@ -30,7 +30,7 @@ func NewSetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SetUs
 }
 
 func (l *SetUserInfoLogic) SetUserInfo(in *user.SetUserInfoRequest) (*user.SetUserInfoResponse, error) {
-	u := &model.User{
+	u := &entity.User{
 		WxUid:        in.WxUid,
 		School:       in.School,
 		Grade:        in.Grade,

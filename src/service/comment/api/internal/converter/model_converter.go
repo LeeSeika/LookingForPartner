@@ -5,29 +5,29 @@ import (
 	"lookingforpartner/service/comment/api/internal/types"
 )
 
-func CommentApiToRpc(commentInfo *types.Comment) comment.CommentInfo {
+func CommentApiToRpc(commentApi *types.Comment) comment.CommentInfo {
 	return comment.CommentInfo{
-		CommentID:        commentInfo.CommentID,
-		SubjectID:        commentInfo.SubjectID,
-		RootID:           commentInfo.RootID,
-		ParentID:         commentInfo.ParentID,
-		DialogID:         commentInfo.DialogID,
-		AuthorID:         commentInfo.AuthorID,
-		Content:          commentInfo.Content,
-		Floor:            int32(commentInfo.Floor),
-		CreatedAt:        commentInfo.CreatedAt,
-		SubCommentsCount: int32(commentInfo.SubCommentCount),
+		CommentID:        commentApi.CommentID,
+		SubjectID:        commentApi.SubjectID,
+		RootID:           commentApi.RootID,
+		ParentID:         commentApi.ParentID,
+		DialogID:         commentApi.DialogID,
+		AuthorID:         commentApi.AuthorID,
+		Content:          commentApi.Content,
+		Floor:            int32(commentApi.Floor),
+		CreatedAt:        commentApi.CreatedAt,
+		SubCommentsCount: int32(commentApi.SubCommentCount),
 	}
 }
 
-func CommentRpcToApi(commentInfo *comment.CommentInfo) types.Comment {
+func CommentRpcToApi(commentRpc *comment.CommentInfo) types.Comment {
 
-	commentApi := commentRpcToApi(commentInfo)
+	commentApi := commentRpcToApi(commentRpc)
 
-	subCommentApis := make([]*types.Comment, 0, commentInfo.SubCommentsCount)
+	subCommentApis := make([]*types.Comment, 0, commentRpc.SubCommentsCount)
 
-	for i := 0; i < int(commentInfo.SubCommentsCount); i++ {
-		subCommentApi := commentRpcToApi(commentInfo.SubComments[i])
+	for i := 0; i < int(commentRpc.SubCommentsCount); i++ {
+		subCommentApi := commentRpcToApi(commentRpc.SubComments[i])
 		subCommentApis = append(subCommentApis, &subCommentApi)
 	}
 

@@ -78,5 +78,5 @@ func (l *GetCommentsByPostIDLogic) GetCommentsByPostID(in *comment.GetCommentsBy
 		rootCommentInfos = append(rootCommentInfos, rootCommentInfo)
 	}
 
-	return &comment.GetCommentsByPostIDResponse{Comment: rootCommentInfos, Paginator: paginator.ToRPC()}, nil
+	return &comment.GetCommentsByPostIDResponse{Comments: rootCommentInfos, Paginator: paginator.ToRPC()}, nil
 }

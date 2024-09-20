@@ -213,7 +213,9 @@ func NewMysqlInterface(database, username, password, host, port string, maxIdleC
 }
 
 func (m *MysqlInterface) autoMigrate() {
-	m.db.AutoMigrate(&entity.Project{})
-	m.db.AutoMigrate(&entity.Post{})
-	m.db.AutoMigrate(&entity.IdempotencyPost{})
+	m.db.AutoMigrate(
+		&entity.Project{},
+		&entity.Post{},
+		&entity.IdempotencyPost{},
+	)
 }

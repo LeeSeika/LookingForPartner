@@ -6,39 +6,39 @@ import (
 	"time"
 )
 
-func SubjectDBToRPC(subject *entity.Subject) *comment.SubjectInfo {
+func SubjectDBToRPC(subjectDB *entity.Subject) *comment.SubjectInfo {
 	return &comment.SubjectInfo{
-		SubjectID:        subject.SubjectID,
-		PostID:           subject.PostID,
-		AllCommentCount:  int32(subject.AllCommentCount),
-		RootCommentCount: int32(subject.RootCommentCount),
-		Status:           int32(subject.Status),
+		SubjectID:        subjectDB.SubjectID,
+		PostID:           subjectDB.PostID,
+		AllCommentCount:  int32(subjectDB.AllCommentCount),
+		RootCommentCount: int32(subjectDB.RootCommentCount),
+		Status:           int32(subjectDB.Status),
 	}
 }
 
-func SingleCommentDBToRPC(commentIndex *entity.CommentIndex, commentContent *entity.CommentContent) *comment.CommentInfo {
+func SingleCommentDBToRPC(commentIndexRpc *entity.CommentIndex, commentContentRpc *entity.CommentContent) *comment.CommentInfo {
 	var rootID, parentID, dialogID string
-	if commentIndex.RootID == nil {
+	if commentIndexRpc.RootID == nil {
 		rootID = ""
 	}
-	if commentIndex.ParentID == nil {
+	if commentIndexRpc.ParentID == nil {
 		parentID = ""
 	}
-	if commentIndex.DialogID == nil {
+	if commentIndexRpc.DialogID == nil {
 		dialogID = ""
 	}
 
 	return &comment.CommentInfo{
-		CommentID:        commentIndex.CommentID,
-		SubjectID:        commentIndex.SubjectID,
+		CommentID:        commentIndexRpc.CommentID,
+		SubjectID:        commentIndexRpc.SubjectID,
 		RootID:           rootID,
 		ParentID:         parentID,
 		DialogID:         dialogID,
-		AuthorID:         commentIndex.AuthorID,
-		Content:          commentContent.Content,
-		Floor:            int32(commentIndex.Floor),
-		CreatedAt:        commentIndex.CreatedAt.Format(time.DateTime),
-		SubCommentsCount: int32(commentIndex.SubCommentCount),
+		AuthorID:         commentIndexRpc.AuthorID,
+		Content:          commentContentRpc.Content,
+		Floor:            int32(commentIndexRpc.Floor),
+		CreatedAt:        commentIndexRpc.CreatedAt.Format(time.DateTime),
+		SubCommentsCount: int32(commentIndexRpc.SubCommentCount),
 		SubComments:      nil,
 	}
 }

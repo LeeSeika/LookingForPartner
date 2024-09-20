@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/logger"
-	"lookingforpartner/service/user/model"
+	"lookingforpartner/service/user/model/entity"
 
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
@@ -28,7 +28,7 @@ func NewWxLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxLoginLo
 }
 
 func (l *WxLoginLogic) WxLogin(in *user.WxLoginRequest) (*user.WxLoginResponse, error) {
-	u := &model.User{
+	u := &entity.User{
 		WxUid:    constant.NanoidPrefixUser + in.WxUid,
 		Username: in.Username,
 	}

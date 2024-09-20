@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/api/internal/converter"
 	"lookingforpartner/service/comment/api/internal/svc"
@@ -20,7 +21,7 @@ type GetCommentLogic struct {
 
 func NewGetCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetCommentLogic {
 	return &GetCommentLogic{
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-api"),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
