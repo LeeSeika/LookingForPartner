@@ -8,30 +8,30 @@ import (
 	"lookingforpartner/pb/post"
 )
 
-func PostDBToRPC(po *entity.Post) *post.PostInfo {
-	author := user.UserInfo{WxUid: po.AuthorID}
-	poInfo := post.PostInfo{
-		PostID:    po.PostID,
-		CreatedAt: po.CreatedAt.Format(time.DateTime),
-		Title:     po.Title,
-		Content:   po.Content,
+func PostDBToRPC(postDB *entity.Post) *post.PostInfo {
+	author := user.UserInfo{WxUid: postDB.AuthorID}
+	poRpc := post.PostInfo{
+		PostID:    postDB.PostID,
+		CreatedAt: postDB.CreatedAt.Format(time.DateTime),
+		Title:     postDB.Title,
+		Content:   postDB.Content,
 		Author:    &author,
 	}
 
-	return &poInfo
+	return &poRpc
 }
 
-func ProjectDBToRPC(proj *entity.Project) *post.Project {
-	maintainer := user.UserInfo{WxUid: proj.MaintainerID}
-	projRPC := post.Project{
-		ProjectID:     proj.ProjectID,
-		Name:          proj.Name,
-		Introduction:  proj.Introduction,
-		Role:          proj.Role,
-		HeadCountInfo: proj.HeadCountInfo,
-		Progress:      proj.Progress,
+func ProjectDBToRPC(projectDB *entity.Project) *post.Project {
+	maintainer := user.UserInfo{WxUid: projectDB.MaintainerID}
+	projRpc := post.Project{
+		ProjectID:     projectDB.ProjectID,
+		Name:          projectDB.Name,
+		Introduction:  projectDB.Introduction,
+		Role:          projectDB.Role,
+		HeadCountInfo: projectDB.HeadCountInfo,
+		Progress:      projectDB.Progress,
 		Maintainer:    &maintainer,
 	}
 
-	return &projRPC
+	return &projRpc
 }

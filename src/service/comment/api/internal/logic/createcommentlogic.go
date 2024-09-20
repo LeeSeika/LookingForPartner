@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/api/internal/converter"
 
@@ -20,7 +21,7 @@ type CreateCommentLogic struct {
 
 func NewCreateCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateCommentLogic {
 	return &CreateCommentLogic{
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-api"),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}

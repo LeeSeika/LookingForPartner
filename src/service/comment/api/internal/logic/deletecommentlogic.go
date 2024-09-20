@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/comment"
 	"net/http"
 
@@ -21,7 +22,7 @@ type DeleteCommentLogic struct {
 
 func NewDeleteCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteCommentLogic {
 	return &DeleteCommentLogic{
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-api"),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
