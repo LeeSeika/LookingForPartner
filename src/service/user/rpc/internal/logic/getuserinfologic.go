@@ -22,7 +22,7 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 	return &GetUserInfoLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user"),
+		Logger: logger.NewLogger(ctx, "user-rpc"),
 	}
 }
 
