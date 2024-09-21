@@ -8,6 +8,7 @@ import (
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/post"
+	"lookingforpartner/service/comment/model/dto"
 
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/svc"
@@ -76,7 +77,18 @@ func (l *DeleteCommentLogic) DeleteComment(in *comment.DeleteCommentRequest) (*c
 	if deletedComment.RootID == nil {
 		err := l.svcCtx.KqDeleteCommentsByIDPusher.KPush(l.ctx, constant.MqMessageKeyDeleteSubCommentsByRootID, in.CommentID)
 		if err != nil {
-			// todo: add local queue
+			topic := l.svcCtx.Config.KqDeleteCommentsByIDPusherConf.Topic
+			l.Logger.
+				WithFields(logx.Field("topic", topic)).
+				WithFields(logx.Field("key", constant.MqMessageKeyDeleteSubCommentsByRootID)).
+				Errorf("cannot push a message to mq when deleting comment, err: %+V", err)
+
+			msg := dto.DeleteCommentMessage{
+				Topic: topic,
+				Key:   constant.MqMessageKeyDeleteSubCommentsByRootID,
+				Val:   in.CommentID,
+			}
+			l.svcCtx.LocalQueue.Push(msg)
 		}
 	}
 

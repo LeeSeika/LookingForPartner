@@ -22,7 +22,7 @@ func NewUpdateProjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 	return &UpdateProjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post"),
+		Logger: logger.NewLogger(ctx, "post-rpc"),
 	}
 }
 

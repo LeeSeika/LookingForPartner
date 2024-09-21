@@ -23,7 +23,7 @@ func NewGetPostsByAuthorIDLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	return &GetPostsByAuthorIDLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post"),
+		Logger: logger.NewLogger(ctx, "post-rpc"),
 	}
 }
 
