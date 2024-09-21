@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/rpc/internal/svc"
 
@@ -20,7 +21,7 @@ func NewUpdateUserPostCountLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	return &UpdateUserPostCountLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "user-rpc"),
 	}
 }
 

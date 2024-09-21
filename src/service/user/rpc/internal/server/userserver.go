@@ -37,6 +37,11 @@ func (s *UserServer) GetUserInfo(ctx context.Context, in *user.GetUserInfoReques
 	return l.GetUserInfo(in)
 }
 
+func (s *UserServer) GetUserInfoByIDs(ctx context.Context, in *user.GetUserInfoByIDsRequest) (*user.GetUserInfoByIDsResponse, error) {
+	l := logic.NewGetUserInfoByIDsLogic(ctx, s.svcCtx)
+	return l.GetUserInfoByIDs(in)
+}
+
 func (s *UserServer) UpdateUserPostCount(ctx context.Context, in *user.UpdateUserPostCountRequest) (*user.UpdateUserPostCountResponse, error) {
 	l := logic.NewUpdateUserPostCountLogic(ctx, s.svcCtx)
 	return l.UpdateUserPostCount(in)

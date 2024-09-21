@@ -18,6 +18,20 @@ type MysqlInterface struct {
 	db *gorm.DB
 }
 
+func (m *MysqlInterface) GetUsersByIDs(ctx context.Context, wxUids []string) ([]*entity.User, error) {
+	db := m.db.WithContext(ctx)
+
+	var users []*entity.User
+
+	if err := db.Model(&entity.User{}).
+		Where("wx_uid IN ?", wxUids).
+		Find(&users).Error; err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
 func (m *MysqlInterface) UpdatePostCount(ctx context.Context, wxUid string, delta int, idempotencyKey int64) error {
 	tx := m.db.Begin()
 	if tx.Error != nil {

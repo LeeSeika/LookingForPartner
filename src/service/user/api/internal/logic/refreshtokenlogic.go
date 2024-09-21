@@ -22,7 +22,7 @@ func NewRefreshTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Refr
 	return &RefreshTokenLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user"),
+		Logger: logger.NewLogger(ctx, "user-api"),
 	}
 }
 
