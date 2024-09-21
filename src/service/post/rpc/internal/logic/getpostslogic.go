@@ -23,7 +23,7 @@ func NewGetPostsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPosts
 	return &GetPostsLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post"),
+		Logger: logger.NewLogger(ctx, "post-rpc"),
 	}
 }
 

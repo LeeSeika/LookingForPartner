@@ -21,6 +21,12 @@ UserRpc:
       - etcd:2379
     Key: user.rpc
 
+CommentRpc:
+  Etcd:
+    Hosts:
+      - etcd:2379
+    Key: comment.rpc
+
 KqUpdateUserPostCountPusherConf:
   Brokers:
     - kafka:9092
