@@ -21,6 +21,16 @@ type MysqlInterface struct {
 	db *gorm.DB
 }
 
+func (m *MysqlInterface) UpdatePost(ctx context.Context, updatedPost *entity.Post) (*entity.Post, error) {
+	db := m.db.WithContext(ctx)
+
+	if err := db.Save(updatedPost).Error; err != nil {
+		return nil, err
+	}
+
+	return updatedPost, nil
+}
+
 func (m *MysqlInterface) DeletePost(ctx context.Context, postID string) (*vo.PostProject, error) {
 	tx := m.db.Begin()
 	if tx.Error != nil {

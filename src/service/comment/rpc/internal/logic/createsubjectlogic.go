@@ -5,6 +5,7 @@ import (
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/logger"
+	"lookingforpartner/pb/post"
 	"lookingforpartner/pkg/nanoid"
 	"lookingforpartner/service/comment/model/entity"
 	"lookingforpartner/service/comment/rpc/internal/converter"
@@ -30,8 +31,9 @@ func NewCreateSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cre
 }
 
 func (l *CreateSubjectLogic) CreateSubject(in *comment.CreateSubjectRequest) (*comment.CreateSubjectResponse, error) {
+	subjectID := constant.NanoidPrefixSubject + nanoid.Gen()
 	subject := &entity.Subject{
-		SubjectID:        constant.NanoidPrefixSubject + nanoid.Gen(),
+		SubjectID:        subjectID,
 		PostID:           in.PostID,
 		AllCommentCount:  0,
 		RootCommentCount: 0,
@@ -41,6 +43,17 @@ func (l *CreateSubjectLogic) CreateSubject(in *comment.CreateSubjectRequest) (*c
 	if err != nil {
 		l.Logger.Errorf("cannot create subject, err: %+v", err)
 		return nil, errs.RpcUnknown
+	}
+
+	// fill comment subject id
+	fillSubjectReq := post.FillSubjectRequest{
+		PostID:    in.PostID,
+		SubjectID: subjectID,
+	}
+	_, err = l.svcCtx.PostRpc.FillSubject(l.ctx, &fillSubjectReq)
+	if err != nil {
+		l.Logger.Errorf("cannot fill subject id, err: %+v", err)
+		// todo: retry
 	}
 
 	return &comment.CreateSubjectResponse{Subject: converter.SubjectDBToRPC(subject)}, nil

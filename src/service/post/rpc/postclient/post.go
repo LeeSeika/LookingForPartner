@@ -17,6 +17,8 @@ type (
 	CreatePostResponse         = post.CreatePostResponse
 	DeletePostRequest          = post.DeletePostRequest
 	DeletePostResponse         = post.DeletePostResponse
+	FillSubjectRequest         = post.FillSubjectRequest
+	FillSubjectResponse        = post.FillSubjectResponse
 	GetPostRequest             = post.GetPostRequest
 	GetPostResponse            = post.GetPostResponse
 	GetPostsByAuthorIDRequest  = post.GetPostsByAuthorIDRequest
@@ -35,6 +37,7 @@ type (
 		GetPosts(ctx context.Context, in *GetPostsRequest, opts ...grpc.CallOption) (*GetPostsResponse, error)
 		GetPostsByAuthorID(ctx context.Context, in *GetPostsByAuthorIDRequest, opts ...grpc.CallOption) (*GetPostsByAuthorIDResponse, error)
 		UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error)
+		FillSubject(ctx context.Context, in *FillSubjectRequest, opts ...grpc.CallOption) (*FillSubjectResponse, error)
 	}
 
 	defaultPost struct {
@@ -76,4 +79,9 @@ func (m *defaultPost) GetPostsByAuthorID(ctx context.Context, in *GetPostsByAuth
 func (m *defaultPost) UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error) {
 	client := post.NewPostClient(m.cli.Conn())
 	return client.UpdateProject(ctx, in, opts...)
+}
+
+func (m *defaultPost) FillSubject(ctx context.Context, in *FillSubjectRequest, opts ...grpc.CallOption) (*FillSubjectResponse, error) {
+	client := post.NewPostClient(m.cli.Conn())
+	return client.FillSubject(ctx, in, opts...)
 }
