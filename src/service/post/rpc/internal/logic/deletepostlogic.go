@@ -38,7 +38,7 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 			return nil, errs.RpcNotFound
 		}
 		l.Logger.Errorf("cannot get post, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 	// check permission
 	if po.AuthorID != in.WxUid {
@@ -51,7 +51,7 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 			return nil, errs.RpcAlreadyExists
 		}
 		l.Logger.Errorf("cannot delete post, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	// update user post count

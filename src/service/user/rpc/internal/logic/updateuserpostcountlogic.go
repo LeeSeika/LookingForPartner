@@ -32,7 +32,7 @@ func (l *UpdateUserPostCountLogic) UpdateUserPostCount(in *user.UpdateUserPostCo
 		if errors.Is(err, errs.DBDuplicatedIdempotencyKey) {
 			return nil, errs.RpcDuplicatedIdempotencyKey
 		}
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	return &user.UpdateUserPostCountResponse{}, nil

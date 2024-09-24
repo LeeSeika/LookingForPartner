@@ -35,14 +35,14 @@ func (l *GetCommentsByPostIDLogic) GetCommentsByPostID(in *comment.GetCommentsBy
 	rootComments, paginator, err := l.svcCtx.CommentInterface.GetRootCommentsByPostID(l.ctx, in.PostID, in.PaginationParams.Page, in.PaginationParams.Size, params.ToOrderByOpt(in.GetPaginationParams().OrderBy))
 	if err != nil {
 		l.Logger.Errorf("cannot get root comments, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	rootIDs := make([]string, 0, len(rootComments))
 	allSubComments, err := l.svcCtx.CommentInterface.GetTopSubCommentsByRootIDs(l.ctx, rootIDs, DefaultTopCount, params.ToOrderByOpt(params.OrderByCreateTimeASC))
 	if err != nil {
 		l.Logger.Errorf("cannot get sub comments, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	// construct comment

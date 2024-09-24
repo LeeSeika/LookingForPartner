@@ -31,7 +31,7 @@ func (l *GetPostsByAuthorIDLogic) GetPostsByAuthorID(in *post.GetPostsByAuthorID
 	poProjs, paginator, err := l.svcCtx.PostInterface.GetPostsByAuthorID(l.ctx, in.PaginationParams.Page, in.PaginationParams.Size, in.AuthorID, params.ToOrderByOpt(in.PaginationParams.OrderBy))
 	if err != nil {
 		l.Logger.Errorf("cannot get posts by author_id, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	poInfos := make([]*post.PostInfo, 0, len(poProjs))

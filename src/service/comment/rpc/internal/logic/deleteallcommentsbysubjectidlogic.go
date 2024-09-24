@@ -29,7 +29,7 @@ func (l *DeleteAllCommentsBySubjectIDLogic) DeleteAllCommentsBySubjectID(in *com
 	err := l.svcCtx.CommentInterface.DeleteAllCommentsBySubjectID(l.ctx, in.SubjectID)
 	if err != nil {
 		l.Logger.Errorf("cannot delete all comments by subject id, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	return &comment.DeleteAllCommentsBySubjectIDResponse{}, nil

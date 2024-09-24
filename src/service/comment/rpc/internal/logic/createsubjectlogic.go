@@ -42,7 +42,7 @@ func (l *CreateSubjectLogic) CreateSubject(in *comment.CreateSubjectRequest) (*c
 	subject, err := l.svcCtx.CommentInterface.CreateSubject(l.ctx, subject, in.IdempotencyKey)
 	if err != nil {
 		l.Logger.Errorf("cannot create subject, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	// fill comment subject id

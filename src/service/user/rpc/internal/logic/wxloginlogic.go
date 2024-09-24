@@ -35,7 +35,7 @@ func (l *WxLoginLogic) WxLogin(in *user.WxLoginRequest) (*user.WxLoginResponse, 
 	u, err := l.svcCtx.UserInterface.FirstOrCreateUser(l.ctx, u)
 	if err != nil {
 		l.Logger.Errorf("cannot get or create user, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	return &user.WxLoginResponse{UserInfo: converter.UserDBToRpc(u)}, nil

@@ -31,7 +31,7 @@ func (l *GetUserInfoByIDsLogic) GetUserInfoByIDs(in *user.GetUserInfoByIDsReques
 	users, err := l.svcCtx.UserInterface.GetUsersByIDs(l.ctx, in.WechatIDs)
 	if err != nil {
 		l.Logger.Errorf("cannot get users by ids, err:%+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	userRpcs := make([]*user.UserInfo, 0, len(users))

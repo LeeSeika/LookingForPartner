@@ -31,7 +31,7 @@ func (l *GetPostsLogic) GetPosts(in *post.GetPostsRequest) (*post.GetPostsRespon
 	poProjs, paginator, err := l.svcCtx.PostInterface.GetPosts(l.ctx, in.PaginationParams.Page, in.PaginationParams.Size, params.ToOrderByOpt(in.PaginationParams.OrderBy))
 	if err != nil {
 		l.Logger.Errorf("cannot get posts, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	poInfos := make([]*post.PostInfo, 0, len(poProjs))

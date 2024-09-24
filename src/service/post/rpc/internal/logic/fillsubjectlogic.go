@@ -34,7 +34,7 @@ func (l *FillSubjectLogic) FillSubject(in *post.FillSubjectRequest) (*post.FillS
 	_, err := l.svcCtx.PostInterface.UpdatePost(l.ctx, &updatedPost)
 	if err != nil {
 		l.Logger.Errorf("cannot update post, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	return &post.FillSubjectResponse{}, nil

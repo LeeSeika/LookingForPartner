@@ -29,7 +29,7 @@ func (l *DeleteSubCommentsByRooIDLogic) DeleteSubCommentsByRooID(in *comment.Del
 	err := l.svcCtx.CommentInterface.DeleteSubCommentsByRootID(l.ctx, in.RootID)
 	if err != nil {
 		l.Logger.Errorf("cannot delete sub comments by root id, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	return &comment.DeleteSubjectResponse{}, nil

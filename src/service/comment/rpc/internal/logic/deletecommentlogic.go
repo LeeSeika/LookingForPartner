@@ -38,7 +38,7 @@ func (l *DeleteCommentLogic) DeleteComment(in *comment.DeleteCommentRequest) (*c
 			return nil, errs.RpcNotFound
 		}
 		l.Logger.Errorf("cannot get comment when deleting comment, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 	subject, err := l.svcCtx.CommentInterface.GetSubject(l.ctx, _comment.SubjectID)
 	if err != nil {
@@ -46,7 +46,7 @@ func (l *DeleteCommentLogic) DeleteComment(in *comment.DeleteCommentRequest) (*c
 			return nil, errs.RpcNotFound
 		}
 		l.Logger.Errorf("cannot get subject when deleting comment, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	// check permission
@@ -70,7 +70,7 @@ func (l *DeleteCommentLogic) DeleteComment(in *comment.DeleteCommentRequest) (*c
 	deletedComment, err := l.svcCtx.CommentInterface.DeleteComment(l.ctx, in.CommentID)
 	if err != nil {
 		l.Logger.Errorf("cannot delete comment, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	// if this is a root comment, asynchronously delete all of its sub comments

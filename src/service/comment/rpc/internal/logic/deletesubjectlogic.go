@@ -31,7 +31,7 @@ func (l *DeleteSubjectLogic) DeleteSubject(in *comment.DeleteSubjectRequest) (*c
 	deletedSubject, err := l.svcCtx.CommentInterface.DeleteSubject(l.ctx, in.SubjectID)
 	if err != nil {
 		l.Logger.Errorf("cannot delete subject, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	// asynchronously delete all comments of this subject

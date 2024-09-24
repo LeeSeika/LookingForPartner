@@ -58,7 +58,7 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 	poProj, err := l.svcCtx.PostInterface.CreatePost(l.ctx, po, proj, in.IdempotencyKey)
 	if err != nil {
 		l.Logger.Errorf("cannot create post, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	poInfo := converter.PostDBToRPC(poProj.Post)

@@ -38,7 +38,7 @@ func (l *UpdateProjectLogic) UpdateProject(in *post.UpdateProjectRequest) (*post
 	updatedProj, err := l.svcCtx.PostInterface.UpdateProject(l.ctx, &proj)
 	if err != nil {
 		l.Logger.Errorf("cannot update project, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	projResp := converter.ProjectDBToRPC(updatedProj)

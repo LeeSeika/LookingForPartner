@@ -34,7 +34,7 @@ func (l *GetPostLogic) GetPost(in *post.GetPostRequest) (*post.GetPostResponse, 
 			return nil, errs.RpcNotFound
 		}
 		l.Logger.Errorf("cannot get post, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	poInfo := converter.PostDBToRPC(poProj.Post)

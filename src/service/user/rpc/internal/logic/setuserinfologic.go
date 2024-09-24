@@ -42,7 +42,7 @@ func (l *SetUserInfoLogic) SetUserInfo(in *user.SetUserInfoRequest) (*user.SetUs
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errs.RpcNotFound
 		}
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	return &user.SetUserInfoResponse{UserInfo: converter.UserDBToRpc(u)}, nil
