@@ -34,7 +34,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Config:                      c,
 		PostInterface:               postInterface,
 		UserRpc:                     userclient.NewUser(zrpc.MustNewClient(c.UserRpc)),
-		CommentRpc:                  commentclient.NewComment(zrpc.MustNewClient(c.CommentRpc)),
 		KqUpdateUserPostCountPusher: kq.NewPusher(c.KqUpdateUserPostCountPusherConf.Brokers, c.KqUpdateUserPostCountPusherConf.Topic),
 		KqDeleteSubjectPusher:       kq.NewPusher(c.KqDeleteSubjectPusherConf.Brokers, c.KqDeleteSubjectPusherConf.Topic),
 		LocalQueue:                  localqueue.NewQueue(constant.DefaultLocalQueueChanCap, constant.DefaultLocalQueueDataCap),

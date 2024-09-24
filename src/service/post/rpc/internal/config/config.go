@@ -17,7 +17,6 @@ type Config struct {
 		ConnMaxLifeTime int
 	}
 	UserRpc                         zrpc.RpcClientConf
-	CommentRpc                      zrpc.RpcClientConf
 	KqUpdateUserPostCountPusherConf struct {
 		Brokers []string
 		Topic   string
