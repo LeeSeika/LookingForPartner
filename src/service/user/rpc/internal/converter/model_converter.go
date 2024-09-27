@@ -14,6 +14,7 @@ func UserDBToRpc(userDB *entity.User) *user.UserInfo {
 		Avatar:       userDB.Avatar,
 		Introduction: userDB.Introduction,
 		Username:     userDB.Username,
+		WxUid:        userDB.WxUid,
 	}
 	return &userRpc
 }
