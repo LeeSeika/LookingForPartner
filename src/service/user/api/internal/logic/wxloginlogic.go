@@ -2,10 +2,7 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
-	"io/ioutil"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
@@ -30,52 +27,27 @@ func NewWxLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxLoginLo
 }
 
 func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginResponse, err error) {
-	// wx api call
-	appID := l.svcCtx.Config.AppID
-	appSecret := l.svcCtx.Config.AppSecret
 
-	authUrl := fmt.Sprintf("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", appID, appSecret, req.Code)
-	authReq, err := http.NewRequest(http.MethodGet, authUrl, nil)
-	if err != nil {
-		l.Logger.Errorf("cannot new wechat login request, err: %+v", err)
-		return nil, errs.FormattedApiInternal()
-	}
-
-	client := &http.Client{}
-	authResp, err := client.Do(authReq)
-	if err != nil {
-		l.Logger.Errorf("cannot send wechat login request, err: %+v", err)
-		return nil, errs.FormatApiError(authResp.StatusCode, errs.ApiProcessWxLoginFailed)
-	}
-
-	respBodyData, err := ioutil.ReadAll(authResp.Body)
-	if err != nil {
-		l.Logger.Errorf("cannot read reponse body, err: %+v", err)
-		return nil, errs.FormattedApiInternal()
-	}
-
-	type respBody struct {
-		SessionKey string `json:"session_key"`
-		Openid     string `json:"openid"`
-		ErrCode    int    `json:"errcode"`
-		ErrMsg     string `json:"errMsg"`
-	}
-
-	var rb respBody
-	err = json.Unmarshal(respBodyData, &rb)
-	if err != nil {
-		l.Logger.Errorf("cannot unmarshal json, err: %+v", err)
-		return nil, errs.FormattedApiInternal()
-	}
-
-	// rpc call
 	wxLoginReq := user.WxLoginRequest{
 		Username: req.NickName,
-		WxUid:    rb.Openid,
+		Code:     req.Code,
 	}
 	wxLoginResp, err := l.svcCtx.UserRpc.WxLogin(l.ctx, &wxLoginReq)
 	if err != nil {
-		l.Logger.Errorf("cannot call WxLogin rpc, err: %+v", err)
+		l.Logger.Errorf("cannot login, err: %+v", err)
+		if wxLoginResp.WechatResponseCode != 0 {
+
+			if wxLoginResp.WechatResponseCode == errs.WechatLoginInvalidCode {
+				return nil, errs.FormatApiError(http.StatusBadRequest, "invalid js_code")
+			} else if wxLoginResp.WechatResponseCode == errs.WechatLoginReachedRateLimit {
+				return nil, errs.FormatApiError(http.StatusTooManyRequests, "too many login requests")
+			} else if wxLoginResp.WechatResponseCode == errs.WechatLoginBlockedUser {
+				return nil, errs.FormatApiError(http.StatusForbidden, "this account has been blocked by wechat")
+			} else if wxLoginResp.WechatResponseCode == errs.WechatLoginSystemError {
+				return nil, errs.FormatApiError(http.StatusServiceUnavailable, "wechat server unavailable")
+			}
+		}
+
 		return nil, errs.FormattedApiInternal()
 	}
 
@@ -83,14 +55,14 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	accessExpire := l.svcCtx.Config.Auth.AccessExpire
 	refreshExpire := l.svcCtx.Config.Auth.RefreshExpire
 	accessSecret := l.svcCtx.Config.Auth.AccessSecret
-	accessToken, refreshToken, err := common.CreateTokenAndRefreshToken(rb.Openid, accessExpire, refreshExpire, accessSecret)
+	accessToken, refreshToken, err := common.CreateTokenAndRefreshToken(wxLoginResp.UserInfo.WxUid, accessExpire, refreshExpire, accessSecret)
 	if err != nil {
 		l.Logger.Errorf("cannot generate token, err: %+v", err)
 		return nil, errs.FormattedApiGenTokenFailed()
 	}
 
 	userInfo := types.UserInfo{
-		WxUid:        rb.Openid,
+		WxUid:        wxLoginResp.UserInfo.WxUid,
 		Avatar:       wxLoginResp.UserInfo.Avatar,
 		School:       wxLoginResp.UserInfo.School,
 		Grade:        wxLoginResp.UserInfo.Grade,

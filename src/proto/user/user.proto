@@ -7,11 +7,12 @@ option go_package = "lookingforpartner/pb/user";
 // WxLogin
 message WxLoginRequest {
   string Username = 1;
-  string WxUid = 2;
+  string Code = 2;
 }
 
 message WxLoginResponse {
   UserInfo UserInfo = 1;
+  int32 WechatResponseCode = 2;
 }
 
 // UserInfo

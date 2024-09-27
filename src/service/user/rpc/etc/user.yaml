@@ -5,6 +5,9 @@ Etcd:
     - etcd:2379
   Key: user.rpc
 
+AppID: wxd9b9f364a3b912e2
+AppSecret: 3bcb974555cd8ecfaaa34928cba98f95
+
 Mysql:
   Database: looking_for_partner
   Username: root

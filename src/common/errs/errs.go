@@ -23,6 +23,8 @@ func FormatRpcUnknownError(errMsg string) error {
 	return status.Error(codes.Unknown, errMsg)
 }
 
+func FormatRpcAbortedError(errMsg string) error { return status.Error(codes.Aborted, errMsg) }
+
 var (
 	ApiInternal             = "internal"
 	ApiProcessWxLoginFailed = "failed to process wx login"

@@ -18,4 +18,7 @@ type Config struct {
 		ConnMaxLifeTime int
 	}
 	KqUpdateUserPostCountConsumerConf kq.KqConf
+
+	AppID     string
+	AppSecret string
 }
