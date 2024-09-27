@@ -21,4 +21,8 @@ type Config struct {
 		Brokers []string
 		Topic   string
 	}
+	KqDeleteSubjectPusherConf struct {
+		Brokers []string
+		Topic   string
+	}
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/logger"
-	"lookingforpartner/service/post/model"
+	"lookingforpartner/service/post/model/entity"
 	"lookingforpartner/service/post/rpc/internal/converter"
 
 	"lookingforpartner/pb/post"
@@ -22,12 +22,12 @@ func NewUpdateProjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 	return &UpdateProjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post"),
+		Logger: logger.NewLogger(ctx, "post-rpc"),
 	}
 }
 
 func (l *UpdateProjectLogic) UpdateProject(in *post.UpdateProjectRequest) (*post.UpdateProjectResponse, error) {
-	proj := model.Project{
+	proj := entity.Project{
 		ProjectID:     in.ProjectID,
 		Name:          in.Name,
 		Introduction:  in.Introduction,
@@ -38,7 +38,7 @@ func (l *UpdateProjectLogic) UpdateProject(in *post.UpdateProjectRequest) (*post
 	updatedProj, err := l.svcCtx.PostInterface.UpdateProject(l.ctx, &proj)
 	if err != nil {
 		l.Logger.Errorf("cannot update project, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	projResp := converter.ProjectDBToRPC(updatedProj)

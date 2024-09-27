@@ -22,6 +22,7 @@ const (
 	User_WxLogin_FullMethodName             = "/userclient.User/WxLogin"
 	User_SetUserInfo_FullMethodName         = "/userclient.User/SetUserInfo"
 	User_GetUserInfo_FullMethodName         = "/userclient.User/GetUserInfo"
+	User_GetUserInfoByIDs_FullMethodName    = "/userclient.User/GetUserInfoByIDs"
 	User_UpdateUserPostCount_FullMethodName = "/userclient.User/UpdateUserPostCount"
 )
 
@@ -32,6 +33,7 @@ type UserClient interface {
 	WxLogin(ctx context.Context, in *WxLoginRequest, opts ...grpc.CallOption) (*WxLoginResponse, error)
 	SetUserInfo(ctx context.Context, in *SetUserInfoRequest, opts ...grpc.CallOption) (*SetUserInfoResponse, error)
 	GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
+	GetUserInfoByIDs(ctx context.Context, in *GetUserInfoByIDsRequest, opts ...grpc.CallOption) (*GetUserInfoByIDsResponse, error)
 	UpdateUserPostCount(ctx context.Context, in *UpdateUserPostCountRequest, opts ...grpc.CallOption) (*UpdateUserPostCountResponse, error)
 }
 
@@ -73,6 +75,16 @@ func (c *userClient) GetUserInfo(ctx context.Context, in *GetUserInfoRequest, op
 	return out, nil
 }
 
+func (c *userClient) GetUserInfoByIDs(ctx context.Context, in *GetUserInfoByIDsRequest, opts ...grpc.CallOption) (*GetUserInfoByIDsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserInfoByIDsResponse)
+	err := c.cc.Invoke(ctx, User_GetUserInfoByIDs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) UpdateUserPostCount(ctx context.Context, in *UpdateUserPostCountRequest, opts ...grpc.CallOption) (*UpdateUserPostCountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserPostCountResponse)
@@ -90,6 +102,7 @@ type UserServer interface {
 	WxLogin(context.Context, *WxLoginRequest) (*WxLoginResponse, error)
 	SetUserInfo(context.Context, *SetUserInfoRequest) (*SetUserInfoResponse, error)
 	GetUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoResponse, error)
+	GetUserInfoByIDs(context.Context, *GetUserInfoByIDsRequest) (*GetUserInfoByIDsResponse, error)
 	UpdateUserPostCount(context.Context, *UpdateUserPostCountRequest) (*UpdateUserPostCountResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
@@ -109,6 +122,9 @@ func (UnimplementedUserServer) SetUserInfo(context.Context, *SetUserInfoRequest)
 }
 func (UnimplementedUserServer) GetUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
+}
+func (UnimplementedUserServer) GetUserInfoByIDs(context.Context, *GetUserInfoByIDsRequest) (*GetUserInfoByIDsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfoByIDs not implemented")
 }
 func (UnimplementedUserServer) UpdateUserPostCount(context.Context, *UpdateUserPostCountRequest) (*UpdateUserPostCountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserPostCount not implemented")
@@ -188,6 +204,24 @@ func _User_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetUserInfoByIDs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserInfoByIDsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserInfoByIDs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserInfoByIDs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserInfoByIDs(ctx, req.(*GetUserInfoByIDsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_UpdateUserPostCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserPostCountRequest)
 	if err := dec(in); err != nil {
@@ -224,6 +258,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserInfo",
 			Handler:    _User_GetUserInfo_Handler,
+		},
+		{
+			MethodName: "GetUserInfoByIDs",
+			Handler:    _User_GetUserInfoByIDs_Handler,
 		},
 		{
 			MethodName: "UpdateUserPostCount",

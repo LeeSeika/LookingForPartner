@@ -1,15 +1,23 @@
 package svc
 
 import (
+	"github.com/zeromicro/go-queue/kq"
+	"github.com/zeromicro/go-zero/zrpc"
 	"log"
+	"lookingforpartner/common/constant"
+	"lookingforpartner/common/localqueue"
 	"lookingforpartner/service/comment/rpc/internal/config"
 	"lookingforpartner/service/comment/rpc/internal/dao"
 	"lookingforpartner/service/comment/rpc/internal/dao/mysql"
+	"lookingforpartner/service/post/rpc/postclient"
 )
 
 type ServiceContext struct {
-	Config           config.Config
-	CommentInterface dao.CommentInterface
+	Config                     config.Config
+	CommentInterface           dao.CommentInterface
+	PostRpc                    postclient.Post
+	KqDeleteCommentsByIDPusher *kq.Pusher
+	LocalQueue                 *localqueue.Queue
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -19,7 +27,10 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		return nil
 	}
 	return &ServiceContext{
-		Config:           c,
-		CommentInterface: commentInterface,
+		Config:                     c,
+		CommentInterface:           commentInterface,
+		PostRpc:                    postclient.NewPost(zrpc.MustNewClient(c.PostRpc)),
+		KqDeleteCommentsByIDPusher: kq.NewPusher(c.KqDeleteCommentsByIDPusherConf.Brokers, c.KqDeleteCommentsByIDPusherConf.Topic),
+		LocalQueue:                 localqueue.NewQueue(constant.DefaultLocalQueueChanCap, constant.DefaultLocalQueueDataCap),
 	}
 }

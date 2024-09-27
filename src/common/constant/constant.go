@@ -19,3 +19,19 @@ const (
 	// NanoidPrefixSubject is a nanoid prefix for each subject
 	NanoidPrefixSubject = "subj_"
 )
+
+const (
+	// MqMessageKeyDeleteAllCommentsBySubjectID is a key represents the task DeleteAllCommentsBySubjectID
+	MqMessageKeyDeleteAllCommentsBySubjectID = "mq_delete-all-comments-by-subject-id"
+
+	// MqMessageKeyDeleteSubCommentsByRootID is a key represents the task DeleteSubCommentsByRootID
+	MqMessageKeyDeleteSubCommentsByRootID = "mq_delete-sub-comments-by-root-id"
+)
+
+const (
+	// DefaultLocalQueueChanCap is a default channel capacity for local queue
+	DefaultLocalQueueChanCap = 100
+
+	// DefaultLocalQueueDataCap is a default data slice capacity for local queue
+	DefaultLocalQueueDataCap = 1000
+)

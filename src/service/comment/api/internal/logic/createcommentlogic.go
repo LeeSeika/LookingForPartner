@@ -3,7 +3,9 @@ package logic
 import (
 	"context"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/comment"
+	"lookingforpartner/service/comment/api/internal/converter"
 
 	"lookingforpartner/service/comment/api/internal/svc"
 	"lookingforpartner/service/comment/api/internal/types"
@@ -19,7 +21,7 @@ type CreateCommentLogic struct {
 
 func NewCreateCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateCommentLogic {
 	return &CreateCommentLogic{
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-api"),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
@@ -42,6 +44,11 @@ func (l *CreateCommentLogic) CreateComment(req *types.CreateCommentRequest) (res
 	}
 
 	createCommentResp, err := l.svcCtx.CommentRpc.CreateComment(l.ctx, &createCommentReq)
+	if err != nil {
+		return nil, errs.FormattedApiInternal()
+	}
 
-	return
+	resp = &types.CreateCommentResponse{Comment: converter.CommentRpcToApi(createCommentResp.Comment)}
+
+	return resp, nil
 }

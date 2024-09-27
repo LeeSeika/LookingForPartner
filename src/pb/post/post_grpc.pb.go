@@ -25,6 +25,7 @@ const (
 	Post_GetPosts_FullMethodName           = "/postclient.Post/GetPosts"
 	Post_GetPostsByAuthorID_FullMethodName = "/postclient.Post/GetPostsByAuthorID"
 	Post_UpdateProject_FullMethodName      = "/postclient.Post/UpdateProject"
+	Post_FillSubject_FullMethodName        = "/postclient.Post/FillSubject"
 )
 
 // PostClient is the client API for Post service.
@@ -37,6 +38,7 @@ type PostClient interface {
 	GetPosts(ctx context.Context, in *GetPostsRequest, opts ...grpc.CallOption) (*GetPostsResponse, error)
 	GetPostsByAuthorID(ctx context.Context, in *GetPostsByAuthorIDRequest, opts ...grpc.CallOption) (*GetPostsByAuthorIDResponse, error)
 	UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error)
+	FillSubject(ctx context.Context, in *FillSubjectRequest, opts ...grpc.CallOption) (*FillSubjectResponse, error)
 }
 
 type postClient struct {
@@ -107,6 +109,16 @@ func (c *postClient) UpdateProject(ctx context.Context, in *UpdateProjectRequest
 	return out, nil
 }
 
+func (c *postClient) FillSubject(ctx context.Context, in *FillSubjectRequest, opts ...grpc.CallOption) (*FillSubjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FillSubjectResponse)
+	err := c.cc.Invoke(ctx, Post_FillSubject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PostServer is the server API for Post service.
 // All implementations must embed UnimplementedPostServer
 // for forward compatibility.
@@ -117,6 +129,7 @@ type PostServer interface {
 	GetPosts(context.Context, *GetPostsRequest) (*GetPostsResponse, error)
 	GetPostsByAuthorID(context.Context, *GetPostsByAuthorIDRequest) (*GetPostsByAuthorIDResponse, error)
 	UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error)
+	FillSubject(context.Context, *FillSubjectRequest) (*FillSubjectResponse, error)
 	mustEmbedUnimplementedPostServer()
 }
 
@@ -144,6 +157,9 @@ func (UnimplementedPostServer) GetPostsByAuthorID(context.Context, *GetPostsByAu
 }
 func (UnimplementedPostServer) UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProject not implemented")
+}
+func (UnimplementedPostServer) FillSubject(context.Context, *FillSubjectRequest) (*FillSubjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FillSubject not implemented")
 }
 func (UnimplementedPostServer) mustEmbedUnimplementedPostServer() {}
 func (UnimplementedPostServer) testEmbeddedByValue()              {}
@@ -274,6 +290,24 @@ func _Post_UpdateProject_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Post_FillSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FillSubjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServer).FillSubject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Post_FillSubject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServer).FillSubject(ctx, req.(*FillSubjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Post_ServiceDesc is the grpc.ServiceDesc for Post service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -304,6 +338,10 @@ var Post_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateProject",
 			Handler:    _Post_UpdateProject_Handler,
+		},
+		{
+			MethodName: "FillSubject",
+			Handler:    _Post_FillSubject_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

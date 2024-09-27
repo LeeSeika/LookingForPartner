@@ -7,11 +7,12 @@ option go_package = "lookingforpartner/pb/user";
 // WxLogin
 message WxLoginRequest {
   string Username = 1;
-  string WxUid = 2;
+  string Code = 2;
 }
 
 message WxLoginResponse {
   UserInfo UserInfo = 1;
+  int32 WechatResponseCode = 2;
 }
 
 // UserInfo
@@ -46,6 +47,15 @@ message GetUserInfoResponse {
   UserInfo UserInfo = 1;
 }
 
+// GetUserInfoByIDs
+message GetUserInfoByIDsRequest {
+  repeated string WechatIDs = 1;
+}
+
+message GetUserInfoByIDsResponse {
+  repeated UserInfo UserInfos = 1;
+}
+
 // UpdateUserPostCount
 message UpdateUserPostCountRequest {
   int64 IdempotencyKey = 1;
@@ -59,5 +69,6 @@ service User {
   rpc WxLogin(WxLoginRequest) returns(WxLoginResponse);
   rpc SetUserInfo(SetUserInfoRequest) returns(SetUserInfoResponse);
   rpc GetUserInfo(GetUserInfoRequest) returns(GetUserInfoResponse);
+  rpc GetUserInfoByIDs(GetUserInfoByIDsRequest) returns(GetUserInfoByIDsResponse);
   rpc UpdateUserPostCount(UpdateUserPostCountRequest) returns(UpdateUserPostCountResponse);
 }

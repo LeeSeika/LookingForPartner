@@ -53,7 +53,7 @@ func (l *CreateCommentLogic) CreateComment(in *comment.CreateCommentRequest) (*c
 	commentIndexContent, err := l.svcCtx.CommentInterface.CreateComment(l.ctx, commentIndex, commentContent)
 	if err != nil {
 		l.Logger.Errorf("cannot create comment, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	return &comment.CreateCommentResponse{Comment: converter.SingleCommentDBToRPC(commentIndexContent.CommentIndex, commentIndexContent.CommentContent)}, nil

@@ -22,7 +22,7 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 	return &GetUserInfoLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user"),
+		Logger: logger.NewLogger(ctx, "user-rpc"),
 	}
 }
 
@@ -33,7 +33,7 @@ func (l *GetUserInfoLogic) GetUserInfo(in *user.GetUserInfoRequest) (*user.GetUs
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errs.RpcNotFound
 		}
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	userInfo := user.UserInfo{

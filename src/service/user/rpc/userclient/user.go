@@ -13,6 +13,8 @@ import (
 )
 
 type (
+	GetUserInfoByIDsRequest     = user.GetUserInfoByIDsRequest
+	GetUserInfoByIDsResponse    = user.GetUserInfoByIDsResponse
 	GetUserInfoRequest          = user.GetUserInfoRequest
 	GetUserInfoResponse         = user.GetUserInfoResponse
 	SetUserInfoRequest          = user.SetUserInfoRequest
@@ -27,6 +29,7 @@ type (
 		WxLogin(ctx context.Context, in *WxLoginRequest, opts ...grpc.CallOption) (*WxLoginResponse, error)
 		SetUserInfo(ctx context.Context, in *SetUserInfoRequest, opts ...grpc.CallOption) (*SetUserInfoResponse, error)
 		GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
+		GetUserInfoByIDs(ctx context.Context, in *GetUserInfoByIDsRequest, opts ...grpc.CallOption) (*GetUserInfoByIDsResponse, error)
 		UpdateUserPostCount(ctx context.Context, in *UpdateUserPostCountRequest, opts ...grpc.CallOption) (*UpdateUserPostCountResponse, error)
 	}
 
@@ -54,6 +57,11 @@ func (m *defaultUser) SetUserInfo(ctx context.Context, in *SetUserInfoRequest, o
 func (m *defaultUser) GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error) {
 	client := user.NewUserClient(m.cli.Conn())
 	return client.GetUserInfo(ctx, in, opts...)
+}
+
+func (m *defaultUser) GetUserInfoByIDs(ctx context.Context, in *GetUserInfoByIDsRequest, opts ...grpc.CallOption) (*GetUserInfoByIDsResponse, error) {
+	client := user.NewUserClient(m.cli.Conn())
+	return client.GetUserInfoByIDs(ctx, in, opts...)
 }
 
 func (m *defaultUser) UpdateUserPostCount(ctx context.Context, in *UpdateUserPostCountRequest, opts ...grpc.CallOption) (*UpdateUserPostCountResponse, error) {

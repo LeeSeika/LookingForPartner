@@ -614,7 +614,7 @@ type GetCommentsByPostIDResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Comment   []*CommentInfo       `protobuf:"bytes,1,rep,name=Comment,proto3" json:"Comment,omitempty"`
+	Comments  []*CommentInfo       `protobuf:"bytes,1,rep,name=Comments,proto3" json:"Comments,omitempty"`
 	Paginator *paginator.Paginator `protobuf:"bytes,2,opt,name=Paginator,proto3" json:"Paginator,omitempty"`
 }
 
@@ -650,9 +650,9 @@ func (*GetCommentsByPostIDResponse) Descriptor() ([]byte, []int) {
 	return file_comment_comment_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *GetCommentsByPostIDResponse) GetComment() []*CommentInfo {
+func (x *GetCommentsByPostIDResponse) GetComments() []*CommentInfo {
 	if x != nil {
-		return x.Comment
+		return x.Comments
 	}
 	return nil
 }
@@ -662,6 +662,178 @@ func (x *GetCommentsByPostIDResponse) GetPaginator() *paginator.Paginator {
 		return x.Paginator
 	}
 	return nil
+}
+
+// DeleteSubCommentsByRootID
+type DeleteSubCommentsByRootIDRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RootID string `protobuf:"bytes,1,opt,name=RootID,proto3" json:"RootID,omitempty"`
+}
+
+func (x *DeleteSubCommentsByRootIDRequest) Reset() {
+	*x = DeleteSubCommentsByRootIDRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_comment_comment_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteSubCommentsByRootIDRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSubCommentsByRootIDRequest) ProtoMessage() {}
+
+func (x *DeleteSubCommentsByRootIDRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_comment_comment_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSubCommentsByRootIDRequest.ProtoReflect.Descriptor instead.
+func (*DeleteSubCommentsByRootIDRequest) Descriptor() ([]byte, []int) {
+	return file_comment_comment_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DeleteSubCommentsByRootIDRequest) GetRootID() string {
+	if x != nil {
+		return x.RootID
+	}
+	return ""
+}
+
+type DeleteSubCommentsByRootIDResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeleteSubCommentsByRootIDResponse) Reset() {
+	*x = DeleteSubCommentsByRootIDResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_comment_comment_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteSubCommentsByRootIDResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSubCommentsByRootIDResponse) ProtoMessage() {}
+
+func (x *DeleteSubCommentsByRootIDResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_comment_comment_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSubCommentsByRootIDResponse.ProtoReflect.Descriptor instead.
+func (*DeleteSubCommentsByRootIDResponse) Descriptor() ([]byte, []int) {
+	return file_comment_comment_proto_rawDescGZIP(), []int{11}
+}
+
+// DeleteAllCommentsBySubjectID
+type DeleteAllCommentsBySubjectIDRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SubjectID string `protobuf:"bytes,1,opt,name=SubjectID,proto3" json:"SubjectID,omitempty"`
+}
+
+func (x *DeleteAllCommentsBySubjectIDRequest) Reset() {
+	*x = DeleteAllCommentsBySubjectIDRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_comment_comment_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteAllCommentsBySubjectIDRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAllCommentsBySubjectIDRequest) ProtoMessage() {}
+
+func (x *DeleteAllCommentsBySubjectIDRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_comment_comment_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAllCommentsBySubjectIDRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAllCommentsBySubjectIDRequest) Descriptor() ([]byte, []int) {
+	return file_comment_comment_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *DeleteAllCommentsBySubjectIDRequest) GetSubjectID() string {
+	if x != nil {
+		return x.SubjectID
+	}
+	return ""
+}
+
+type DeleteAllCommentsBySubjectIDResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeleteAllCommentsBySubjectIDResponse) Reset() {
+	*x = DeleteAllCommentsBySubjectIDResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_comment_comment_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteAllCommentsBySubjectIDResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAllCommentsBySubjectIDResponse) ProtoMessage() {}
+
+func (x *DeleteAllCommentsBySubjectIDResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_comment_comment_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAllCommentsBySubjectIDResponse.ProtoReflect.Descriptor instead.
+func (*DeleteAllCommentsBySubjectIDResponse) Descriptor() ([]byte, []int) {
+	return file_comment_comment_proto_rawDescGZIP(), []int{13}
 }
 
 // CreateSubject
@@ -677,7 +849,7 @@ type CreateSubjectRequest struct {
 func (x *CreateSubjectRequest) Reset() {
 	*x = CreateSubjectRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_comment_comment_proto_msgTypes[10]
+		mi := &file_comment_comment_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -690,7 +862,7 @@ func (x *CreateSubjectRequest) String() string {
 func (*CreateSubjectRequest) ProtoMessage() {}
 
 func (x *CreateSubjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_comment_comment_proto_msgTypes[10]
+	mi := &file_comment_comment_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -703,7 +875,7 @@ func (x *CreateSubjectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSubjectRequest.ProtoReflect.Descriptor instead.
 func (*CreateSubjectRequest) Descriptor() ([]byte, []int) {
-	return file_comment_comment_proto_rawDescGZIP(), []int{10}
+	return file_comment_comment_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CreateSubjectRequest) GetPostID() string {
@@ -731,7 +903,7 @@ type CreateSubjectResponse struct {
 func (x *CreateSubjectResponse) Reset() {
 	*x = CreateSubjectResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_comment_comment_proto_msgTypes[11]
+		mi := &file_comment_comment_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -744,7 +916,7 @@ func (x *CreateSubjectResponse) String() string {
 func (*CreateSubjectResponse) ProtoMessage() {}
 
 func (x *CreateSubjectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_comment_comment_proto_msgTypes[11]
+	mi := &file_comment_comment_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -757,7 +929,7 @@ func (x *CreateSubjectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSubjectResponse.ProtoReflect.Descriptor instead.
 func (*CreateSubjectResponse) Descriptor() ([]byte, []int) {
-	return file_comment_comment_proto_rawDescGZIP(), []int{11}
+	return file_comment_comment_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CreateSubjectResponse) GetSubject() *SubjectInfo {
@@ -779,7 +951,7 @@ type GetSubjectRequest struct {
 func (x *GetSubjectRequest) Reset() {
 	*x = GetSubjectRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_comment_comment_proto_msgTypes[12]
+		mi := &file_comment_comment_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -792,7 +964,7 @@ func (x *GetSubjectRequest) String() string {
 func (*GetSubjectRequest) ProtoMessage() {}
 
 func (x *GetSubjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_comment_comment_proto_msgTypes[12]
+	mi := &file_comment_comment_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -805,7 +977,7 @@ func (x *GetSubjectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSubjectRequest.ProtoReflect.Descriptor instead.
 func (*GetSubjectRequest) Descriptor() ([]byte, []int) {
-	return file_comment_comment_proto_rawDescGZIP(), []int{12}
+	return file_comment_comment_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetSubjectRequest) GetSubjectID() string {
@@ -826,7 +998,7 @@ type GetSubjectResponse struct {
 func (x *GetSubjectResponse) Reset() {
 	*x = GetSubjectResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_comment_comment_proto_msgTypes[13]
+		mi := &file_comment_comment_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -839,7 +1011,7 @@ func (x *GetSubjectResponse) String() string {
 func (*GetSubjectResponse) ProtoMessage() {}
 
 func (x *GetSubjectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_comment_comment_proto_msgTypes[13]
+	mi := &file_comment_comment_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -852,7 +1024,7 @@ func (x *GetSubjectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSubjectResponse.ProtoReflect.Descriptor instead.
 func (*GetSubjectResponse) Descriptor() ([]byte, []int) {
-	return file_comment_comment_proto_rawDescGZIP(), []int{13}
+	return file_comment_comment_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetSubjectResponse) GetSubject() *SubjectInfo {
@@ -874,7 +1046,7 @@ type DeleteSubjectRequest struct {
 func (x *DeleteSubjectRequest) Reset() {
 	*x = DeleteSubjectRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_comment_comment_proto_msgTypes[14]
+		mi := &file_comment_comment_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -887,7 +1059,7 @@ func (x *DeleteSubjectRequest) String() string {
 func (*DeleteSubjectRequest) ProtoMessage() {}
 
 func (x *DeleteSubjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_comment_comment_proto_msgTypes[14]
+	mi := &file_comment_comment_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -900,7 +1072,7 @@ func (x *DeleteSubjectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSubjectRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSubjectRequest) Descriptor() ([]byte, []int) {
-	return file_comment_comment_proto_rawDescGZIP(), []int{14}
+	return file_comment_comment_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DeleteSubjectRequest) GetSubjectID() string {
@@ -919,7 +1091,7 @@ type DeleteSubjectResponse struct {
 func (x *DeleteSubjectResponse) Reset() {
 	*x = DeleteSubjectResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_comment_comment_proto_msgTypes[15]
+		mi := &file_comment_comment_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -932,7 +1104,7 @@ func (x *DeleteSubjectResponse) String() string {
 func (*DeleteSubjectResponse) ProtoMessage() {}
 
 func (x *DeleteSubjectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_comment_comment_proto_msgTypes[15]
+	mi := &file_comment_comment_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -945,7 +1117,7 @@ func (x *DeleteSubjectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSubjectResponse.ProtoReflect.Descriptor instead.
 func (*DeleteSubjectResponse) Descriptor() ([]byte, []int) {
-	return file_comment_comment_proto_rawDescGZIP(), []int{15}
+	return file_comment_comment_proto_rawDescGZIP(), []int{19}
 }
 
 var File_comment_comment_proto protoreflect.FileDescriptor
@@ -1028,16 +1200,29 @@ var file_comment_comment_proto_rawDesc = []byte{
 	0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x1b, 0x2e, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x50, 0x61, 0x67, 0x69,
 	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x10, 0x50, 0x61,
-	0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x87,
+	0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x89,
 	0x01, 0x0a, 0x1b, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x42, 0x79,
-	0x50, 0x6f, 0x73, 0x74, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x34,
-	0x0a, 0x07, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
-	0x1a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e,
-	0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x07, 0x43, 0x6f, 0x6d,
-	0x6d, 0x65, 0x6e, 0x74, 0x12, 0x32, 0x0a, 0x09, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x6f,
-	0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61,
-	0x74, 0x6f, 0x72, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x09, 0x50,
-	0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x56, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61,
+	0x50, 0x6f, 0x73, 0x74, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x36,
+	0x0a, 0x08, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x1a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x08, 0x43, 0x6f,
+	0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x32, 0x0a, 0x09, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61,
+	0x74, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70, 0x61, 0x67, 0x69,
+	0x6e, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x52,
+	0x09, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x3a, 0x0a, 0x20, 0x44, 0x65,
+	0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x42,
+	0x79, 0x52, 0x6f, 0x6f, 0x74, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16,
+	0x0a, 0x06, 0x52, 0x6f, 0x6f, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x52, 0x6f, 0x6f, 0x74, 0x49, 0x44, 0x22, 0x23, 0x0a, 0x21, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x53, 0x75, 0x62, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x42, 0x79, 0x52, 0x6f, 0x6f,
+	0x74, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x43, 0x0a, 0x23, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x6c, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73,
+	0x42, 0x79, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44,
+	0x22, 0x26, 0x0a, 0x24, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x6c, 0x43, 0x6f, 0x6d,
+	0x6d, 0x65, 0x6e, 0x74, 0x73, 0x42, 0x79, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x56, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61,
 	0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
 	0x12, 0x16, 0x0a, 0x06, 0x50, 0x6f, 0x73, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x06, 0x50, 0x6f, 0x73, 0x74, 0x49, 0x44, 0x12, 0x26, 0x0a, 0x0e, 0x69, 0x64, 0x65, 0x6d,
@@ -1060,7 +1245,7 @@ var file_comment_comment_proto_rawDesc = []byte{
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63,
 	0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x53, 0x75, 0x62, 0x6a, 0x65,
 	0x63, 0x74, 0x49, 0x44, 0x22, 0x17, 0x0a, 0x15, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75,
-	0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x8d, 0x05,
+	0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x8a, 0x07,
 	0x0a, 0x07, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x5a, 0x0a, 0x0d, 0x43, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x23, 0x2e, 0x63, 0x6f, 0x6d,
 	0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74,
@@ -1085,26 +1270,42 @@ var file_comment_comment_proto_rawDesc = []byte{
 	0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x63,
 	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c,
 	0x65, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x5a, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a,
-	0x65, 0x63, 0x74, 0x12, 0x23, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69,
-	0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63,
-	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65,
-	0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53,
-	0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51,
-	0x0a, 0x0a, 0x47, 0x65, 0x74, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x20, 0x2e, 0x63,
-	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74,
-	0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21,
-	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x47,
-	0x65, 0x74, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x5a, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65,
-	0x63, 0x74, 0x12, 0x23, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65,
-	0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e,
-	0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75,
-	0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x1e, 0x5a,
-	0x1c, 0x6c, 0x6f, 0x6f, 0x6b, 0x69, 0x6e, 0x67, 0x66, 0x6f, 0x72, 0x70, 0x61, 0x72, 0x74, 0x6e,
-	0x65, 0x72, 0x2f, 0x70, 0x62, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x65, 0x12, 0x71, 0x0a, 0x18, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x43,
+	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x42, 0x79, 0x52, 0x6f, 0x6f, 0x49, 0x44, 0x12, 0x2f,
+	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73,
+	0x42, 0x79, 0x52, 0x6f, 0x6f, 0x74, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x24, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x87, 0x01, 0x0a, 0x1c, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x41, 0x6c, 0x6c, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x42, 0x79, 0x53, 0x75, 0x62,
+	0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x32, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74,
+	0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x6c,
+	0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x42, 0x79, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63,
+	0x74, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x33, 0x2e, 0x63, 0x6f, 0x6d,
+	0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x41, 0x6c, 0x6c, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x42, 0x79, 0x53, 0x75,
+	0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x5a, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74,
+	0x12, 0x23, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a,
+	0x65, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x0a, 0x47,
+	0x65, 0x74, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x20, 0x2e, 0x63, 0x6f, 0x6d, 0x6d,
+	0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x75, 0x62,
+	0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x63, 0x6f,
+	0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x53,
+	0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5a,
+	0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12,
+	0x23, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x63, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x75, 0x62, 0x6a, 0x65,
+	0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x1e, 0x5a, 0x1c, 0x6c, 0x6f,
+	0x6f, 0x6b, 0x69, 0x6e, 0x67, 0x66, 0x6f, 0x72, 0x70, 0x61, 0x72, 0x74, 0x6e, 0x65, 0x72, 0x2f,
+	0x70, 0x62, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -1119,52 +1320,60 @@ func file_comment_comment_proto_rawDescGZIP() []byte {
 	return file_comment_comment_proto_rawDescData
 }
 
-var file_comment_comment_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_comment_comment_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_comment_comment_proto_goTypes = []any{
-	(*CommentInfo)(nil),                 // 0: commentclient.CommentInfo
-	(*SubjectInfo)(nil),                 // 1: commentclient.SubjectInfo
-	(*CreateCommentRequest)(nil),        // 2: commentclient.CreateCommentRequest
-	(*CreateCommentResponse)(nil),       // 3: commentclient.CreateCommentResponse
-	(*DeleteCommentRequest)(nil),        // 4: commentclient.DeleteCommentRequest
-	(*DeleteCommentResponse)(nil),       // 5: commentclient.DeleteCommentResponse
-	(*GetCommentRequest)(nil),           // 6: commentclient.GetCommentRequest
-	(*GetCommentResponse)(nil),          // 7: commentclient.GetCommentResponse
-	(*GetCommentsByPostIDRequest)(nil),  // 8: commentclient.GetCommentsByPostIDRequest
-	(*GetCommentsByPostIDResponse)(nil), // 9: commentclient.GetCommentsByPostIDResponse
-	(*CreateSubjectRequest)(nil),        // 10: commentclient.CreateSubjectRequest
-	(*CreateSubjectResponse)(nil),       // 11: commentclient.CreateSubjectResponse
-	(*GetSubjectRequest)(nil),           // 12: commentclient.GetSubjectRequest
-	(*GetSubjectResponse)(nil),          // 13: commentclient.GetSubjectResponse
-	(*DeleteSubjectRequest)(nil),        // 14: commentclient.DeleteSubjectRequest
-	(*DeleteSubjectResponse)(nil),       // 15: commentclient.DeleteSubjectResponse
-	(*paginator.PaginationParams)(nil),  // 16: paginator.PaginationParams
-	(*paginator.Paginator)(nil),         // 17: paginator.Paginator
+	(*CommentInfo)(nil),                          // 0: commentclient.CommentInfo
+	(*SubjectInfo)(nil),                          // 1: commentclient.SubjectInfo
+	(*CreateCommentRequest)(nil),                 // 2: commentclient.CreateCommentRequest
+	(*CreateCommentResponse)(nil),                // 3: commentclient.CreateCommentResponse
+	(*DeleteCommentRequest)(nil),                 // 4: commentclient.DeleteCommentRequest
+	(*DeleteCommentResponse)(nil),                // 5: commentclient.DeleteCommentResponse
+	(*GetCommentRequest)(nil),                    // 6: commentclient.GetCommentRequest
+	(*GetCommentResponse)(nil),                   // 7: commentclient.GetCommentResponse
+	(*GetCommentsByPostIDRequest)(nil),           // 8: commentclient.GetCommentsByPostIDRequest
+	(*GetCommentsByPostIDResponse)(nil),          // 9: commentclient.GetCommentsByPostIDResponse
+	(*DeleteSubCommentsByRootIDRequest)(nil),     // 10: commentclient.DeleteSubCommentsByRootIDRequest
+	(*DeleteSubCommentsByRootIDResponse)(nil),    // 11: commentclient.DeleteSubCommentsByRootIDResponse
+	(*DeleteAllCommentsBySubjectIDRequest)(nil),  // 12: commentclient.DeleteAllCommentsBySubjectIDRequest
+	(*DeleteAllCommentsBySubjectIDResponse)(nil), // 13: commentclient.DeleteAllCommentsBySubjectIDResponse
+	(*CreateSubjectRequest)(nil),                 // 14: commentclient.CreateSubjectRequest
+	(*CreateSubjectResponse)(nil),                // 15: commentclient.CreateSubjectResponse
+	(*GetSubjectRequest)(nil),                    // 16: commentclient.GetSubjectRequest
+	(*GetSubjectResponse)(nil),                   // 17: commentclient.GetSubjectResponse
+	(*DeleteSubjectRequest)(nil),                 // 18: commentclient.DeleteSubjectRequest
+	(*DeleteSubjectResponse)(nil),                // 19: commentclient.DeleteSubjectResponse
+	(*paginator.PaginationParams)(nil),           // 20: paginator.PaginationParams
+	(*paginator.Paginator)(nil),                  // 21: paginator.Paginator
 }
 var file_comment_comment_proto_depIdxs = []int32{
 	0,  // 0: commentclient.CommentInfo.SubComments:type_name -> commentclient.CommentInfo
 	0,  // 1: commentclient.CreateCommentResponse.Comment:type_name -> commentclient.CommentInfo
 	0,  // 2: commentclient.GetCommentResponse.Comment:type_name -> commentclient.CommentInfo
-	16, // 3: commentclient.GetCommentsByPostIDRequest.PaginationParams:type_name -> paginator.PaginationParams
-	0,  // 4: commentclient.GetCommentsByPostIDResponse.Comment:type_name -> commentclient.CommentInfo
-	17, // 5: commentclient.GetCommentsByPostIDResponse.Paginator:type_name -> paginator.Paginator
+	20, // 3: commentclient.GetCommentsByPostIDRequest.PaginationParams:type_name -> paginator.PaginationParams
+	0,  // 4: commentclient.GetCommentsByPostIDResponse.Comments:type_name -> commentclient.CommentInfo
+	21, // 5: commentclient.GetCommentsByPostIDResponse.Paginator:type_name -> paginator.Paginator
 	1,  // 6: commentclient.CreateSubjectResponse.Subject:type_name -> commentclient.SubjectInfo
 	1,  // 7: commentclient.GetSubjectResponse.Subject:type_name -> commentclient.SubjectInfo
 	2,  // 8: commentclient.Comment.CreateComment:input_type -> commentclient.CreateCommentRequest
 	6,  // 9: commentclient.Comment.GetComment:input_type -> commentclient.GetCommentRequest
 	8,  // 10: commentclient.Comment.GetCommentsByPostID:input_type -> commentclient.GetCommentsByPostIDRequest
 	4,  // 11: commentclient.Comment.DeleteComment:input_type -> commentclient.DeleteCommentRequest
-	10, // 12: commentclient.Comment.CreateSubject:input_type -> commentclient.CreateSubjectRequest
-	12, // 13: commentclient.Comment.GetSubject:input_type -> commentclient.GetSubjectRequest
-	14, // 14: commentclient.Comment.DeleteSubject:input_type -> commentclient.DeleteSubjectRequest
-	3,  // 15: commentclient.Comment.CreateComment:output_type -> commentclient.CreateCommentResponse
-	7,  // 16: commentclient.Comment.GetComment:output_type -> commentclient.GetCommentResponse
-	9,  // 17: commentclient.Comment.GetCommentsByPostID:output_type -> commentclient.GetCommentsByPostIDResponse
-	5,  // 18: commentclient.Comment.DeleteComment:output_type -> commentclient.DeleteCommentResponse
-	11, // 19: commentclient.Comment.CreateSubject:output_type -> commentclient.CreateSubjectResponse
-	13, // 20: commentclient.Comment.GetSubject:output_type -> commentclient.GetSubjectResponse
-	15, // 21: commentclient.Comment.DeleteSubject:output_type -> commentclient.DeleteSubjectResponse
-	15, // [15:22] is the sub-list for method output_type
-	8,  // [8:15] is the sub-list for method input_type
+	10, // 12: commentclient.Comment.DeleteSubCommentsByRooID:input_type -> commentclient.DeleteSubCommentsByRootIDRequest
+	12, // 13: commentclient.Comment.DeleteAllCommentsBySubjectID:input_type -> commentclient.DeleteAllCommentsBySubjectIDRequest
+	14, // 14: commentclient.Comment.CreateSubject:input_type -> commentclient.CreateSubjectRequest
+	16, // 15: commentclient.Comment.GetSubject:input_type -> commentclient.GetSubjectRequest
+	18, // 16: commentclient.Comment.DeleteSubject:input_type -> commentclient.DeleteSubjectRequest
+	3,  // 17: commentclient.Comment.CreateComment:output_type -> commentclient.CreateCommentResponse
+	7,  // 18: commentclient.Comment.GetComment:output_type -> commentclient.GetCommentResponse
+	9,  // 19: commentclient.Comment.GetCommentsByPostID:output_type -> commentclient.GetCommentsByPostIDResponse
+	5,  // 20: commentclient.Comment.DeleteComment:output_type -> commentclient.DeleteCommentResponse
+	19, // 21: commentclient.Comment.DeleteSubCommentsByRooID:output_type -> commentclient.DeleteSubjectResponse
+	13, // 22: commentclient.Comment.DeleteAllCommentsBySubjectID:output_type -> commentclient.DeleteAllCommentsBySubjectIDResponse
+	15, // 23: commentclient.Comment.CreateSubject:output_type -> commentclient.CreateSubjectResponse
+	17, // 24: commentclient.Comment.GetSubject:output_type -> commentclient.GetSubjectResponse
+	19, // 25: commentclient.Comment.DeleteSubject:output_type -> commentclient.DeleteSubjectResponse
+	17, // [17:26] is the sub-list for method output_type
+	8,  // [8:17] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
 	8,  // [8:8] is the sub-list for extension extendee
 	0,  // [0:8] is the sub-list for field type_name
@@ -1297,7 +1506,7 @@ func file_comment_comment_proto_init() {
 			}
 		}
 		file_comment_comment_proto_msgTypes[10].Exporter = func(v any, i int) any {
-			switch v := v.(*CreateSubjectRequest); i {
+			switch v := v.(*DeleteSubCommentsByRootIDRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1309,7 +1518,7 @@ func file_comment_comment_proto_init() {
 			}
 		}
 		file_comment_comment_proto_msgTypes[11].Exporter = func(v any, i int) any {
-			switch v := v.(*CreateSubjectResponse); i {
+			switch v := v.(*DeleteSubCommentsByRootIDResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1321,7 +1530,7 @@ func file_comment_comment_proto_init() {
 			}
 		}
 		file_comment_comment_proto_msgTypes[12].Exporter = func(v any, i int) any {
-			switch v := v.(*GetSubjectRequest); i {
+			switch v := v.(*DeleteAllCommentsBySubjectIDRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1333,7 +1542,7 @@ func file_comment_comment_proto_init() {
 			}
 		}
 		file_comment_comment_proto_msgTypes[13].Exporter = func(v any, i int) any {
-			switch v := v.(*GetSubjectResponse); i {
+			switch v := v.(*DeleteAllCommentsBySubjectIDResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1345,7 +1554,7 @@ func file_comment_comment_proto_init() {
 			}
 		}
 		file_comment_comment_proto_msgTypes[14].Exporter = func(v any, i int) any {
-			switch v := v.(*DeleteSubjectRequest); i {
+			switch v := v.(*CreateSubjectRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1357,6 +1566,54 @@ func file_comment_comment_proto_init() {
 			}
 		}
 		file_comment_comment_proto_msgTypes[15].Exporter = func(v any, i int) any {
+			switch v := v.(*CreateSubjectResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_comment_comment_proto_msgTypes[16].Exporter = func(v any, i int) any {
+			switch v := v.(*GetSubjectRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_comment_comment_proto_msgTypes[17].Exporter = func(v any, i int) any {
+			switch v := v.(*GetSubjectResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_comment_comment_proto_msgTypes[18].Exporter = func(v any, i int) any {
+			switch v := v.(*DeleteSubjectRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_comment_comment_proto_msgTypes[19].Exporter = func(v any, i int) any {
 			switch v := v.(*DeleteSubjectResponse); i {
 			case 0:
 				return &v.state
@@ -1375,7 +1632,7 @@ func file_comment_comment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_comment_comment_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

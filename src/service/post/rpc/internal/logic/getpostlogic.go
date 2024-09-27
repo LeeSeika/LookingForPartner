@@ -8,6 +8,7 @@ import (
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/post"
+	"lookingforpartner/pb/user"
 	"lookingforpartner/service/post/rpc/internal/converter"
 	"lookingforpartner/service/post/rpc/internal/svc"
 )
@@ -22,7 +23,7 @@ func NewGetPostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPostLo
 	return &GetPostLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post"),
+		Logger: logger.NewLogger(ctx, "post-rpc"),
 	}
 }
 
@@ -33,7 +34,7 @@ func (l *GetPostLogic) GetPost(in *post.GetPostRequest) (*post.GetPostResponse, 
 			return nil, errs.RpcNotFound
 		}
 		l.Logger.Errorf("cannot get post, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	poInfo := converter.PostDBToRPC(poProj.Post)
@@ -42,7 +43,18 @@ func (l *GetPostLogic) GetPost(in *post.GetPostRequest) (*post.GetPostResponse, 
 		poInfo.Project = projInfo
 	}
 
-	// todo: get author & maintainer info from user rpc
+	// get author & maintainer info from user
+	getUserInfoReq := user.GetUserInfoRequest{WxUid: poProj.AuthorID}
+	getUserInfoResp, err := l.svcCtx.UserRpc.GetUserInfo(l.ctx, &getUserInfoReq)
+	if err != nil {
+		l.Logger.Errorf("cannot get author info when getting post, err:%+v", err)
+	} else {
+		userInfo := getUserInfoResp.UserInfo
+		poInfo.Author = userInfo
+		if poInfo.Project != nil {
+			poInfo.Project.Maintainer = userInfo
+		}
+	}
 
 	return &post.GetPostResponse{Post: poInfo}, nil
 }

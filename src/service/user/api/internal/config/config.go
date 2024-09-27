@@ -15,7 +15,4 @@ type Config struct {
 	}
 
 	UserRpc zrpc.RpcClientConf
-
-	AppID     string
-	AppSecret string
 }

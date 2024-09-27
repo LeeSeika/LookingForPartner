@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
+	"lookingforpartner/service/comment/rpc/internal/mqs"
 
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/config"
@@ -34,6 +36,24 @@ func main() {
 	})
 	defer s.Stop()
 
-	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
+	// mq
+	go func() {
+		defer func() {
+			if p := recover(); p != nil {
+				log.Printf("recovered from mq panic:%+v\n", p)
+			}
+		}()
+
+		serviceGroup := service.NewServiceGroup()
+		defer serviceGroup.Stop()
+
+		for _, mq := range mqs.Consumers(c, ctx) {
+			serviceGroup.Add(mq)
+		}
+		serviceGroup.Start()
+
+	}()
+
+	fmt.Printf("Starting comment rpc server at %s...\n", c.ListenOn)
 	s.Start()
 }

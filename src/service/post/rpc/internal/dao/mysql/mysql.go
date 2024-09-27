@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"gorm.io/gorm/clause"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/service/post/model"
+	"lookingforpartner/service/post/model/entity"
+	"lookingforpartner/service/post/model/vo"
 	"time"
 
 	basedao "lookingforpartner/common/dao"
@@ -20,7 +21,17 @@ type MysqlInterface struct {
 	db *gorm.DB
 }
 
-func (m *MysqlInterface) DeletePost(ctx context.Context, postID string) (*model.PostProject, error) {
+func (m *MysqlInterface) UpdatePost(ctx context.Context, updatedPost *entity.Post) (*entity.Post, error) {
+	db := m.db.WithContext(ctx)
+
+	if err := db.Save(updatedPost).Error; err != nil {
+		return nil, err
+	}
+
+	return updatedPost, nil
+}
+
+func (m *MysqlInterface) DeletePost(ctx context.Context, postID string) (*vo.PostProject, error) {
 	tx := m.db.Begin()
 	if tx.Error != nil {
 		return nil, tx.Error
@@ -31,7 +42,7 @@ func (m *MysqlInterface) DeletePost(ctx context.Context, postID string) (*model.
 	tx = tx.WithContext(ctx)
 
 	// delete post
-	var post model.Post
+	var post entity.Post
 	post.PostID = postID
 	rs := tx.Clauses(clause.Returning{}).Delete(&post)
 	if rs.Error != nil {
@@ -39,7 +50,7 @@ func (m *MysqlInterface) DeletePost(ctx context.Context, postID string) (*model.
 	}
 
 	// delete project associated with post
-	var proj model.Project
+	var proj entity.Project
 	proj.PostID = postID
 	rs = tx.Clauses(clause.Returning{}).Delete(&proj)
 	if rs.Error != nil {
@@ -50,12 +61,12 @@ func (m *MysqlInterface) DeletePost(ctx context.Context, postID string) (*model.
 		return nil, err
 	}
 
-	poProj := model.PostProject{Post: &post, Project: &proj}
+	poProj := vo.PostProject{Post: &post, Project: &proj}
 
 	return &poProj, nil
 }
 
-func (m *MysqlInterface) CreatePost(ctx context.Context, post *model.Post, proj *model.Project, idempotencyKey int64) (*model.PostProject, error) {
+func (m *MysqlInterface) CreatePost(ctx context.Context, post *entity.Post, proj *entity.Project, idempotencyKey int64) (*vo.PostProject, error) {
 	tx := m.db.Begin()
 	if tx.Error != nil {
 		return nil, tx.Error
@@ -66,7 +77,7 @@ func (m *MysqlInterface) CreatePost(ctx context.Context, post *model.Post, proj 
 	tx = tx.WithContext(ctx)
 
 	// check idempotency
-	idempotency := model.IdempotencyPost{
+	idempotency := entity.IdempotencyPost{
 		ID: idempotencyKey,
 	}
 	rs := tx.Create(idempotency)
@@ -85,10 +96,10 @@ func (m *MysqlInterface) CreatePost(ctx context.Context, post *model.Post, proj 
 		return nil, err
 	}
 
-	post = &model.Post{
+	post = &entity.Post{
 		PostID: post.PostID,
 	}
-	proj = &model.Project{
+	proj = &entity.Project{
 		ProjectID: proj.ProjectID,
 	}
 
@@ -103,17 +114,17 @@ func (m *MysqlInterface) CreatePost(ctx context.Context, post *model.Post, proj 
 		return nil, err
 	}
 
-	poProj := model.PostProject{Post: post, Project: proj}
+	poProj := vo.PostProject{Post: post, Project: proj}
 
 	return &poProj, nil
 }
 
-func (m *MysqlInterface) GetPost(ctx context.Context, postID string) (*model.PostProject, error) {
+func (m *MysqlInterface) GetPost(ctx context.Context, postID string) (*vo.PostProject, error) {
 	db := m.db.WithContext(ctx)
 
-	var poProj model.PostProject
+	var poProj vo.PostProject
 
-	rs := db.Model(&model.Post{}).
+	rs := db.Model(&entity.Post{}).
 		Joins("left join projects on posts.post_id = projects.post_id").
 		Where("posts.post_id = ?", postID).
 		First(&poProj)
@@ -121,12 +132,12 @@ func (m *MysqlInterface) GetPost(ctx context.Context, postID string) (*model.Pos
 	return &poProj, rs.Error
 }
 
-func (m *MysqlInterface) GetPosts(ctx context.Context, page, size int64, order basedao.OrderOpt) ([]*model.PostProject, *basedao.Paginator, error) {
+func (m *MysqlInterface) GetPosts(ctx context.Context, page, size int64, order basedao.OrderOpt) ([]*vo.PostProject, *basedao.Paginator, error) {
 	db := m.db.WithContext(ctx)
 
-	poProjs := make([]*model.PostProject, 0, int(size))
+	poProjs := make([]*vo.PostProject, 0, int(size))
 
-	query := db.Model(&model.Post{}).
+	query := db.Model(&entity.Post{}).
 		Joins("left join projects on posts.post_id = projects.post_id")
 
 	param := basedao.PaginationParam{
@@ -141,12 +152,12 @@ func (m *MysqlInterface) GetPosts(ctx context.Context, page, size int64, order b
 	return poProjs, paginator, err
 }
 
-func (m *MysqlInterface) GetPostsByAuthorID(ctx context.Context, page, size int64, authorID string, order basedao.OrderOpt) ([]*model.PostProject, *basedao.Paginator, error) {
+func (m *MysqlInterface) GetPostsByAuthorID(ctx context.Context, page, size int64, authorID string, order basedao.OrderOpt) ([]*vo.PostProject, *basedao.Paginator, error) {
 	db := m.db.WithContext(ctx)
 
-	poProjs := make([]*model.PostProject, 0, int(size))
+	poProjs := make([]*vo.PostProject, 0, int(size))
 
-	query := db.Model(&model.Post{}).
+	query := db.Model(&entity.Post{}).
 		Joins("left join projects on posts.post_id = projects.post_id").
 		Where("author_id = ?", authorID)
 
@@ -163,7 +174,7 @@ func (m *MysqlInterface) GetPostsByAuthorID(ctx context.Context, page, size int6
 	return poProjs, paginator, err
 }
 
-func (m *MysqlInterface) UpdateProject(ctx context.Context, project *model.Project) (*model.Project, error) {
+func (m *MysqlInterface) UpdateProject(ctx context.Context, project *entity.Project) (*entity.Project, error) {
 	db := m.db.WithContext(ctx)
 
 	query := db.Clauses(clause.Returning{}).
@@ -212,7 +223,9 @@ func NewMysqlInterface(database, username, password, host, port string, maxIdleC
 }
 
 func (m *MysqlInterface) autoMigrate() {
-	m.db.AutoMigrate(&model.Project{})
-	m.db.AutoMigrate(&model.Post{})
-	m.db.AutoMigrate(&model.IdempotencyPost{})
+	m.db.AutoMigrate(
+		&entity.Project{},
+		&entity.Post{},
+		&entity.IdempotencyPost{},
+	)
 }

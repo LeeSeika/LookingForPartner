@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/rpc/internal/svc"
 
@@ -20,7 +21,7 @@ func NewUpdateUserPostCountLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	return &UpdateUserPostCountLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "user-rpc"),
 	}
 }
 
@@ -31,7 +32,7 @@ func (l *UpdateUserPostCountLogic) UpdateUserPostCount(in *user.UpdateUserPostCo
 		if errors.Is(err, errs.DBDuplicatedIdempotencyKey) {
 			return nil, errs.RpcDuplicatedIdempotencyKey
 		}
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	return &user.UpdateUserPostCountResponse{}, nil

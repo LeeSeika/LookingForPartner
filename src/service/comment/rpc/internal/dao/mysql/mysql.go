@@ -19,6 +19,28 @@ type MysqlInterface struct {
 	db *gorm.DB
 }
 
+func (m *MysqlInterface) DeleteAllCommentsBySubjectID(ctx context.Context, subjectID string) error {
+	db := m.db.WithContext(ctx)
+
+	if err := db.Where("subject_id = ?", subjectID).
+		Delete(&entity.CommentIndex{}).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MysqlInterface) DeleteSubCommentsByRootID(ctx context.Context, rootID string) error {
+	db := m.db.WithContext(ctx)
+
+	if err := db.Where("root_id = ?", rootID).
+		Delete(&entity.CommentIndex{}).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *MysqlInterface) GetSubject(ctx context.Context, subjectID string) (*entity.Subject, error) {
 	db := m.db.WithContext(ctx)
 

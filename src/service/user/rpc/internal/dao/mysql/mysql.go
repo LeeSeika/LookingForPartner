@@ -9,13 +9,27 @@ import (
 	"gorm.io/gorm/clause"
 	basedao "lookingforpartner/common/dao"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/service/user/model"
+	"lookingforpartner/service/user/model/entity"
 	"lookingforpartner/service/user/rpc/internal/dao"
 	"time"
 )
 
 type MysqlInterface struct {
 	db *gorm.DB
+}
+
+func (m *MysqlInterface) GetUsersByIDs(ctx context.Context, wxUids []string) ([]*entity.User, error) {
+	db := m.db.WithContext(ctx)
+
+	var users []*entity.User
+
+	if err := db.Model(&entity.User{}).
+		Where("wx_uid IN ?", wxUids).
+		Find(&users).Error; err != nil {
+		return nil, err
+	}
+
+	return users, nil
 }
 
 func (m *MysqlInterface) UpdatePostCount(ctx context.Context, wxUid string, delta int, idempotencyKey int64) error {
@@ -29,7 +43,7 @@ func (m *MysqlInterface) UpdatePostCount(ctx context.Context, wxUid string, delt
 	tx = tx.WithContext(ctx)
 
 	// check idempotency
-	idempotency := model.IdempotencyUser{
+	idempotency := entity.IdempotencyUser{
 		ID: idempotencyKey,
 	}
 	rs := tx.Create(idempotency)
@@ -40,7 +54,7 @@ func (m *MysqlInterface) UpdatePostCount(ctx context.Context, wxUid string, delt
 		return rs.Error
 	}
 
-	rs = tx.Model(&model.User{}).
+	rs = tx.Model(&entity.User{}).
 		Where("wx_uid = ?", wxUid).
 		UpdateColumn("post_count", gorm.Expr("post_count + ?", delta))
 	if rs.Error != nil {
@@ -52,7 +66,7 @@ func (m *MysqlInterface) UpdatePostCount(ctx context.Context, wxUid string, delt
 	return rs.Error
 }
 
-func (m *MysqlInterface) UpdateUser(ctx context.Context, user *model.User) (*model.User, error) {
+func (m *MysqlInterface) UpdateUser(ctx context.Context, user *entity.User) (*entity.User, error) {
 	db := m.db.WithContext(ctx)
 
 	query := db.Clauses(clause.Returning{}).
@@ -70,13 +84,13 @@ func (m *MysqlInterface) UpdateUser(ctx context.Context, user *model.User) (*mod
 	return user, nil
 }
 
-func (m *MysqlInterface) GetUser(ctx context.Context, wxUid string) (*model.User, error) {
-	var user model.User
-	rs := m.db.WithContext(ctx).Model(&model.User{}).Where("wx_uid = ?", wxUid).First(&user)
+func (m *MysqlInterface) GetUser(ctx context.Context, wxUid string) (*entity.User, error) {
+	var user entity.User
+	rs := m.db.WithContext(ctx).Model(&entity.User{}).Where("wx_uid = ?", wxUid).First(&user)
 	return &user, rs.Error
 }
 
-func (m *MysqlInterface) FirstOrCreateUser(ctx context.Context, user *model.User) (*model.User, error) {
+func (m *MysqlInterface) FirstOrCreateUser(ctx context.Context, user *entity.User) (*entity.User, error) {
 	rs := m.db.WithContext(ctx).Where("wx_uid = ?", user.WxUid).FirstOrCreate(user)
 	return user, rs.Error
 }
@@ -112,6 +126,6 @@ func NewMysqlInterface(database, username, password, host, port string, maxIdleC
 }
 
 func (m *MysqlInterface) autoMigrate() {
-	m.db.AutoMigrate(&model.User{})
-	m.db.AutoMigrate(&model.IdempotencyUser{})
+	m.db.AutoMigrate(&entity.User{})
+	m.db.AutoMigrate(&entity.IdempotencyUser{})
 }

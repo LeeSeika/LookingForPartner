@@ -94,6 +94,15 @@ message UpdateProjectResponse {
   Project Project = 1;
 }
 
+// FillSubject
+message FillSubjectRequest {
+  string PostID = 1;
+  string SubjectID = 2;
+}
+
+message FillSubjectResponse {
+}
+
 service Post {
   rpc CreatePost(CreatePostRequest) returns(CreatePostResponse);
   rpc DeletePost(DeletePostRequest) returns(DeletePostResponse);
@@ -101,4 +110,5 @@ service Post {
   rpc GetPosts(GetPostsRequest) returns(GetPostsResponse);
   rpc GetPostsByAuthorID(GetPostsByAuthorIDRequest) returns(GetPostsByAuthorIDResponse);
   rpc UpdateProject(UpdateProjectRequest) returns(UpdateProjectResponse);
+  rpc FillSubject(FillSubjectRequest) returns(FillSubjectResponse);
 }

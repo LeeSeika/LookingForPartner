@@ -1,4 +1,4 @@
-Name: user.rpc
+Name: post.rpc
 ListenOn: 0.0.0.0:20002
 Etcd:
   Hosts:
@@ -25,4 +25,9 @@ KqUpdateUserPostCountPusherConf:
   Brokers:
     - kafka:9092
   Topic: update-user-post-count
+
+KqDeleteSubjectPusherConf:
+  Brokers:
+    - kafka:9092
+  Topic: delete-subject
 

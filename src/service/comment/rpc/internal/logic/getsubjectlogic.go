@@ -36,7 +36,7 @@ func (l *GetSubjectLogic) GetSubject(in *comment.GetSubjectRequest) (*comment.Ge
 			return nil, errs.RpcNotFound
 		}
 		l.Logger.Errorf("cannot get subject, err: %+v", err)
-		return nil, errs.RpcUnknown
+		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
 	return &comment.GetSubjectResponse{Subject: converter.SubjectDBToRPC(subject)}, nil

@@ -51,3 +51,8 @@ func (s *PostServer) UpdateProject(ctx context.Context, in *post.UpdateProjectRe
 	l := logic.NewUpdateProjectLogic(ctx, s.svcCtx)
 	return l.UpdateProject(in)
 }
+
+func (s *PostServer) FillSubject(ctx context.Context, in *post.FillSubjectRequest) (*post.FillSubjectResponse, error) {
+	l := logic.NewFillSubjectLogic(ctx, s.svcCtx)
+	return l.FillSubject(in)
+}

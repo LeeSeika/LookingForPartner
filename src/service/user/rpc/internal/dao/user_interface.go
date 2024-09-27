@@ -2,12 +2,13 @@ package dao
 
 import (
 	"context"
-	"lookingforpartner/service/user/model"
+	"lookingforpartner/service/user/model/entity"
 )
 
 type UserInterface interface {
-	FirstOrCreateUser(ctx context.Context, user *model.User) (*model.User, error)
-	UpdateUser(ctx context.Context, user *model.User) (*model.User, error)
-	GetUser(ctx context.Context, wxUid string) (*model.User, error)
+	FirstOrCreateUser(ctx context.Context, user *entity.User) (*entity.User, error)
+	UpdateUser(ctx context.Context, user *entity.User) (*entity.User, error)
+	GetUser(ctx context.Context, wxUid string) (*entity.User, error)
+	GetUsersByIDs(ctx context.Context, wxUids []string) ([]*entity.User, error)
 	UpdatePostCount(ctx context.Context, wxUid string, delta int, idempotencyKey int64) error
 }

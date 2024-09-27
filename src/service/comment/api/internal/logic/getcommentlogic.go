@@ -2,7 +2,11 @@ package logic
 
 import (
 	"context"
-
+	"errors"
+	"lookingforpartner/common/errs"
+	"lookingforpartner/common/logger"
+	"lookingforpartner/pb/comment"
+	"lookingforpartner/service/comment/api/internal/converter"
 	"lookingforpartner/service/comment/api/internal/svc"
 	"lookingforpartner/service/comment/api/internal/types"
 
@@ -17,14 +21,23 @@ type GetCommentLogic struct {
 
 func NewGetCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetCommentLogic {
 	return &GetCommentLogic{
-		Logger: logx.WithContext(ctx),
+		Logger: logger.NewLogger(ctx, "comment-api"),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
 func (l *GetCommentLogic) GetComment(req *types.GetCommentRequest) (resp *types.GetCommentResponse, err error) {
-	// todo: add your logic here and delete this line
+	getCommentReq := comment.GetCommentRequest{CommentID: req.CommentID}
+	getCommentResp, err := l.svcCtx.CommentRpc.GetComment(l.ctx, &getCommentReq)
+	if err != nil {
+		if errors.Is(err, errs.RpcNotFound) {
+			return nil, errs.FormattedApiNotFound()
+		}
+		return nil, errs.FormattedApiInternal()
+	}
 
-	return
+	resp = &types.GetCommentResponse{Comment: converter.CommentRpcToApi(getCommentResp.Comment)}
+
+	return resp, nil
 }

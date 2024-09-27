@@ -13,12 +13,17 @@ var (
 )
 
 var (
-	RpcUnknown                  = status.Error(codes.Unknown, "unknown")
 	RpcNotFound                 = status.Error(codes.NotFound, "not found")
 	RpcAlreadyExists            = status.Error(codes.AlreadyExists, "already exists")
 	RpcPermissionDenied         = status.Error(codes.PermissionDenied, "permission denied")
 	RpcDuplicatedIdempotencyKey = status.Error(codes.AlreadyExists, "duplicated idempotency key")
 )
+
+func FormatRpcUnknownError(errMsg string) error {
+	return status.Error(codes.Unknown, errMsg)
+}
+
+func FormatRpcAbortedError(errMsg string) error { return status.Error(codes.Aborted, errMsg) }
 
 var (
 	ApiInternal             = "internal"
@@ -26,6 +31,7 @@ var (
 	ApiNotFound             = "not found"
 	ApiUnauthorized         = "unauthorized"
 	ApiGenTokenFailed       = "failed to generate token"
+	ApiPermissionDenied     = "permission denied"
 )
 
 func FormatApiError(statusCode int, errMsg string) error {
