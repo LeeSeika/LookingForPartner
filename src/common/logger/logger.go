@@ -18,6 +18,7 @@ func SetupLogger(service string) {
 		KeepDays:    7,
 		MaxBackups:  2,
 		Rotation:    "daily",
+		Stat:        true,
 	}
 	logx.MustSetup(conf)
 }
