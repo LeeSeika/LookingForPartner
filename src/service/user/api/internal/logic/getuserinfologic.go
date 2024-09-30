@@ -5,7 +5,6 @@ import (
 	"errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/api/internal/svc"
 	"lookingforpartner/service/user/api/internal/types"
@@ -21,7 +20,7 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 	return &GetUserInfoLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user-api"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/service/post/model/entity"
 	"lookingforpartner/service/post/rpc/internal/converter"
 
@@ -22,7 +21,7 @@ func NewUpdateProjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 	return &UpdateProjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

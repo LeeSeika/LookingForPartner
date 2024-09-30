@@ -6,7 +6,6 @@ import (
 	"gorm.io/gorm"
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/post"
 	"lookingforpartner/service/comment/model/dto"
 
@@ -26,7 +25,7 @@ func NewDeleteCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Del
 	return &DeleteCommentLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "comment-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

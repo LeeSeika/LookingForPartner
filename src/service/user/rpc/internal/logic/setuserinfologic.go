@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/zeromicro/go-zero/core/logx"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/service/user/model/entity"
 
 	"lookingforpartner/common/errs"
@@ -25,7 +24,7 @@ func NewSetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SetUs
 	return &SetUserInfoLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

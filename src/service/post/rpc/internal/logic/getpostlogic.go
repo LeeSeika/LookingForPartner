@@ -6,7 +6,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/post"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/post/rpc/internal/converter"
@@ -23,7 +22,7 @@ func NewGetPostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetPostLo
 	return &GetPostLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

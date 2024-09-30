@@ -5,7 +5,6 @@ import (
 	"errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/api/internal/common"
 	"lookingforpartner/service/user/api/internal/svc"
@@ -22,7 +21,7 @@ func NewRefreshTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Refr
 	return &RefreshTokenLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user-api"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

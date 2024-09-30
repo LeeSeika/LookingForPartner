@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/api/internal/common"
 	"lookingforpartner/service/user/api/internal/svc"
@@ -22,7 +21,7 @@ func NewWxLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxLoginLo
 	return &WxLoginLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user-api"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 
@@ -35,7 +34,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 	wxLoginResp, err := l.svcCtx.UserRpc.WxLogin(l.ctx, &wxLoginReq)
 	if err != nil {
 		l.Logger.Errorf("cannot login, err: %+v", err)
-		if wxLoginResp.WechatResponseCode != 0 {
+		if wxLoginResp != nil && wxLoginResp.WechatResponseCode != 0 {
 
 			if wxLoginResp.WechatResponseCode == errs.WechatLoginInvalidCode {
 				return nil, errs.FormatApiError(http.StatusBadRequest, "invalid js_code")

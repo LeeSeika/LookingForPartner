@@ -7,7 +7,6 @@ import (
 	"lookingforpartner/pb/comment"
 
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/post"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/post/model/dto"
@@ -27,7 +26,7 @@ func NewDeletePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delete
 	return &DeletePostLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

@@ -33,7 +33,7 @@ services:
       - ${CODE_PATH_HOST}:/home/src
       - ${TARGET_PATH_HOST}:/home/target
       - ${SCRIPTS_PATH_HOST}:/home/scripts
-      - ${LOG_PATH_HOST}:/home/logs
+      - ${LOG_PATH_HOST}:/var/logs
     stdin_open: true
     tty: true
     networks:

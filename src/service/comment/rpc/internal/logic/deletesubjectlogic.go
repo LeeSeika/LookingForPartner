@@ -4,7 +4,6 @@ import (
 	"context"
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/service/comment/model/dto"
 
 	"lookingforpartner/pb/comment"
@@ -23,7 +22,7 @@ func NewDeleteSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Del
 	return &DeleteSubjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "comment-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

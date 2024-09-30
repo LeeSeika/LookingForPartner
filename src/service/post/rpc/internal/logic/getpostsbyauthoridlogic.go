@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/common/params"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/post/rpc/internal/converter"
@@ -23,7 +22,7 @@ func NewGetPostsByAuthorIDLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	return &GetPostsByAuthorIDLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

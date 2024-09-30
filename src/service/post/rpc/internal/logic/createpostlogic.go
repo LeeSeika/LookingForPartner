@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/zeromicro/go-zero/core/logx"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/comment/model/dto"
 	"lookingforpartner/service/post/model/entity"
@@ -27,7 +26,7 @@ func NewCreatePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 	return &CreatePostLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

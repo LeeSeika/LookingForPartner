@@ -3,8 +3,6 @@ package logic
 import (
 	"context"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
-
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/svc"
 
@@ -21,7 +19,7 @@ func NewDeleteAllCommentsBySubjectIDLogic(ctx context.Context, svcCtx *svc.Servi
 	return &DeleteAllCommentsBySubjectIDLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "comment-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

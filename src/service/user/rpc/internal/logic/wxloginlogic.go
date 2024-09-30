@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
 	"io/ioutil"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/service/user/model/dto"
 	"lookingforpartner/service/user/model/entity"
 	"net/http"
@@ -28,7 +27,7 @@ func NewWxLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxLoginLo
 	return &WxLoginLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

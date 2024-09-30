@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/pb/paginator"
 	"lookingforpartner/service/comment/api/internal/converter"
@@ -22,7 +21,7 @@ type GetCommentsByPostIDLogic struct {
 
 func NewGetCommentsByPostIDLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetCommentsByPostIDLogic {
 	return &GetCommentsByPostIDLogic{
-		Logger: logger.NewLogger(ctx, "comment-api"),
+		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
