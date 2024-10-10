@@ -69,7 +69,7 @@ func (l *WxLoginLogic) WxLogin(in *user.WxLoginRequest) (*user.WxLoginResponse, 
 			WithFields(logx.Field("wechat response error code", rb.ErrCode)).
 			Errorf("cannot get wechat session")
 
-		return &user.WxLoginResponse{WechatResponseCode: int32(rb.ErrCode)}, errs.FormatRpcAbortedError(rb.ErrMsg)
+		return &user.WxLoginResponse{WechatResponseCode: int32(rb.ErrCode)}, nil
 	}
 
 	// create user
