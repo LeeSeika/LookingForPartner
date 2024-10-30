@@ -39,7 +39,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginRe
 		return nil, errs.FormattedApiInternal()
 	}
 
-	if wxLoginResp != nil && wxLoginResp.WechatResponseCode != 0 {
+	if wxLoginResp.WechatResponseCode != 0 {
 
 		if wxLoginResp.WechatResponseCode == int32(errs.WechatLoginInvalidCode) {
 			return nil, errs.FormatApiError(http.StatusBadRequest, "invalid js_code")
