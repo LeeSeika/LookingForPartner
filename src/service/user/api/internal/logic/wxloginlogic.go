@@ -28,8 +28,10 @@ func NewWxLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxLoginLo
 func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginResponse, err error) {
 
 	wxLoginReq := user.WxLoginRequest{
-		Username: req.NickName,
+		Username: req.Username,
 		Code:     req.Code,
+		Gender:   int32(req.Gender),
+		Avatar:   req.Avatar,
 	}
 	wxLoginResp, err := l.svcCtx.UserRpc.WxLogin(l.ctx, &wxLoginReq)
 	if err != nil {

@@ -226,6 +226,7 @@ func (m *MysqlInterface) GetRootCommentsByPostID(ctx context.Context, postID str
 		Where("comment_indexes.root_id == NULL")
 
 	pagiParam := basedao.PaginationParam{
+		DB:      db,
 		Query:   queryRootComments,
 		Page:    int(page),
 		Limit:   int(size),
@@ -233,7 +234,7 @@ func (m *MysqlInterface) GetRootCommentsByPostID(ctx context.Context, postID str
 		ShowSQL: false,
 	}
 
-	paginator, err := basedao.GetListWithPagination(db, &pagiParam, &rootCommentIndexContents)
+	paginator, err := basedao.GetListWithPagination(&pagiParam, &rootCommentIndexContents)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -325,7 +326,7 @@ func (m *MysqlInterface) CreateSubject(ctx context.Context, subject *entity.Subj
 	idempotency := entity.IdempotencyComment{
 		ID: idempotencyKey,
 	}
-	rs := tx.Create(idempotency)
+	rs := tx.Create(&idempotency)
 	if rs.Error != nil {
 		if errors.Is(rs.Error, gorm.ErrDuplicatedKey) {
 			return nil, errs.DBDuplicatedIdempotencyKey

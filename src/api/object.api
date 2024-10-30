@@ -8,12 +8,31 @@ info (
 	version: "1.0"
 )
 
+// param model
 type PaginationParams {
     Page  int64  `path:"page"`
     Size  int64  `path:"size"`
     Order string `path:"order"`
 }
 
+type NewProject {
+	Name          string `json:"name"`
+	Introduction  string `json:"introduction"`
+	MaintainerID    string `json:"maintainer_id"`
+	Role          string `json:"role"`
+	HeadCountInfo string `json:"head_count_info"`
+	Progress      string `json:"progress"`
+}
+
+type UpdatedProject {
+	Name          string `json:"name, optional"`
+	Introduction  string `json:"introduction, optional"`
+	Role          string `json:"role, optional"`
+	HeadCountInfo string `json:"head_count_info, optional"`
+	Progress      string `json:"progress, optional"`
+}
+
+// object model
 type Paginator {
     TotalRecord int64 `json:"total_record"`
     TotalPage   int   `json:"total_page"`

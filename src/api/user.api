@@ -13,7 +13,9 @@ import "object.api"
 // WxLogin
 type WxLoginRequest {
 	Code     string `json:"code"`
-	NickName string `json:"nickname"`
+	Username string `json:"username"`
+	Avatar   string `json:"avatar"`
+	Gender   int    `json:"gender"`
 }
 
 type WxLoginResponse {
@@ -33,9 +35,9 @@ type RefreshTokenResponse {
 // SetUserInfo
 type SetUserInfoRequest {
 	WxUid        string `path:"wxUid"`
-	School       string `json:"school"`
-	Grade        int64  `json:"grade"`
-	Introduction string `json:"introduction"`
+	School       string `json:"school, optional"`
+	Grade        int64  `json:"grade, optional"`
+	Introduction string `json:"introduction, optional"`
 }
 
 type SetUserInfoResponse {
@@ -79,6 +81,6 @@ service User {
 	get /users/token (RefreshTokenRequest) returns (RefreshTokenResponse)
 
 	@handler SetUserInfo
-	put /users/wxUid (SetUserInfoRequest) returns (SetUserInfoResponse)
+	put /users/:wxUid (SetUserInfoRequest) returns (SetUserInfoResponse)
 }
 

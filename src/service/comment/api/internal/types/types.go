@@ -53,6 +53,15 @@ type GetCommentsByPostIDResponse struct {
 	Paginator Paginator `json:"paginator"`
 }
 
+type NewProject struct {
+	Name          string `json:"name"`
+	Introduction  string `json:"introduction"`
+	MaintainerID  string `json:"maintainer_id"`
+	Role          string `json:"role"`
+	HeadCountInfo string `json:"head_count_info"`
+	Progress      string `json:"progress"`
+}
+
 type PaginationParams struct {
 	Page  int64  `path:"page"`
 	Size  int64  `path:"size"`
@@ -94,6 +103,14 @@ type Subject struct {
 	AllCommentCount  int    `json:"all_comment_count"`
 	RootCommentCount int    `json:"root_comment_count"`
 	Status           int8   `json:"status"`
+}
+
+type UpdatedProject struct {
+	Name          string `json:"name, optional"`
+	Introduction  string `json:"introduction, optional"`
+	Role          string `json:"role, optional"`
+	HeadCountInfo string `json:"head_count_info, optional"`
+	Progress      string `json:"progress, optional"`
 }
 
 type UserInfo struct {

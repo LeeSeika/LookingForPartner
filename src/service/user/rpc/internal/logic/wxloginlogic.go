@@ -76,6 +76,8 @@ func (l *WxLoginLogic) WxLogin(in *user.WxLoginRequest) (*user.WxLoginResponse, 
 	u := &entity.User{
 		WxUid:    constant.NanoidPrefixUser + rb.Openid,
 		Username: in.Username,
+		Avatar:   in.Avatar,
+		Gender:   int8(in.Gender),
 	}
 	u, err = l.svcCtx.UserInterface.FirstOrCreateUser(l.ctx, u)
 	if err != nil {

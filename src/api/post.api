@@ -12,9 +12,9 @@ import "object.api"
 
 // CreatePost
 type CreatePostRequest {
-	Title   string  `json:"title"`
-	Project Project `json:"project"`
-	Content string  `json:"content"`
+	Title      string     `json:"title"`
+	Content    string     `json:"content"`
+	NewProject NewProject `json:"new_project"`
 }
 
 type CreatePostResponse {
@@ -59,14 +59,6 @@ type GetPostsByAuthorIDResponse {
 }
 
 // UpdateProject
-type UpdatedProject {
-	Name          string `json:"name"`
-	Introduction  string `json:"introduction"`
-	Role          string `json:"role"`
-	HeadCountInfo string `json:"head_count_info"`
-	Progress      string `json:"progress"`
-}
-
 type UpdateProjectRequest {
 	ProjectID      string         `path:"projectID"`
 	UpdatedProject UpdatedProject `json:"updated_project"`

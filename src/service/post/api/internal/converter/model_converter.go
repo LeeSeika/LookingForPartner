@@ -28,23 +28,22 @@ func ProjectRpcToApi(projectRpc *post.Project) types.Project {
 	}
 }
 
-func ProjectApiToRpc(projectApi *types.Project) post.Project {
+func ProjectApiToRpc(projectApi *types.NewProject) post.Project {
 	maintainer := &user.UserInfo{
-		WxUid:        projectApi.Maintainer.WxUid,
-		Avatar:       projectApi.Maintainer.Avatar,
-		School:       projectApi.Maintainer.School,
-		Grade:        projectApi.Maintainer.Grade,
-		Introduction: projectApi.Maintainer.Introduction,
-		PostCount:    projectApi.Maintainer.PostCount,
-		Username:     projectApi.Maintainer.Username,
+		WxUid: projectApi.MaintainerID,
+		//Avatar:       projectApi.Maintainer.Avatar,
+		//School:       projectApi.Maintainer.School,
+		//Grade:        projectApi.Maintainer.Grade,
+		//Introduction: projectApi.Maintainer.Introduction,
+		//PostCount:    projectApi.Maintainer.PostCount,
+		//Username:     projectApi.Maintainer.Username,
 	}
 
 	return post.Project{
-		ProjectID:     projectApi.ProjectID,
 		Name:          projectApi.Name,
 		Introduction:  projectApi.Introduction,
-		Maintainer:    maintainer,
 		Role:          projectApi.Role,
+		Maintainer:    maintainer,
 		HeadCountInfo: projectApi.HeadCountInfo,
 		Progress:      projectApi.Progress,
 	}
