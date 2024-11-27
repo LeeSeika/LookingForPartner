@@ -59,7 +59,15 @@ func (l *GetPostsByAuthorIDLogic) GetPostsByAuthorID(req *types.GetPostByAuthorI
 		postInfos = append(postInfos, poApi)
 	}
 
-	resp = &types.GetPostsByAuthorIDResponse{Posts: postInfos}
+	resp = &types.GetPostsByAuthorIDResponse{Posts: postInfos, Paginator: types.Paginator{
+		TotalRecord: getPostsByAuthorIDResp.Paginator.TotalRecord,
+		TotalPage:   int(getPostsByAuthorIDResp.Paginator.TotalPage),
+		Offset:      int(getPostsByAuthorIDResp.Paginator.Offset),
+		Limit:       int(getPostsByAuthorIDResp.Paginator.Limit),
+		CurrPage:    int(getPostsByAuthorIDResp.Paginator.CurrPage),
+		PrevPage:    int(getPostsByAuthorIDResp.Paginator.PrevPage),
+		NextPage:    int(getPostsByAuthorIDResp.Paginator.NextPage),
+	}}
 
 	return resp, nil
 }

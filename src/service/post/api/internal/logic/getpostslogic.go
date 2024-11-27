@@ -59,7 +59,15 @@ func (l *GetPostsLogic) GetPosts(req *types.GetPostsRequest) (resp *types.GetPos
 		postInfos = append(postInfos, poApi)
 	}
 
-	resp = &types.GetPostsResponse{Posts: postInfos}
+	resp = &types.GetPostsResponse{Posts: postInfos, Paginator: types.Paginator{
+		TotalRecord: getPostsResp.Paginator.TotalRecord,
+		TotalPage:   int(getPostsResp.Paginator.TotalPage),
+		Offset:      int(getPostsResp.Paginator.Offset),
+		Limit:       int(getPostsResp.Paginator.Limit),
+		CurrPage:    int(getPostsResp.Paginator.CurrPage),
+		PrevPage:    int(getPostsResp.Paginator.PrevPage),
+		NextPage:    int(getPostsResp.Paginator.NextPage),
+	}}
 
 	return resp, nil
 }
