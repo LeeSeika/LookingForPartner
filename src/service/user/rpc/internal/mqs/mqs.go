@@ -11,7 +11,7 @@ func Consumers(c config.Config, svcContext *svc.ServiceContext) []service.Servic
 
 	return []service.Service{
 		//Listening for changes in consumption flow status
-		kq.MustNewQueue(c.KqUpdateUserPostCountConsumerConf, NewUpdateUserPostCount(svcContext)),
+		kq.MustNewQueue(c.KqCreatePostConsumerConf, NewCreatePost(c, svcContext)),
 	}
 
 }

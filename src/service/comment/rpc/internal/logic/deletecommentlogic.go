@@ -2,14 +2,13 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"gorm.io/gorm"
-	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/pb/post"
-	"lookingforpartner/service/comment/model/dto"
-
+	"lookingforpartner/common/event"
 	"lookingforpartner/pb/comment"
+	"lookingforpartner/pb/post"
 	"lookingforpartner/service/comment/rpc/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -74,20 +73,21 @@ func (l *DeleteCommentLogic) DeleteComment(in *comment.DeleteCommentRequest) (*c
 
 	// if this is a root comment, asynchronously delete all of its sub comments
 	if deletedComment.RootID == nil {
-		err := l.svcCtx.KqDeleteCommentsByIDPusher.KPush(l.ctx, constant.MqMessageKeyDeleteSubCommentsByRootID, in.CommentID)
+		evt := event.DeleteRootComment{CommentID: in.CommentID}
+		bytes, err := json.Marshal(&evt)
 		if err != nil {
-			topic := l.svcCtx.Config.KqDeleteCommentsByIDPusherConf.Topic
+			l.Logger.Errorf("cannot marshal event when deleting comment, err: %+v", err)
+			return nil, errs.FormatRpcUnknownError(err.Error())
+		}
+
+		err = l.svcCtx.KqDeleteRootComment.Push(l.ctx, string(bytes))
+		if err != nil {
+			topic := l.svcCtx.Config.KqDeleteRootCommentPusherConf.Topic
 			l.Logger.
 				WithFields(logx.Field("topic", topic)).
-				WithFields(logx.Field("key", constant.MqMessageKeyDeleteSubCommentsByRootID)).
 				Errorf("cannot push a message to mq when deleting comment, err: %+V", err)
 
-			msg := dto.DeleteCommentMessage{
-				Topic: topic,
-				Key:   constant.MqMessageKeyDeleteSubCommentsByRootID,
-				Val:   in.CommentID,
-			}
-			l.svcCtx.LocalQueue.Push(msg)
+			l.svcCtx.LocalQueue.Push(evt)
 		}
 	}
 

@@ -5,10 +5,10 @@ echo "program pid list" > ../services.pid
 ../target/user-rpc -f ${USER_RPC_CONFIG_PATH} & echo "user-rpc:$!" >> ../services.pid
 sleep 3
 
-../target/comment-rpc -f ${COMMENT_RPC_CONFIG_PATH} & echo "comment-rpc:$!" >> ../services.pid
+../target/post-rpc -f ${POST_RPC_CONFIG_PATH} & echo "post-rpc:$!" >> ../services.pid
 sleep 3
 
-../target/post-rpc -f ${POST_RPC_CONFIG_PATH} & echo "post-rpc:$!" >> ../services.pid
+../target/comment-rpc -f ${COMMENT_RPC_CONFIG_PATH} & echo "comment-rpc:$!" >> ../services.pid
 sleep 3
 
 ../target/user-api -f ${USER_API_CONFIG_PATH} & echo "user-api:$!" >> ../services.pid

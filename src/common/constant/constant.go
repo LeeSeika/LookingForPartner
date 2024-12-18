@@ -21,14 +21,6 @@ const (
 )
 
 const (
-	// MqMessageKeyDeleteAllCommentsBySubjectID is a key represents the task DeleteAllCommentsBySubjectID
-	MqMessageKeyDeleteAllCommentsBySubjectID = "mq_delete-all-comments-by-subject-id"
-
-	// MqMessageKeyDeleteSubCommentsByRootID is a key represents the task DeleteSubCommentsByRootID
-	MqMessageKeyDeleteSubCommentsByRootID = "mq_delete-sub-comments-by-root-id"
-)
-
-const (
 	// DefaultLocalQueueChanCap is a default channel capacity for local queue
 	DefaultLocalQueueChanCap = 100
 

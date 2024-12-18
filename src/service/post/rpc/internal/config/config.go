@@ -16,12 +16,11 @@ type Config struct {
 		MaxOpenConns    int
 		ConnMaxLifeTime int
 	}
-	UserRpc                         zrpc.RpcClientConf
-	KqUpdateUserPostCountPusherConf struct {
+	KqCreatePostPusherConf struct {
 		Brokers []string
 		Topic   string
 	}
-	KqDeleteSubjectPusherConf struct {
+	KqDeletePostPusherConf struct {
 		Brokers []string
 		Topic   string
 	}

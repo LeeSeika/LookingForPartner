@@ -20,4 +20,5 @@ type CommentInterface interface {
 	UpdateSubject(ctx context.Context, updatedSubject *entity.Subject) (*entity.Subject, error)
 	DeleteSubject(ctx context.Context, subjectID string) (*entity.Subject, error)
 	GetSubject(ctx context.Context, subjectID string) (*entity.Subject, error)
+	GetSubjectByPostID(ctx context.Context, postID string) (*entity.Subject, error)
 }

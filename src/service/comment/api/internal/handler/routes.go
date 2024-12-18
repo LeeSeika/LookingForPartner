@@ -19,7 +19,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/comments/post/:postID",
+				Path:    "/comments/posts/:postID",
 				Handler: GetCommentsByPostIDHandler(serverCtx),
 			},
 		},
@@ -30,7 +30,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/comments/",
+				Path:    "/comments",
 				Handler: CreateCommentHandler(serverCtx),
 			},
 			{

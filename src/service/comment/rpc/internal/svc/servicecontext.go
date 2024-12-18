@@ -13,11 +13,11 @@ import (
 )
 
 type ServiceContext struct {
-	Config                     config.Config
-	CommentInterface           dao.CommentInterface
-	PostRpc                    postclient.Post
-	KqDeleteCommentsByIDPusher *kq.Pusher
-	LocalQueue                 *localqueue.Queue
+	Config              config.Config
+	CommentInterface    dao.CommentInterface
+	PostRpc             postclient.Post
+	KqDeleteRootComment *kq.Pusher
+	LocalQueue          *localqueue.Queue
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -27,10 +27,10 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		return nil
 	}
 	return &ServiceContext{
-		Config:                     c,
-		CommentInterface:           commentInterface,
-		PostRpc:                    postclient.NewPost(zrpc.MustNewClient(c.PostRpc)),
-		KqDeleteCommentsByIDPusher: kq.NewPusher(c.KqDeleteCommentsByIDPusherConf.Brokers, c.KqDeleteCommentsByIDPusherConf.Topic),
-		LocalQueue:                 localqueue.NewQueue(constant.DefaultLocalQueueChanCap, constant.DefaultLocalQueueDataCap),
+		Config:              c,
+		CommentInterface:    commentInterface,
+		PostRpc:             postclient.NewPost(zrpc.MustNewClient(c.PostRpc)),
+		KqDeleteRootComment: kq.NewPusher(c.KqDeleteRootCommentPusherConf.Brokers, c.KqDeleteRootCommentPusherConf.Topic),
+		LocalQueue:          localqueue.NewQueue(constant.DefaultLocalQueueChanCap, constant.DefaultLocalQueueDataCap),
 	}
 }

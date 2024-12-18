@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"lookingforpartner/pb/paginator"
+	"lookingforpartner/pb/user"
 	"net/http"
 
 	"lookingforpartner/common/errs"
@@ -53,6 +54,33 @@ func (l *GetPostsLogic) GetPosts(req *types.GetPostsRequest) (resp *types.GetPos
 	}
 
 	posts := getPostsResp.GetPosts()
+
+	authorIDs := make([]string, 0, len(posts))
+	authorIDToPoInfoMap := make(map[string]*post.PostInfo, len(authorIDs))
+	for i := 0; i < len(posts); i++ {
+		poInfo := posts[i]
+
+		authorIDs = append(authorIDs, poInfo.Author.WxUid)
+		authorIDToPoInfoMap[poInfo.Author.WxUid] = poInfo
+	}
+
+	// get authors info
+	getUserInfoByIDsReq := user.GetUserInfoByIDsRequest{WechatIDs: authorIDs}
+	getUserInfoByIDsResp, err := l.svcCtx.UserRpc.GetUserInfoByIDs(l.ctx, &getUserInfoByIDsReq)
+	if err == nil {
+		userInfos := getUserInfoByIDsResp.UserInfos
+		for i := 0; i < len(userInfos); i++ {
+			userInfo := userInfos[i]
+			authorID := userInfo.WxUid
+
+			poInfo := authorIDToPoInfoMap[authorID]
+			poInfo.Author = userInfo
+			if poInfo.Project != nil {
+				poInfo.Project.Maintainer = userInfo
+			}
+		}
+	}
+
 	postInfos := make([]types.Post, 0, len(posts))
 	for _, poRpc := range posts {
 		poApi := converter.PostRpcToApi(poRpc)

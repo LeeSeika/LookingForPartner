@@ -114,6 +114,7 @@ message DeleteSubjectRequest {
 }
 
 message DeleteSubjectResponse {
+  SubjectInfo Subject = 1;
 }
 
 service Comment {
@@ -121,7 +122,7 @@ service Comment {
   rpc GetComment(GetCommentRequest) returns(GetCommentResponse);
   rpc GetCommentsByPostID(GetCommentsByPostIDRequest) returns(GetCommentsByPostIDResponse);
   rpc DeleteComment(DeleteCommentRequest) returns(DeleteCommentResponse);
-  rpc DeleteSubCommentsByRooID(DeleteSubCommentsByRootIDRequest) returns(DeleteSubjectResponse);
+  rpc DeleteSubCommentsByRooID(DeleteSubCommentsByRootIDRequest) returns(DeleteSubCommentsByRootIDResponse);
   rpc DeleteAllCommentsBySubjectID(DeleteAllCommentsBySubjectIDRequest) returns(DeleteAllCommentsBySubjectIDResponse);
 
   rpc CreateSubject(CreateSubjectRequest) returns(CreateSubjectResponse);

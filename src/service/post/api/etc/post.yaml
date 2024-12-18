@@ -12,3 +12,15 @@ PostRpc:
     Hosts:
       - etcd:2379
     Key: post.rpc
+
+CommentRpc:
+  Etcd:
+    Hosts:
+      - etcd:2379
+    Key: comment.rpc
+
+UserRpc:
+  Etcd:
+    Hosts:
+      - etcd:2379
+    Key: user.rpc

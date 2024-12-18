@@ -76,10 +76,10 @@ service Post {
 	get /posts/:postID (GetPostRequest) returns (GetPostResponse)
 
 	@handler GetPosts
-	get /posts/page/:page/size/:size/order/:order (GetPostsRequest) returns (GetPostsResponse)
+	get /posts (GetPostsRequest) returns (GetPostsResponse)
 
 	@handler GetPostsByAuthorID
-	get /posts/author/:authorID/page/:page/size/:size/order/:order (GetPostByAuthorIDRequest) returns (GetPostsByAuthorIDResponse)
+	get /posts/authors/:authorID (GetPostByAuthorIDRequest) returns (GetPostsByAuthorIDResponse)
 }
 
 @server (
@@ -94,6 +94,6 @@ service Post {
 	delete /posts/:postID (DeletePostRequest) returns (DeletePostResponse)
 
 	@handler UpdateProject
-	put /posts/project/:projectID (UpdateProjectRequest) returns (UpdateProjectResponse)
+	put /posts/projects/:projectID (UpdateProjectRequest) returns (UpdateProjectResponse)
 }
 

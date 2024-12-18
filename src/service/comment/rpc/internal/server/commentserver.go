@@ -42,7 +42,7 @@ func (s *CommentServer) DeleteComment(ctx context.Context, in *comment.DeleteCom
 	return l.DeleteComment(in)
 }
 
-func (s *CommentServer) DeleteSubCommentsByRooID(ctx context.Context, in *comment.DeleteSubCommentsByRootIDRequest) (*comment.DeleteSubjectResponse, error) {
+func (s *CommentServer) DeleteSubCommentsByRooID(ctx context.Context, in *comment.DeleteSubCommentsByRootIDRequest) (*comment.DeleteSubCommentsByRootIDResponse, error) {
 	l := logic.NewDeleteSubCommentsByRooIDLogic(ctx, s.svcCtx)
 	return l.DeleteSubCommentsByRooID(in)
 }

@@ -2,7 +2,9 @@ package logic
 
 import (
 	"context"
+	"errors"
 	"lookingforpartner/pb/paginator"
+	"lookingforpartner/pb/user"
 	"net/http"
 
 	"lookingforpartner/common/errs"
@@ -53,8 +55,25 @@ func (l *GetPostsByAuthorIDLogic) GetPostsByAuthorID(req *types.GetPostByAuthorI
 	}
 
 	posts := getPostsByAuthorIDResp.GetPosts()
+	if len(posts) == 0 {
+		return &types.GetPostsByAuthorIDResponse{}, nil
+	}
+
+	// get author info
+	getUserInfoReq := user.GetUserInfoRequest{
+		WxUid: posts[0].Author.WxUid,
+	}
+	getUserInfoResp, err := l.svcCtx.UserRpc.GetUserInfo(l.ctx, &getUserInfoReq)
+	if err != nil {
+		if errors.Is(err, errs.RpcNotFound) {
+			return nil, errs.FormattedApiNotFound()
+		}
+		return nil, errs.FormattedApiInternal()
+	}
+
 	postInfos := make([]types.Post, 0, len(posts))
 	for _, poRpc := range posts {
+		poRpc.Author = getUserInfoResp.UserInfo
 		poApi := converter.PostRpcToApi(poRpc)
 		postInfos = append(postInfos, poApi)
 	}

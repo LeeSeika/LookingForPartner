@@ -63,9 +63,9 @@ type NewProject struct {
 }
 
 type PaginationParams struct {
-	Page  int64  `path:"page"`
-	Size  int64  `path:"size"`
-	Order string `path:"order"`
+	Page  int64  `form:"page, optional"`
+	Size  int64  `form:"size, optional"`
+	Order string `form:"order, optional"`
 }
 
 type Paginator struct {

@@ -14,5 +14,7 @@ type Config struct {
 		RefreshExpire int64
 	}
 
-	PostRpc zrpc.RpcClientConf
+	PostRpc    zrpc.RpcClientConf
+	CommentRpc zrpc.RpcClientConf
+	UserRpc    zrpc.RpcClientConf
 }

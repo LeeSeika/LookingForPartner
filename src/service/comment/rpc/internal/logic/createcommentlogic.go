@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"errors"
+	"gorm.io/gorm"
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/pkg/nanoid"
@@ -29,6 +31,14 @@ func NewCreateCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cre
 }
 
 func (l *CreateCommentLogic) CreateComment(in *comment.CreateCommentRequest) (*comment.CreateCommentResponse, error) {
+	_, err := l.svcCtx.CommentInterface.GetSubject(l.ctx, in.SubjectID)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errs.RpcNotFound
+		}
+		l.Logger.Errorf("cannot get subject, err: %+v", err)
+		return nil, errs.FormatRpcUnknownError(err.Error())
+	}
 	commentID := constant.NanoidPrefixComment + nanoid.Gen()
 	commentIndex := &entity.CommentIndex{
 		CommentID:       commentID,

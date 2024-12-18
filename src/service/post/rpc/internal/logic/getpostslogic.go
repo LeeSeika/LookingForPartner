@@ -5,7 +5,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/common/params"
-	"lookingforpartner/pb/user"
 	"lookingforpartner/service/post/rpc/internal/converter"
 
 	"lookingforpartner/pb/post"
@@ -41,34 +40,6 @@ func (l *GetPostsLogic) GetPosts(in *post.GetPostsRequest) (*post.GetPostsRespon
 			poInfo.Project = projInfo
 		}
 		poInfos = append(poInfos, poInfo)
-	}
-
-	authorIDs := make([]string, 0, len(poInfos))
-	authorIDToPoInfoMap := make(map[string]*post.PostInfo, len(authorIDs))
-	for i := 0; i < len(poInfos); i++ {
-		poInfo := poInfos[i]
-
-		authorIDs = append(authorIDs, poInfo.Author.WxUid)
-		authorIDToPoInfoMap[poInfo.Author.WxUid] = poInfo
-	}
-
-	// get author & maintainer info from user rpc
-	getUserInfoByIDsReq := user.GetUserInfoByIDsRequest{WechatIDs: authorIDs}
-	getUserInfoByIDsResp, err := l.svcCtx.UserRpc.GetUserInfoByIDs(l.ctx, &getUserInfoByIDsReq)
-	if err != nil {
-		l.Logger.Errorf("cannot get author infos when getting posts, err:%+v", err)
-	} else {
-		userInfos := getUserInfoByIDsResp.UserInfos
-		for i := 0; i < len(userInfos); i++ {
-			userInfo := userInfos[i]
-			authorID := userInfo.WxUid
-
-			poInfo := authorIDToPoInfoMap[authorID]
-			poInfo.Author = userInfo
-			if poInfo.Project != nil {
-				poInfo.Project.Maintainer = userInfo
-			}
-		}
 	}
 
 	return &post.GetPostsResponse{Posts: poInfos, Paginator: paginator.ToRPC()}, nil

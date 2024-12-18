@@ -7,7 +7,6 @@ import (
 	"gorm.io/gorm"
 	"lookingforpartner/common/errs"
 	"lookingforpartner/pb/post"
-	"lookingforpartner/pb/user"
 	"lookingforpartner/service/post/rpc/internal/converter"
 	"lookingforpartner/service/post/rpc/internal/svc"
 )
@@ -40,19 +39,6 @@ func (l *GetPostLogic) GetPost(in *post.GetPostRequest) (*post.GetPostResponse, 
 	if poProj.Project != nil {
 		projInfo := converter.ProjectDBToRPC(poProj.Project)
 		poInfo.Project = projInfo
-	}
-
-	// get author & maintainer info from user
-	getUserInfoReq := user.GetUserInfoRequest{WxUid: poProj.AuthorID}
-	getUserInfoResp, err := l.svcCtx.UserRpc.GetUserInfo(l.ctx, &getUserInfoReq)
-	if err != nil {
-		l.Logger.Errorf("cannot get author info when getting post, err:%+v", err)
-	} else {
-		userInfo := getUserInfoResp.UserInfo
-		poInfo.Author = userInfo
-		if poInfo.Project != nil {
-			poInfo.Project.Maintainer = userInfo
-		}
 	}
 
 	return &post.GetPostResponse{Post: poInfo}, nil

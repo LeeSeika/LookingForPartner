@@ -39,7 +39,7 @@ type (
 		GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error)
 		GetCommentsByPostID(ctx context.Context, in *GetCommentsByPostIDRequest, opts ...grpc.CallOption) (*GetCommentsByPostIDResponse, error)
 		DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error)
-		DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error)
+		DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubCommentsByRootIDResponse, error)
 		DeleteAllCommentsBySubjectID(ctx context.Context, in *DeleteAllCommentsBySubjectIDRequest, opts ...grpc.CallOption) (*DeleteAllCommentsBySubjectIDResponse, error)
 		CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error)
 		GetSubject(ctx context.Context, in *GetSubjectRequest, opts ...grpc.CallOption) (*GetSubjectResponse, error)
@@ -77,7 +77,7 @@ func (m *defaultComment) DeleteComment(ctx context.Context, in *DeleteCommentReq
 	return client.DeleteComment(ctx, in, opts...)
 }
 
-func (m *defaultComment) DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error) {
+func (m *defaultComment) DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubCommentsByRootIDResponse, error) {
 	client := comment.NewCommentClient(m.cli.Conn())
 	return client.DeleteSubCommentsByRooID(ctx, in, opts...)
 }

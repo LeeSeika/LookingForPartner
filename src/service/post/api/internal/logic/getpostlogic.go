@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"errors"
+	"lookingforpartner/pb/user"
 
 	"lookingforpartner/common/errs"
 	"lookingforpartner/pb/post"
@@ -37,8 +38,23 @@ func (l *GetPostLogic) GetPost(req *types.GetPostRequest) (resp *types.GetPostRe
 		return nil, errs.FormattedApiInternal()
 	}
 
+	// get author info
+	getUserInfoReq := user.GetUserInfoRequest{
+		WxUid: getPostResp.GetPost().GetAuthor().WxUid,
+	}
+	getUserInfoResp, err := l.svcCtx.UserRpc.GetUserInfo(l.ctx, &getUserInfoReq)
+	if err != nil {
+		if errors.Is(err, errs.RpcNotFound) {
+			return nil, errs.FormattedApiNotFound()
+		}
+		return nil, errs.FormattedApiInternal()
+	}
+
+	po := getPostResp.GetPost()
+	po.Author = getUserInfoResp.UserInfo
+
 	resp = &types.GetPostResponse{
-		Post: converter.PostRpcToApi(getPostResp.GetPost()),
+		Post: converter.PostRpcToApi(po),
 	}
 
 	return resp, nil

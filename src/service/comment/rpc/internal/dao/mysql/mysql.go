@@ -19,6 +19,17 @@ type MysqlInterface struct {
 	db *gorm.DB
 }
 
+func (m *MysqlInterface) GetSubjectByPostID(ctx context.Context, postID string) (*entity.Subject, error) {
+	db := m.db.WithContext(ctx)
+
+	var subject entity.Subject
+	if err := db.First(&subject, "post_id = ?", postID).Error; err != nil {
+		return nil, err
+	}
+
+	return &subject, nil
+}
+
 func (m *MysqlInterface) DeleteAllCommentsBySubjectID(ctx context.Context, subjectID string) error {
 	db := m.db.WithContext(ctx)
 
@@ -203,7 +214,7 @@ func (m *MysqlInterface) GetComment(ctx context.Context, commentID string) (*vo.
 
 	var commentIndexContent vo.CommentIndexContent
 	rs := db.Model(&entity.CommentIndex{}).
-		Joins("left join comment_contents on comment_indexes.comment_id = comment_contents.comment_id").
+		Joins("left join comment_contents on comment_indices.comment_id = comment_contents.comment_id").
 		Where("comment_id = ?", commentID).
 		First(&commentIndexContent)
 
@@ -219,11 +230,17 @@ func (m *MysqlInterface) GetRootCommentsByPostID(ctx context.Context, postID str
 
 	rootCommentIndexContents := make([]*vo.CommentIndexContent, 0, int(size))
 
+	// query subject
+	var subject entity.Subject
+	if err := db.First(&subject, "post_id = ?", postID).Error; err != nil {
+		return nil, nil, err
+	}
+
 	// query root comments
 	queryRootComments := db.Model(&entity.CommentIndex{}).
-		Joins("left join comment_contents on comment_indexes.comment_id = comment_contents.comment_id").
-		Where("post_id == ?", postID).
-		Where("comment_indexes.root_id == NULL")
+		Joins("left join comment_contents on comment_indices.comment_id = comment_contents.comment_id").
+		Where("comment_indices.subject_id == ?", subject.SubjectID).
+		Where("comment_indices.root_id == NULL")
 
 	pagiParam := basedao.PaginationParam{
 		DB:      db,
