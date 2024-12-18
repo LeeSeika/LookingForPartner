@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"lookingforpartner/common/logger"
 
 	"lookingforpartner/service/post/api/internal/config"
 	"lookingforpartner/service/post/api/internal/handler"
@@ -19,6 +20,8 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+
+	logger.SetupLogger("post-api")
 
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()

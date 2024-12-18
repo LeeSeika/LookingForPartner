@@ -10,7 +10,8 @@ import (
 
 // PaginationParam parameters for pagination
 type PaginationParam struct {
-	Query   interface{}
+	DB      *gorm.DB
+	Query   *gorm.DB
 	Page    int
 	Limit   int
 	OrderBy []string
@@ -28,8 +29,8 @@ type Paginator struct {
 	NextPage    int
 }
 
-func GetListWithPagination(db *gorm.DB, p *PaginationParam, result interface{}) (*Paginator, error) {
-	query := db.Where(p.Query)
+func GetListWithPagination(p *PaginationParam, result interface{}) (*Paginator, error) {
+	query := p.Query
 	if query.Error != nil {
 		return nil, errors.Wrapf(query.Error, "db where:%+v", query)
 
@@ -58,7 +59,7 @@ func GetListWithPagination(db *gorm.DB, p *PaginationParam, result interface{}) 
 	var count int64
 	var offset int
 
-	go countRecords(query, result, done, &count)
+	go countRecords(p.DB, result, done, &count)
 
 	if p.Page == 1 {
 		offset = 0

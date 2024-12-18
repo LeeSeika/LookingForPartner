@@ -19,9 +19,11 @@ type Config struct {
 	}
 	PostRpc zrpc.RpcClientConf
 
-	KqDeleteCommentsByIDPusherConf struct {
+	KqDeleteRootCommentPusherConf struct {
 		Brokers []string
 		Topic   string
 	}
-	KqDeleteCommentsByIDConsumerConf kq.KqConf
+	KqDeleteRootCommentConsumerConf kq.KqConf
+	KqDeletePostConsumerConf        kq.KqConf
+	KqCreatePostConsumerConf        kq.KqConf
 }

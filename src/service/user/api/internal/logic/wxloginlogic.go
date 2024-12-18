@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logx"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/user"
 	"lookingforpartner/service/user/api/internal/common"
 	"lookingforpartner/service/user/api/internal/svc"
@@ -22,33 +21,35 @@ func NewWxLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxLoginLo
 	return &WxLoginLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user-api"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 
 func (l *WxLoginLogic) WxLogin(req *types.WxLoginRequest) (resp *types.WxLoginResponse, err error) {
 
 	wxLoginReq := user.WxLoginRequest{
-		Username: req.NickName,
+		Username: req.Username,
 		Code:     req.Code,
+		Gender:   int32(req.Gender),
+		Avatar:   req.Avatar,
 	}
 	wxLoginResp, err := l.svcCtx.UserRpc.WxLogin(l.ctx, &wxLoginReq)
 	if err != nil {
 		l.Logger.Errorf("cannot login, err: %+v", err)
-		if wxLoginResp.WechatResponseCode != 0 {
-
-			if wxLoginResp.WechatResponseCode == errs.WechatLoginInvalidCode {
-				return nil, errs.FormatApiError(http.StatusBadRequest, "invalid js_code")
-			} else if wxLoginResp.WechatResponseCode == errs.WechatLoginReachedRateLimit {
-				return nil, errs.FormatApiError(http.StatusTooManyRequests, "too many login requests")
-			} else if wxLoginResp.WechatResponseCode == errs.WechatLoginBlockedUser {
-				return nil, errs.FormatApiError(http.StatusForbidden, "this account has been blocked by wechat")
-			} else if wxLoginResp.WechatResponseCode == errs.WechatLoginSystemError {
-				return nil, errs.FormatApiError(http.StatusServiceUnavailable, "wechat server unavailable")
-			}
-		}
-
 		return nil, errs.FormattedApiInternal()
+	}
+
+	if wxLoginResp.WechatResponseCode != 0 {
+
+		if wxLoginResp.WechatResponseCode == int32(errs.WechatLoginInvalidCode) {
+			return nil, errs.FormatApiError(http.StatusBadRequest, "invalid js_code")
+		} else if wxLoginResp.WechatResponseCode == int32(errs.WechatLoginReachedRateLimit) {
+			return nil, errs.FormatApiError(http.StatusTooManyRequests, "too many login requests")
+		} else if wxLoginResp.WechatResponseCode == int32(errs.WechatLoginBlockedUser) {
+			return nil, errs.FormatApiError(http.StatusForbidden, "this account has been blocked by wechat")
+		} else if wxLoginResp.WechatResponseCode == int32(errs.WechatLoginSystemError) {
+			return nil, errs.FormatApiError(http.StatusServiceUnavailable, "wechat server unavailable")
+		}
 	}
 
 	// generate token

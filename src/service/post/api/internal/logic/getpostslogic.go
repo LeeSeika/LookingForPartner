@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"lookingforpartner/pb/paginator"
+	"lookingforpartner/pb/user"
 	"net/http"
 
 	"lookingforpartner/common/errs"
@@ -53,13 +54,48 @@ func (l *GetPostsLogic) GetPosts(req *types.GetPostsRequest) (resp *types.GetPos
 	}
 
 	posts := getPostsResp.GetPosts()
+
+	authorIDs := make([]string, 0, len(posts))
+	authorIDToPoInfoMap := make(map[string]*post.PostInfo, len(authorIDs))
+	for i := 0; i < len(posts); i++ {
+		poInfo := posts[i]
+
+		authorIDs = append(authorIDs, poInfo.Author.WxUid)
+		authorIDToPoInfoMap[poInfo.Author.WxUid] = poInfo
+	}
+
+	// get authors info
+	getUserInfoByIDsReq := user.GetUserInfoByIDsRequest{WechatIDs: authorIDs}
+	getUserInfoByIDsResp, err := l.svcCtx.UserRpc.GetUserInfoByIDs(l.ctx, &getUserInfoByIDsReq)
+	if err == nil {
+		userInfos := getUserInfoByIDsResp.UserInfos
+		for i := 0; i < len(userInfos); i++ {
+			userInfo := userInfos[i]
+			authorID := userInfo.WxUid
+
+			poInfo := authorIDToPoInfoMap[authorID]
+			poInfo.Author = userInfo
+			if poInfo.Project != nil {
+				poInfo.Project.Maintainer = userInfo
+			}
+		}
+	}
+
 	postInfos := make([]types.Post, 0, len(posts))
 	for _, poRpc := range posts {
 		poApi := converter.PostRpcToApi(poRpc)
 		postInfos = append(postInfos, poApi)
 	}
 
-	resp = &types.GetPostsResponse{Posts: postInfos}
+	resp = &types.GetPostsResponse{Posts: postInfos, Paginator: types.Paginator{
+		TotalRecord: getPostsResp.Paginator.TotalRecord,
+		TotalPage:   int(getPostsResp.Paginator.TotalPage),
+		Offset:      int(getPostsResp.Paginator.Offset),
+		Limit:       int(getPostsResp.Paginator.Limit),
+		CurrPage:    int(getPostsResp.Paginator.CurrPage),
+		PrevPage:    int(getPostsResp.Paginator.PrevPage),
+		NextPage:    int(getPostsResp.Paginator.NextPage),
+	}}
 
 	return resp, nil
 }

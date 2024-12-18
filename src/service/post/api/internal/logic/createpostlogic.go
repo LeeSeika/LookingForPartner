@@ -30,12 +30,13 @@ func (l *CreatePostLogic) CreatePost(req *types.CreatePostRequest) (resp *types.
 		return nil, errs.FormattedApiUnAuthorized()
 	}
 
-	proj := converter.ProjectApiToRpc(&req.Project)
+	proj := converter.ProjectApiToRpc(&req.NewProject)
 	createPostReq := post.CreatePostRequest{
-		Title:   req.Title,
-		Project: &proj,
-		Content: req.Content,
-		WxUid:   uid,
+		Title:          req.Title,
+		Project:        &proj,
+		Content:        req.Content,
+		WxUid:          uid,
+		IdempotencyKey: 124214215125,
 	}
 	createPostResp, err := l.svcCtx.PostRpc.CreatePost(l.ctx, &createPostReq)
 	if err != nil {

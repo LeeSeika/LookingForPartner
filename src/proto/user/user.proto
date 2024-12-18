@@ -8,6 +8,8 @@ option go_package = "lookingforpartner/pb/user";
 message WxLoginRequest {
   string Username = 1;
   string Code = 2;
+  string Avatar = 3;
+  int32 Gender = 4;
 }
 
 message WxLoginResponse {

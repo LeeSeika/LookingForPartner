@@ -109,7 +109,7 @@ service Comment {
 	get /comments/:commentID (GetCommentRequest) returns (GetCommentResponse)
 
 	@handler GetCommentsByPostID
-	get /comments/post/:postID (GetCommentsByPostIDRequest) returns (GetCommentsByPostIDResponse)
+	get /comments/posts/:postID (GetCommentsByPostIDRequest) returns (GetCommentsByPostIDResponse)
 }
 
 @server (
@@ -118,7 +118,7 @@ service Comment {
 )
 service Comment {
 	@handler CreateComment
-	post /comments/ (CreateCommentRequest) returns (CreateCommentResponse)
+	post /comments (CreateCommentRequest) returns (CreateCommentResponse)
 
 	@handler DeleteComment
 	delete /comments/:commentID (DeleteCommentRequest) returns (DeleteCommentResponse)

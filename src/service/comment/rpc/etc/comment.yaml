@@ -21,17 +21,37 @@ PostRpc:
       - etcd:2379
     Key: post.rpc
 
-KqDeleteCommentsByIDConsumerConf:
-  Name: kqDeleteCommentsByIDConsumer1
+KqDeletePostConsumerConf:
+  Name: kqDeletePostConsumer1
   Brokers:
     - kafka:9092
-  Group: kqDeleteCommentsByIDConsumerGroup
-  Topic: delete-comments-by-id
+  Group: kqDeletePostConsumerGroup
+  Topic: delete-post
   Offset: first
   Consumers: 8
   Processors: 8
 
-KqDeleteCommentsByIDPusherConf:
+KqCreatePostConsumerConf:
+  Name: kqCreatePostConsumer1
   Brokers:
     - kafka:9092
-  Topic: delete--comments-by-id
+  Group: kqCreatePostConsumerGroup
+  Topic: create-post
+  Offset: first
+  Consumers: 8
+  Processors: 8
+
+KqDeleteRootCommentConsumerConf:
+  Name: kqDeleteRootCommentConsumer1
+  Brokers:
+    - kafka:9092
+  Group: kqDeleteRootCommentConsumerGroup
+  Topic: delete-root-comment
+  Offset: first
+  Consumers: 8
+  Processors: 8
+
+KqDeleteRootCommentPusherConf:
+  Brokers:
+    - kafka:9092
+  Topic: delete-root-comment

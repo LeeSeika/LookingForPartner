@@ -3,8 +3,6 @@ package logic
 import (
 	"context"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
-
 	"lookingforpartner/pb/comment"
 	"lookingforpartner/service/comment/rpc/internal/svc"
 
@@ -21,16 +19,16 @@ func NewDeleteSubCommentsByRooIDLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	return &DeleteSubCommentsByRooIDLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "comment-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *DeleteSubCommentsByRooIDLogic) DeleteSubCommentsByRooID(in *comment.DeleteSubCommentsByRootIDRequest) (*comment.DeleteSubjectResponse, error) {
+func (l *DeleteSubCommentsByRooIDLogic) DeleteSubCommentsByRooID(in *comment.DeleteSubCommentsByRootIDRequest) (*comment.DeleteSubCommentsByRootIDResponse, error) {
 	err := l.svcCtx.CommentInterface.DeleteSubCommentsByRootID(l.ctx, in.RootID)
 	if err != nil {
 		l.Logger.Errorf("cannot delete sub comments by root id, err: %+v", err)
 		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
-	return &comment.DeleteSubjectResponse{}, nil
+	return &comment.DeleteSubCommentsByRootIDResponse{}, nil
 }

@@ -17,7 +17,7 @@ type Config struct {
 		MaxOpenConns    int
 		ConnMaxLifeTime int
 	}
-	KqUpdateUserPostCountConsumerConf kq.KqConf
+	KqCreatePostConsumerConf kq.KqConf
 
 	AppID     string
 	AppSecret string

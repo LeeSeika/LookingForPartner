@@ -80,7 +80,7 @@ func (m *MysqlInterface) CreatePost(ctx context.Context, post *entity.Post, proj
 	idempotency := entity.IdempotencyPost{
 		ID: idempotencyKey,
 	}
-	rs := tx.Create(idempotency)
+	rs := tx.Create(&idempotency)
 	if rs.Error != nil {
 		if errors.Is(rs.Error, gorm.ErrDuplicatedKey) {
 			return nil, errs.DBDuplicatedIdempotencyKey
@@ -135,19 +135,49 @@ func (m *MysqlInterface) GetPost(ctx context.Context, postID string) (*vo.PostPr
 func (m *MysqlInterface) GetPosts(ctx context.Context, page, size int64, order basedao.OrderOpt) ([]*vo.PostProject, *basedao.Paginator, error) {
 	db := m.db.WithContext(ctx)
 
-	poProjs := make([]*vo.PostProject, 0, int(size))
+	posts := make([]*entity.Post, 0, int(size))
+	projects := make([]*entity.Project, 0, int(size))
 
-	query := db.Model(&entity.Post{}).
-		Joins("left join projects on posts.post_id = projects.post_id")
-
-	param := basedao.PaginationParam{
-		Query:   query,
+	queryPosts := db.Model(&entity.Post{})
+	queryPostsParam := basedao.PaginationParam{
+		DB:      db,
+		Query:   queryPosts,
 		Page:    int(page),
 		Limit:   int(size),
 		OrderBy: []string{order.String()},
 		ShowSQL: false,
 	}
-	paginator, err := basedao.GetListWithPagination(db, &param, poProjs)
+
+	paginator, err := basedao.GetListWithPagination(&queryPostsParam, &posts)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	postIds := make([]string, 0, int(size))
+	for _, post := range posts {
+		postIds = append(postIds, post.PostID)
+	}
+
+	if err := db.Model(&entity.Project{}).
+		Where("post_id IN (?)", postIds).
+		Find(&projects).Error; err != nil {
+		return nil, nil, err
+	}
+
+	// map
+	mp := map[string]*entity.Project{}
+	for i := 0; i < len(projects); i++ {
+		mp[projects[i].PostID] = projects[i]
+	}
+
+	poProjs := make([]*vo.PostProject, 0, int(size))
+	for i := 0; i < len(posts); i++ {
+		poProj := vo.PostProject{
+			Post:    posts[i],
+			Project: mp[posts[i].PostID],
+		}
+		poProjs = append(poProjs, &poProj)
+	}
 
 	return poProjs, paginator, err
 }
@@ -162,6 +192,7 @@ func (m *MysqlInterface) GetPostsByAuthorID(ctx context.Context, page, size int6
 		Where("author_id = ?", authorID)
 
 	param := basedao.PaginationParam{
+		DB:      db,
 		Query:   query,
 		Page:    int(page),
 		Limit:   int(size),
@@ -169,7 +200,7 @@ func (m *MysqlInterface) GetPostsByAuthorID(ctx context.Context, page, size int6
 		ShowSQL: false,
 	}
 
-	paginator, err := basedao.GetListWithPagination(db, &param, poProjs)
+	paginator, err := basedao.GetListWithPagination(&param, poProjs)
 
 	return poProjs, paginator, err
 }

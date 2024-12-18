@@ -9,6 +9,7 @@ type User struct {
 	Username     string `gorm:"size:128"`
 	Avatar       string `gorm:"size:256"`
 	School       string `gorm:"size:128"`
+	Gender       int8
 	Grade        int64
 	Introduction string
 	PostCount    int64

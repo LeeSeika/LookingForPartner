@@ -4,15 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/zeromicro/go-zero/core/logx"
-	"lookingforpartner/common/logger"
-	"lookingforpartner/pb/user"
-	"lookingforpartner/service/comment/model/dto"
-	"lookingforpartner/service/post/model/entity"
-
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
+	"lookingforpartner/common/event"
 	"lookingforpartner/pb/post"
 	"lookingforpartner/pkg/nanoid"
+	"lookingforpartner/service/post/model/entity"
 	"lookingforpartner/service/post/rpc/internal/converter"
 	"lookingforpartner/service/post/rpc/internal/svc"
 )
@@ -27,7 +24,7 @@ func NewCreatePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 	return &CreatePostLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 
@@ -67,31 +64,23 @@ func (l *CreatePostLogic) CreatePost(in *post.CreatePostRequest) (*post.CreatePo
 		poInfo.Project = projInfo
 	}
 
-	// call user rpc
-	updateUserPostCountReq := user.UpdateUserPostCountRequest{
+	// send event to mq
+	evt := event.CreatePost{
 		IdempotencyKey: in.IdempotencyKey,
-		WxUid:          in.WxUid,
-		Delta:          1,
+		Post:           po,
 	}
-	_, err = l.svcCtx.UserRpc.UpdateUserPostCount(l.ctx, &updateUserPostCountReq)
+	bytes, _ := json.Marshal(&evt)
+
+	err = l.svcCtx.KqCreatePostPusher.Push(l.ctx, string(bytes))
 	if err != nil {
-		// push to kafka to retry asynchronously
-		bytes, _ := json.Marshal(&updateUserPostCountReq)
+		// push to local queue
+		topic := l.svcCtx.Config.KqCreatePostPusherConf.Topic
+		l.Logger.
+			WithFields(logx.Field("topic", topic)).
+			WithFields(logx.Field("idempotencyKey", in.IdempotencyKey)).
+			Errorf("cannot push a message to mq when creating post, err: %+v", err)
 
-		err = l.svcCtx.KqUpdateUserPostCountPusher.Push(l.ctx, string(bytes))
-		if err != nil {
-			// push to local queue
-			topic := l.svcCtx.Config.KqUpdateUserPostCountPusherConf.Topic
-			l.Logger.
-				WithFields(logx.Field("topic", topic)).
-				Errorf("cannot push a message to mq when creating post, err: %+v", err)
-
-			msg := dto.UpdateUserPostCountMessage{
-				Topic: topic,
-				Val:   bytes,
-			}
-			l.svcCtx.LocalQueue.Push(msg)
-		}
+		l.svcCtx.LocalQueue.Push(evt)
 	}
 
 	return &post.CreatePostResponse{PostInfo: poInfo}, nil

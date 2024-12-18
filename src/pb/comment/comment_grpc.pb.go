@@ -38,7 +38,7 @@ type CommentClient interface {
 	GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error)
 	GetCommentsByPostID(ctx context.Context, in *GetCommentsByPostIDRequest, opts ...grpc.CallOption) (*GetCommentsByPostIDResponse, error)
 	DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error)
-	DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error)
+	DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubCommentsByRootIDResponse, error)
 	DeleteAllCommentsBySubjectID(ctx context.Context, in *DeleteAllCommentsBySubjectIDRequest, opts ...grpc.CallOption) (*DeleteAllCommentsBySubjectIDResponse, error)
 	CreateSubject(ctx context.Context, in *CreateSubjectRequest, opts ...grpc.CallOption) (*CreateSubjectResponse, error)
 	GetSubject(ctx context.Context, in *GetSubjectRequest, opts ...grpc.CallOption) (*GetSubjectResponse, error)
@@ -93,9 +93,9 @@ func (c *commentClient) DeleteComment(ctx context.Context, in *DeleteCommentRequ
 	return out, nil
 }
 
-func (c *commentClient) DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubjectResponse, error) {
+func (c *commentClient) DeleteSubCommentsByRooID(ctx context.Context, in *DeleteSubCommentsByRootIDRequest, opts ...grpc.CallOption) (*DeleteSubCommentsByRootIDResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteSubjectResponse)
+	out := new(DeleteSubCommentsByRootIDResponse)
 	err := c.cc.Invoke(ctx, Comment_DeleteSubCommentsByRooID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ type CommentServer interface {
 	GetComment(context.Context, *GetCommentRequest) (*GetCommentResponse, error)
 	GetCommentsByPostID(context.Context, *GetCommentsByPostIDRequest) (*GetCommentsByPostIDResponse, error)
 	DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error)
-	DeleteSubCommentsByRooID(context.Context, *DeleteSubCommentsByRootIDRequest) (*DeleteSubjectResponse, error)
+	DeleteSubCommentsByRooID(context.Context, *DeleteSubCommentsByRootIDRequest) (*DeleteSubCommentsByRootIDResponse, error)
 	DeleteAllCommentsBySubjectID(context.Context, *DeleteAllCommentsBySubjectIDRequest) (*DeleteAllCommentsBySubjectIDResponse, error)
 	CreateSubject(context.Context, *CreateSubjectRequest) (*CreateSubjectResponse, error)
 	GetSubject(context.Context, *GetSubjectRequest) (*GetSubjectResponse, error)
@@ -178,7 +178,7 @@ func (UnimplementedCommentServer) GetCommentsByPostID(context.Context, *GetComme
 func (UnimplementedCommentServer) DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteComment not implemented")
 }
-func (UnimplementedCommentServer) DeleteSubCommentsByRooID(context.Context, *DeleteSubCommentsByRootIDRequest) (*DeleteSubjectResponse, error) {
+func (UnimplementedCommentServer) DeleteSubCommentsByRooID(context.Context, *DeleteSubCommentsByRootIDRequest) (*DeleteSubCommentsByRootIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSubCommentsByRooID not implemented")
 }
 func (UnimplementedCommentServer) DeleteAllCommentsBySubjectID(context.Context, *DeleteAllCommentsBySubjectIDRequest) (*DeleteAllCommentsBySubjectIDResponse, error) {

@@ -5,7 +5,6 @@ import (
 	"errors"
 	"gorm.io/gorm"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/service/comment/rpc/internal/converter"
 
 	"lookingforpartner/pb/comment"
@@ -24,7 +23,7 @@ func NewGetSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetSub
 	return &GetSubjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "comment-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

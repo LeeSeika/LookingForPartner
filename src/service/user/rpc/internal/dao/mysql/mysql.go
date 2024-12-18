@@ -42,11 +42,14 @@ func (m *MysqlInterface) UpdatePostCount(ctx context.Context, wxUid string, delt
 
 	tx = tx.WithContext(ctx)
 
+	// todo: use temp
+	idempotencyKey = time.Now().Unix()
+
 	// check idempotency
 	idempotency := entity.IdempotencyUser{
 		ID: idempotencyKey,
 	}
-	rs := tx.Create(idempotency)
+	rs := tx.Create(&idempotency)
 	if rs.Error != nil {
 		if errors.Is(rs.Error, gorm.ErrDuplicatedKey) {
 			return errs.DBDuplicatedIdempotencyKey

@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/service/user/rpc/internal/converter"
 
 	"lookingforpartner/pb/user"
@@ -22,7 +21,7 @@ func NewGetUserInfoByIDsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	return &GetUserInfoByIDsLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

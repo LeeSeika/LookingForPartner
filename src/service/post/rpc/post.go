@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"lookingforpartner/common/logger"
 
 	"lookingforpartner/pb/post"
 	"lookingforpartner/service/post/rpc/internal/config"
@@ -23,6 +24,9 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+
+	logger.SetupLogger("post-rpc")
+
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {

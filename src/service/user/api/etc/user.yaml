@@ -4,8 +4,8 @@ Port: 10001
 
 Auth:
   AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
-  AccessExpire: 3600
-  RefreshExpire: 604800
+  AccessExpire: 36000000
+  RefreshExpire: 6048000000
 
 UserRpc:
   Etcd:

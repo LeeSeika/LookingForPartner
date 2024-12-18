@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
 	"io/ioutil"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/service/user/model/dto"
 	"lookingforpartner/service/user/model/entity"
 	"net/http"
@@ -28,7 +27,7 @@ func NewWxLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *WxLoginLo
 	return &WxLoginLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "user-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 
@@ -70,13 +69,15 @@ func (l *WxLoginLogic) WxLogin(in *user.WxLoginRequest) (*user.WxLoginResponse, 
 			WithFields(logx.Field("wechat response error code", rb.ErrCode)).
 			Errorf("cannot get wechat session")
 
-		return &user.WxLoginResponse{WechatResponseCode: int32(rb.ErrCode)}, errs.FormatRpcAbortedError(rb.ErrMsg)
+		return &user.WxLoginResponse{WechatResponseCode: int32(rb.ErrCode)}, nil
 	}
 
 	// create user
 	u := &entity.User{
 		WxUid:    constant.NanoidPrefixUser + rb.Openid,
 		Username: in.Username,
+		Avatar:   in.Avatar,
+		Gender:   int8(in.Gender),
 	}
 	u, err = l.svcCtx.UserInterface.FirstOrCreateUser(l.ctx, u)
 	if err != nil {

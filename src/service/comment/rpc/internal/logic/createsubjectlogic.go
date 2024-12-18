@@ -4,7 +4,6 @@ import (
 	"context"
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pb/post"
 	"lookingforpartner/pkg/nanoid"
 	"lookingforpartner/service/comment/model/entity"
@@ -26,7 +25,7 @@ func NewCreateSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cre
 	return &CreateSubjectLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "comment-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

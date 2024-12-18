@@ -2,9 +2,9 @@
 package types
 
 type CreatePostRequest struct {
-	Title   string  `json:"title"`
-	Project Project `json:"project"`
-	Content string  `json:"content"`
+	Title      string     `json:"title"`
+	Content    string     `json:"content"`
+	NewProject NewProject `json:"new_project"`
 }
 
 type CreatePostResponse struct {
@@ -45,10 +45,19 @@ type GetPostsResponse struct {
 	Paginator Paginator `json:"paginator"`
 }
 
+type NewProject struct {
+	Name          string `json:"name"`
+	Introduction  string `json:"introduction"`
+	MaintainerID  string `json:"maintainer_id"`
+	Role          string `json:"role"`
+	HeadCountInfo string `json:"head_count_info"`
+	Progress      string `json:"progress"`
+}
+
 type PaginationParams struct {
-	Page  int64  `path:"page"`
-	Size  int64  `path:"size"`
-	Order string `path:"order"`
+	Page  int64  `form:"page, optional"`
+	Size  int64  `form:"size, optional"`
+	Order string `form:"order, optional"`
 }
 
 type Paginator struct {
@@ -90,11 +99,11 @@ type UpdateProjectResponse struct {
 }
 
 type UpdatedProject struct {
-	Name          string `json:"name"`
-	Introduction  string `json:"introduction"`
-	Role          string `json:"role"`
-	HeadCountInfo string `json:"head_count_info"`
-	Progress      string `json:"progress"`
+	Name          string `json:"name, optional"`
+	Introduction  string `json:"introduction, optional"`
+	Role          string `json:"role, optional"`
+	HeadCountInfo string `json:"head_count_info, optional"`
+	Progress      string `json:"progress, optional"`
 }
 
 type UserInfo struct {

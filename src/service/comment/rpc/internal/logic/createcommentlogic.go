@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+	"errors"
+	"gorm.io/gorm"
 	"lookingforpartner/common/constant"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/pkg/nanoid"
 	"lookingforpartner/service/comment/model/entity"
 	"lookingforpartner/service/comment/rpc/internal/converter"
@@ -25,11 +26,19 @@ func NewCreateCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cre
 	return &CreateCommentLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "comment-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 
 func (l *CreateCommentLogic) CreateComment(in *comment.CreateCommentRequest) (*comment.CreateCommentResponse, error) {
+	_, err := l.svcCtx.CommentInterface.GetSubject(l.ctx, in.SubjectID)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errs.RpcNotFound
+		}
+		l.Logger.Errorf("cannot get subject, err: %+v", err)
+		return nil, errs.FormatRpcUnknownError(err.Error())
+	}
 	commentID := constant.NanoidPrefixComment + nanoid.Gen()
 	commentIndex := &entity.CommentIndex{
 		CommentID:       commentID,

@@ -29,14 +29,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
+				Method:  http.MethodPut,
+				Path:    "/users/:wxUid",
+				Handler: SetUserInfoHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodGet,
 				Path:    "/users/token",
 				Handler: RefreshTokenHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPut,
-				Path:    "/users/wxUid",
-				Handler: SetUserInfoHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

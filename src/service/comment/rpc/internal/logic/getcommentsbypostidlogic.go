@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
 	"lookingforpartner/common/params"
 	"lookingforpartner/service/comment/model/vo"
 	"lookingforpartner/service/comment/rpc/internal/converter"
@@ -24,7 +23,7 @@ func NewGetCommentsByPostIDLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	return &GetCommentsByPostIDLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "comment-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 

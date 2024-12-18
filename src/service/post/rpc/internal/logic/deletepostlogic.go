@@ -4,13 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"lookingforpartner/pb/comment"
-
 	"lookingforpartner/common/errs"
-	"lookingforpartner/common/logger"
+	"lookingforpartner/common/event"
 	"lookingforpartner/pb/post"
-	"lookingforpartner/pb/user"
-	"lookingforpartner/service/post/model/dto"
 	"lookingforpartner/service/post/rpc/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -27,7 +23,7 @@ func NewDeletePostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delete
 	return &DeletePostLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
-		Logger: logger.NewLogger(ctx, "post-rpc"),
+		Logger: logx.WithContext(ctx),
 	}
 }
 
@@ -44,7 +40,7 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 	if po.AuthorID != in.WxUid {
 		return nil, errs.RpcPermissionDenied
 	}
-	_, err = l.svcCtx.PostInterface.DeletePost(l.ctx, in.PostID)
+	poProj, err := l.svcCtx.PostInterface.DeletePost(l.ctx, in.PostID)
 	if err != nil {
 		if errors.Is(err, gorm.ErrDuplicatedKey) {
 			//
@@ -54,46 +50,22 @@ func (l *DeletePostLogic) DeletePost(in *post.DeletePostRequest) (*post.DeletePo
 		return nil, errs.FormatRpcUnknownError(err.Error())
 	}
 
-	// update user post count
-	updateUserPostCountReq := user.UpdateUserPostCountRequest{
-		IdempotencyKey: 123, // todo: gen idem key
-		WxUid:          in.WxUid,
-		Delta:          -1,
+	// send event to mq
+	evt := event.DeletePost{
+		Post:    poProj.Post,
+		Project: poProj.Project,
 	}
-	_, err = l.svcCtx.UserRpc.UpdateUserPostCount(l.ctx, &updateUserPostCountReq)
+	bytes, _ := json.Marshal(&evt)
+
+	err = l.svcCtx.KqDeletePostPusher.Push(l.ctx, string(bytes))
 	if err != nil {
-		// push to kafka to retry asynchronously
-		bytes, _ := json.Marshal(&updateUserPostCountReq)
+		// push to local queue
+		topic := l.svcCtx.Config.KqDeletePostPusherConf.Topic
+		l.Logger.
+			WithFields(logx.Field("topic", topic)).
+			Errorf("cannot push a message to mq when deleting post, err: %+V", err)
 
-		err = l.svcCtx.KqUpdateUserPostCountPusher.Push(l.ctx, string(bytes))
-		if err != nil {
-			// push to local queue
-			topic := l.svcCtx.Config.KqUpdateUserPostCountPusherConf.Topic
-			l.Logger.
-				WithFields(logx.Field("topic", topic)).
-				Errorf("cannot push a message to mq when deleting post, err: %+V", err)
-
-			msg := dto.UpdateUserPostCountMessage{
-				Topic: topic,
-				Val:   bytes,
-			}
-			l.svcCtx.LocalQueue.Push(msg)
-		}
-	}
-
-	// delete comment subject
-	deleteSubjectReq := comment.DeleteSubjectRequest{
-		SubjectID: po.CommentSubjectID,
-	}
-	_, err = l.svcCtx.CommentRpc.DeleteSubject(l.ctx, &deleteSubjectReq)
-	if err != nil {
-		l.Logger.Errorf("cannot delete subject when deleting post, err: %+v", err)
-		// push to local queue to retry
-		msg := dto.DeleteSubjectMessage{
-			Topic:     l.svcCtx.Config.KqDeleteSubjectPusherConf.Topic,
-			SubjectID: po.CommentSubjectID,
-		}
-		l.svcCtx.LocalQueue.Push(msg)
+		l.svcCtx.LocalQueue.Push(evt)
 	}
 
 	return &post.DeletePostResponse{}, nil

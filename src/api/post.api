@@ -12,9 +12,9 @@ import "object.api"
 
 // CreatePost
 type CreatePostRequest {
-	Title   string  `json:"title"`
-	Project Project `json:"project"`
-	Content string  `json:"content"`
+	Title      string     `json:"title"`
+	Content    string     `json:"content"`
+	NewProject NewProject `json:"new_project"`
 }
 
 type CreatePostResponse {
@@ -59,14 +59,6 @@ type GetPostsByAuthorIDResponse {
 }
 
 // UpdateProject
-type UpdatedProject {
-	Name          string `json:"name"`
-	Introduction  string `json:"introduction"`
-	Role          string `json:"role"`
-	HeadCountInfo string `json:"head_count_info"`
-	Progress      string `json:"progress"`
-}
-
 type UpdateProjectRequest {
 	ProjectID      string         `path:"projectID"`
 	UpdatedProject UpdatedProject `json:"updated_project"`
@@ -84,10 +76,10 @@ service Post {
 	get /posts/:postID (GetPostRequest) returns (GetPostResponse)
 
 	@handler GetPosts
-	get /posts/page/:page/size/:size/order/:order (GetPostsRequest) returns (GetPostsResponse)
+	get /posts (GetPostsRequest) returns (GetPostsResponse)
 
 	@handler GetPostsByAuthorID
-	get /posts/author/:authorID/page/:page/size/:size/order/:order (GetPostByAuthorIDRequest) returns (GetPostsByAuthorIDResponse)
+	get /posts/authors/:authorID (GetPostByAuthorIDRequest) returns (GetPostsByAuthorIDResponse)
 }
 
 @server (
@@ -102,6 +94,6 @@ service Post {
 	delete /posts/:postID (DeletePostRequest) returns (DeletePostResponse)
 
 	@handler UpdateProject
-	put /posts/project/:projectID (UpdateProjectRequest) returns (UpdateProjectResponse)
+	put /posts/projects/:projectID (UpdateProjectRequest) returns (UpdateProjectResponse)
 }
 

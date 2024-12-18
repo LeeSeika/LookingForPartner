@@ -13,10 +13,19 @@ type GetUserInfoResponse struct {
 	PostCount    int64  `json:"post_count"`
 }
 
+type NewProject struct {
+	Name          string `json:"name"`
+	Introduction  string `json:"introduction"`
+	MaintainerID  string `json:"maintainer_id"`
+	Role          string `json:"role"`
+	HeadCountInfo string `json:"head_count_info"`
+	Progress      string `json:"progress"`
+}
+
 type PaginationParams struct {
-	Page  int64  `path:"page"`
-	Size  int64  `path:"size"`
-	Order string `path:"order"`
+	Page  int64  `form:"page, optional"`
+	Size  int64  `form:"size, optional"`
+	Order string `form:"order, optional"`
 }
 
 type Paginator struct {
@@ -58,9 +67,9 @@ type RefreshTokenResponse struct {
 
 type SetUserInfoRequest struct {
 	WxUid        string `path:"wxUid"`
-	School       string `json:"school"`
-	Grade        int64  `json:"grade"`
-	Introduction string `json:"introduction"`
+	School       string `json:"school, optional"`
+	Grade        int64  `json:"grade, optional"`
+	Introduction string `json:"introduction, optional"`
 }
 
 type SetUserInfoResponse struct {
@@ -69,6 +78,14 @@ type SetUserInfoResponse struct {
 	Grade        int64  `json:"grade"`
 	Introduction string `json:"introduction"`
 	PostCount    int64  `json:"post_count"`
+}
+
+type UpdatedProject struct {
+	Name          string `json:"name, optional"`
+	Introduction  string `json:"introduction, optional"`
+	Role          string `json:"role, optional"`
+	HeadCountInfo string `json:"head_count_info, optional"`
+	Progress      string `json:"progress, optional"`
 }
 
 type UserInfo struct {
@@ -83,7 +100,9 @@ type UserInfo struct {
 
 type WxLoginRequest struct {
 	Code     string `json:"code"`
-	NickName string `json:"nickname"`
+	Username string `json:"username"`
+	Avatar   string `json:"avatar"`
+	Gender   int    `json:"gender"`
 }
 
 type WxLoginResponse struct {

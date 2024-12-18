@@ -15,19 +15,13 @@ Mysql:
   maxOpenConns: 100
   connMaxLifeTime: 3600
 
-UserRpc:
-  Etcd:
-    Hosts:
-      - etcd:2379
-    Key: user.rpc
-
-KqUpdateUserPostCountPusherConf:
+KqCreatePostPusherConf:
   Brokers:
     - kafka:9092
-  Topic: update-user-post-count
+  Topic: create-post
 
-KqDeleteSubjectPusherConf:
+KqDeletePostPusherConf:
   Brokers:
     - kafka:9092
-  Topic: delete-subject
+  Topic: delete-post
 
